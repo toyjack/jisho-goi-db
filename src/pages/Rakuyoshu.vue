@@ -7,7 +7,7 @@ const term = ref("山");
 const results = ref({});
 
 const search = () => {
-  fetch("http://portal.kojisho.com/api/v1/rakuyoshu/search/" + term.value)
+  fetch("https://portal.kojisho.com/api/v1/rakuyoshu/search/" + term.value)
     .then((res) => res.json())
     .then((data) => (results.value = data));
 };
