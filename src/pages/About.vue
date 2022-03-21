@@ -57,7 +57,6 @@ watch(isFetching, () => {
     </div>
     <div class="col-12 col-md-8">
       <h4>{{ showingHelp.title }}</h4>
-      <!-- <p>{{ showingHelp.content }}</p> -->
       <vue-markdown :source="showingHelp.content"></vue-markdown>
       <p>updated:{{ showingHelp.date }}</p>
     </div>

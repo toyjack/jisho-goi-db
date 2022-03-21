@@ -8,6 +8,7 @@ interface IHelp {
   about_type: string
   lang: string
   content: string
+  pub_date: string
 }
 
 export const useAbout = defineStore('about', {
