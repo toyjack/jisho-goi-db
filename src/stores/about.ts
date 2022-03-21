@@ -1,40 +1,34 @@
 import { defineStore } from 'pinia'
+import { getAboutContents } from '../api/about'
+
+interface IHelp {
+  id: number
+  creator: string
+  title: string
+  about_type: string
+  lang: string
+  content: string
+}
 
 export const useAbout = defineStore('about', {
   state: () => {
     return {
-      contents: [
-        {
-          helpType: "general",
-          helpTitle: "header and footer",
-          helpContent: "lorem",
-          helpUpdateDate: "2022/03/19"
-        },
-        {
-          helpType: "general",
-          helpTitle: "header and footer",
-          helpContent: "lorem",
-          helpUpdateDate: "2022-03-21"
-        },
-        {
-          helpType: "general",
-          helpTitle: "header and footer",
-          helpContent: "lorem",
-          helpUpdateDate: "2022-03-20"
-        },
-        {
-          helpType: "creator",
-          helpTitle: "作業者一覧",
-          helpContent: "lorem",
-          helpUpdateDate: "2022-03-21"
-        },
-        {
-          helpType: "copyright",
-          helpTitle: "利用条件",
-          helpContent: "lorem",
-          helpUpdateDate: "2022-03-21"
-        },
-      ]
+      isFetching: true,
+      contents: <IHelp[]>[]
     }
+  },
+  getters: {
+    // doubleCount: (state) => state.counter * 2,
+    general_help: (state) => state.contents.filter(v => v['about_type'] == "general").sort((a, b) => Date.parse(b.helpUpdateDate) - Date.parse(a.helpUpdateDate)),
+    creator_helps: (state) => state.contents.filter(v => v['about_type'] == "creator"),
+    copyright_helps: (state) => state.contents.filter(v => v['about_type'] == "copyright"),
+  },
+  actions: {
+    async fetchAbout() {
+      this.isFetching = true
+      this.contents = await getAboutContents()
+      this.isFetching = false
+    }
+
   }
 })
