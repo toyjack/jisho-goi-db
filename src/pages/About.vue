@@ -1,17 +1,14 @@
 <script setup lang="ts">
-import { generate } from '@vue/compiler-core';
-import { date } from 'quasar';
 import { reactive, ref, watch } from 'vue'
 import { useAbout } from '../stores/about'
 import { storeToRefs } from 'pinia'
 
+import VueMarkdown from 'vue-markdown-render'
+ 
+
 const store = useAbout()
 const { contents, general_help, creator_helps, copyright_helps, isFetching } = storeToRefs(store)
 store.fetchAbout()
-// console.log(store.contents)
-// const general_help = store.general_help
-// const creator_helps = store.creator_helps
-// const copyright_helps = store.copyright_helps
 
 const showHelp = (content: any) => {
   showingHelp.value.title = content.title
@@ -35,7 +32,7 @@ watch(isFetching, () => {
   <div class="row q-ma-lg q-gutter-lg">
     <div class="col-12 col-md-3">
       <q-list bordered class="rounded-borders">
-        <q-expansion-item label="General" default-opened>
+        <q-expansion-item label="共通" default-opened>
           <q-item clickable v-ripple v-for="item of general_help" @click="showHelp(item)">
             <q-item-section>
               <q-item-label overline>{{ item.pub_date }}</q-item-label>
@@ -60,7 +57,8 @@ watch(isFetching, () => {
     </div>
     <div class="col-12 col-md-8">
       <h4>{{ showingHelp.title }}</h4>
-      <p>{{ showingHelp.content }}</p>
+      <!-- <p>{{ showingHelp.content }}</p> -->
+      <vue-markdown :source="showingHelp.content"></vue-markdown>
       <p>updated:{{ showingHelp.date }}</p>
     </div>
   </div>
