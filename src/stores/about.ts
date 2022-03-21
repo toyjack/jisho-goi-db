@@ -20,7 +20,7 @@ export const useAbout = defineStore('about', {
   },
   getters: {
     // doubleCount: (state) => state.counter * 2,
-    general_help: (state) => state.contents.filter(v => v['about_type'] == "general").sort((a, b) => Date.parse(b.helpUpdateDate) - Date.parse(a.helpUpdateDate)),
+    general_help: (state) => state.contents.filter(v => v['about_type'] == "general"),
     creator_helps: (state) => state.contents.filter(v => v['about_type'] == "creator"),
     copyright_helps: (state) => state.contents.filter(v => v['about_type'] == "copyright"),
   },
