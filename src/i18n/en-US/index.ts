@@ -17,10 +17,10 @@ export default {
     textdb:"Text Databases",
     imagedb:"Image Databases",
     jiruisho: "Iroha Jiruisho",
-    rakuyoshu: "Rakuyoshu",
+    rakuyoshu: "RACVYOXV",
     wakunnoshiori: "Wakun no Siori",
-    setsuyoshu: "Bunmeibon Setsuyoshu",
-    zozokutaizen: "Zozoku Taizen",
+    setsuyoshu: "Bummeibon Setsuyoshu",
+    zozokutaizen: "Gyokuhen Taizen",
     about: "About",
   },
   rakuyoshu: {

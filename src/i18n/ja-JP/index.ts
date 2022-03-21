@@ -20,7 +20,7 @@ export default {
     rakuyoshu: "落葉集",
     wakunnoshiori: "倭訓栞",
     setsuyoshu: "文明本節用集",
-    zozokutaizen: "増続大全",
+    zozokutaizen: "玉編大全",
     about: "アバウト",
   },
   rakuyoshu:{
