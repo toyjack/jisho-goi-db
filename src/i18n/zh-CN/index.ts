@@ -14,6 +14,8 @@ export default {
   },
   nav: {
     home: "首页",
+    textdb:"文本数据库",
+    imagedb:"图像数据库",
     jiruisho: "色叶字类抄",
     rakuyoshu: "落叶集",
     wakunnoshiori: "倭訓栞",

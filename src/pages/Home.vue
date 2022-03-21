@@ -86,14 +86,12 @@ const changeArticle = (index: number) => {
         :key="slide.content"
       >
         <q-icon :name="slide.icon" size="56px" />
-        <div class="q-mt-md text-center">
-          {{ slide.content }}
-        </div>
+        <div class="q-mt-md text-center">{{ slide.content }}</div>
       </q-carousel-slide>
     </q-carousel>
   </div>
 
-  <div class="q-ma-xl">
+  <div class="q-mx-xl">
     <q-card flat bordered q-ma-xl q-pa-xl class="my-card">
       <q-card-section>
         <p>現在言語テスター：{{ $t("hello") }}</p>
@@ -102,29 +100,27 @@ const changeArticle = (index: number) => {
 
       <q-card-section class="text-h6">
         [説明など]五つの漢和辞書・国語辞書のデータベースを検索できるサイトです。
-        <br />
-        科研費番号　の支援で...
+        <br />科研費番号 の支援で...
       </q-card-section>
 
       <q-separator inset />
 
       <q-card-section>
         このサイトは
-        <span style="color: #1414dc">まだ開発中</span> です。<br />
-        バグがありましたら、
+        <span style="color: #1414dc">まだ開発中</span> です。
+        <br />バグがありましたら、
         <span style="color: #1414dc">k-ryu@hi.u-tokyo.ac.jp</span>
         へ連絡してください。
-        <br />
-        なお、 著作権はそれぞれに異なり、使用の前に確認してください。
+        <br />なお、 著作権はそれぞれに異なり、使用の前に確認してください。
       </q-card-section>
     </q-card>
   </div>
 
-  <div class="row q-ma-xl">
-    <div class="col-12 col-sm-2 col-md3"></div>
+  <div class="row q-mx-xl q-my-sm">
+    <!-- <div class="col-12 col-sm-2 col-md3"></div> -->
     <div class="col-12 col-sm-auto col-md-auto">
-      <div class="row">
-        <div class="col-4">
+      <div class="row q-gutter-md">
+        <div class="col-sm-12 col-md-4">
           <q-list bordered padding>
             <q-item-label header>お知らせのリスト</q-item-label>
             <q-item
@@ -136,36 +132,21 @@ const changeArticle = (index: number) => {
             >
               <q-item-section>
                 <q-item-label>{{ article.date }}</q-item-label>
-                <q-item-label caption>
-                  {{ article.title }}
-                </q-item-label>
+                <q-item-label caption>{{ article.title }}</q-item-label>
               </q-item-section>
             </q-item>
           </q-list>
         </div>
-        <div class="col-8">
-          <q-list padding>
-            <q-item-label header>お知らせ</q-item-label>
-
-            <q-item
-              v-for="article of articles.reverse()"
+        <div class="col-sm-12 col-md-7">
+          <q-timeline color="secondary">
+            <q-timeline-entry v-for="article of articles.reverse()"
               :key="article.date"
-              :id="article.date + article.title"
-            >
-              <q-item-section>
-                <q-item-label>
-                  {{ article.title }}
-                </q-item-label>
-                <q-item-label caption>
-                  {{ article.date }}
-                </q-item-label>
-                <p>{{ article.content }}</p>
-              </q-item-section>
-            </q-item>
-          </q-list>
+              :id="article.date + article.title" :title="article.title" :subtitle="article.date">
+              {{article.content}}</q-timeline-entry>
+          </q-timeline>
         </div>
       </div>
     </div>
-    <div class="col-12 col-sm-2 col-md3"></div>
+    <!-- <div class="col-12 col-sm-2 col-md3"></div> -->
   </div>
 </template>

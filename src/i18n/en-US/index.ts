@@ -14,6 +14,8 @@ export default {
   },
   nav: {
     home: "Home",
+    textdb:"Text Databases",
+    imagedb:"Image Databases",
     jiruisho: "Iroha Jiruisho",
     rakuyoshu: "Rakuyoshu",
     wakunnoshiori: "Wakun no Siori",
