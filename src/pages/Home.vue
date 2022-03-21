@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { storeToRefs } from 'pinia'
 import { scroll } from "quasar";
+import { useNews } from '../stores/news'
+
+const store = useNews()
+store.fetchNews()
+const { news, isFetching } = storeToRefs(store)
 
 const { getScrollTarget, setVerticalScrollPosition } = scroll;
 
@@ -27,41 +33,6 @@ const slides = [
   },
 ];
 const firstSlide = ref("hi");
-
-const articles = [
-  {
-    index: 1,
-    date: "2022/03/03",
-    title: "フロントエンド開発を始めました",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  },
-  {
-    index: 2,
-    date: "2022/03/05",
-    title: "テストです",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  },
-  {
-    index: 3,
-    date: "2022/03/05",
-    title: "テストです!",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  },
-  {
-    index: 4,
-    date: "2022/03/06",
-    title: "テストです",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  },
-];
-let showedArticleIndex = articles[articles.length - 1].index;
-const changeArticle = (index: number) => {
-  showedArticleIndex = index;
-};
 </script>
 
 <template>
@@ -94,7 +65,6 @@ const changeArticle = (index: number) => {
   <div class="q-mx-xl">
     <q-card flat bordered q-ma-xl q-pa-xl class="my-card">
       <q-card-section>
-        <p>現在言語テスター：{{ $t("hello") }}</p>
         <div class="text-h2">辞書語彙データベース</div>
       </q-card-section>
 
@@ -126,12 +96,12 @@ const changeArticle = (index: number) => {
             <q-item
               clickable
               v-ripple
-              v-for="article of articles.reverse()"
-              :key="article.date"
-              @click="scrollToElement(article.date + article.title)"
+              v-for="article of news.slice().reverse()"
+              :key="article.pub_date"
+              @click="scrollToElement(article.pub_date + article.title)"
             >
               <q-item-section>
-                <q-item-label>{{ article.date }}</q-item-label>
+                <q-item-label>{{ article.pub_date }}</q-item-label>
                 <q-item-label caption>{{ article.title }}</q-item-label>
               </q-item-section>
             </q-item>
@@ -139,10 +109,13 @@ const changeArticle = (index: number) => {
         </div>
         <div class="col-sm-12 col-md-7">
           <q-timeline color="secondary">
-            <q-timeline-entry v-for="article of articles.reverse()"
-              :key="article.date"
-              :id="article.date + article.title" :title="article.title" :subtitle="article.date">
-              {{article.content}}</q-timeline-entry>
+            <q-timeline-entry
+              v-for="article of news.slice().reverse()"
+              :key="article.pub_date"
+              :id="article.pub_date + article.title"
+              :title="article.title"
+              :subtitle="article.pub_date"
+            >{{ article.content }}</q-timeline-entry>
           </q-timeline>
         </div>
       </div>

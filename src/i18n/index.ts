@@ -15,11 +15,9 @@ const i18n = createI18n({
   legacy: false,
   useScope: "global", 
   globalInjection: true,
-  locale: 'ja-JP', // ロケールをセット
-  fallbackLocale: 'en-US', // フォールバックロケールをセット
-  messages, // ロケールメッセージをセット
-  // その他オプションを指定できます
-  // ...
+  locale: 'ja-JP', 
+  fallbackLocale: 'en-US', 
+  messages, 
 })
 
 export default i18n
