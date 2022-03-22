@@ -24,12 +24,12 @@ const slides = [
   {
     name: "hi",
     icon: "assured_workload",
-    content: "特徴１",
+    content: "五つの漢和辞書・国語辞書のデータベースを検索できる",
   },
   {
     name: "nihao",
     icon: "school",
-    content: "特徴２",
+    content: "JSPS[21H00529]『色葉字類抄』の語彙研究および総合データベースの構築",
   },
 ];
 const firstSlide = ref("hi");
@@ -43,12 +43,12 @@ const firstSlide = ref("hi");
       transition-next="scale"
       swipeable
       animated
-      control-color="white"
+      control-color="dark"
       navigation
       padding
       arrows
       height="300px"
-      class="bg-primary text-white shadow-1 rounded-borders"
+      class="bg-primary text-dark shadow-2 rounded-borders"
     >
       <q-carousel-slide
         :name="slide.name"
@@ -69,15 +69,17 @@ const firstSlide = ref("hi");
       </q-card-section>
 
       <q-card-section class="text-h6">
-        [説明など]五つの漢和辞書・国語辞書のデータベースを検索できるサイトです。
-        <br />科研費番号 の支援で...
+        <p>科研費プロジェクト：</p>
+        <a href="https://kaken.nii.ac.jp/ja/grant/KAKENHI-PROJECT-21H00529/" target="blank">『色葉字類抄』の語彙研究および総合データベースの構築</a>
+        <br>
+        <a href="https://kaken.nii.ac.jp/ja/grant/KAKENHI-PROJECT-21K18364/" target="blank">異種古辞書間におけるデータ連携モデルの構築</a>
       </q-card-section>
 
       <q-separator inset />
 
       <q-card-section>
         このサイトは
-        <span style="color: #1414dc">まだ開発中</span> です。
+        <span class="text-dark">まだ開発中</span> です。
         <br />バグがありましたら、
         <span style="color: #1414dc">k-ryu@hi.u-tokyo.ac.jp</span>
         へ連絡してください。

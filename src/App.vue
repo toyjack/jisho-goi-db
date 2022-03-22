@@ -20,7 +20,7 @@ const changeLocale = (to: string) => {
 
 <template>
   <q-layout view="hhr LpR lfr">
-    <q-header bordered class="bg-primary text-white" height-hint="98">
+    <q-header bordered class="bg-primary text-dark text-weight-bold">
       <q-toolbar>
         <q-toolbar-title>
           <q-avatar>
@@ -47,7 +47,7 @@ const changeLocale = (to: string) => {
         <q-btn dense flat round icon="menu" @click="toggleRightDrawer" />
       </q-toolbar>
 
-      <q-tabs align="left" v-model="tab" indicator-color="transparent" >
+      <q-tabs align="left" v-model="tab" indicator-color="transparent" class="text-dark text-weight-bold">
         <q-route-tab to="/" :label="$t('nav.home')" />
         <q-tab name="textdb" :label="$t('nav.textdb')" />
         <q-tab name="imagedb" :label="$t('nav.imagedb')" />
@@ -55,7 +55,7 @@ const changeLocale = (to: string) => {
       </q-tabs>
       <q-separator />
 
-      <q-tab-panels v-model="tab" class="bg-primary text-white">
+      <q-tab-panels v-model="tab" class="bg-primary text-dark text-weight-bold">
         <q-tab-panel name="textdb">
           <q-tabs align="left" dense>
             <q-route-tab to="/jiruisho" :label="$t('nav.jiruisho')" />
@@ -93,3 +93,10 @@ const changeLocale = (to: string) => {
     </q-page-container>
   </q-layout>
 </template>
+
+<style lang="sass">
+.q-toolbar__title
+  font-weight: 500
+.q-tab__label
+  font-weight: 600
+</style>

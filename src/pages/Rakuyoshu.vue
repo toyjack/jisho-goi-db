@@ -11,6 +11,9 @@ const search = () => {
     .then((res) => res.json())
     .then((data) => (results.value = data));
 };
+const clear = ()=>{
+  term.value=""
+}
 </script>
 
 <template>
@@ -18,7 +21,7 @@ const search = () => {
     <div class="row">
       <div class="col-12 col-sm-2 col-md-3"></div>
       <div class="col-12 col-sm-8 col-md-6">
-        <q-input filled v-model="term" :label="$t('rakuyoshu.inputForSearch')" />
+        <q-input outlined v-model="term"  :label="$t('rakuyoshu.inputForSearch')" />
       </div>
       <div class="col-12 col-sm-2 col-md-3"></div>
     </div>
@@ -29,8 +32,8 @@ const search = () => {
       <div class="col-12 col-sm-8 col-md-6">
         <div class="column items-end">
           <div class="col q-gutter-md">
-            <q-btn color="white" text-color="black" :label="$t('button.clear')" />
-            <q-btn color="primary" :label="$t('button.search')" @click="search" />
+            <q-btn color="secondary" text-color="dark" :label="$t('button.clear')" @click="clear" />
+            <q-btn color="primary" text-color="dark" :label="$t('button.search')" @click="search" />
           </div>
         </div>
       </div>
