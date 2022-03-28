@@ -70,26 +70,31 @@ const firstSlide = ref("hi");
 
       <q-card-section class="text-h6">
         <p>科研費プロジェクト：</p>
-        <a href="https://kaken.nii.ac.jp/ja/grant/KAKENHI-PROJECT-21H00529/" target="blank">『色葉字類抄』の語彙研究および総合データベースの構築</a>
-        <br>
-        <a href="https://kaken.nii.ac.jp/ja/grant/KAKENHI-PROJECT-21K18364/" target="blank">異種古辞書間におけるデータ連携モデルの構築</a>
+        <a
+          href="https://kaken.nii.ac.jp/ja/grant/KAKENHI-PROJECT-21H00529/"
+          target="blank"
+        >『色葉字類抄』の語彙研究および総合データベースの構築</a>
+        <br />
+        <a
+          href="https://kaken.nii.ac.jp/ja/grant/KAKENHI-PROJECT-21K18364/"
+          target="blank"
+        >異種古辞書間におけるデータ連携モデルの構築</a>
       </q-card-section>
 
       <q-separator inset />
 
       <q-card-section>
         このサイトは
-        <span class="text-dark">まだ開発中</span> です。
+        <span class="text-dark">開発中</span> です。
         <br />バグがありましたら、
         <span style="color: #1414dc">k-ryu@hi.u-tokyo.ac.jp</span>
-        へ連絡してください。
-        <br />なお、 著作権はそれぞれに異なり、使用の前に確認してください。
+        までご連絡ください。
+        <br />著作権はデータベースごとに異なります。使用前にこ確認ください。
       </q-card-section>
     </q-card>
   </div>
 
   <div class="row q-mx-xl q-my-sm">
-    <!-- <div class="col-12 col-sm-2 col-md3"></div> -->
     <div class="col-12 col-sm-auto col-md-auto">
       <div class="row q-gutter-md">
         <div class="col-sm-12 col-md-4">
@@ -122,6 +127,5 @@ const firstSlide = ref("hi");
         </div>
       </div>
     </div>
-    <!-- <div class="col-12 col-sm-2 col-md3"></div> -->
   </div>
 </template>
