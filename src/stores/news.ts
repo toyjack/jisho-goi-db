@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { getNews } from '../api/news'
+import { getNews } from '../api'
 
 interface INews {
   id: number

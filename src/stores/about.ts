@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { getAboutContents } from '../api/about'
+import { getAboutContents } from '../api'
 
 interface IHelp {
   id: number

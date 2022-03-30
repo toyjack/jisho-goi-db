@@ -2,15 +2,16 @@
 // home page
 import { ref } from "vue";
 import Result from "../components/JiruishoResultCard.vue";
+import {searchJiruisho} from '../api'
 
 const term = ref("山");
-const results = ref({});
+const results = ref([]);
 
-const search = () => {
-  fetch("https://portal.kojisho.com/api/v1/jiruisho/search/" + term.value)
-    .then((res) => res.json())
-    .then((data) => (results.value = data));
-};
+const search = async () => {
+  results.value = await searchJiruisho(term.value)
+  console.log(results.value)
+}
+
 const clear = ()=>{
   term.value=""
 }
