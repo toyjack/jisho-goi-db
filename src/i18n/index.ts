@@ -1,22 +1,22 @@
 import { createI18n } from 'vue-i18n'
 
 
-import enUS from './en-US';
-import jaJP from './ja-JP'
-import zhCN from './zh-CN'
+import enUS from './en';
+import jaJP from './ja'
+import zhCN from './zh'
 
 const messages = {
-  'en-US': enUS,
-  'ja-JP': jaJP,
-  'zh-CN': zhCN
+  '日本語': jaJP,
+  'English': enUS,
+  '中文': zhCN
 };
 
 const i18n = createI18n({
   legacy: false,
   useScope: "global", 
   globalInjection: true,
-  locale: 'ja-JP', 
-  fallbackLocale: 'en-US', 
+  locale: '日本語', 
+  fallbackLocale: 'English', 
   messages, 
 })
 

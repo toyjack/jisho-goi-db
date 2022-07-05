@@ -1,7 +1,4 @@
 <script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-// import HelloWorld from "./components/HelloWorld.vue";
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 const { t, locale } = useI18n({ useScope: "global" });
@@ -20,31 +17,27 @@ const changeLocale = (to: string) => {
 
 <template>
   <q-layout view="hhr LpR lfr">
-    <q-header bordered class="bg-primary text-dark text-weight-bold">
-      <q-toolbar>
-        <q-toolbar-title>
+    <q-header bordered class="bg-secondary text-dark text-weight-bold">
+      <q-toolbar class="items-center self-center">
+        <q-toolbar-title class="text-h4">
           <q-avatar>
             <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg" />
           </q-avatar>
-          {{ $t("siteTitle") }}
+          <span>{{ $t("siteTitle") }}</span>
         </q-toolbar-title>
 
         <q-btn flat round dense icon="translate" class="q-mr-xs">
           <q-menu>
             <q-list style="min-width: 100px">
-              <q-item
-                clickable
-                v-close-popup
-                v-for="locale in $i18n.availableLocales"
-                :key="`locale-${locale}`"
-                @click="changeLocale(locale)"
-              >
+              <q-item clickable v-close-popup v-for="locale in $i18n.availableLocales" :key="`locale-${locale}`"
+                @click="changeLocale(locale)">
                 <q-item-section>{{ locale }}</q-item-section>
               </q-item>
             </q-list>
           </q-menu>
         </q-btn>
-        <q-btn dense flat round icon="menu" @click="toggleRightDrawer" />
+        <!-- サイドメニュー -->
+        <!-- <q-btn dense flat round icon="menu" @click="toggleRightDrawer" /> -->
       </q-toolbar>
 
       <q-tabs align="left" v-model="tab" indicator-color="transparent" class="text-dark text-weight-bold">
