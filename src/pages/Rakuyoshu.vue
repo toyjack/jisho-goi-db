@@ -1,5 +1,4 @@
 <script setup>
-// home page
 import { ref } from "vue"
 import Result from "../components/RakuyoshuResultCard.vue"
 import { searchRakuyoshu } from '../api'

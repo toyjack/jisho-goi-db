@@ -15,8 +15,12 @@ export async function  searchJiruisho (query: string)  {
   return data
 }
 
-
 export async function  searchRakuyoshu (query: string)  {
   const {data} = await instance.get('/rakuyoshu/search/'+ query)
+  return data
+}
+
+export async function  searchZozoku (query: string)  {
+  const {data} = await instance.get('/zozokutaizen/search/'+ query)
   return data
 }

@@ -1,7 +1,63 @@
 <script setup lang="ts">
-// home page
+import { ref } from "vue"
+import Result from "../components/ZozokuResultCard.vue"
+import { searchZozoku } from '../api'
+
+const term = ref("人")
+const results = ref([])
+
+const search = async () => {
+  results.value = await searchZozoku(term.value)
+}
+
+const clear = () => {
+  term.value = ""
+}
+
 </script>
 
 <template>
-<h2>増続大広益会玉編大全 準備中</h2>
+<div class="column q-pa-md q-gutter-md">
+  <div class="row">
+    <div class="col-12 col-sm-2 col-md-3"></div>
+    <div class="col-12 col-sm-8 col-md-6">
+      <q-input outlined v-model="term" label="掲出字を入力" />
+    </div>
+    <div class="col-12 col-sm-2 col-md-3"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-sm-2 col-md-3"></div>
+
+    <div class="col-12 col-sm-8 col-md-6">
+      <div class="column items-end">
+        <div class="col q-gutter-md">
+          <q-btn color="secondary" text-color="dark" :label="$t('button.clear')" @click="clear" />
+          <q-btn color="primary" text-color="dark" :label="$t('button.search')" @click="search" />
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-sm-2 col-md-3"></div>
+  </div>
+
+  <div class="row no-wrap items-center" v-if="results.length > 0">
+    <div class="col">
+      <q-separator inset />
+    </div>
+    <div class="col-grow q-px-md">{{ $t("label.numOfResults") }}{{ results.length }}</div>
+    <div class="col">
+      <q-separator inset />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-sm-12 col-md-12">
+      <div class="row wrap q-gutter-sm justify-center">
+        <div class="col-3" v-for="item of results" :key="item">
+          <Result :result="item" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </template>
