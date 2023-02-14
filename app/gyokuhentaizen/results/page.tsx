@@ -17,7 +17,7 @@ async function getData(entry: string | undefined, onkun: string | undefined) {
 async function GyokuhentaizenResults({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | undefined };
+  searchParams?: { [key: string]: string | undefined };
 }) {
   const entry = searchParams?.entry;
   const onkun = searchParams?.onkun;
@@ -44,7 +44,7 @@ async function GyokuhentaizenResults({
           <tbody>
             {results.map((result: any, index: number) => (
               <tr key={result.ghtz_id}>
-                <th>{index+1}</th>
+                <th>{index + 1}</th>
                 <td>{result.entry}</td>
                 <td>{result.jion_r}</td>
                 <td>{result.jion_l}</td>

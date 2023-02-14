@@ -1079,8 +1079,6 @@ const radicalList = [
 function GyokuhentaizenForm() {
   const searchParams = useSearchParams();
   // TODO: read state from query params
-  const entryRef = useRef(null);
-  const onkunRef = useRef(null);
   const radicalRef = useRef(null);
   const remainstrokeRef = useRef(null);
 
@@ -1090,7 +1088,7 @@ function GyokuhentaizenForm() {
   const router = useRouter();
 
   function handleSearchBtn(){
-    router.push(`/gyokuhentaizen/results?entry=${entryRef.current?.value}&onkun=${onkunRef.current.value}`)
+    router.push(`/gyokuhentaizen/results?entry=${entry}&onkun=${onkun}`)
   }
 
   function handleDisplayBtn(){}
@@ -1106,7 +1104,6 @@ function GyokuhentaizenForm() {
           type="text"
           placeholder="掲出字を入力してください"
           className="input input-bordered w-full max-w-xs"
-          ref={entryRef}
           value={entry}
           onChange={(e) => setEntry(e.target.value)}
         />
@@ -1125,7 +1122,6 @@ function GyokuhentaizenForm() {
           type="text"
           placeholder="漢字音または和訓を入力してください"
           className="input input-bordered w-full max-w-xs"
-          ref={onkunRef}
           value={onkun}
           onChange={(e) => setOnkun(e.target.value)}
         />
