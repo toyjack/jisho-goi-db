@@ -1,8 +1,36 @@
 import React from 'react'
+import Link from 'next/link';
 
 function CommonHeader() {
 
+  const databaseList = [
+    {
+      title: "色葉字類抄",
+      url: "/irohojiruisho",
+    },
+    {
+      title: "落葉集",
+      url: "/rakuyoshu",
+    },
+    {
+      title: "和訓栞",
+      url: "/wakunnoshiori",
+    },
+    {
+      title: "文明本節用集",
+      url: "/setsuyoshu",
+    },
+    {
+      title: "増続大広益会玉篇大全",
+      url: "/gyokuhentaizen",
+    },
+  ];
+
   const navList = [
+    {
+      title: "お知らせ",
+      url: "/news",
+    },
     {
       title: "色葉字類抄",
       url: "/irohojiruisho",
@@ -24,12 +52,12 @@ function CommonHeader() {
       url: "/gyokuhentaizen",
     },
     {
-      title: "本サイトについて",
-      url: "/about",
+      title: "画像ギャラリー",
+      url: "/gallery",
     },
     {
-      title: "お知らせ",
-      url: "/news",
+      title: "本サイトについて",
+      url: "/about",
     },
   ];
 
@@ -47,11 +75,36 @@ function CommonHeader() {
 
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
-            {navList.map((item) => (
-              <li key={item.title}>
-                <a href={item.url}>{item.title}</a>
-              </li>
-            ))}
+            <li>
+              <Link href="/news">お知らせ</Link>
+            </li>
+            <li tabIndex={0}>
+              <a className="justify-between">
+                全文データベース
+                <svg
+                  className="fill-current"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+                </svg>
+              </a>
+              <ul className="p-2 bg-base-200 z-10">
+                {databaseList.map((database) => (
+                  <li key={database.title}>
+                    <Link href={database.url}>{database.title}</Link>
+                  </li>
+                ))}
+              </ul>
+            </li>
+            <li>
+              <Link href="/gallery">画像ギャラリー</Link>
+            </li>
+            <li>
+              <Link href="/about">本サイトについて</Link>
+            </li>
           </ul>
         </div>
 
@@ -79,7 +132,7 @@ function CommonHeader() {
             >
               {navList.map((item) => (
                 <li key={item.title}>
-                  <a href={item.url}>{item.title}</a>
+                  <Link href={item.url}>{item.title}</Link>
                 </li>
               ))}
             </ul>
