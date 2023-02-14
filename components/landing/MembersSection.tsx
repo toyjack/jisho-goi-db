@@ -98,36 +98,6 @@ function MembersSection() {
         </div>
       </div>
     </section>
-
-    // <section>
-
-    //   <div className="hero bg-hero from-primary to-accent text-primary-content min-h-screen bg-gradient-to-br">
-    //     <div className="hero-content text-center">
-    //       <div className="w-full max-w-md">
-    //         <h2 className="mt-20 mb-2 text-4xl font-extrabold md:text-6xl">
-    //           メンバー
-    //         </h2>
-    //         <div className="my-20 flex flex-row flex-wrap w-full space-y-2 gap-2 md:flex-row md:space-y-0 md:space-x-2">
-    //           {data.map((item) => (
-    //             <a
-    //               href={item.url_in_site}
-    //               className="card bg-base-100 text-base-content w-32 p-8 flex items-center justify-center"
-    //               key={item.name}
-    //             >
-    //               <div className="avatar">
-    //                 <div className="w-24 rounded-xl">
-    //                   <img src={item.img} />
-    //                 </div>
-    //               </div>
-    //               <h3 className="text-lg font-bold">{item.name}</h3>
-    //               <h4 className="text-base">{item.name_ruby}</h4>
-    //             </a>
-    //           ))}
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </section>
   );
 }
 

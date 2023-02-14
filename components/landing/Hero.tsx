@@ -17,7 +17,7 @@ function Hero() {
             『色葉字類抄』の語彙研究および総合データベースの構築
             異種古辞書間におけるデータ連携モデルの構築
           </p>
-          <button className="btn btn-primary">Get Started</button>
+          <a className="btn btn-primary" href="#databases">データベース一覧</a>
         </div>
       </div>
     </div>

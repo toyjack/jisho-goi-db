@@ -20,6 +20,10 @@ function CommonHeader() {
       url: "/setsuyoshu",
     },
     {
+      title: "増続大広益会玉篇大全",
+      url: "/gyokuhentaizen",
+    },
+    {
       title: "本サイトについて",
       url: "/about",
     },
