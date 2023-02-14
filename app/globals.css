@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* Color Theme Swatches in Hex */
+.紫和黄-1-hex { color: #514859; }
+.紫和黄-2-hex { color: #F2F2EB; }
+.紫和黄-3-hex { color: #F2E96D; }
+.紫和黄-4-hex { color: #D9C896; }
+.紫和黄-5-hex { color: #A69472; }
