@@ -1,9 +1,10 @@
 import React from "react";
+import Link from "next/link";
+
 async function getData(entry: string | undefined, onkun: string | undefined) {
   const params = { entry: entry || "", onkun: onkun || "" };
   const query = new URLSearchParams(params);
   const url = `https://portal.kojisho.com/api/v1/gyokuhentaizen/search?${query}`;
-  console.log(url);
   const res = await fetch(url, { cache: "no-store" });
 
   if (!res.ok) {
@@ -24,6 +25,17 @@ async function GyokuhentaizenResults({
 
   const results = await getData(entry, onkun);
 
+  function getWord(wordStr: string) {
+    if (wordStr == "") return;
+    return wordStr.split("；").map((word) => {
+      return (
+        <span key={word} className="px-2 mx-1 badge badge-lg badge-primary">
+          {word}
+        </span>
+      );
+    });
+  }
+
   return (
     <div className="md:p-4">
       <div className="divider">
@@ -35,6 +47,7 @@ async function GyokuhentaizenResults({
           <thead>
             <tr>
               <th></th>
+              <th>辞書内ID</th>
               <th>掲出字</th>
               <th>字音（右）</th>
               <th>字音（左）</th>
@@ -45,10 +58,18 @@ async function GyokuhentaizenResults({
             {results.map((result: any, index: number) => (
               <tr key={result.ghtz_id}>
                 <th>{index + 1}</th>
-                <td>{result.entry}</td>
-                <td>{result.jion_r}</td>
-                <td>{result.jion_l}</td>
-                <td>{result.wakun}</td>
+                <td>{result.ghtz_id}</td>
+                <td>
+                  <Link
+                    href={"/gyokuhentaizen/" + result.ghtz_id}
+                    className="kbd"
+                  >
+                    {result.entry}
+                  </Link>
+                </td>
+                <td>{getWord(result.jion_r || "")}</td>
+                <td>{getWord(result.jion_l || "")}</td>
+                <td>{getWord(result.wakun || "")}</td>
               </tr>
             ))}
           </tbody>

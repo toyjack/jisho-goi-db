@@ -1,5 +1,5 @@
-'use client';
-import {useRef, useState} from 'react'
+"use client";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 
@@ -1082,16 +1082,16 @@ function GyokuhentaizenForm() {
   const radicalRef = useRef(null);
   const remainstrokeRef = useRef(null);
 
-  const [entry, setEntry]= useState(searchParams.get("entry") || "");
-  const [onkun, setOnkun]= useState(searchParams.get("onkun") || "");
+  const [entry, setEntry] = useState(searchParams.get("entry") || "");
+  const [onkun, setOnkun] = useState(searchParams.get("onkun") || "");
 
   const router = useRouter();
 
-  function handleSearchBtn(){
-    router.push(`/gyokuhentaizen/results?entry=${entry}&onkun=${onkun}`)
+  function handleSearchBtn() {
+    router.push(`/gyokuhentaizen/results?entry=${entry}&onkun=${onkun}`);
   }
 
-  function handleDisplayBtn(){}
+  function handleDisplayBtn() {}
 
   return (
     <>
@@ -1132,7 +1132,9 @@ function GyokuhentaizenForm() {
       </div>
 
       <div className="pt-6 form-control w-full max-w-xs flex flex-col items-center justify-center">
-        <button className="btn btn-wide btn-primary" onClick={handleSearchBtn}>検索</button>
+        <button className="btn btn-wide btn-primary" onClick={handleSearchBtn}>
+          検索
+        </button>
       </div>
 
       {/* <div className="divider"></div>
@@ -1178,4 +1180,4 @@ function GyokuhentaizenForm() {
   );
 }
 
-export default GyokuhentaizenForm
+export default GyokuhentaizenForm;
