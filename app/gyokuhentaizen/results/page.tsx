@@ -1,10 +1,24 @@
 import React from "react";
 import Link from "next/link";
 
-async function getData(entry: string | undefined, onkun: string | undefined) {
-  const params = { entry: entry || "", onkun: onkun || "" };
+async function getData(
+  entry: string | undefined,
+  jion: string | undefined,
+  wakun: string | undefined,
+  maki: string | undefined,
+  tyo: string | undefined
+) {
+  const params = {
+    entry: entry || "",
+    jion: jion || "",
+    wakun: wakun || "",
+    maki: maki || "",
+    tyo: tyo || "",
+  };
   const query = new URLSearchParams(params);
   const url = `https://portal.kojisho.com/api/v1/gyokuhentaizen/search?${query}`;
+  // const url = `http://localhost:8000/api/v1/gyokuhentaizen/search?${query}`;
+  console.log(url);
   const res = await fetch(url, { cache: "no-store" });
 
   if (!res.ok) {
@@ -21,9 +35,12 @@ async function GyokuhentaizenResults({
   searchParams?: { [key: string]: string | undefined };
 }) {
   const entry = searchParams?.entry;
-  const onkun = searchParams?.onkun;
+  const jion = searchParams?.jion;
+  const wakun = searchParams?.wakun;
+  const maki = searchParams?.maki;
+  const tyo = searchParams?.tyo;
 
-  const results = await getData(entry, onkun);
+  const results = await getData(entry, jion, wakun, maki, tyo);
 
   function getWord(wordStr: string) {
     if (wordStr == "") return;

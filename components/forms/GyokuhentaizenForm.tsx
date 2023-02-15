@@ -1083,12 +1083,20 @@ function GyokuhentaizenForm() {
   const remainstrokeRef = useRef(null);
 
   const [entry, setEntry] = useState(searchParams.get("entry") || "");
-  const [onkun, setOnkun] = useState(searchParams.get("onkun") || "");
+  const [jion, setJion] = useState(searchParams.get("jion") || "");
+  const [wakun, setWakun] = useState(searchParams.get("wakun") || "");
+  const [radical, setRadical] = useState(searchParams.get("radical") || "");
+  const [strokes, setStrokes] = useState(searchParams.get("strokes") || "");
+  const [maki, setMaki] = useState(searchParams.get("maki") || "");
+  const [tyo, setTyo] = useState(searchParams.get("tyo") || "");
+
+  const params = { entry, jion, wakun, maki, tyo };
+  const query = new URLSearchParams(params);
 
   const router = useRouter();
 
   function handleSearchBtn() {
-    router.push(`/gyokuhentaizen/results?entry=${entry}&onkun=${onkun}`);
+    router.push(`/gyokuhentaizen/results?${query}`);
   }
 
   function handleDisplayBtn() {}
@@ -1115,15 +1123,14 @@ function GyokuhentaizenForm() {
 
       <div className="form-control w-full max-w-xs">
         <label className="label">
-          <span className="label-text">音・訓</span>
-          {/* <span className="label-text-alt">Alt label</span> */}
+          <span className="label-text">字音</span>
         </label>
         <input
           type="text"
-          placeholder="漢字音または和訓を入力してください"
+          placeholder="字音を入力してください"
           className="input input-bordered w-full max-w-xs"
-          value={onkun}
-          onChange={(e) => setOnkun(e.target.value)}
+          value={jion}
+          onChange={(e) => setJion(e.target.value)}
         />
         <label className="label">
           <span className="label-text-alt"></span>
@@ -1131,20 +1138,35 @@ function GyokuhentaizenForm() {
         </label>
       </div>
 
-      <div className="pt-6 form-control w-full max-w-xs flex flex-col items-center justify-center">
-        <button className="btn btn-wide btn-primary" onClick={handleSearchBtn}>
-          検索
-        </button>
+      <div className="form-control w-full max-w-xs">
+        <label className="label">
+          <span className="label-text">和訓</span>
+        </label>
+        <input
+          type="text"
+          placeholder="和訓を入力してください"
+          className="input input-bordered w-full max-w-xs"
+          value={wakun}
+          onChange={(e) => setWakun(e.target.value)}
+        />
+        <label className="label">
+          <span className="label-text-alt"></span>
+          <span className="label-text-alt">歴史仮名遣い</span>
+        </label>
       </div>
 
-      {/* <div className="divider"></div>
+      <div className="divider"></div>
 
       <div className="form-control w-full max-w-xs">
         <label className="label">
           <span className="label-text">部首</span>
         </label>
-        <select className="select select-bordered" ref={radicalRef}>
-          <option disabled selected value="">
+        <select
+          className="select select-bordered"
+          ref={radicalRef}
+          defaultValue={"default"}
+        >
+          <option disabled value="default" hidden>
             部首を選択してください
           </option>
           {radicalList.map((radical) => (
@@ -1160,22 +1182,85 @@ function GyokuhentaizenForm() {
           <span className="label-text">残り画数</span>
         </label>
         <select className="select select-bordered" ref={remainstrokeRef}>
-          <option disabled selected value="">
+          <option disabled selected value="default" hidden>
             残り画数を選択してください
           </option>
-          {radicalList.map((radical) => (
-            <option value={radical.radical} key={radical.radical}>
-              {radical.label}
+          {[0, 1, 2].map((stroke) => (
+            <option value={stroke} key={stroke}>
+              {stroke}
             </option>
           ))}
         </select>
       </div>
 
-      <div className="form-control w-full max-w-xs flex flex-col items-center justify-center pt-6">
-        <button className="btn btn-wide" onClick={handleDisplayBtn}>表示／絞る</button>
+      {/* <div className="form-control w-full max-w-xs flex flex-col items-center justify-center pt-6">
+        <button className="btn btn-wide" onClick={handleDisplayBtn}>
+          表示／絞る
+        </button>
+      </div> */}
+
+      <div className="divider"></div>
+
+      <div className="form-control w-full max-w-xs">
+        <label className="label">
+          <span className="label-text">巻</span>
+        </label>
+        <select
+          className="select select-bordered"
+          value={maki}
+          onChange={(e) => {
+            setMaki(e.target.value);
+          }}
+        >
+          <option disabled selected value="" hidden>
+            巻を選択してください
+          </option>
+          {[1].map((maki) => (
+            <option value={maki} key={maki}>
+              {maki}
+            </option>
+          ))}
+        </select>
       </div>
 
-      <div className="divider"></div> */}
+      <div className="form-control w-full max-w-xs">
+        <label className="label">
+          <span className="label-text">丁</span>
+        </label>
+        <input
+          type="text"
+          placeholder="丁を入力してください"
+          className="input input-bordered w-full max-w-xs"
+          value={tyo}
+          onChange={(e) => setTyo(e.target.value)}
+        />
+        <label className="label">
+          <span className="label-text-alt"></span>
+          <span className="label-text-alt">アラビア数字</span>
+        </label>
+      </div>
+
+      {/* <div className="form-control w-full max-w-xs">
+        <label className="label">
+          <span className="label-text">丁</span>
+        </label>
+        <select className="select select-bordered" ref={remainstrokeRef}>
+          <option disabled selected value="default" hidden>
+            丁を選択してください
+          </option>
+          {[0, 1, 2].map((stroke) => (
+            <option value={stroke} key={stroke}>
+              {stroke}
+            </option>
+          ))}
+        </select>
+      </div> */}
+
+      <div className="pt-6 form-control w-full max-w-xs flex flex-col items-center justify-center">
+        <button className="btn btn-wide btn-primary" onClick={handleSearchBtn}>
+          検索
+        </button>
+      </div>
     </>
   );
 }
