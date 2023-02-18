@@ -7,17 +7,17 @@ function GyokuhentaizenLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <div className="container mx-auto">
       <div className="p-10">
         <h2 className="text-3xl font-bold">
-          【試行版】増続大広益会玉篇大全データベース
+          増続大広益会玉篇大全データベース
         </h2>
       </div>
       <label
         htmlFor="drawer"
         className="block h-auto w-auto btn btn-primary drawer-button lg:hidden"
       >
-        Open drawer
+        検索パネルを開く
       </label>
 
       <div className="drawer drawer-mobile h-max">
@@ -30,7 +30,7 @@ function GyokuhentaizenLayout({
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

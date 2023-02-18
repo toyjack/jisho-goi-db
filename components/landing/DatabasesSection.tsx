@@ -30,7 +30,7 @@ function DatabasesSection() {
       title: "増続大広益会玉篇大全",
       url: "/gyokuhentaizen",
       description: "公開予定",
-      image: "https://placeimg.com/640/480/arch",
+      image: "/images/gyokuhentaizen/vol_2/1_25b.png",
     },
   ];
 

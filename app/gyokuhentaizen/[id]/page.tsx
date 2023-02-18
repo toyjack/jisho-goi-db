@@ -45,8 +45,14 @@ async function GyokuhentaizenItemPage({ params }: { params: { id: string } }) {
         </p>
         <h2>
           掲出字：
-          <span className="font-bold">{result.entry}</span>
+          <span className="kbd">{result.entry}</span>
         </h2>
+        <p>
+          部首：<span className="font-bold">{result.radical}</span>
+        </p>
+        <p>
+          残り画数：<span className="font-bold">{result.remain_strokes}</span>
+        </p>
         <p>
           所在：<span className="font-bold">{getLocation(result.ghtz_id)}</span>
         </p>

@@ -5,6 +5,8 @@ async function getData(
   entry: string | undefined,
   jion: string | undefined,
   wakun: string | undefined,
+  radical: string | undefined,
+  strokes: string | undefined,
   maki: string | undefined,
   tyo: string | undefined
 ) {
@@ -12,6 +14,8 @@ async function getData(
     entry: entry || "",
     jion: jion || "",
     wakun: wakun || "",
+    radical : radical || "",
+    strokes : strokes || "",
     maki: maki || "",
     tyo: tyo || "",
   };
@@ -37,10 +41,12 @@ async function GyokuhentaizenResults({
   const entry = searchParams?.entry;
   const jion = searchParams?.jion;
   const wakun = searchParams?.wakun;
+  const radical = searchParams?.radical;
+  const strokes = searchParams?.strokes;
   const maki = searchParams?.maki;
   const tyo = searchParams?.tyo;
 
-  const results = await getData(entry, jion, wakun, maki, tyo);
+  const results = await getData(entry, jion, wakun, radical, strokes, maki, tyo);
 
   function getWord(wordStr: string) {
     if (wordStr == "") return;
@@ -64,8 +70,8 @@ async function GyokuhentaizenResults({
           <thead>
             <tr>
               <th></th>
-              <th>辞書内ID</th>
               <th>掲出字</th>
+              <th>部首</th>
               <th>字音（右）</th>
               <th>字音（左）</th>
               <th>和訓</th>
@@ -75,15 +81,15 @@ async function GyokuhentaizenResults({
             {results.map((result: any, index: number) => (
               <tr key={result.ghtz_id}>
                 <th>{index + 1}</th>
-                <td>{result.ghtz_id}</td>
                 <td>
                   <Link
                     href={"/gyokuhentaizen/" + result.ghtz_id}
                     className="kbd"
-                  >
+                    >
                     {result.entry}
                   </Link>
                 </td>
+                    <td>{result.radical}</td>
                 <td>{getWord(result.jion_r || "")}</td>
                 <td>{getWord(result.jion_l || "")}</td>
                 <td>{getWord(result.wakun || "")}</td>
