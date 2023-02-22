@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link';
+import Image from 'next/image';
 
 function CommonHeader() {
 
@@ -67,7 +68,7 @@ function CommonHeader() {
         <div className="navbar-start">
           <a className="btn btn-ghost normal-case text-xl" href="/">
             <div className="w-10 p-2">
-              <img src="/images/logo.png" alt="" width="80" height="80" />
+              <Image src="/images/logo.png" alt="" width="80" height="80" />
             </div>
             辞書語彙データベース
           </a>
