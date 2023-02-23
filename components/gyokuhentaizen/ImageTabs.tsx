@@ -198,6 +198,8 @@ function GyokuhentaizenImageTabs({ ghtz_id }: { ghtz_id: string }) {
             <Image
               src={getNdlImageUrl(ghtz_id)}
               alt="ndl"
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
               width={imageWidth}
               height={imageHeight}
             />
@@ -216,6 +218,8 @@ function GyokuhentaizenImageTabs({ ghtz_id }: { ghtz_id: string }) {
             <Image
               src={getFujimotoImageUrl(ghtz_id)}
               alt="fujimoto"
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
               width={imageWidth}
               height={imageHeight}
             />

@@ -4,6 +4,7 @@ import GyokuhentaizenImageTabs from "@/components/gyokuhentaizen/ImageTabs";
 // https://portal.kojisho.com/api/v1/gyokuhentaizen/1_50b_2_2
 async function getData(id: string) {
   const url = `https://portal.kojisho.com/api/v1/gyokuhentaizen/${id}`;
+  // const url = `https://portal.kojisho.com/api/v1/gyokuhentaizen/${id}`;
   const res = await fetch(url, { cache: "no-store" });
 
   if (!res.ok) {

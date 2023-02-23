@@ -11,15 +11,15 @@ async function getData(
   tyo: string | undefined
 ) {
   const params = {
+    database: "gyokuhentaizen",
     entry: entry || "",
     jion: jion || "",
     wakun: wakun || "",
-    radical : radical || "",
-    strokes : strokes || "",
-    maki: maki || "",
-    tyo: tyo || "",
+    radical: radical || "",
+    remain_strokes: strokes || "",
   };
   const query = new URLSearchParams(params);
+  // const url = `https://jisho-goi-nestjs.kojisho.com/api/search?${query}`;
   const url = `https://portal.kojisho.com/api/v1/gyokuhentaizen/search?${query}`;
   // const url = `http://localhost:8000/api/v1/gyokuhentaizen/search?${query}`;
   console.log(url);

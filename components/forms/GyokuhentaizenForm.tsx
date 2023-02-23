@@ -1175,7 +1175,7 @@ function GyokuhentaizenForm() {
 
       <div className="form-control w-full max-w-xs">
         <label className="label">
-          <span className="label-text">残り画数</span>
+          <span className="label-text">残画数</span>
         </label>
         <input
           type="text"
