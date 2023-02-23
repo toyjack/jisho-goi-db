@@ -30,7 +30,7 @@ export default function RootLayout({
           function gtag(){window.dataLayer.push(arguments);}
           gtag('js', new Date());
 
-          gtag('config', 'GA_MEASUREMENT_ID');
+          gtag('config', 'G-43JXZ3BZT8');
         `}
       </Script>
     </html>
