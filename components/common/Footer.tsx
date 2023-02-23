@@ -45,7 +45,7 @@ function CommonFooter() {
             className="inline-block font-bold text-xl"
             href="https://www.hi.u-tokyo.ac.jp/"
           >
-            <img src="/images/logo_banner.png" alt="" />
+            <img src="/images/logo.png" alt="" />
           </a>
         </div>
        
@@ -90,7 +90,7 @@ function CommonFooter() {
       <div
         className="text-sm text-gray-700 mr-4 dark:text-slate-400 text-center md:text-left"
       >
-        <p>© 2022-2023 <a href="https://www.hi.u-tokyo.ac.jp/" className="link link-hover">辞書語彙データベース</a></p>
+        <p>© 2022-2023 <a href="#" className="link link-hover">辞書語彙データベース</a></p>
         <p>
           注があるものを除いて, このサイトの内容物は<a
             href="https://creativecommons.org/licenses/by/4.0/deed.ja"
