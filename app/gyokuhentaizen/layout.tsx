@@ -1,4 +1,3 @@
-import React from "react";
 import GyokuhentaizenForm from "@/components/forms/GyokuhentaizenForm";
 
 function GyokuhentaizenLayout({
@@ -11,6 +10,8 @@ function GyokuhentaizenLayout({
       <div className="p-10">
         <h2 className="text-3xl font-bold">
           増続大広益会玉篇大全データベース
+          <span className="badge badge-lg">試行版</span>
+          <span className="badge badge-lg badge-secondary">v2023-02</span>
         </h2>
       </div>
       <label
@@ -25,11 +26,12 @@ function GyokuhentaizenLayout({
         <div className="drawer-content">{children}</div>
         <div className="drawer-side min-h-screen">
           <label htmlFor="drawer" className="drawer-overlay"></label>
-          <div className="menu p-4 w-80 bg-base-200 text-base-content">
+          <div className="menu p-4 w-80 bg-base-200 text-base-content z-10">
             <GyokuhentaizenForm />
           </div>
         </div>
       </div>
+
     </div>
   );
 }
