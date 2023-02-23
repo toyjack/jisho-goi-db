@@ -69,7 +69,20 @@ function GyokuhentaizenPage() {
             増続大広益会玉篇大全. 首巻,巻第1-10 / 毛利貞斎 編
           </Link>
         </p>
-        <p>表示される原本画像（準備中）について、XXXXを用いています。</p>
+        <p>
+          表示される原本画像について、
+          <Link
+            href="https://www.wul.waseda.ac.jp/kotenseki/index.html"
+            target="_blank"
+          >
+            早稲田大学図書館古典籍総合データベース
+          </Link>
+          、
+          <Link href="https://dl.ndl.go.jp/" target="_blank">
+            国立国会図書館デジタルコレクション
+          </Link>
+          、藤本灯氏自家本を用いています。
+        </p>
       </article>
     </div>
   );

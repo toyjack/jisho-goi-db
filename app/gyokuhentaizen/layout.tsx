@@ -1,3 +1,4 @@
+import Link from "next/link";
 import GyokuhentaizenForm from "@/components/forms/GyokuhentaizenForm";
 
 function GyokuhentaizenLayout({
@@ -9,7 +10,7 @@ function GyokuhentaizenLayout({
     <div className="container mx-auto">
       <div className="p-10">
         <h2 className="text-3xl font-bold">
-          増続大広益会玉篇大全データベース
+          <Link href="/gyokuhentaizen">増続大広益会玉篇大全データベース</Link>
           <span className="badge badge-lg">試行版</span>
           <span className="badge badge-lg badge-secondary">v2023-02</span>
         </h2>
@@ -31,7 +32,6 @@ function GyokuhentaizenLayout({
           </div>
         </div>
       </div>
-
     </div>
   );
 }
