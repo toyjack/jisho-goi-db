@@ -182,6 +182,8 @@ function GyokuhentaizenImageTabs({ ghtz_id }: { ghtz_id: string }) {
             <Image
               src={getWasedaPageUrl(ghtz_id)}
               alt="waseda"
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
               width={imageWidth}
               height={imageHeight}
             />
@@ -195,7 +197,7 @@ function GyokuhentaizenImageTabs({ ghtz_id }: { ghtz_id: string }) {
           <Link href={getNdlPageUrl(ghtz_id)} target="_blank" className="link">
             <Image
               src={getNdlImageUrl(ghtz_id)}
-              alt="waseda"
+              alt="ndl"
               width={imageWidth}
               height={imageHeight}
             />
@@ -213,7 +215,7 @@ function GyokuhentaizenImageTabs({ ghtz_id }: { ghtz_id: string }) {
           >
             <Image
               src={getFujimotoImageUrl(ghtz_id)}
-              alt="waseda"
+              alt="fujimoto"
               width={imageWidth}
               height={imageHeight}
             />
