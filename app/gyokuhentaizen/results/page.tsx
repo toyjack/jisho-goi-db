@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 
 async function getData(
@@ -22,7 +21,6 @@ async function getData(
   // const url = `https://jisho-goi-nestjs.kojisho.com/api/search?${query}`;
   const url = `https://portal.kojisho.com/api/v1/gyokuhentaizen/search?${query}`;
   // const url = `http://localhost:8000/api/v1/gyokuhentaizen/search?${query}`;
-  console.log(url);
   const res = await fetch(url, { cache: "no-store" });
 
   if (!res.ok) {

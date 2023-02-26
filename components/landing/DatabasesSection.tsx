@@ -1,4 +1,4 @@
-import React from "react";
+import Image from "next/image";
 
 function DatabasesSection() {
   const databases = [
@@ -6,25 +6,25 @@ function DatabasesSection() {
       title: "色葉字類抄",
       url: "/irohajiruisho",
       description: "公開中",
-      image: "https://placeimg.com/640/480/arch",
+      image: "/images/no_image.png",
     },
     {
       title: "落葉集",
       url: "/databases/kuzushiji",
       description: "公開予定",
-      image: "https://placeimg.com/640/480/arch",
+      image: "/images/no_image.png",
     },
     {
       title: "和訓栞",
       url: "/datasets/syozo-gallery",
       description: "公開予定",
-      image: "https://placeimg.com/640/480/arch",
+      image: "/images/no_image.png",
     },
     {
       title: "文明本節用集",
-      url: "/datasets/saigai",
+      url: "/bunmei",
       description: "公開予定",
-      image: "https://placeimg.com/640/480/arch",
+      image: "/images/no_image.png",
     },
     {
       title: "増続大広益会玉篇大全",
@@ -54,7 +54,7 @@ function DatabasesSection() {
                   key={dataset.title}
                 >
                   <figure>
-                    <img src={dataset.image} alt={dataset.title} />
+                    <Image src={dataset.image} alt={dataset.title} width={120} height={120} />
                   </figure>
                   <div className="card-body">
                     <h2 className="card-title">{dataset.title}</h2>

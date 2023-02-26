@@ -19,7 +19,7 @@ function CommonHeader() {
     },
     {
       title: "文明本節用集",
-      url: "/setsuyoshu",
+      url: "/bunmei",
     },
     {
       title: "増続大広益会玉篇大全",
@@ -46,7 +46,7 @@ function CommonHeader() {
     },
     {
       title: "文明本節用集",
-      url: "/setsuyoshu",
+      url: "/bunmei",
     },
     {
       title: "増続大広益会玉篇大全",
