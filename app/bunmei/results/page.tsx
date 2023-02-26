@@ -16,10 +16,10 @@ async function getData(searchParams: { [key: string]: string  }){
 async function BunmeiResultsPage({
   searchParams,
 }: {
-  searchParams: { [key: string]: string };
+  searchParams?: { [key: string]: string };
 }) {
 
-  const results = await getData(searchParams);
+  const results = await getData(searchParams!);
   return (
     <div className="md:p-4">
       <div className="divider">
