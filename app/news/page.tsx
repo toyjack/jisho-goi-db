@@ -1,7 +1,7 @@
 function NewsPage() {
   return (
     <>
-      news
+      開発中
     </>
   );
 }

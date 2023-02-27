@@ -11,7 +11,7 @@ function CommonHeader() {
     },
     {
       title: "落葉集",
-      url: "/rakuyoshu",
+      url: "/racvyoxv",
     },
     {
       title: "和訓栞",
