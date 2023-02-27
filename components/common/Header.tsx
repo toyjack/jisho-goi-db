@@ -48,8 +48,8 @@ function CommonHeader() {
       <div className="navbar bg-base-100">
         <div className="navbar-start">
           <a className="btn btn-ghost normal-case text-xl" href="/">
-            <div className="w-10 p-2">
-              <Image src="/images/logo.png" alt="" width="80" height="80" />
+            <div className="w-16 p-2">
+              <Image src="/images/logo.png" alt="" width="250" height="160" />
             </div>
             辞書語彙データベース
           </a>
