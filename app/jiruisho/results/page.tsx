@@ -74,7 +74,7 @@ async function JiruishoResultsPage({
                 <td>{result.maeda_loc}</td>
                 <td>
                   <Link
-                    href={result.maeda_ndl_url}
+                    href={result.maeda_ndl_url ||""}
                     target="_blank"
                     className="link link-hover"
                   >
@@ -84,7 +84,7 @@ async function JiruishoResultsPage({
                 <td>{result.kurokawa_loc}</td>
                 <td>
                   <Link
-                    href={result.kurokawa_ndl_url}
+                    href={result.kurokawa_ndl_url||""}
                     target="_blank"
                     className="link link-hover"
                   >
