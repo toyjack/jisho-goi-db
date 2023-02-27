@@ -1,9 +1,10 @@
-import JiruishoManual from '@/markdown/JiruishoManual.mdx'
+// import JiruishoManual from '@/markdown/JiruishoManual.mdx'
 
 
 function JiruishoPage() {
   return (
-    <JiruishoManual />
+    // <JiruishoManual />
+    <div>test</div>
   )
 }
 
