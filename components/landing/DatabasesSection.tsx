@@ -1,36 +1,37 @@
 import Image from "next/image";
+import Link from "next/link";
 
 function DatabasesSection() {
   const databases = [
     {
       title: "色葉字類抄",
       url: "/jiruisho",
-      description: "公開中",
-      image: "/images/no_image.png",
+      description: "姓氏部・名字部",
+      image: "/images/jiruisho_logo.png",
     },
     {
       title: "落葉集",
-      url: "/rakuyoshu",
-      description: "公開予定",
+      url: "/racvyoxv",
+      description: "イ部・ロ部、ハ部の一部",
       image: "/images/no_image.png",
     },
     {
       title: "和訓栞",
       url: "/wakunnosiori",
       description: "公開予定",
-      image: "/images/no_image.png",
+      image: "/images/wakun_logo.png",
     },
     {
       title: "文明本節用集",
       url: "/bunmei",
-      description: "公開予定",
-      image: "/images/no_image.png",
+      description: "イ部",
+      image: "/images/bunmeibon_logo.png",
     },
     {
       title: "増続大広益会玉篇大全",
       url: "/gyokuhentaizen",
-      description: "公開予定",
-      image: "/images/gyokuhentaizen/vol_2/1_25b.png",
+      description: "巻一",
+      image: "/images/gyokutaizen_logo.png",
     },
   ];
 
@@ -54,7 +55,12 @@ function DatabasesSection() {
                   key={dataset.title}
                 >
                   <figure>
-                    <Image src={dataset.image} alt={dataset.title} width={120} height={120} />
+                    <Image
+                      src={dataset.image}
+                      alt={dataset.title}
+                      width={200}
+                      height={200}
+                    />
                   </figure>
                   <div className="card-body">
                     <h2 className="card-title">{dataset.title}</h2>
@@ -70,6 +76,14 @@ function DatabasesSection() {
             })}
           </div>
         </div>
+
+        <p className="p-4 text-xs">
+          一部の写真は「
+          <Link href="https://dl.ndl.go.jp/" target={"_blank"} className="link link-hover">
+            国立国会図書館デジタルコレクション
+          </Link>
+          」から転載したものです。
+        </p>
       </div>
     </div>
   );

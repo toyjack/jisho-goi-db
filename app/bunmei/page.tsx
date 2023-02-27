@@ -62,16 +62,36 @@ function BunmeiPage() {
         <p>
           それぞれ検索結果が各項目の全文テキストとして表示されます。検索結果は学術研究の目的のために自由に利用していただいてかまいませんが、校正・点検中のものを含みますので、検索結果を原本画像で確認することをおすすめします。
         </p>
-        <p>
-          底本：
-        </p>
+        <p>底本：</p>
         <p>
           表示される原本画像について、
-         
           <Link href="https://dl.ndl.go.jp/" target="_blank">
             国立国会図書館デジタルコレクション
           </Link>
-         
+        </p>
+        <p className="text-3xl font-bold">利用条件</p>
+        <p>
+          クリエイティブ・コモンズ・ライセンスの「CC
+          BY-NC」（クリエイティブ・コモンズ　表示 - 非営利 4.0
+          国際ライセンス）相当の条件で提供しています。
+          <br />
+          https://creativecommons.org/licenses/by-nc/4.0/deed.ja
+        </p>
+
+        <p className="text-3xl font-bold">データベース作成協力者</p>
+        <p>
+          翻字提供　萩原義雄 <br />
+          作業統括　大島英之　藤本灯　高田智和　劉冠偉 <br />
+          タグ付け　　大島英之 <br></br> 翻字協力　堀川宗一郎 <br />
+          修正協力者　奥山光　小幡幸輝　 <br />
+          システム開発　劉冠偉
+        </p>
+
+        <p className="text-3xl font-bold">連絡先</p>
+        <p>
+          (システム上の問題) liuguanwei2013[atmark]gmail.com
+          (コンテンツ上の問題) jisho-goi@gmail.com
+          admin@jisho-goi.jp
         </p>
       </article>
     </div>

@@ -90,7 +90,7 @@ function MembersSection() {
                 </div>
               </div>
               <h3 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                <a href="#">{item.name}</a>
+                <a href={item.url} target="_blank" rel="noreferrer">{item.name}</a>
               </h3>
               <p>{item.name_ruby}</p>
             </div>

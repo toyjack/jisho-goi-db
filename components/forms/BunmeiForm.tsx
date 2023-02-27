@@ -4,6 +4,25 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import FormTextInput from "../common/FormTextInput";
 
+const mon = [
+  "天地",
+  "家屋",
+  "時節",
+  "草木",
+  "神祇",
+  "人倫",
+  "人名",
+  "官位",
+  "気形",
+  "支体",
+  "飲食",
+  "絹布",
+  "器財",
+  "光彩",
+  "数量",
+  "態藝",
+];
+
 function BunmeiForm() {
 
   // ID;
@@ -69,29 +88,29 @@ function BunmeiForm() {
       />
 
       <FormTextInput
-        labelLeftUppon="語形"
-        labelRightBottom="カタカナ（原表記）"
+        labelLeftUppon="見出し語の語形（右傍）"
+        labelRightBottom="カタカナ（仮名遣いは原本通り）"
         inputValue={gokei}
         getInputValue={setGokei}
       />
 
-      <div className="divider"></div>
 
       <FormTextInput
-        labelLeftUppon="声調"
-        labelRightBottom="平、上、去、入、東、○（○はなし）"
+        labelLeftUppon="音訓（左傍）"
+        labelRightBottom="カタカナ（原表記）"
+        inputValue={leftWakun}
+        getInputValue={setLeftWakun}
+      />
+
+
+      <FormTextInput
+        labelLeftUppon="声点"
+        labelRightBottom="平、東、上、去、入、○（○はなし）"
         inputValue={shouten}
         getInputValue={setShouten}
       />
 
       <div className="divider"></div>
-
-      <FormTextInput
-        labelLeftUppon="左傍訓"
-        labelRightBottom="カタカナ（原表記）"
-        inputValue={leftWakun}
-        getInputValue={setLeftWakun}
-      />
 
       <FormTextInput
         labelLeftUppon="注文"

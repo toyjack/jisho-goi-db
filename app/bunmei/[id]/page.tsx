@@ -13,9 +13,47 @@ async function getData(id: string) {
   return res.json();
 }
 
+const tableHeader = [
+  // { label: "ID", field: "bunmei_id", type: "text" },
+  { label: "語頭記号", field: "gotou", type: "text" },
+  // { label: "見出し語", field: "entry", type: "text" },
+  { label: "見出し語原表記", field: "entry_original", type: "text" },
+  // { label: "語形", field: "gokei", type: "text" },
+  { label: "語形原表記", field: "gokei_original", type: "text" },
+  { label: "声点", field: "shouten", type: "text" },
+  { label: "左傍訓", field: "left_kun", type: "text" },
+  { label: "注", field: "defination", type: "text" },
+  { label: "項目種別", field: "item_type", type: "text" },
+  { label: "部", field: "bu", type: "text" },
+  { label: "門", field: "mon", type: "text" },
+  { label: "影印本番号", field: "page", type: "text" },
+  { label: "行数", field: "line", type: "text" },
+  { label: "NDLリンク", field: "ndl_link", type: "button" },
+  // { label: "備考", field: "remark", type: "text" },
+];
+
 async function BunmeiItemPage({ params }: { params: { id: string } }) {
   const { id } = params;
   const result = await getData(id);
+
+  const CellBlock = ({
+    label,
+    value,
+    type,
+  }: {
+    label: string;
+    value: string;
+    type: string;
+  }) => {
+    if (type === "button" && value) {
+      return (
+        <Link href={value || ""} target="_blank" className="btn btn-primary">
+          {label}
+        </Link>
+      );
+    }
+    return <>{value}</>;
+  };
 
   return (
     <div className="p-4">
@@ -34,78 +72,20 @@ async function BunmeiItemPage({ params }: { params: { id: string } }) {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th>辞書内ID</th>
-              <td>{result.bunmei_id}</td>
-            </tr>
-            <tr>
-              <th>語頭記号</th>
-              <td>{result.gotou}</td>
-            </tr>
-            <tr>
-              <th>見出し語</th>
-              <td>{result.entry}</td>
-            </tr>
-            <tr>
-              <th>見出し語原表記</th>
-              <td>{result.entry_original}</td>
-            </tr>
-            <tr>
-              <th>語形</th>
-              <td>{result.gokei}</td>
-            </tr>
-            <tr>
-              <th>語形原表記</th>
-              <td>{result.gokei_original}</td>
-            </tr>
-            <tr>
-              <th>声点</th>
-              <td>{result.shouten}</td>
-            </tr>
-            <tr>
-              <th>左傍訓</th>
-              <td>{result.left_kun}</td>
-            </tr>
-            <tr>
-              <th>注</th>
-              <td>{result.defination}</td>
-            </tr>
-            <tr>
-              <th>項目種別</th>
-              <td>{result.item_type}</td>
-            </tr>
-            <tr>
-              <th>部</th>
-              <td>{result.bu}</td>
-            </tr>
-            <tr>
-              <th>門</th>
-              <td>{result.mon}</td>
-            </tr>
-            <tr>
-              <th>ページ数</th>
-              <td>{result.page}</td>
-            </tr>
-            <tr>
-              <th>行数</th>
-              <td>{result.line}</td>
-            </tr>
-            <tr>
-              <th>リンク</th>
-              <td>
-                <Link
-                  href={result.ndl_link}
-                  target="_blank"
-                  className="link link-hover"
-                >
-                  {result.ndl_link}
-                </Link>
-              </td>
-            </tr>
-            <tr>
-              <th>備考</th>
-              <td>{result.remark}</td>
-            </tr>
+
+            {tableHeader.map((header) => (
+              <tr key={header.field}>
+                <th>{header.label}</th>
+                <td>
+                  <CellBlock
+                    label={header.label}
+                    value={result[header.field]}
+                    type={header.type}
+                  />
+                </td>
+              </tr>
+            ))}
+            
           </tbody>
         </table>
       </div>

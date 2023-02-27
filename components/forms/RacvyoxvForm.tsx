@@ -4,24 +4,13 @@ import { useState } from "react";
 import FormTextInput from "../common/FormTextInput";
 
 function RacvyoxvForm() {
-  const [entry, setEntry] = useState("");
-  const [ruby, setRuby] = useState("");
-  const [page, setPage] = useState("");
-  const [ line, setLine ] = useState("");
-  const [initialOn, setInitialOn] = useState("");
-  const [kanjiPair, setKanjiPair] = useState("");
-  const [remark, setRemark] = useState("");
-  const [groupEntry, setGroupEntry] = useState("");
+  const [term, setTerm] = useState("");
+  const  [kanjiPairLength, setKanjiPairLength] = useState("");
+  
 
   let params = {
-    entry,
-    ruby,
-    page,
-    line,
-    initial_on:initialOn,
-    kanji_pair:kanjiPair,
-    remark,
-    group_entry:groupEntry,
+    term,
+    kanji_pair_length: kanjiPairLength,
   };
 
   const notEmptyQuery = Object.fromEntries(
@@ -39,24 +28,19 @@ function RacvyoxvForm() {
   return (
     <div>
       <FormTextInput
-        labelLeftUppon="頭文字"
-        labelRightBottom="ひらがな・1文字"
-        inputValue={initialOn}
-        getInputValue={setInitialOn}
-      />
-      <FormTextInput
         labelLeftUppon="見出し語"
-        labelRightBottom="漢字"
-        inputValue={entry}
-        getInputValue={setEntry}
-      />
-      <FormTextInput
-        labelLeftUppon="ルビー"
-        labelRightBottom="ひらがな"
-        inputValue={ruby}
-        getInputValue={setRuby}
+        labelRightBottom="ひらがなまたは漢字"
+        inputValue={term}
+        getInputValue={setTerm}
       />
 
+      <FormTextInput
+        labelLeftUppon="熟語字数"
+        labelRightBottom="アラビア数字"
+        inputValue={kanjiPairLength}
+        getInputValue={setKanjiPairLength}
+      />
+      
       <div className="pt-6 form-control w-full max-w-xs flex flex-col items-center justify-center">
         <button className="btn btn-wide btn-primary" onClick={handleSearchBtn}>
           検索

@@ -1,8 +1,9 @@
+import JiruishoManual from '@/markdown/JiruishoManual.mdx'
 
 
 function JiruishoPage() {
   return (
-    <div>JiruishoPage</div>
+    <JiruishoManual />
   )
 }
 

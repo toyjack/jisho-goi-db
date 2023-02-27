@@ -5,7 +5,7 @@ function Hero() {
     <div
       className="hero min-h-screen"
       style={{
-        backgroundImage: `url("https://kokugo.l.u-tokyo.ac.jp/data/renrinoume/001/jpg/rrum001-003.jpg")`,
+        backgroundImage: `url("/images/hero-bg.png")`,
       }}
     >
       <div className="hero-overlay bg-opacity-60"></div>
@@ -17,7 +17,9 @@ function Hero() {
             『色葉字類抄』の語彙研究および総合データベースの構築
             異種古辞書間におけるデータ連携モデルの構築
           </p>
-          <a className="btn btn-primary" href="#databases">データベース一覧</a>
+          <a className="btn btn-primary" href="#databases">
+            データベース一覧
+          </a>
         </div>
       </div>
     </div>

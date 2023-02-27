@@ -14,25 +14,38 @@ async function getData(id: string) {
 }
 
 const tableHeader = [
-  "page",
-  "line",
-  "initial_on",
-  "entry",
-  "kanji_pair",
-  "ruby_left_first",
-  "ruby_left_remains",
-  "ruby_right_first",
-  "ruby_right_remains",
-  "remark",
-  "group_entry",
-  "gallica",
+  { label: "ID", field: "id" },
+  { label: "代表字頭記号", field: "group_entry" },
+  { label: "所在（笠間頁）", field: "page" },
+  { label: "頁内行数", field: "line" },
+  { label: "Gallica URL", field: "gallica" },
+  { label: "頭音", field: "initial_on" },
+  { label: "代表字", field: "entry" },
+  { label: "熟語", field: "kanji_pair" },
+  { label: "訓（左傍）", field: "ruby_left_first" },
+  { label: "訓（左傍）", field: "ruby_left_remains" },
+  { label: "音（右傍）", field: "ruby_right_first" },
+  { label: "音（右傍）", field: "ruby_right_remains" },
+  { label: "備考", field: "remark" },
+  { label: "日国1", field: "nikkoku1_entry" },
+  { label: "日国1 URL", field: "nikkoku1_url" },
+  { label: "日国2", field: "nikkoku2_entry" },
+  { label: "日国2 URL", field: "nikkoku2_url" },
+  { label: "日国3", field: "nikkoku3_entry" },
+  { label: "日国3 URL", field: "nikkoku3_url" },
+  { label: "日国4", field: "nikkoku4_entry" },
+  { label: "日国4 URL", field: "nikkoku4_url" },
+  { label: "日国5", field: "nikkoku5_entry" },
+  { label: "日国5 URL", field: "nikkoku5_url" },
+  { label: "日国6", field: "nikkoku6_entry" },
+  { label: "日国6 URL", field: "nikkoku6_url" },
+  { label: "日国7", field: "nikkoku7_entry" },
+  { label: "日国7 URL", field: "nikkoku7_url" },
 ];
 
 async function RacvyoxvItemPage({ params }: { params: { id: string } }) {
   const { id } = params;
   const result = await getData(id);
-
-  console.log(result)
 
   return (
     <div className="p-4">
@@ -57,8 +70,8 @@ async function RacvyoxvItemPage({ params }: { params: { id: string } }) {
             </tr>
             {tableHeader.map((header, index) => (
               <tr key={index}>
-                <th>{header}</th>
-                <td>{result[header]}</td>
+                <th>{header.label}</th>
+                <td>{result[header.field]}</td>
               </tr>
             ))}
           </tbody>
