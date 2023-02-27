@@ -2,7 +2,7 @@ import BackButton from "@/components/common/BackButton";
 import Link from "next/link";
 
 async function getData(id: string) {
-  const url = `${process.env.API_ROOT}/api/bunmei/${id}`;
+  const url = `${process.env.API_ROOT}/api/jiruisho/${id}`;
 
   const res = await fetch(url, { cache: "no-store" });
 
@@ -13,7 +13,7 @@ async function getData(id: string) {
   return res.json();
 }
 
-async function BunmeiItemPage({ params }: { params: { id: string } }) {
+async function JiruishoItemPage({ params }: { params: { id: string } }) {
   const { id } = params;
   const result = await getData(id);
 
@@ -35,73 +35,77 @@ async function BunmeiItemPage({ params }: { params: { id: string } }) {
           </thead>
           <tbody>
             <tr>
-              <th>辞書内ID</th>
-              <td>{result.bunmei_id}</td>
-            </tr>
-            <tr>
-              <th>語頭記号</th>
-              <td>{result.gotou}</td>
+              <th>辞書内ID（仮）</th>
+              <td>{result.id}</td>
             </tr>
             <tr>
               <th>見出し語</th>
               <td>{result.entry}</td>
             </tr>
             <tr>
-              <th>見出し語原表記</th>
-              <td>{result.entry_original}</td>
-            </tr>
-            <tr>
-              <th>語形</th>
-              <td>{result.gokei}</td>
-            </tr>
-            <tr>
-              <th>語形原表記</th>
-              <td>{result.gokei_original}</td>
-            </tr>
-            <tr>
               <th>声点</th>
               <td>{result.shouten}</td>
             </tr>
             <tr>
-              <th>左傍訓</th>
-              <td>{result.left_kun}</td>
+              <th>所在篇</th>
+              <td>{result.hen}</td>
             </tr>
             <tr>
-              <th>注</th>
-              <td>{result.defination}</td>
-            </tr>
-            <tr>
-              <th>項目種別</th>
-              <td>{result.item_type}</td>
-            </tr>
-            <tr>
-              <th>部</th>
+              <th>所在部</th>
               <td>{result.bu}</td>
             </tr>
             <tr>
-              <th>門</th>
-              <td>{result.mon}</td>
+              <th>前田本所在</th>
+              <td>{result.maeda_loc}</td>
             </tr>
             <tr>
-              <th>ページ数</th>
-              <td>{result.page}</td>
-            </tr>
-            <tr>
-              <th>行数</th>
-              <td>{result.line}</td>
-            </tr>
-            <tr>
-              <th>リンク</th>
+              <th>前田本NDLリンク</th>
               <td>
                 <Link
-                  href={result.ndl_link}
+                  href={result.maeda_ndl_url}
                   target="_blank"
                   className="link link-hover"
                 >
-                  {result.ndl_link}
+                  {result.maeda_ndl_url}
                 </Link>
               </td>
             </tr>
+            <tr>
+              <th>黒川本所在</th>
+              <td>{result.kurokawa_loc}</td>
+            </tr>
+            <tr>
+              <th>黒川本NDLリンク</th>
+              <td>
+                <Link
+                  href={result.kurokawa_ndl_url}
+                  target="_blank"
+                  className="link link-hover"
+                >
+                  {result.kurokawa_ndl_url}
+                </Link>
+              </td>
+            </tr>
+            <tr>
+              <th>音訓</th>
+              <td>{result.onkun}</td>
+            </tr>
+            <tr>
+              <th>文字数</th>
+              <td>{result.char_count}</td>
+            </tr>
+            
+            <tr>
+              <th>語形原表記</th>
+              <td>{result.gokei_display}</td>
+            </tr>
+
+            <tr>
+              <th>註文</th>
+              <td>{result.defination}</td>
+            </tr>
+            
+
             <tr>
               <th>備考</th>
               <td>{result.remark}</td>
@@ -109,10 +113,8 @@ async function BunmeiItemPage({ params }: { params: { id: string } }) {
           </tbody>
         </table>
       </div>
-
-     
     </div>
   );
 }
 
-export default BunmeiItemPage;
+export default JiruishoItemPage;

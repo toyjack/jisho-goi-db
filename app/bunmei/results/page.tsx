@@ -1,7 +1,11 @@
 import Link from "next/link";
 
 async function getData(searchParams: { [key: string]: string  }){
-  const query = new URLSearchParams(searchParams);
+  const notEmptyQuery = Object.fromEntries(
+    Object.entries(searchParams).filter(([_, v]) => v != "")
+  );
+  const query = new URLSearchParams(notEmptyQuery);
+  
   const url = `${process.env.API_ROOT}/api/bunmei/search?${query}`;
 
   const res = await fetch(url, { cache: "no-store" });

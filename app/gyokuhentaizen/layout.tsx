@@ -17,7 +17,7 @@ function GyokuhentaizenLayout({
       </div>
       <label
         htmlFor="drawer"
-        className="block h-auto w-auto btn btn-primary drawer-button lg:hidden"
+        className="h-auto w-full btn btn-primary drawer-button lg:hidden"
       >
         検索パネルを開く
       </label>

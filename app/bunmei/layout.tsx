@@ -1,5 +1,4 @@
 import Link from "next/link";
-import GyokuhentaizenForm from "@/components/forms/GyokuhentaizenForm";
 import BunmeiForm from "@/components/forms/BunmeiForm";
 
 function GyokuhentaizenLayout({
@@ -11,14 +10,14 @@ function GyokuhentaizenLayout({
     <div className="container mx-auto">
       <div className="p-10">
         <h2 className="text-3xl font-bold">
-          <Link href="/gyokuhentaizen">文明本節用集データベース</Link>
+          <Link href="/bunmei">文明本節用集データベース</Link>
           <span className="badge badge-lg">試行版</span>
           <span className="badge badge-lg badge-secondary">v2023-02</span>
         </h2>
       </div>
       <label
         htmlFor="drawer"
-        className="block h-auto w-auto btn btn-primary drawer-button lg:hidden"
+        className="px-2 h-auto w-full btn btn-primary drawer-button lg:hidden"
       >
         検索パネルを開く
       </label>

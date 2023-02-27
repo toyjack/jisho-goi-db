@@ -7,7 +7,7 @@ function CommonHeader() {
   const databaseList = [
     {
       title: "色葉字類抄",
-      url: "/irohojiruisho",
+      url: "/jiruisho",
     },
     {
       title: "落葉集",
@@ -32,34 +32,15 @@ function CommonHeader() {
       title: "お知らせ",
       url: "/news",
     },
-    {
-      title: "色葉字類抄",
-      url: "/irohojiruisho",
-    },
-    {
-      title: "落葉集",
-      url: "/rakuyoshu",
-    },
-    {
-      title: "和訓栞",
-      url: "/wakunnoshiori",
-    },
-    {
-      title: "文明本節用集",
-      url: "/bunmei",
-    },
-    {
-      title: "増続大広益会玉篇大全",
-      url: "/gyokuhentaizen",
-    },
+    ...databaseList,
     {
       title: "画像ギャラリー",
       url: "/gallery",
     },
-    {
-      title: "本サイトについて",
-      url: "/about",
-    },
+    // {
+    //   title: "本サイトについて",
+    //   url: "/about",
+    // },
   ];
 
   return (
@@ -103,9 +84,9 @@ function CommonHeader() {
             <li>
               <Link href="/gallery">画像ギャラリー</Link>
             </li>
-            <li>
+            {/* <li>
               <Link href="/about">本サイトについて</Link>
-            </li>
+            </li> */}
           </ul>
         </div>
 

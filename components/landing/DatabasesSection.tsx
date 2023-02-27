@@ -4,19 +4,19 @@ function DatabasesSection() {
   const databases = [
     {
       title: "色葉字類抄",
-      url: "/irohajiruisho",
+      url: "/jiruisho",
       description: "公開中",
       image: "/images/no_image.png",
     },
     {
       title: "落葉集",
-      url: "/databases/kuzushiji",
+      url: "/rakuyoshu",
       description: "公開予定",
       image: "/images/no_image.png",
     },
     {
       title: "和訓栞",
-      url: "/datasets/syozo-gallery",
+      url: "/wakunnosiori",
       description: "公開予定",
       image: "/images/no_image.png",
     },
