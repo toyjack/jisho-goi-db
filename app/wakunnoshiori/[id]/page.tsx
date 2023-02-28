@@ -1,9 +1,6 @@
 import Link from "next/link";
 import BackButton from "@/components/common/BackButton";
-
-// 臨時的
-import Image from "next/image";
-import ImagePage from "@/public/images/wakunnoshiori/wakunnoshiori_a/wakunnoshiori-2-24a.png"
+import WakunoshioriImageTabs from "@/components/wakunnoshiori/ImageTabs";
 
 interface Defination {
   id: number;
@@ -28,7 +25,8 @@ const tableHeader = [
   { label: "語釈", field: "definations", type: "text_array" },
   { label: "NDLリンク", field: "ndl_url", type: "button" },
   // { label: "日国", field: "nikkoku", type: "text" },
-  { label: "所在", field: "location", type: "text" },
+  { label: "所在", field: "page", type: "text" },
+  { label: "行数", field: "location", type: "text" },
 ];
 
 function handleDefination(definations: any) {
@@ -111,11 +109,9 @@ export default async function WakunnoshioriItemPage({
       <div className="divider py-4"></div>
 
       <h2 className="text-xl font-bold">画像</h2>
-      <div>
-        <Link href="/images/wakunnoshiori/wakunnoshiori_a/wakunnoshiori-2-24a.png">
-          <Image src={ImagePage} alt="画像" width={300} />
-        </Link>
-      </div>
+      <WakunoshioriImageTabs location={result.page} ndl_url={result.ndl_url}/>
+     
+      {/* */}
     </div>
   );
 }
