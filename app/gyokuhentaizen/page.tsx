@@ -1,29 +1,12 @@
-import Link from "next/link";
-import GyokuhentaizenManual from "./GyokuhentaizenManual.mdx";
+import GyokuhentaizenManual from "@/markdown/GyokuhentaizenManual.mdx";
+import Shikouban from "@/components/common/Shikouban";
 
 function GyokuhentaizenPage() {
   return (
-    <div className="p-4">
-      <div className="alert alert-warning shadow-lg py-4 my-4">
-        <div>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="stroke-current flex-shrink-0 h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-            />
-          </svg>
-          <span>このデータベースは試行版です</span>
-        </div>
-      </div>
+    <div className="px-4 pb-8">
+      <Shikouban />
 
-      <article className="max-w-none prose mx-auto">
+      <article className="max-w-none prose mx-auto p-4">
         <GyokuhentaizenManual />
       </article>
     </div>
