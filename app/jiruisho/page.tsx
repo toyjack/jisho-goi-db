@@ -1,11 +1,11 @@
-// import JiruishoManual from '@/markdown/JiruishoManual.mdx'
-
+import JiruishoManual from "../../markdown/JiruishoManual.mdx";
 
 function JiruishoPage() {
   return (
-    // <JiruishoManual />
-    <div>test</div>
-  )
+    <article className="max-w-none prose">
+      <JiruishoManual />
+    </article>
+  );
 }
 
-export default JiruishoPage
+export default JiruishoPage;
