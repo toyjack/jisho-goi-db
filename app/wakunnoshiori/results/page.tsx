@@ -1,5 +1,12 @@
 import Link from "next/link";
 
+interface Defination {
+  id: number;
+  defination: string;
+  index: number;
+  entry_id: number;
+}
+
 async function getData(searchParams: { [key: string]: string }) {
   const notEmptyQuery = Object.fromEntries(
     Object.entries(searchParams).filter(([_, v]) => v != "")
@@ -32,22 +39,22 @@ const CellBlock = ({
   url,
 }: {
   label: string;
-  value: any;
+  value: string | Defination[];
   type: string;
   url?: string;
 }) => {
-  if (type === "button" && value) {
+  if (type === "button" && value && typeof value === "string") {
     return (
       <Link href={value || ""} target="_blank" className="btn btn-primary">
         {label}
       </Link>
     );
   }
-  if (type === "text_array") {
+  if (type === "text_array" && Array.isArray(value)) {
     const text = value.map(v=>v.defination).join("");
     return <>{text}</>;
   }
-  if (url) return <Link href={url}>{value}</Link>;
+  if (url) return <Link href={url}>{value as string}</Link>;
   return <>{value}</>;
 };
 

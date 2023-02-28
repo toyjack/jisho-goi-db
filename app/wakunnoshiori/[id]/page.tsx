@@ -5,6 +5,13 @@ import BackButton from "@/components/common/BackButton";
 import Image from "next/image";
 import ImagePage from "@/public/images/wakunnoshiori/wakunnoshiori_a/wakunnoshiori-2-24a.png"
 
+interface Defination {
+  id: number;
+  defination: string;
+  index: number;
+  entry_id: number;
+}
+
 async function getData(id: string) {
   const url = `${process.env.API_ROOT}/api/wakunnoshiori/${id}`;
 
@@ -36,22 +43,22 @@ const CellBlock = ({
   url,
 }: {
   label: string;
-  value: any;
+  value: string | Defination[];
   type: string;
   url?: string;
 }) => {
-  if (type === "button" && value) {
+  if (type === "button" && value && typeof value === "string") {
     return (
       <Link href={value || ""} target="_blank" className="btn btn-primary">
         {label}
       </Link>
     );
   }
-  if (type === "text_array") {
+  if (type === "text_array" && Array.isArray(value)) {
     const text = value.map((v) => v.defination).join("");
     return <>{text}</>;
   }
-  if (url) return <Link href={url}>{value}</Link>;
+  if (url) return <Link href={url}>{value as string}</Link>;
   return <>{value}</>;
 };
 
