@@ -18,9 +18,7 @@ async function getData(
     remain_strokes: strokes || "",
   };
   const query = new URLSearchParams(params);
-  // const url = `https://jisho-goi-nestjs.kojisho.com/api/search?${query}`;
-  const url = `https://portal.kojisho.com/api/v1/gyokuhentaizen/search?${query}`;
-  // const url = `http://localhost:8000/api/v1/gyokuhentaizen/search?${query}`;
+  const url = `${process.env.API_ROOT}/api/gyokuhentaizen/search?${query}`;
   const res = await fetch(url, { cache: "no-store" });
 
   if (!res.ok) {
