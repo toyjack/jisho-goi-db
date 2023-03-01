@@ -1,3 +1,4 @@
+import IiifViewer from "@/components/iiif/Viewer";
 import BackButton from "@/components/ui/BackButton";
 import Link from "next/link";
 
@@ -46,7 +47,11 @@ const tableHeader = [
 async function RacvyoxvItemPage({ params }: { params: { id: string } }) {
   const { id } = params;
   const result = await getData(id);
-
+  // https://gallica.bnf.fr/view3if/ga/ark:/12148/btv1b10508396b/f17
+  const gallicaId = result.gallica.split("/").slice(5, 8).join("/"); //ark:/12148/btv1b10508396b
+  // https://gallica.bnf.fr/iiif/ark:/12148/btv1b10508396b/manifest.json
+  const gallicaManifest = `https://gallica.bnf.fr/iiif/${gallicaId}/manifest.json`;
+  const page = parseInt(result.page)+12;
   return (
     <div className="p-4">
       <div className="p-2">
@@ -77,6 +82,12 @@ async function RacvyoxvItemPage({ params }: { params: { id: string } }) {
           </tbody>
         </table>
       </div>
+
+      <div className="divider"></div>
+      <h2 className="text-xl font-bold py-4">画像</h2>
+      <div>
+        <IiifViewer manifestUrl={gallicaManifest} page={page-1} />
+        </div>
     </div>
   );
 }
