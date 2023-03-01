@@ -1,6 +1,6 @@
 
-import BackButton from "@/components/common/BackButton";
-import GyokuhentaizenImageTabs from "@/components/gyokuhentaizen/ImageTabs";
+import BackButton from "@/components/ui/BackButton";
+import GyokuhentaizenImageTabs from "@/app/gyokuhentaizen/[id]/ImageTabs";
 
 async function getData(id: string) {
   const url = `${process.env.API_ROOT}/api/gyokuhentaizen/${id}`;
