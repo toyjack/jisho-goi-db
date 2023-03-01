@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import mirador from "mirador";
+const mirador = require('mirador')
 
 export default function IiifViewer({manifestUrl, page}:{manifestUrl: string, page?: number}){
   useEffect(() => {
