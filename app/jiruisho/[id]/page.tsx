@@ -1,5 +1,12 @@
 import BackButton from "@/components/ui/BackButton";
 import Link from "next/link";
+import JiruishoImageTab from "./ImageTab";
+
+interface ImageData {
+  tabTitle: string;
+  manifestUrl: string;
+  page: number;
+}
 
 async function getData(id: string) {
   const url = `${process.env.API_ROOT}/api/jiruisho/${id}`;
@@ -16,6 +23,28 @@ async function getData(id: string) {
 async function JiruishoItemPage({ params }: { params: { id: string } }) {
   const { id } = params;
   const result = await getData(id);
+
+  let tabData: ImageData[] = [];
+
+  if(result.maeda_ndl_url){
+      const [_, __, ___, ____, ndlId, _____, canvasNum] =
+        result.maeda_ndl_url.split("/");
+    tabData.push({
+      tabTitle: "前田本",
+      manifestUrl: `https://dl.ndl.go.jp/api/iiif/${ndlId}/manifest.json`,
+      page: parseInt(canvasNum),
+    });
+  }
+
+  if (result.kurokawa_ndl_url) {
+    const [_, __, ___, ____, ndlId, _____, canvasNum] =
+      result.kurokawa_ndl_url.split("/");
+    tabData.push({
+      tabTitle: "黒川本",
+      manifestUrl: `https://dl.ndl.go.jp/api/iiif/${ndlId}/manifest.json`,
+      page: parseInt(canvasNum),
+    });
+  }
 
   return (
     <div className="p-4">
@@ -61,13 +90,15 @@ async function JiruishoItemPage({ params }: { params: { id: string } }) {
             <tr>
               <th>前田本NDLリンク</th>
               <td>
-                <Link
-                  href={result.maeda_ndl_url}
-                  target="_blank"
-                  className="link link-hover"
-                >
-                  {result.maeda_ndl_url}
-                </Link>
+                {result.maeda_ndl_url && (
+                  <Link
+                    href={result.maeda_ndl_url}
+                    target="_blank"
+                    className="btn btn-primary"
+                  >
+                    NDLページ
+                  </Link>
+                )}
               </td>
             </tr>
             <tr>
@@ -77,13 +108,15 @@ async function JiruishoItemPage({ params }: { params: { id: string } }) {
             <tr>
               <th>黒川本NDLリンク</th>
               <td>
-                <Link
-                  href={result.kurokawa_ndl_url}
-                  target="_blank"
-                  className="link link-hover"
-                >
-                  {result.kurokawa_ndl_url}
-                </Link>
+                {result.kurokawa_ndl_url && (
+                  <Link
+                    href={result.kurokawa_ndl_url}
+                    target="_blank"
+                    className="btn btn-primary"
+                  >
+                    NDLページ
+                  </Link>
+                )}
               </td>
             </tr>
             <tr>
@@ -94,7 +127,7 @@ async function JiruishoItemPage({ params }: { params: { id: string } }) {
               <th>文字数</th>
               <td>{result.char_count}</td>
             </tr>
-            
+
             <tr>
               <th>語形原表記</th>
               <td>{result.gokei_display}</td>
@@ -104,7 +137,6 @@ async function JiruishoItemPage({ params }: { params: { id: string } }) {
               <th>註文</th>
               <td>{result.defination}</td>
             </tr>
-            
 
             <tr>
               <th>備考</th>
@@ -112,6 +144,12 @@ async function JiruishoItemPage({ params }: { params: { id: string } }) {
             </tr>
           </tbody>
         </table>
+      </div>
+      <div className="divider"></div>
+      <h2 className="text-xl font-bold py-4">画像</h2>
+      <div>
+        <JiruishoImageTab data={tabData} />
+        
       </div>
     </div>
   );

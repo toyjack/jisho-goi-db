@@ -45,7 +45,7 @@ async function GyokuhentaizenItemPage({ params }: { params: { id: string } }) {
       <h2 className="text-xl font-bold">テキストデータ</h2>
 
       <div className="overflow-x-auto">
-        <table className="table table-zebra w-full text-xl">
+        <table className="table table-zebra w-full">
           <thead>
             <tr>
               <th>フィールド</th>
@@ -93,7 +93,7 @@ async function GyokuhentaizenItemPage({ params }: { params: { id: string } }) {
 
       <div className="divider py-4"></div>
 
-      <h2 className="text-xl font-bold">画像</h2>
+      <h2 className="text-xl font-bold py-4">画像</h2>
 
       <GyokuhentaizenImageTabs ghtz_id={result.ghtz_id} />
     </div>

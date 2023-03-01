@@ -5,9 +5,10 @@ import { useEffect } from "react";
 import mirador from "mirador";
 
 export default function IiifViewer({manifestUrl, page}:{manifestUrl: string, page?: number}){
+  const divId = "mirador"+manifestUrl.split("/").slice(-2)[0];
   useEffect(() => {
     mirador.viewer({
-      id: "iiif-viewer",
+      id: divId,
       language: "ja",
       window: {
         allowClose: false,
@@ -26,11 +27,11 @@ export default function IiifViewer({manifestUrl, page}:{manifestUrl: string, pag
         enabled: false, // Remove extra workspace settings
       },
     });
-  }, [manifestUrl, page]);
+  }, [manifestUrl, page, divId]);
 
   return (
     <div className="relative h-96">
-      <div id="iiif-viewer" />
+      <div id={divId} />
     </div>
   );
 }

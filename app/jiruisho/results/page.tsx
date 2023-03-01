@@ -74,21 +74,21 @@ async function JiruishoResultsPage({
                 <td>{result.maeda_loc}</td>
                 <td>
                   <Link
-                    href={result.maeda_ndl_url ||""}
+                    href={result.maeda_ndl_url || ""}
                     target="_blank"
-                    className="link link-hover"
+                    className="btn btn-primary"
                   >
-                    {result.maeda_ndl_url}
+                    NDLページ
                   </Link>
                 </td>
                 <td>{result.kurokawa_loc}</td>
                 <td>
                   <Link
-                    href={result.kurokawa_ndl_url||""}
+                    href={result.kurokawa_ndl_url || ""}
                     target="_blank"
-                    className="link link-hover"
+                    className="btn btn-primary"
                   >
-                    {result.kurokawa_ndl_url}
+                    NDLページ
                   </Link>
                 </td>
                 <td>{result.onkun}</td>
