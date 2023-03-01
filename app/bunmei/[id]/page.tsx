@@ -2,7 +2,7 @@ import BackButton from "@/components/ui/BackButton";
 import Link from "next/link";
 
 async function getData(id: string) {
-  const url = `${process.env.API_ROOT}/api/bunmei/${id}`;
+  const url = `${process.env.API_ROOT}/api/bunmeibon/${id}`;
 
   const res = await fetch(url, { cache: "no-store" });
 
