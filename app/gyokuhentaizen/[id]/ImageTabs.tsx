@@ -15,8 +15,6 @@ function getWasedaPageUrl(ghtz_id: string) {
 
 function getNdlImageUrl(ghtz_id: string) {
   const [maki, page, line, num_in_line] = ghtz_id.split("_");
-  // https://dl.ndl.go.jp/api/iiif/3440912/R0000003/full/full/0/default.jpg
-  // 25 -3 = 22
   const ndlPage = String(Number(page.slice(0, -1)) - 22).padStart(7, "0");
   return `https://dl.ndl.go.jp/api/iiif/3440912/R${ndlPage}/full/full/0/default.jpg`;
 }
@@ -40,9 +38,9 @@ function GyokuhentaizenImageTabs({ ghtz_id }: { ghtz_id: string }) {
 
   const [maki, page, line, num_in_line] = ghtz_id.split("_");
   // https://dl.ndl.go.jp/pid/3440912/1/3
-  const ndlPage = String(Number(page.slice(0, -1)) - 22).padStart(7, "0");
+  const ndlPage = String(Number(page.slice(0, -1)) - 23).padStart(7, "0");
 
-  const tabList = ["NDL", "底本（早稲田）", "藤本"];
+  const tabList = ["底本（早稲田）", "NDL", "藤本"];
 
   const imageWidth = 600;
   const imageHeight = 400;
@@ -73,7 +71,11 @@ function GyokuhentaizenImageTabs({ ghtz_id }: { ghtz_id: string }) {
       text: "早稲田大学図書館　古典籍総合データベース",
       url: "https://www.wul.waseda.ac.jp/kotenseki/index.html",
     },
-    { label: "画像ファイル", text: getWasedaPageUrl(ghtz_id), url: getWasedaPageUrl(ghtz_id) },
+    {
+      label: "画像ファイル",
+      text: getWasedaPageUrl(ghtz_id),
+      url: getWasedaPageUrl(ghtz_id),
+    },
     {
       label: "巻ページ",
       text: "https://archive.wul.waseda.ac.jp/kosho/bunko31/bunko31_e0853/bunko31_e0853_0001/bunko31_e0853_0001.html",
@@ -140,7 +142,7 @@ function GyokuhentaizenImageTabs({ ghtz_id }: { ghtz_id: string }) {
   const ImageMetaTable = ({
     metas,
   }: {
-    metas: { label: string; text: string; url:string }[];
+    metas: { label: string; text: string; url: string }[];
   }) => {
     return (
       <div className="overflow-x-auto pt-4">
@@ -177,30 +179,8 @@ function GyokuhentaizenImageTabs({ ghtz_id }: { ghtz_id: string }) {
   const TabPanels = () => {
     return (
       <div className="h-full">
-        {/* NDL */}
-        {activeTab === 0 && (
-          <IiifViewer
-            manifestUrl={"https://dl.ndl.go.jp/api/iiif/3440912/manifest.json"}
-            page={Number(ndlPage)}
-          />
-        )}
-        <div className={`tab-panel h-full ${activeTab === 0 ? "block" : "hidden"}`}>
-          {/* <Link href={getNdlPageUrl(ghtz_id)} target="_blank" className="link">
-            <Image
-              src={getNdlImageUrl(ghtz_id)}
-              alt="ndl"
-              placeholder="blur"
-              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
-              width={imageWidth}
-              height={imageHeight}
-            />
-          </Link> */}
-
-          <ImageMetaTable metas={ndlMetas} />
-        </div>
-
         {/* 早稲田本 */}
-        <div className={`tab-panel ${activeTab === 1 ? "block" : "hidden"}`}>
+        <div className={`tab-panel ${activeTab === 0 ? "block" : "hidden"}`}>
           <Link
             href={getWasedaPageUrl(ghtz_id)}
             target="_blank"
@@ -217,6 +197,18 @@ function GyokuhentaizenImageTabs({ ghtz_id }: { ghtz_id: string }) {
           </Link>
 
           <ImageMetaTable metas={wasedaMetas} />
+        </div>
+
+        {/* NDL */}
+        <div
+          className={`tab-panel h-full ${activeTab === 1 ? "block" : "hidden"}`}
+        >
+          <IiifViewer
+            manifestUrl={"https://dl.ndl.go.jp/api/iiif/3440912/manifest.json"}
+            page={Number(ndlPage)}
+          />
+
+          <ImageMetaTable metas={ndlMetas} />
         </div>
 
         {/* 藤本 */}

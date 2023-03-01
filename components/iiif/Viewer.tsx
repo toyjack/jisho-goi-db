@@ -1,7 +1,6 @@
 "use client";
 import { useEffect } from "react";
 import mirador from "mirador";
-import Script from "next/script";
 
 export default function IiifViewer({manifestUrl, page}:{manifestUrl: string, page?: number}){
   useEffect(() => {
