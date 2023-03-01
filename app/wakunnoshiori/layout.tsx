@@ -1,5 +1,5 @@
 import Link from "next/link";
-import WakunnosioriForm from "@/components/forms/WakunnoshioriForm";
+import WakunnosioriForm from "@/app/wakunnoshiori/WakunnoshioriForm";
 
 export default function WakunnoshiorihoLayout({
   children, // will be a page or nested layout

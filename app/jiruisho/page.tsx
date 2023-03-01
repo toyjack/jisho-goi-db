@@ -1,4 +1,4 @@
-import Shikouban from "@/components/common/Shikouban";
+import Shikouban from "@/components/ui/Shikouban";
 import JiruishoManual from "@/markdown/JiruishoManual.mdx";
 
 function JiruishoPage() {

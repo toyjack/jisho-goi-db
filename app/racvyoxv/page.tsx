@@ -1,4 +1,4 @@
-import Shikouban from "@/components/common/Shikouban";
+import Shikouban from "@/components/ui/Shikouban";
 import RacvyoxvManual from "@/markdown/RacvyoxvManual.mdx"
 
 function RacvyoxvPage() {

@@ -1,5 +1,5 @@
 import GyokuhentaizenManual from "@/markdown/GyokuhentaizenManual.mdx";
-import Shikouban from "@/components/common/Shikouban";
+import Shikouban from "@/components/ui/Shikouban";
 
 function GyokuhentaizenPage() {
   return (

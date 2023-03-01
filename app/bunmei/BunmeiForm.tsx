@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import FormTextInput from "../common/FormTextInput";
+import FormTextInput from "../../components/common/FormTextInput";
 
 const mon = [
   "天地",

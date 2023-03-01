@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 
 import { radicalList } from "@/utils/radicalList";
 
-import FormTextInput from "../common/FormTextInput";
+import FormTextInput from "../../components/common/FormTextInput";
 
 function GyokuhentaizenForm() {
   const searchParams = useSearchParams();

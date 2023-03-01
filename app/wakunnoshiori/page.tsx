@@ -1,4 +1,4 @@
-import Shikouban from "@/components/common/Shikouban";
+import Shikouban from "@/components/ui/Shikouban";
 import Manual from "@/markdown/WakunnosioriManual.mdx";
 export default function WakunnosioriPage() {
    return (

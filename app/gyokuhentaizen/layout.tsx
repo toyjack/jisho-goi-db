@@ -1,5 +1,5 @@
 import Link from "next/link";
-import GyokuhentaizenForm from "@/components/forms/GyokuhentaizenForm";
+import GyokuhentaizenForm from "@/app/gyokuhentaizen/GyokuhentaizenForm";
 
 function GyokuhentaizenLayout({
   children, // will be a page or nested layout

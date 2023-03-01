@@ -1,4 +1,4 @@
-import JiruishoForm from "@/components/forms/JiruishoForm";
+import JiruishoForm from "@/app/jiruisho/JiruishoForm";
 import Link from "next/link";
 
 function JiruishoLayout({

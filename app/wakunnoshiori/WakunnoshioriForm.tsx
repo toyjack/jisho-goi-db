@@ -1,16 +1,15 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import FormTextInput from "../common/FormTextInput";
+import FormTextInput from "../../components/common/FormTextInput";
 
-function RacvyoxvForm() {
-  const [term, setTerm] = useState("");
-  const  [kanjiPairLength, setKanjiPairLength] = useState("");
-  
+export default function WakunnosioriForm() {
+  const [entry, setEntry] = useState("");
+  const [definition, setDefinition] = useState("");
 
   let params = {
-    term,
-    kanji_pair_length: kanjiPairLength,
+    entry,
+    definition,
   };
 
   const notEmptyQuery = Object.fromEntries(
@@ -22,25 +21,25 @@ function RacvyoxvForm() {
   const router = useRouter();
 
   function handleSearchBtn() {
-    router.push(`/racvyoxv/results?${query}`);
+    router.push(`/wakunnoshiori/results?${query}`);
   }
 
   return (
     <div>
       <FormTextInput
         labelLeftUppon="見出し語"
-        labelRightBottom="ひらがなまたは漢字"
-        inputValue={term}
-        getInputValue={setTerm}
+        labelRightBottom="ひらがな"
+        inputValue={entry}
+        getInputValue={setEntry}
       />
 
       <FormTextInput
-        labelLeftUppon="熟語字数"
-        labelRightBottom="アラビア数字"
-        inputValue={kanjiPairLength}
-        getInputValue={setKanjiPairLength}
+        labelLeftUppon="語釈"
+        labelRightBottom="ひらがなまたは漢字"
+        inputValue={definition}
+        getInputValue={setDefinition}
       />
-      
+
       <div className="pt-6 form-control w-full max-w-xs flex flex-col items-center justify-center">
         <button className="btn btn-wide btn-primary" onClick={handleSearchBtn}>
           検索
@@ -49,5 +48,3 @@ function RacvyoxvForm() {
     </div>
   );
 }
-
-export default RacvyoxvForm;

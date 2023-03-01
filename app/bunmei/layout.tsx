@@ -1,5 +1,5 @@
 import Link from "next/link";
-import BunmeiForm from "@/components/forms/BunmeiForm";
+import BunmeiForm from "@/app/bunmei/BunmeiForm";
 
 function GyokuhentaizenLayout({
   children, // will be a page or nested layout

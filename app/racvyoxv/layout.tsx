@@ -1,5 +1,5 @@
 import Link from "next/link";
-import RacvyoxvForm from "@/components/forms/RacvyoxvForm";
+import RacvyoxvForm from "@/app/racvyoxv/RacvyoxvForm";
 
 function JiruishoLayout({
   children, // will be a page or nested layout

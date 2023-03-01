@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import IiifViewer from "../iiif/Viewer";
+import IiifViewer from "../../../components/iiif/Viewer";
 
 export default function WakunoshioriImageTabs({location,ndl_url}:{location:string, ndl_url:string}) {
   const [activeTab, setActiveTab] = useState(0);

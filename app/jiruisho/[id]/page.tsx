@@ -1,4 +1,4 @@
-import BackButton from "@/components/common/BackButton";
+import BackButton from "@/components/ui/BackButton";
 import Link from "next/link";
 
 async function getData(id: string) {

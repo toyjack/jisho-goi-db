@@ -1,6 +1,6 @@
 import Link from "next/link";
-import BackButton from "@/components/common/BackButton";
-import WakunoshioriImageTabs from "@/components/wakunnoshiori/ImageTabs";
+import BackButton from "@/components/ui/BackButton";
+import WakunoshioriImageTabs from "@/app/wakunnoshiori/[id]/ImageTabs";
 
 interface Defination {
   id: number;
