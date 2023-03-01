@@ -176,13 +176,15 @@ function GyokuhentaizenImageTabs({ ghtz_id }: { ghtz_id: string }) {
 
   const TabPanels = () => {
     return (
-      <div>
+      <div className="h-full">
         {/* NDL */}
-        <div className={`tab-panel ${activeTab === 0 ? "block" : "hidden"}`}>
+        {activeTab === 0 && (
           <IiifViewer
             manifestUrl={"https://dl.ndl.go.jp/api/iiif/3440912/manifest.json"}
             page={Number(ndlPage)}
           />
+        )}
+        <div className={`tab-panel h-full ${activeTab === 0 ? "block" : "hidden"}`}>
           {/* <Link href={getNdlPageUrl(ghtz_id)} target="_blank" className="link">
             <Image
               src={getNdlImageUrl(ghtz_id)}
