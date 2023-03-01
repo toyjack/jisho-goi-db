@@ -70,7 +70,11 @@ function BunmeiForm() {
     page,
     line,
   };
-  const query = new URLSearchParams(params);
+
+  const notEmptyQuery = Object.fromEntries(
+    Object.entries(params).filter(([_, v]) => v != "")
+  );
+  const query = new URLSearchParams(notEmptyQuery);
 
   const router = useRouter();
 

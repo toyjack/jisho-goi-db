@@ -1,3 +1,4 @@
+import IiifViewer from "@/components/iiif/Viewer";
 import BackButton from "@/components/ui/BackButton";
 import Link from "next/link";
 
@@ -36,6 +37,9 @@ async function BunmeiItemPage({ params }: { params: { id: string } }) {
   const { id } = params;
   const result = await getData(id);
 
+  const [_,__,___,____,ndlId,_____,canvasNum] = result.ndl_link.split('/')
+  const manifestUrl = `https://dl.ndl.go.jp/api/iiif/${ndlId}/manifest.json`;
+
   const CellBlock = ({
     label,
     value,
@@ -72,11 +76,10 @@ async function BunmeiItemPage({ params }: { params: { id: string } }) {
             </tr>
           </thead>
           <tbody>
-
             {tableHeader.map((header) => (
               <tr key={header.field}>
                 <th>{header.label}</th>
-                <td>
+                <td className="whitespace-normal">
                   <CellBlock
                     label={header.label}
                     value={result[header.field]}
@@ -85,12 +88,15 @@ async function BunmeiItemPage({ params }: { params: { id: string } }) {
                 </td>
               </tr>
             ))}
-            
           </tbody>
         </table>
       </div>
 
-     
+      <h2 className="text-xl font-bold py-4">画像データ</h2>
+
+      <div className="overflow-x-auto">
+        <IiifViewer manifestUrl={manifestUrl} page={Number(canvasNum)-1} />
+      </div>
     </div>
   );
 }

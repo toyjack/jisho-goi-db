@@ -31,8 +31,8 @@ const tableHeader = [
   { label: "項目種別", field: "item_type", type: "text" },
   { label: "部", field: "bu", type: "text" },
   { label: "門", field: "mon", type: "text" },
-  { label: "影印本番号", field: "page", type: "text" },
-  { label: "行数", field: "line", type: "text" },
+  // { label: "影印本番号", field: "page", type: "text" },
+  // { label: "行数", field: "line", type: "text" },
   // { label: "備考", field: "remark", type: "text" },
 ];
 
@@ -88,7 +88,7 @@ async function BunmeiResultsPage({
             <tr>
               <th></th>
               {tableHeader.map((header) => (
-                <th key={header.label}>{header.label}</th>
+                <th key={header.label} className="w-1">{header.label}</th>
               ))}
             </tr>
           </thead>
@@ -101,7 +101,7 @@ async function BunmeiResultsPage({
                   {/* <GetLoc id={result.ghtz_id} url={result.ndl_link} /> */}
                 </th>
                 {tableHeader.map((header) => (
-                  <td key={header.label}>
+                  <td key={header.label} >
                     <CellBlock
                       label={header.label}
                       value={result[header.field]}
