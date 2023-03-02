@@ -88,7 +88,7 @@ export default async function WakunnoshioriResultsPage({
               <tr key={result.id}>
                 <th>{index + 1}</th>
                 {tableHeader.map((header) => (
-                  <td key={header.label}>
+                  <td key={header.label} className="whitespace-normal">
                     <CellBlock
                       label={header.label}
                       value={result[header.field]}
