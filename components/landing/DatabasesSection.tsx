@@ -17,7 +17,7 @@ function DatabasesSection() {
     },
     {
       title: "和訓栞",
-      url: "/wakunnosiori",
+      url: "/wakunnoshiori",
       description: "公開予定",
       image: "/images/wakun_logo.png",
     },
