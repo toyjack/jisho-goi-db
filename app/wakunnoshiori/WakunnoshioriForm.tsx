@@ -5,11 +5,11 @@ import FormTextInput from "../../components/common/FormTextInput";
 
 export default function WakunnosioriForm() {
   const [entry, setEntry] = useState("");
-  const [definition, setDefinition] = useState("");
+  const [defination, setDefination] = useState("");
 
   let params = {
     entry,
-    definition,
+    defination,
   };
 
   const notEmptyQuery = Object.fromEntries(
@@ -36,8 +36,8 @@ export default function WakunnosioriForm() {
       <FormTextInput
         labelLeftUppon="語釈"
         labelRightBottom="ひらがなまたは漢字"
-        inputValue={definition}
-        getInputValue={setDefinition}
+        inputValue={defination}
+        getInputValue={setDefination}
       />
 
       <div className="pt-6 form-control w-full max-w-xs flex flex-col items-center justify-center">
