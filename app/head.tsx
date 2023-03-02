@@ -1,3 +1,5 @@
+import GoogleAnalytics from "@/components/common/GoogleAnalytics";
+
 export default function Head() {
   return (
     <>
@@ -5,6 +7,7 @@ export default function Head() {
       <meta content="width=device-width, initial-scale=1" name="viewport" />
       <meta name="description" content="辞書語彙データベース" />
       <link rel="icon" href="/images/logo_withbg.png" />
+      <GoogleAnalytics />
     </>
   );
 }
