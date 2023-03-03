@@ -27,7 +27,7 @@ function CommonFooter() {
             <div className="mb-2">
               <a
                 className="inline-block font-bold text-xl"
-                href="https://www.hi.u-tokyo.ac.jp/"
+                href="https://jisho-goi.kojisho.com/"
               >
                 <Image
                   src="/images/logo.png"
@@ -61,14 +61,17 @@ function CommonFooter() {
           <div className="text-sm text-gray-700 mr-4 dark:text-slate-400 text-center md:text-left">
             <p>
               © 2022-2023{" "}
-              <a href="#" className="link link-hover">
+              <a
+                href="https://jisho-goi.kojisho.com/gyokuhentaizen"
+                className="link link-hover"
+              >
                 辞書語彙データベース
               </a>
             </p>
             <p>
               注があるものを除いて, このサイトの内容物は
               <a
-                href="https://creativecommons.org/licenses/by/4.0/deed.ja"
+                href="https://creativecommons.org/licenses/by-nc/4.0/deed.ja"
                 className="link link-hover"
                 target="_blank"
                 rel="noreferrer"
