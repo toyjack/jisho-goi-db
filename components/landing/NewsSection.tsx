@@ -7,11 +7,10 @@ function NewsSection() {
       date: "2021/01/01",
     },
     {
-      title: "お知らせ2",
-      date: "2021/01/01",
+      title: "開発版の公開",
+      date: "2022/02/14",
     },
-  
-  ]
+  ];
   return (
     <div className="hero h-full bg-base-200">
       <div className="hero-content flex-col lg:flex-row">
