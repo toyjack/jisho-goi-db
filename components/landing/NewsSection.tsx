@@ -3,12 +3,8 @@ import React from 'react'
 function NewsSection() {
   const news = [
     {
-      title: "お知らせ1",
-      date: "2021/01/01",
-    },
-    {
-      title: "開発版の公開",
-      date: "2022/02/14",
+      title: "プロトタイプ版の公開開始",
+      date: "2023/03/03",
     },
   ];
   return (
