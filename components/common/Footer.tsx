@@ -76,7 +76,7 @@ function CommonFooter() {
                 target="_blank"
                 rel="noreferrer"
               >
-                クリエイティブ・コモンズ 表示 4.0 ライセンス
+                クリエイティブ・コモンズ 表示-非営利 4.0 (CC BY-NC 4.0) ライセンス
               </a>
               の下に提供されています。
             </p>
