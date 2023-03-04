@@ -22,7 +22,7 @@ export default function GoogleAnalytics() {
     <>
       <Script
         strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GA_MEASUREMENT_ID}`}
+        src={`https://www.googletagmanager.com/gtag/js?id=G-43JXZ3BZT8`}
       ></Script>
       <Script id="google-analytics" strategy="afterInteractive">
         {`
@@ -30,7 +30,7 @@ export default function GoogleAnalytics() {
           function gtag(){window.dataLayer.push(arguments);}
           gtag('js', new Date());
 
-          gtag('config', '${process.env.GA_MEASUREMENT_ID}');
+          gtag('config', 'G-43JXZ3BZT8');
         `}
       </Script>
     </>
