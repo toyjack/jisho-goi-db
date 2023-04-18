@@ -38,7 +38,6 @@ const tableHeader = [
 
 function getLoc(id: string, url: string) {
   const [page, line, col] = id.split("_");
-  console.log(id);
   // https://dl.ndl.go.jp/pid/1286982/1/3
   const [_, __, ___, ____, _____, ______, koma] = url.split("/");
   const sayu = Number(page) % 2 === 1 ? "左" : "右";

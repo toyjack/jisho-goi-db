@@ -52,6 +52,9 @@ function CommonHeader() {
         </div>
 
         <div className="navbar-end">
+          <div className='px-2 hidden lg:block'>
+            <Link href='/admin' className="btn btn-secondary">管理</Link>
+          </div>
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
               <svg
