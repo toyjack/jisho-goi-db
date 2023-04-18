@@ -17,6 +17,15 @@ function CommonFooter() {
       title: "画像ギャラリー",
       items: [],
     },
+    {
+      title:"管理用",
+      items:[
+        {
+          title:"管理システム",
+          href:"/admin"
+        }
+      ],
+    },
   ];
 
   return (

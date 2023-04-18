@@ -4,6 +4,9 @@ const nextConfig = {
     appDir: true,
     mdxRs: true,
   },
+  compiler: {
+    styledComponents: true,
+  },
   images: {
     remotePatterns: [
       {

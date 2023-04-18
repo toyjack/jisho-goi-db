@@ -15,8 +15,6 @@ async function getData(searchParams: { [key: string]: string }) {
 
   const url = `${process.env.API_ROOT}/api/wakunnoshiori/search?${query}`;
 
-  console.log(url)
-
   const res = await fetch(url, { cache: "no-store" });
 
   if (!res.ok) {
