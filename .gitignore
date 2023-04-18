@@ -1,3 +1,8 @@
+# yarn v3
+/.yarn
+.yarnrc.yml
+
+# images
 /public/images/gyokuhentaizen/*
 /public/images/wakunnoshiori/*
 
