@@ -12,7 +12,7 @@ function DatabasesSection() {
     {
       title: "落葉集",
       url: "/racvyoxv",
-      description: "イ部・ロ部、ハ部の一部",
+      description: "本篇",
       image: "/images/no_image.png",
     },
     {
