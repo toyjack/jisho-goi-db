@@ -9,13 +9,13 @@ import FormTextInput from "../../components/common/FormTextInput";
 
 function GyokuhentaizenForm() {
   const searchParams = useSearchParams();
-  const [entry, setEntry] = useState(searchParams.get("entry") || "");
-  const [jion, setJion] = useState(searchParams.get("jion") || "");
-  const [wakun, setWakun] = useState(searchParams.get("wakun") || "");
-  const [radical, setRadical] = useState(searchParams.get("radical") || "");
-  const [strokes, setStrokes] = useState(searchParams.get("strokes") || "");
-  const [maki, setMaki] = useState(searchParams.get("maki") || "");
-  const [tyo, setTyo] = useState(searchParams.get("tyo") || "");
+  const [entry, setEntry] = useState(searchParams?.get("entry") || "");
+  const [jion, setJion] = useState(searchParams?.get("jion") || "");
+  const [wakun, setWakun] = useState(searchParams?.get("wakun") || "");
+  const [radical, setRadical] = useState(searchParams?.get("radical") || "");
+  const [strokes, setStrokes] = useState(searchParams?.get("strokes") || "");
+  const [maki, setMaki] = useState(searchParams?.get("maki") || "");
+  const [tyo, setTyo] = useState(searchParams?.get("tyo") || "");
 
   const params = { entry, jion, wakun, radical, strokes, maki, tyo };
   const query = new URLSearchParams(params);

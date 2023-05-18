@@ -7,8 +7,8 @@ import { useEffect } from "react";
 export default function GoogleAnalytics() {
   // 参考:
   // https://qiita.com/ruiiixiii/items/2f3e3497d13ec804eb40
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const pathname = usePathname()|| "";
+  const searchParams = useSearchParams()|| "";
 
   useEffect(() => {
     if (!existsGaId) {
