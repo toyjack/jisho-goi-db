@@ -3,7 +3,7 @@ import React from 'react'
 function NewsSection() {
   const news = [
     {
-      title: "落葉集の本篇を全文で公開しました",
+      title: "落葉集本篇を検索システム上で全文公開しました",
       date: "2023/05/18",
     },
     {
