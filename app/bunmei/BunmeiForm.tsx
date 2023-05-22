@@ -44,7 +44,7 @@ function BunmeiForm() {
   // 左傍訓;
   const [leftWakun, setLeftWakun] = useState(searchParams.get("left_kun")||"");
   // 注;
-  const [def, setDef] = useState(searchParams.get("definition") || "");
+  const [def, setDef] = useState(searchParams.get("def") || "");
   // 項目種別;
   const [itemType, setItemType] = useState("");
   // 部;

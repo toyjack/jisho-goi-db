@@ -19,7 +19,7 @@ export async function GET(request: Request) {
       contains: searchParams.get("left_kun") || undefined,
     },
     defination: {
-      contains: searchParams.get("definition") || undefined,
+      contains: searchParams.get("def") || undefined,
     },
   };
   const resutls = await prisma.$transaction([
