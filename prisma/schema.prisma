@@ -1,0 +1,140 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+
+model User {
+  id           Int       @id @default(autoincrement())
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  email        String    @unique
+  name         String?
+  password     String
+  role         String    @default("user")
+}
+
+model News {
+  id       Int       @id @default(autoincrement())
+  pub_date DateTime?
+  title    String?
+  content  String? //@db.VarChar(10000)
+}
+
+
+model Gyokuhentaizen {
+  id             Int     @id @default(autoincrement())
+  ghtz_id        String  @unique
+  entry          String?
+  jion_r         String?
+  jion_l         String?
+  wakun          String?
+  ids            String?
+  radical        String?
+  remain_strokes String?
+}
+
+model Jiruisho {
+  id                    Int     @id @default(autoincrement())
+  entry                 String?
+  entry_expression      String?
+  shouten               String?
+  hen                   String?
+  bu                    String?
+  maeda_loc             String?
+  maeda_ndl_url         String?
+  kurokawa_loc          String?
+  kurokawa_ndl_url      String?
+  onkun                 String?
+  char_count            String?
+  gokei_display         String?
+  gokei_search_original String?
+  gokei_search_current  String?
+  defination            String?
+  remark                String?
+}
+
+
+
+model BunmeiSetsuyoshu {
+  id                Int     @id @default(autoincrement())
+  bunmei_id         String  @unique
+  gotou             String?
+  entry             String?
+  entry_original    String?
+  gokei             String?
+  gokei_original    String?
+  shouten_original  String?
+  left_kun_original String?
+  defination        String?
+  item_type         String?
+  bu                String?
+  mon               String?
+  page              String?
+  line              String?
+  ndl_link          String?
+  remark            String?
+  shouten           String?
+  left_kun          String?
+}
+
+model Racvyoxv {
+  id                 Int     @id @default(autoincrement())
+  record_creator     String?
+  check_kubo         String?
+  check_fujimoto     String?
+  page               String?
+  line               String?
+  gallica            String?
+  initial_on         String?
+  entry              String?
+  kanji_pair         String?
+  ruby_left_first    String?
+  ruby_left_remains  String?
+  ruby_right_first   String?
+  ruby_right_remains String?
+  remark             String?
+  nikkoku1_entry     String?
+  kanji_pair_length  String?
+  nikkoku1_url       String?
+  nikkoku2_entry     String?
+  nikkoku2_url       String?
+  nikkoku3_entry     String?
+  nikkoku3_url       String?
+  nikkoku4_entry     String?
+  nikkoku4_url       String?
+  nikkoku5_entry     String?
+  nikkoku5_url       String?
+  nikkoku6_entry     String?
+  nikkoku6_url       String?
+  nikkoku7_entry     String?
+  nikkoku7_url       String?
+  group_entry        String?
+}
+
+model Wakunnosiori_Entry {
+  id          Int                @id @default(autoincrement())
+  entry       String?
+  location    String?
+  ndl_url     String?
+  page        String?
+  definations Wakunnosiori_Def[]
+}
+
+model Wakunnosiori_Def {
+  id         Int                @id @default(autoincrement())
+  defination String?
+  index      Int?
+  entry_id   Int
+  entry      Wakunnosiori_Entry @relation(fields: [entry_id], references: [id])
+
+  @@index([entry_id])
+}
