@@ -1,12 +1,13 @@
+import { ApiResponse } from "@/types";
 import Link from "next/link";
 
 async function getData(searchParams: { [key: string]: string }) {
-  const notEmptyQuery = Object.fromEntries(
-    Object.entries(searchParams).filter(([_, v]) => v != "")
-  );
-  const query = new URLSearchParams(notEmptyQuery);
+  // const notEmptyQuery = Object.fromEntries(
+  //   Object.entries(searchParams).filter(([_, v]) => v != "")
+  // );
+  const query = new URLSearchParams(searchParams);
 
-  const url = `${process.env.API_ROOT}/api/bunmeibon/search?${query}`;
+  const url = `${process.env.API_ROOT}/api/databases/bunmeibon?${query}`;
 
   const res = await fetch(url, { cache: "no-store" });
 
@@ -14,7 +15,9 @@ async function getData(searchParams: { [key: string]: string }) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error("データが見つかりませんでした。");
   }
-  return res.json();
+
+  const response = (await res.json()) as ApiResponse;
+  return response;
 }
 
 const tableHeader = [
@@ -78,7 +81,7 @@ async function BunmeiResultsPage({
   return (
     <div className="md:p-4">
       <div className="divider">
-        <h2>検索結果：{results.length}件</h2>
+        <h2>検索結果：{results.count}件</h2>
       </div>
 
       <div className="overflow-x-auto">
@@ -92,7 +95,7 @@ async function BunmeiResultsPage({
             </tr>
           </thead>
           <tbody>
-            {results.map((result: any, index: number) => (
+            {results.data.map((result: any, index: number) => (
               <tr key={result.bunmei_id}>
                 {/* <th>{index + 1}</th> */}
                 <th>
