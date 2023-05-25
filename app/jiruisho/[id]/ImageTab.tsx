@@ -3,13 +3,13 @@
 import IiifViewer from "@/components/iiif/Viewer";
 import { useState } from "react";
 
-interface ImageData{
+interface ImageData {
   tabTitle: string;
   manifestUrl: string;
   page: number;
 }
 
-export default function JiruishoImageTab({data}:{data:ImageData[]}){
+export default function JiruishoImageTab({ data }: { data: ImageData[] }) {
   const [activeTab, setActiveTab] = useState(0);
   return (
     <>

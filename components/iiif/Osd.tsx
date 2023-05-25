@@ -1,39 +1,42 @@
-"use client"
-import dynamic from "next/dynamic";
-import  OpenSeadragon,{ Options } from "openseadragon";
-import { useEffect, useState } from "react";
+"use client";
+import OpenSeadragon from "openseadragon";
+import { useEffect } from "react";
 
-export interface OsdProps {
-  tiles: string[];
-}
-function Osd({tiles}: OsdProps) {
-
-  const randomId = Math.random().toString(36).substring(7);
-  const [viewer, setViewer]= useState<OpenSeadragon.Viewer | null>(null);
-
-  const initViewer = () => {
-    viewer && viewer.destroy();
-    setViewer(OpenSeadragon({
-      id: randomId,
-      sequenceMode: true,
-      // tileSources: tiles,
-    }))
-  }
-
+function Osd({
+  manifestUrl,
+  page = 0,
+}: {
+  manifestUrl: string[];
+  page?: number;
+}) {
+  const randomId = Math.random().toString(32).substring(2);
   useEffect(() => {
-    initViewer();
+    const viewer = OpenSeadragon({
+      id: randomId,
+      prefixUrl: "https://openseadragon.github.io/openseadragon/images/",
+      tileSources: manifestUrl,
+      sequenceMode: true,
+      initialPage: page,
+      showReferenceStrip: true,
+      showNavigator: true,
+      showRotationControl: true,
+      showHomeControl: true,
+      showFullPageControl: true,
+      showSequenceControl: true,
+      showZoomControl: true,
+      showFlipControl: true,
+    });
     return () => {
-      viewer?.destroy();
+      viewer.destroy();
     };
-  }, [])
-
+  }, [manifestUrl, page, randomId]);
   return (
-    <>
-      <div id={randomId} className="w-full h-96 relative bg-inherit"></div>
-      <pre>{JSON.stringify(tiles, null, 2)}</pre>
-    </>
+    <div>
+      <div className="w-full h-96" id={randomId}>
+        Osd
+      </div>
+    </div>
   );
-
 }
 
-export default Osd
+export default Osd;

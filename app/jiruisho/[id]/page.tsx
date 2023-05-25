@@ -16,8 +16,9 @@ async function getData(id: string) {
   if (!res.ok) {
     throw new Error("データが見つかりませんでした。");
   }
-
-  return res.json();
+  const result = await res.json();
+  // console.log(result);
+  return result;
 }
 
 async function JiruishoItemPage({ params }: { params: { id: string } }) {
@@ -26,13 +27,13 @@ async function JiruishoItemPage({ params }: { params: { id: string } }) {
 
   let tabData: ImageData[] = [];
 
-  if(result.maeda_ndl_url){
-      const [_, __, ___, ____, ndlId, _____, canvasNum] =
-        result.maeda_ndl_url.split("/");
+  if (result.maeda_ndl_url) {
+    const [_, __, ___, ____, ndlId, _____, canvasNum] =
+      result.maeda_ndl_url.split("/");
     tabData.push({
       tabTitle: "前田本",
       manifestUrl: `https://dl.ndl.go.jp/api/iiif/${ndlId}/manifest.json`,
-      page: parseInt(canvasNum),
+      page: Number(canvasNum),
     });
   }
 
@@ -42,9 +43,11 @@ async function JiruishoItemPage({ params }: { params: { id: string } }) {
     tabData.push({
       tabTitle: "黒川本",
       manifestUrl: `https://dl.ndl.go.jp/api/iiif/${ndlId}/manifest.json`,
-      page: parseInt(canvasNum),
+      page: Number(canvasNum),
     });
   }
+
+  console.log(tabData);
 
   return (
     <div className="p-4">
@@ -149,7 +152,6 @@ async function JiruishoItemPage({ params }: { params: { id: string } }) {
       <h2 className="text-xl font-bold py-4">画像</h2>
       <div>
         <JiruishoImageTab data={tabData} />
-        
       </div>
     </div>
   );

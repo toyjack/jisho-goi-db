@@ -5,6 +5,7 @@ pnpm-lock.yaml
 # yarn v3
 /.yarn
 .yarnrc.yml
+yarn.lock
 
 
 # images
