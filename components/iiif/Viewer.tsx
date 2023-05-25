@@ -1,37 +1,24 @@
-"use client";
-// @ts-nocheck
-import { useEffect } from "react";
-// @ts-ignore
-import mirador from "mirador";
+import { Manifest } from "@iiif/presentation-2";
 
-export default function IiifViewer({manifestUrl, page}:{manifestUrl: string, page?: number}){
-  const divId = "mirador"+manifestUrl.split("/").slice(-2)[0];
-  useEffect(() => {
-    mirador.viewer({
-      id: divId,
-      language: "ja",
-      window: {
-        allowClose: false,
-        defaultSideBarPanel: "attribution",
-        sideBarOpenByDefault: false,
-        allowFullscreen: true,
-        allowMaximize: false,
-      },
-      windows: [
-        {
-          manifestId: manifestUrl,
-          canvasIndex: page || 1,
-        },
-      ],
-      workspaceControlPanel: {
-        enabled: false, // Remove extra workspace settings
-      },
-    });
-  }, [manifestUrl, page, divId]);
+async function IiifViewer({
+  manifestUrl,
+  page,
+}: {
+  manifestUrl: string;
+  page?: number;
+}) {
 
-  return (
-    <div className="relative h-96">
-      <div id={divId} />
-    </div>
-  );
+  const manifestData =  await fetch(manifestUrl)
+  const manifestJson = await manifestData.json() as Manifest;
+
+  const tile = manifestJson.sequences[0].canvases[0].images[0].resource.service["@id"];
+
+
+  return <div className="flex flex-col">
+    {manifestUrl}
+    {tile}
+    {JSON.stringify(manifestJson)}
+  </div>;
 }
+
+export default IiifViewer

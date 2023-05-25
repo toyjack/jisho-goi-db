@@ -8,6 +8,7 @@ async function getData(searchParams: { [key: string]: string }) {
   const query = new URLSearchParams(searchParams);
 
   const url = `${process.env.API_ROOT}/api/databases/bunmeibon?${query}`;
+  console.log(url);
 
   const res = await fetch(url, { cache: "no-store" });
 
