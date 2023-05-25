@@ -33,6 +33,7 @@ function Osd({tiles}: OsdProps) {
       <pre>{JSON.stringify(tiles, null, 2)}</pre>
     </>
   );
+
 }
 
 export default Osd

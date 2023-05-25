@@ -1,8 +1,10 @@
 "use client";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import FormTextInput from "../../components/common/FormTextInput";
+
+// TODO: convert to react form hooks
 
 const mon = [
   "天地",
@@ -24,24 +26,25 @@ const mon = [
 ];
 
 function BunmeiForm() {
+  const searchParams = useSearchParams();
 
   // ID;
   // 語頭記号;
   const [gotou, setGotou] = useState("");
   // 見出し語;
-  const [entry, setEntry] = useState("");
+  const [entry, setEntry] = useState(searchParams.get("entry")||"");
   // 見出し語原表記;
   const [entryOriginal, setEntryOriginal] = useState("");
   // 語形;
-  const [gokei, setGokei] = useState("");
+  const [gokei, setGokei] = useState(searchParams.get("gokei")||"");
   // 語形原表記;
   const [gokeiOriginal, setGokeiOriginal] = useState("");
   // 声点;
-  const [shouten, setShouten] = useState("");
+  const [shouten, setShouten] = useState(searchParams.get("shouten")||"");
   // 左傍訓;
-  const [leftWakun, setLeftWakun] = useState("");
+  const [leftWakun, setLeftWakun] = useState(searchParams.get("left_kun")||"");
   // 注;
-  const [def, setDef] = useState("");
+  const [def, setDef] = useState(searchParams.get("def") || "");
   // 項目種別;
   const [itemType, setItemType] = useState("");
   // 部;

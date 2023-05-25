@@ -1,4 +1,6 @@
 
+prisma/dev.db
+.env
 pnpm-lock.yaml
 # yarn v3
 /.yarn
