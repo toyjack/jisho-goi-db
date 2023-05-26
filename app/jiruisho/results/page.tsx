@@ -1,21 +1,5 @@
+import { jiruishoFindmany, JiruishoFindManyQuery } from "@/db/jiruisho";
 import Link from "next/link";
-
-async function getData(searchParams: { [key: string]: string }) {
-  const notEmptyQuery = Object.fromEntries(
-    Object.entries(searchParams).filter(([_, v]) => v != "")
-  );
-
-  const query = new URLSearchParams(notEmptyQuery);
-  const url = `${process.env.API_ROOT}/api/jiruisho/search?${query}`;
-
-  const res = await fetch(url, { cache: "no-store" });
-
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("データが見つかりませんでした。");
-  }
-  return res.json();
-}
 
 const tableHeader = [
   "見出し語",
@@ -38,12 +22,27 @@ async function JiruishoResultsPage({
 }: {
   searchParams?: { [key: string]: string };
 }) {
-  const results = await getData(searchParams!);
+  if (!searchParams) return <div>検索結果がありません</div>;
+  // entry=&gokei_search_current=ア&=&defination=&shouten=&hen=&bu=&onkun=&char_count=
+  const query: JiruishoFindManyQuery = {
+    entry: searchParams.entry,
+    gokei_search_current: searchParams.gokei_search_current,
+    gokei_search_original: searchParams.gokei_search_original,
+    definition: searchParams.definition,
+    shouten: searchParams.shouten,
+    bu: searchParams.bu,
+    hen: searchParams.hen,
+    onkun: searchParams.onkun,
+    char_count: searchParams.char_count,
+  };
+  const { count, data: results } = await jiruishoFindmany(query);
+
+  console.log(results)
 
   return (
     <div className="md:p-4">
       <div className="divider">
-        <h2>検索結果：{results.length}件</h2>
+        <h2>検索結果：{count}件</h2>
       </div>
 
       <div className="overflow-x-auto">

@@ -58,7 +58,7 @@ model Jiruisho {
   gokei_display         String?
   gokei_search_original String?
   gokei_search_current  String?
-  defination            String?
+  definition            String?
   remark                String?
 }
 

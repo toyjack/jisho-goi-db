@@ -1,3 +1,7 @@
+import {
+  gyokuhentaizenFindMany,
+  GyokuhentaizenFindManyQuery,
+} from "@/db/gyokuhentaizen";
 import Link from "next/link";
 
 async function getData(
@@ -9,24 +13,16 @@ async function getData(
   maki: string | undefined,
   tyo: string | undefined
 ) {
-  const params = {
-    database: "gyokuhentaizen",
-    entry: entry || "",
-    jion: jion || "",
-    wakun: wakun || "",
-    radical: radical || "",
-    remain_strokes: strokes || "",
+  const query: GyokuhentaizenFindManyQuery = {
+    entry,
+    jion,
+    wakun,
+    radical,
+    remain_strokes: strokes,
   };
-  const query = new URLSearchParams(params);
-  const url = `${process.env.API_ROOT}/api/gyokuhentaizen/search?${query}`;
-  const res = await fetch(url, { cache: "no-store" });
+  const results = await gyokuhentaizenFindMany(query);
 
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("データが見つかりませんでした。");
-  }
-
-  return res.json();
+  return results;
 }
 
 async function GyokuhentaizenResults({
@@ -42,7 +38,15 @@ async function GyokuhentaizenResults({
   const maki = searchParams?.maki;
   const tyo = searchParams?.tyo;
 
-  const results = await getData(entry, jion, wakun, radical, strokes, maki, tyo);
+  const { data: results } = await getData(
+    entry,
+    jion,
+    wakun,
+    radical,
+    strokes,
+    maki,
+    tyo
+  );
 
   function getWord(wordStr: string) {
     if (wordStr == "") return;
@@ -81,11 +85,11 @@ async function GyokuhentaizenResults({
                   <Link
                     href={"/gyokuhentaizen/" + result.ghtz_id}
                     className="kbd"
-                    >
+                  >
                     {result.entry}
                   </Link>
                 </td>
-                    <td>{result.radical}</td>
+                <td>{result.radical}</td>
                 <td>{getWord(result.jion_r || "")}</td>
                 <td>{getWord(result.jion_l || "")}</td>
                 <td>{getWord(result.wakun || "")}</td>

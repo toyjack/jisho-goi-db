@@ -25,7 +25,7 @@ const tableHeader = [
 async function BunmeiItemPage({ params }: { params: { id: string } }) {
   const { id } = params;
   const result = await bunmeibonFindUnique(id);
-  const a =  result;
+  
   if (!result || !result.ndl_link ) {
     throw new Error("データが見つかりませんでした。");
   }

@@ -12,13 +12,13 @@ function JiruishoForm() {
   const [charCount, setCharCount] = useState("");
   const [gokeiCurrent , setGokeiCurrent] = useState("");
   const [gokeiOriginal, setGokeiOriginal] = useState("");
-  const [defination, setDefination] = useState("");
+  const [definition, setDefinition] = useState("");
 
   const params = {
     entry,
     gokei_search_current: gokeiCurrent,
     gokei_search_original: gokeiOriginal,
-    defination,
+    definition,
     shouten,
     hen,
     bu,
@@ -57,8 +57,8 @@ function JiruishoForm() {
       <FormTextInput
         labelLeftUppon="註文"
         labelRightBottom="カタカナまたは漢字"
-        inputValue={defination}
-        getInputValue={setDefination}
+        inputValue={definition}
+        getInputValue={setDefinition}
       />
 
       <div className="divider"></div>
