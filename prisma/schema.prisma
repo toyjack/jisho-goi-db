@@ -126,12 +126,12 @@ model Wakunnosiori_Entry {
   location    String?
   ndl_url     String?
   page        String?
-  definations Wakunnosiori_Def[]
+  definitions Wakunnosiori_Def[]
 }
 
 model Wakunnosiori_Def {
   id         Int                @id @default(autoincrement())
-  defination String?
+  definition String?
   index      Int?
   entry_id   Int
   entry      Wakunnosiori_Entry @relation(fields: [entry_id], references: [id])
