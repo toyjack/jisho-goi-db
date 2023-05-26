@@ -1,7 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
 
-
 export interface JiruishoFindManyQuery {
   entry?: string | null;
   hen?: string | null;
@@ -12,8 +11,14 @@ export interface JiruishoFindManyQuery {
   definition?: string | null;
 }
 
+export async function jiruishoFindOne(id: string) {
+  const result = await prisma.jiruisho.findUnique({
+    where: { id: Number(id) },
+  });
+  return result;
+}
 
-export async function jiruishoFindmany(query:JiruishoFindManyQuery){
+export async function jiruishoFindmany(query: JiruishoFindManyQuery) {
   const where: Prisma.JiruishoWhereInput = {
     AND: [
       {

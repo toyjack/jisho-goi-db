@@ -6,6 +6,13 @@ export interface RacvyoxvFindManyQuery {
   kanji_pair_length: string | null;
 }
 
+export async function racvyoxvFindOne(id: string) {
+  const result = await prisma.racvyoxv.findUnique({
+    where: { id: Number(id) },
+  });
+  return result;
+}
+
 export async function racvyoxvFindMany(query: RacvyoxvFindManyQuery){
   const where: Prisma.RacvyoxvWhereInput = {
     AND: [

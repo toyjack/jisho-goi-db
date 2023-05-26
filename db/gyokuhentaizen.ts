@@ -10,6 +10,15 @@ export interface GyokuhentaizenFindManyQuery {
   ghtz_id?: string | null;
 }
 
+export async function gyokuhentaizenFindOne(ghtz_id: string) {
+  const result = await prisma.gyokuhentaizen.findUnique({
+    where: { 
+      ghtz_id: ghtz_id,
+     },
+  });
+  return result;
+}
+
 export async function gyokuhentaizenFindMany(query: GyokuhentaizenFindManyQuery) {
   const where: Prisma.GyokuhentaizenWhereInput = {
     AND: [
