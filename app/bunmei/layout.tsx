@@ -1,7 +1,8 @@
 import Link from "next/link";
 import BunmeiForm from "@/app/bunmei/BunmeiForm";
+import { Suspense } from "react";
 
-function GyokuhentaizenLayout({
+async function GyokuhentaizenLayout({
   children, // will be a page or nested layout
 }: {
   children: React.ReactNode;
@@ -28,7 +29,9 @@ function GyokuhentaizenLayout({
         <div className="drawer-side min-h-screen">
           <label htmlFor="drawer" className="drawer-overlay"></label>
           <div className="menu p-4 w-80 bg-base-200 text-base-content z-10">
-            <BunmeiForm />
+            <Suspense fallback={<div>loading...</div>} >
+              <BunmeiForm />
+            </Suspense>
           </div>
         </div>
       </div>
