@@ -9,6 +9,7 @@ export async function getTiles(manifestUrl: string) {
     .map((sequence) =>
       sequence.canvases.map((canvas) =>
         canvas.images.map(
+          // @ts-ignore
           (image) => image.resource.service["@id"] + "/info.json"
         )
       )
