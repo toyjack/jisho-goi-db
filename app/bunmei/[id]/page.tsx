@@ -1,18 +1,7 @@
 import IiifViewer from "@/components/iiif/Viewer";
 import BackButton from "@/components/ui/BackButton";
+import { bunmeibonFindUnique } from "@/db/bunmeibon";
 import Link from "next/link";
-
-async function getData(id: string) {
-  const url = `${process.env.API_ROOT}/api/bunmeibon/${id}`;
-
-  const res = await fetch(url, { cache: "no-store" });
-
-  if (!res.ok) {
-    throw new Error("データが見つかりませんでした。");
-  }
-
-  return res.json();
-}
 
 const tableHeader = [
   // { label: "ID", field: "bunmei_id", type: "text" },
@@ -35,7 +24,11 @@ const tableHeader = [
 
 async function BunmeiItemPage({ params }: { params: { id: string } }) {
   const { id } = params;
-  const result = await getData(id);
+  const result = await bunmeibonFindUnique(id);
+  const a =  result;
+  if (!result || !result.ndl_link ) {
+    throw new Error("データが見つかりませんでした。");
+  }
 
   const [_,__,___,____,ndlId,_____,canvasNum] = result.ndl_link.split('/')
   const manifestUrl = `https://dl.ndl.go.jp/api/iiif/${ndlId}/manifest.json`;
@@ -82,7 +75,10 @@ async function BunmeiItemPage({ params }: { params: { id: string } }) {
                 <td className="whitespace-normal">
                   <CellBlock
                     label={header.label}
-                    value={result[header.field]}
+                    value={
+                      // @ts-ignore
+                      result[header.field]
+                    }
                     type={header.type}
                   />
                 </td>
