@@ -1,34 +1,21 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
-
 model User {
-  id           Int       @id @default(autoincrement())
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  email        String    @unique
-  name         String?
-  password     String
-  role         String    @default("user")
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String?
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
-
-model News {
-  id       Int       @id @default(autoincrement())
-  pub_date DateTime?
-  title    String?
-  content  String? //@db.VarChar(10000)
-}
-
 
 model Gyokuhentaizen {
   id             Int     @id @default(autoincrement())
@@ -58,11 +45,9 @@ model Jiruisho {
   gokei_display         String?
   gokei_search_original String?
   gokei_search_current  String?
-  definition            String?
   remark                String?
+  definition            String?
 }
-
-
 
 model BunmeiSetsuyoshu {
   id                Int     @id @default(autoincrement())
@@ -131,10 +116,52 @@ model Wakunnosiori_Entry {
 
 model Wakunnosiori_Def {
   id         Int                @id @default(autoincrement())
-  definition String?
   index      Int?
   entry_id   Int
+  definition String?
   entry      Wakunnosiori_Entry @relation(fields: [entry_id], references: [id])
 
   @@index([entry_id])
+}
+
+model KrmRecord {
+  id             Int       @id @default(autoincrement())
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @default(now())
+  deletedAt      DateTime?
+  KRID_n         String
+  KRID_sn        String
+  KR2ID          String
+  KRID           String
+  KR_Tenri_p     String?
+  KR_vol_name    String?
+  KR_radical     String?
+  KR_vol_radical String?
+  Entry          String?
+  Entry_original String?
+  Def            String?   @db.VarChar(2000)
+  Remarks        String?   @db.VarChar(2000)
+}
+
+model OudanKanjion {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+  book_id     String
+  book_name   String
+  char_id     Int
+  word_id     Int
+  char        String
+  word        String
+  char_index  Int
+  beat_count  Int?
+  shoten      String?
+  shoten_type String?
+  ruby        String?
+  ruby_all    String?
+  fanqie      String?
+  ruion       String?
+  etc         String?
+  location    String?
+  remarks     String?
 }

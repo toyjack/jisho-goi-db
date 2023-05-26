@@ -38,8 +38,6 @@ async function JiruishoItemPage({ params }: { params: { id: string } }) {
     });
   }
 
-  console.log(tabData);
-
   return (
     <div className="p-4">
       <div className="p-2">

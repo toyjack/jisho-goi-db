@@ -46,15 +46,5 @@ export async function wakunnoshioriFindMany(query:WakunnoshioriFindManyQuery){
     data: resutls[1],
   };
 
-  const temp = await prisma.wakunnosiori_Entry.findMany({
-    where:{
-      entry:{
-        contains: query.entry || undefined,
-      }
-    },
-    include: { definitions: true },
-  })
-  console.log(temp)
-
   return response;
 }

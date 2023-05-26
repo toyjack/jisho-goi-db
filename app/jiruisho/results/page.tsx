@@ -37,8 +37,6 @@ async function JiruishoResultsPage({
   };
   const { count, data: results } = await jiruishoFindmany(query);
 
-  console.log(results)
-
   return (
     <div className="md:p-4">
       <div className="divider">
