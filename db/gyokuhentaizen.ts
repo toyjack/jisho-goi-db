@@ -1,13 +1,8 @@
 import { prisma } from "@/lib/prisma";
-import { Prisma } from "@prisma/client";
+import { Prisma,Gyokuhentaizen } from "@prisma/client";
 
-export interface GyokuhentaizenFindManyQuery {
-  entry?: string | null;
+export interface GyokuhentaizenFindManyQuery extends Partial<Gyokuhentaizen> {
   jion?: string | null;
-  wakun?: string | null;
-  radical?: string | null;
-  remain_strokes?: string | null;
-  ghtz_id?: string | null;
 }
 
 export async function gyokuhentaizenFindOne(ghtz_id: string) {

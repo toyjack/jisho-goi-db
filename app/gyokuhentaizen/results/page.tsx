@@ -13,12 +13,22 @@ async function getData(
   maki: string | undefined,
   tyo: string | undefined
 ) {
+  let ghtz_id = "";
+  // 1_25b_1_3
+  if (maki) {
+    ghtz_id += maki;
+    if (tyo) {
+      ghtz_id += "_"+tyo;
+    }
+  }
+
   const query: GyokuhentaizenFindManyQuery = {
     entry,
     jion,
     wakun,
     radical,
     remain_strokes: strokes,
+    ghtz_id,
   };
   const results = await gyokuhentaizenFindMany(query);
 
