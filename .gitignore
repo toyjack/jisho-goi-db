@@ -1,3 +1,4 @@
+.netlify/
 
 prisma/dev.db
 .env
