@@ -1,10 +1,17 @@
 "use client";
-import Link from "next/link";
+import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
 import FormTextInput from "../../components/common/FormTextInput";
+import { useForm } from "react-hook-form";
+import TextInput from "@/components/common/TextInput";
 
-// TODO: convert to react form hooks
+interface FormData {
+  entry?: string;
+  gokei?: string;
+  leftWakun?: string;
+  shouten?: string;
+  def?: string;
+}
 
 const mon = [
   "天地",
@@ -27,111 +34,81 @@ const mon = [
 
 function BunmeiForm() {
   const searchParams = useSearchParams();
-
-  // ID;
-  // 語頭記号;
-  const [gotou, setGotou] = useState("");
-  // 見出し語;
-  const [entry, setEntry] = useState(searchParams.get("entry")||"");
-  // 見出し語原表記;
-  const [entryOriginal, setEntryOriginal] = useState("");
-  // 語形;
-  const [gokei, setGokei] = useState(searchParams.get("gokei")||"");
-  // 語形原表記;
-  const [gokeiOriginal, setGokeiOriginal] = useState("");
-  // 声点;
-  const [shouten, setShouten] = useState(searchParams.get("shouten")||"");
-  // 左傍訓;
-  const [leftWakun, setLeftWakun] = useState(searchParams.get("left_kun")||"");
-  // 注;
-  const [def, setDef] = useState(searchParams.get("def") || "");
-  // 項目種別;
-  const [itemType, setItemType] = useState("");
-  // 部;
-  const [bu, setBu] = useState("");
-  // 門;
-  const [mon, setMon] = useState("");
-  // ページ数;
-  const [page, setPage] = useState("");
-  // 行数;
-  const [line, setLine] = useState("");
-  // リンク;
-  // 備考;
-
-  const params = {
-    entry,
-    gokei,
-    shouten,
-    leftWakun,
-    def,
-    gotou,
-    // entryOriginal,
-    // gokeiOriginal,
-    itemType,
-    bu,
-    mon,
-    page,
-    line,
-  };
-
-  const notEmptyQuery = Object.fromEntries(
-    Object.entries(params).filter(([_, v]) => v != "")
-  );
-  const query = new URLSearchParams(notEmptyQuery);
+  const entry = searchParams.get("entry");
+  const gokei = searchParams.get("gokei");
+  const leftWakun = searchParams.get("leftWakun");
+  const shouten = searchParams.get("shouten");
+  const def = searchParams.get("def");
 
   const router = useRouter();
 
-  function handleSearchBtn() {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+  } = useForm();
+
+  useEffect(() => {
+    setValue("entry", entry);
+    setValue("gokei", gokei);
+    setValue("leftWakun", leftWakun);
+    setValue("shouten", shouten);
+    setValue("def", def);
+  });
+
+  const onSubmit = (data: FormData) => {
+    const notEmptyQuery = Object.fromEntries(
+      Object.entries(data).filter(([_, v]) => v != "")
+    );
+    const query = new URLSearchParams(notEmptyQuery);
     router.push(`/bunmei/results?${query}`);
-  }
+  };
 
   return (
-    <div>
-      <FormTextInput
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <TextInput
         labelLeftUppon="見出し語"
         labelRightBottom="漢字"
-        inputValue={entry}
-        getInputValue={setEntry}
+        name="entry"
+        register={register}
       />
 
-      <FormTextInput
+      <TextInput
         labelLeftUppon="見出し語の語形（右傍）"
         labelRightBottom="カタカナ（仮名遣いは原本通り）"
-        inputValue={gokei}
-        getInputValue={setGokei}
+        name="gokei"
+        register={register}
       />
 
-
-      <FormTextInput
+      <TextInput
         labelLeftUppon="音訓（左傍）"
         labelRightBottom="カタカナ（原表記）"
-        inputValue={leftWakun}
-        getInputValue={setLeftWakun}
+        name="leftWakun"
+        register={register}
       />
 
-
-      <FormTextInput
+      <TextInput
         labelLeftUppon="声点"
         labelRightBottom="平、東、上、去、入、○（○はなし）"
-        inputValue={shouten}
-        getInputValue={setShouten}
+        name={"shouten"}
+        register={register}
       />
 
       <div className="divider"></div>
 
-      <FormTextInput
+      <TextInput
         labelLeftUppon="注文"
         labelRightBottom="カタカナまたは漢字"
-        inputValue={def}
-        getInputValue={setDef}
+        name={"def"}
+        register={register}
       />
 
       <div className="pt-6 form-control w-full max-w-xs flex flex-col items-center justify-center">
-        <button className="btn btn-wide btn-primary" onClick={handleSearchBtn}>
+        <button type="submit" className="btn btn-wide btn-primary">
           検索
         </button>
       </div>
-    </div>
+    </form>
   );
 }
 
