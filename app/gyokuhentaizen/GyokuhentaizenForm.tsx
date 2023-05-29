@@ -1,55 +1,53 @@
 "use client";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useSearchParams } from "next/navigation";
-
 import { radicalList } from "@/utils/radicalList";
+import { useForm } from "react-hook-form";
+import TextInput from "@/components/common/TextInput";
 
-import FormTextInput from "../../components/common/FormTextInput";
+interface FormData {
+  entry?: string;
+  jion?: string;
+  wakun?: string;
+  radical?: string;
+  strokes?: string;
+  maki?: string;
+  tyo?: string;
+}
 
 function GyokuhentaizenForm() {
-  const searchParams = useSearchParams();
-  const [entry, setEntry] = useState(searchParams?.get("entry") || "");
-  const [jion, setJion] = useState(searchParams?.get("jion") || "");
-  const [wakun, setWakun] = useState(searchParams?.get("wakun") || "");
-  const [radical, setRadical] = useState(searchParams?.get("radical") || "");
-  const [strokes, setStrokes] = useState(searchParams?.get("strokes") || "");
-  const [maki, setMaki] = useState(searchParams?.get("maki") || "");
-  const [tyo, setTyo] = useState(searchParams?.get("tyo") || "");
-
-  const params = { entry, jion, wakun, radical, strokes, maki, tyo };
-  const query = new URLSearchParams(params);
-
+  const { register, handleSubmit } = useForm();
   const router = useRouter();
 
-  function handleSearchBtn() {
+  const onSubmit = (data: FormData) => {
+    const notEmptyQuery = Object.fromEntries(
+      Object.entries(data).filter(([_, v]) => v != "")
+    );
+    const query = new URLSearchParams(notEmptyQuery);
     router.push(`/gyokuhentaizen/results?${query}`);
-  }
-
-  function handleDisplayBtn() {}
+  };
 
   return (
-    <>
-      <FormTextInput
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <TextInput
         labelLeftUppon="掲出字"
         labelRightBottom="1文字"
         placeholder="掲出字を入力してください"
-        inputValue={entry}
-        getInputValue={setEntry}
+        name={"entry"}
+        register={register}
       />
-      <FormTextInput
+      <TextInput
         labelLeftUppon="字音"
         labelRightBottom="カタカナ／原本の表記"
         placeholder="字音を入力してください"
-        inputValue={jion}
-        getInputValue={setJion}
+        name={"jion"}
+        register={register}
       />
-      <FormTextInput
+      <TextInput
         labelLeftUppon="和訓"
         labelRightBottom="カタカナ／原本の表記"
         placeholder="和訓を入力してください"
-        inputValue={wakun}
-        getInputValue={setWakun}
+        name={"wakun"}
+        register={register}
       />
 
       <div className="divider"></div>
@@ -58,11 +56,7 @@ function GyokuhentaizenForm() {
         <label className="label">
           <span className="label-text">部首</span>
         </label>
-        <select
-          className="select select-bordered"
-          value={radical}
-          onChange={(e) => setRadical(e.target.value)}
-        >
+        <select className="select select-bordered" {...register("radical")}>
           <option disabled value="">
             部首を選択してください
           </option>
@@ -74,19 +68,13 @@ function GyokuhentaizenForm() {
         </select>
       </div>
 
-      <FormTextInput
+      <TextInput
         labelLeftUppon="残画数"
         labelRightBottom="アラビア数字"
         placeholder="残り画数を入力してください"
-        inputValue={strokes}
-        getInputValue={setStrokes}
+        name={"strokes"}
+        register={register}
       />
-
-      {/* <div className="form-control w-full max-w-xs flex flex-col items-center justify-center pt-6">
-        <button className="btn btn-wide" onClick={handleDisplayBtn}>
-          表示／絞る
-        </button>
-      </div> */}
 
       <div className="divider"></div>
 
@@ -94,13 +82,7 @@ function GyokuhentaizenForm() {
         <label className="label">
           <span className="label-text">巻</span>
         </label>
-        <select
-          className="select select-bordered"
-          value={maki}
-          onChange={(e) => {
-            setMaki(e.target.value);
-          }}
-        >
+        <select className="select select-bordered" {...register("maki")}>
           <option disabled selected value="" hidden>
             巻を選択してください
           </option>
@@ -112,36 +94,20 @@ function GyokuhentaizenForm() {
         </select>
       </div>
 
-      <FormTextInput
+      <TextInput
         labelLeftUppon="丁"
         labelRightBottom="アラビア数字"
         placeholder="丁を入力してください"
-        inputValue={tyo}
-        getInputValue={setTyo}
+        name={"tyo"}
+        register={register}
       />
 
-      {/* <div className="form-control w-full max-w-xs">
-        <label className="label">
-          <span className="label-text">丁</span>
-        </label>
-        <select className="select select-bordered" ref={remainstrokeRef}>
-          <option disabled selected value="default" hidden>
-            丁を選択してください
-          </option>
-          {[0, 1, 2].map((stroke) => (
-            <option value={stroke} key={stroke}>
-              {stroke}
-            </option>
-          ))}
-        </select>
-      </div> */}
-
       <div className="pt-6 form-control w-full max-w-xs flex flex-col items-center justify-center">
-        <button className="btn btn-wide btn-primary" onClick={handleSearchBtn}>
+        <button className="btn btn-wide btn-primary" type="submit">
           検索
         </button>
       </div>
-    </>
+    </form>
   );
 }
 

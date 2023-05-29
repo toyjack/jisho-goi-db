@@ -1,7 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import FormTextInput from "../../components/common/FormTextInput";
 import { useForm } from "react-hook-form";
 import TextInput from "@/components/common/TextInput";
 
@@ -42,18 +40,14 @@ function BunmeiForm() {
 
   const router = useRouter();
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-  } = useForm();
-
-  useEffect(() => {
-    setValue("entry", entry);
-    setValue("gokei", gokei);
-    setValue("leftWakun", leftWakun);
-    setValue("shouten", shouten);
-    setValue("def", def);
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      entry: entry || "",
+      gokei: gokei || "",
+      leftWakun: leftWakun || "",
+      shouten: shouten || "",
+      def: def || "",
+    },
   });
 
   const onSubmit = (data: FormData) => {

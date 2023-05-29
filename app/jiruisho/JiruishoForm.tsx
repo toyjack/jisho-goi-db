@@ -1,109 +1,103 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import FormTextInput from "../../components/common/FormTextInput";
+import { useForm } from "react-hook-form";
+import TextInput from "../../components/common/TextInput";
+
+interface FormData {
+  entry?: string;
+  gokei_search_current?: string;
+  gokei_search_original?: string;
+  definition?: string;
+  shouten?: string;
+  hen?: string;
+  bu?: string;
+  onkun?: string;
+  char_count?: string;
+}
 
 function JiruishoForm() {
-  const [entry, setEntry] = useState("");
-  const [shouten, setShouten] = useState("");
-  const [hen, setHen] = useState("");
-  const [bu, setBu] = useState("");
-  const [onkun, setOnkun] = useState("");
-  const [charCount, setCharCount] = useState("");
-  const [gokeiCurrent , setGokeiCurrent] = useState("");
-  const [gokeiOriginal, setGokeiOriginal] = useState("");
-  const [definition, setDefinition] = useState("");
-
-  const params = {
-    entry,
-    gokei_search_current: gokeiCurrent,
-    gokei_search_original: gokeiOriginal,
-    definition,
-    shouten,
-    hen,
-    bu,
-    onkun,
-    char_count: charCount,
-  };
-  const query = new URLSearchParams(params);
-
   const router = useRouter();
+  const { register, handleSubmit } = useForm();
 
-  function handleSearchBtn() {
+  const onSubmit = (data:FormData) => {
+    const notEmptyQuery = Object.fromEntries(
+      Object.entries(data).filter(([_, v]) => v != "")
+    );
+    const query = new URLSearchParams(notEmptyQuery);
     router.push(`/jiruisho/results?${query}`);
-  }
+  };
 
   return (
-    <div>
-      <FormTextInput
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <TextInput
         labelLeftUppon="見出し語"
         labelRightBottom="漢字"
-        inputValue={entry}
-        getInputValue={setEntry}
+        name={"entry"}
+        register={register}
       />
-      <FormTextInput
+      <TextInput
         labelLeftUppon="語形（現代仮名遣い）"
         labelRightBottom="カタカナ"
-        inputValue={gokeiCurrent}
-        getInputValue={setGokeiCurrent}
+        name={"gokei_search_current"}
+        register={register}
       />
-      <FormTextInput
+      <TextInput
         labelLeftUppon="語形（原表記）"
         labelRightBottom="カタカナ"
-        inputValue={gokeiOriginal}
-        getInputValue={setGokeiOriginal}
+        name={"gokei_search_original"}
+        register={register}
       />
 
-      <FormTextInput
+      <TextInput
         labelLeftUppon="註文"
         labelRightBottom="カタカナまたは漢字"
-        inputValue={definition}
-        getInputValue={setDefinition}
+        name={"definition"}
+        register={register}
       />
 
       <div className="divider"></div>
 
-      <FormTextInput
+      <TextInput
         labelLeftUppon="声点"
         labelRightBottom="..."
-        inputValue={shouten}
-        getInputValue={setShouten}
+        name={"shouten"}
+        register={register}
       />
 
-      <FormTextInput
+      <TextInput
         labelLeftUppon="篇"
         labelRightBottom="カタカナ"
-        inputValue={hen}
-        getInputValue={setHen}
+        name={"hen"}
+        register={register}
       />
 
-      <FormTextInput
+      <TextInput
         labelLeftUppon="部"
         labelRightBottom="漢字"
-        inputValue={bu}
-        getInputValue={setBu}
+        name={"bu"}
+        register={register}
       />
 
-      <FormTextInput
+      <TextInput
         labelLeftUppon="音訓"
         labelRightBottom="「音」または「訓」"
-        inputValue={onkun}
-        getInputValue={setOnkun}
+        name={"onkun"}
+        register={register}
       />
 
-      <FormTextInput
+      <TextInput
         labelLeftUppon="字数"
         labelRightBottom="アラビア数字"
-        inputValue={charCount}
-        getInputValue={setCharCount}
+        name={"char_count"}
+        register={register}
       />
 
       <div className="pt-6 form-control w-full max-w-xs flex flex-col items-center justify-center">
-        <button className="btn btn-wide btn-primary" onClick={handleSearchBtn}>
+        <button className="btn btn-wide btn-primary" type="submit">
           検索
         </button>
       </div>
-    </div>
+    </form>
   );
 }
 
