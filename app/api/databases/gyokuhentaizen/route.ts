@@ -9,7 +9,7 @@ export async function GET(request: Request) {
   const wakun = searchParams.get("wakun")
   const radical = searchParams.get("radical")
   const remain_strokes = searchParams.get("remain_strokes")
-  const ghtz_id = searchParams.get("ghtz_id")
+  const ghtz_id = searchParams.get("ghtz_id") || undefined
 
   const results = await gyokuhentaizenFindMany({
     entry,jion,wakun,radical,remain_strokes,ghtz_id
