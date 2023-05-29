@@ -15,7 +15,12 @@ interface FormData {
 }
 
 function GyokuhentaizenForm() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      radical: "",
+      maki: "",
+    },
+  });
   const router = useRouter();
 
   const onSubmit = (data: FormData) => {

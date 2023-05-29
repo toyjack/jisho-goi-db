@@ -1,20 +1,34 @@
 import { prisma } from "@/lib/prisma";
-import { Prisma,Gyokuhentaizen } from "@prisma/client";
+import { Prisma, Gyokuhentaizen } from "@prisma/client";
 
 export interface GyokuhentaizenFindManyQuery extends Partial<Gyokuhentaizen> {
   jion?: string | null;
+  maki?: string | null;
+  tyo?: string | null;
 }
 
 export async function gyokuhentaizenFindOne(ghtz_id: string) {
   const result = await prisma.gyokuhentaizen.findUnique({
-    where: { 
+    where: {
       ghtz_id: ghtz_id,
-     },
+    },
   });
   return result;
 }
 
-export async function gyokuhentaizenFindMany(query: GyokuhentaizenFindManyQuery) {
+export async function gyokuhentaizenFindMany(
+  query: GyokuhentaizenFindManyQuery
+) {
+  let ghtz_id: string | undefined = "";
+  if (query.maki) {
+    ghtz_id += query.maki;
+    if (query.tyo) {
+      ghtz_id += "_" + query.tyo;
+    }
+  } else {
+    ghtz_id = undefined;
+  }
+
   const where: Prisma.GyokuhentaizenWhereInput = {
     AND: [
       {
@@ -45,7 +59,7 @@ export async function gyokuhentaizenFindMany(query: GyokuhentaizenFindManyQuery)
       { remain_strokes: query.remain_strokes || undefined },
       {
         ghtz_id: {
-          startsWith: query.ghtz_id || undefined,
+          startsWith: ghtz_id || undefined,
         },
       },
     ],
