@@ -23,9 +23,7 @@ function CommonHeader() {
             </li>
             <li tabIndex={0}>
               <details>
-                <summary>
-                  全文データベース
-                </summary>
+                <summary>全文データベース</summary>
                 <ul className="p-2  text-base z-10">
                   {databaseList.map((database) => (
                     <li key={database.title}>
@@ -34,8 +32,6 @@ function CommonHeader() {
                   ))}
                 </ul>
               </details>
-
-              
             </li>
             <li>
               <Link href="/gallery">画像ギャラリー</Link>
@@ -54,8 +50,8 @@ function CommonHeader() {
           </div>
 
           {/* mobile menu */}
-          <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost lg:hidden">
+          <details className="dropdown dropdown-end z-10">
+            <summary className="m-1 btn md:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -70,18 +66,17 @@ function CommonHeader() {
                   d="M4 6h16M4 12h8m-8 6h16"
                 ></path>
               </svg>
-            </label>
-            <ul
-              tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-            >
+            </summary>
+            <ul className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52">
               {navList.map((item) => (
                 <li key={item.title}>
                   <Link href={item.url}>{item.title}</Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </details>
+
+         
         </div>
       </div>
     </header>
