@@ -23,7 +23,7 @@ async function GyokuhentaizenLayout({
         検索パネルを開く
       </label>
 
-      <div className="drawer drawer-mobile h-max">
+      <div className="drawer md:drawer-open h-max">
         <input id="drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">{children}</div>
         <div className="drawer-side min-h-screen">
