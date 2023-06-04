@@ -1,3 +1,4 @@
+import IiifViewer from "@/components/iiif/Viewer";
 import { hzwmFindOneById } from "@/db/hzwm"
 
 async function HzwmItemPage({params}:{params: {id: string}}) {
@@ -28,7 +29,17 @@ async function HzwmItemPage({params}:{params: {id: string}}) {
           </tbody>
         </table>
       </div>
-      <div>Image</div>
+      
+      <div className="divider">画像</div>
+
+      <div>
+        <h2>Image View</h2>
+        <p>on working</p>
+        <IiifViewer
+          manifestUrl={"https://dl.ndl.go.jp/api/iiif/2555536/manifest.json"}
+          page={Number(1)}
+        />
+      </div>
     </div>
   );
 }
