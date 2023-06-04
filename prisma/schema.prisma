@@ -14,7 +14,19 @@ model User {
   name      String?
   password  String
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime? @updatedAt
+}
+
+model Hzwm {
+  id         String  @id
+  location   String?
+  type       String?
+  entry      String?
+  definition String?  @db.VarChar(2000)
+  readings   String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime? @updatedAt
 }
 
 model Gyokuhentaizen {
