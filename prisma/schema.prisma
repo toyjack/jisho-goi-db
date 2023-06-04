@@ -143,10 +143,23 @@ model KrmRecord {
   Remarks        String?   @db.VarChar(2000)
 }
 
-model OudanKanjion {
-  id          Int      @id @default(autoincrement())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now())
+model HiGaiji {
+  id       Int     @id @default(autoincrement())
+  textId   String? @db.VarChar(255)
+  manageId String? @db.VarChar(255)
+  gaiji    String? @db.VarChar(255)
+  char1    String? @db.VarChar(255)
+  unicode  String? @db.VarChar(255)
+  char2    String? @db.VarChar(255)
+  matched  String? @db.VarChar(255)
+  remark   String? @db.VarChar(255)
+  imageUrl String? @db.VarChar(255)
+}
+
+model OudanKanjionItem {
+  id          Int       @id @default(autoincrement())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime?
   book_id     String
   book_name   String
   char_id     Int
@@ -164,4 +177,20 @@ model OudanKanjion {
   etc         String?
   location    String?
   remarks     String?
+}
+
+model OudankanjionBook {
+  id              Int      @id @default(autoincrement())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime
+  bookId          String   @unique
+  bookInformation String
+  bookName        String
+  inputLegend     String
+  inputer         String
+  jionInformation String
+  possession      String
+  references      String
+  time            String
+  timeDesc        String?
 }
