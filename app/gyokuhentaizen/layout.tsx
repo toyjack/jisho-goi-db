@@ -8,7 +8,7 @@ function GyokuhentaizenLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto h-full">
       <div className="p-10">
         <h2 className="text-3xl font-bold">
           <Link href="/gyokuhentaizen">増続大広益会玉篇大全データベース</Link>

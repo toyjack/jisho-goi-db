@@ -32,7 +32,7 @@ function GyokuhentaizenForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className="h-max" onSubmit={handleSubmit(onSubmit)}>
       <TextInput
         labelLeftUppon="掲出字"
         labelRightBottom="1文字"
@@ -65,6 +65,7 @@ function GyokuhentaizenForm() {
           <option disabled value="">
             部首を選択してください
           </option>
+          <option value="">（空）</option>
           {radicalList.map((radical) => (
             <option value={radical.radical} key={radical.radical}>
               {radical.label}
@@ -91,6 +92,7 @@ function GyokuhentaizenForm() {
           <option disabled selected value="" hidden>
             巻を選択してください
           </option>
+          <option value="">（空）</option>
           {[1].map((maki) => (
             <option value={maki} key={maki}>
               {maki}
