@@ -1,27 +1,10 @@
 import Link from "next/link";
-
+import {wakunnoshioriFindMany} from '@/db/wakunnosiori'
 interface Defination {
   id: number;
   defination: string;
   index: number;
   entry_id: number;
-}
-
-async function getData(searchParams: { [key: string]: string }) {
-  const notEmptyQuery = Object.fromEntries(
-    Object.entries(searchParams).filter(([_, v]) => v != "")
-  );
-  const query = new URLSearchParams(notEmptyQuery);
-
-  const url = `${process.env.API_ROOT}/api/wakunnoshiori/search?${query}`;
-
-  const res = await fetch(url, { cache: "no-store" });
-
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("データが見つかりませんでした。");
-  }
-  return res.json();
 }
 
 const tableHeader = [
@@ -63,7 +46,9 @@ export default async function WakunnoshioriResultsPage({
 }: {
   searchParams?: { [key: string]: string };
 }) {
-  const results = await getData(searchParams!);
+  const entry = searchParams?.entry || "";
+  const definitions  = searchParams?.definitions || "";
+  const {data:results} = await wakunnoshioriFindMany(searchParams!);
 
   return (
     <div className="md:p-4">

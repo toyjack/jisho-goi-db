@@ -1,7 +1,10 @@
+import ShukaiSection from "@/components/landing/Shukai";
+
 function NewsPage() {
   return (
     <>
-      開発中
+      過去の開催
+      <ShukaiSection />
     </>
   );
 }

@@ -1,25 +1,5 @@
-import { ApiResponse } from "@/types";
+import { bunmeibonFindMany, BunmeibonFindManyQuery } from "@/db/bunmeibon";
 import Link from "next/link";
-
-async function getData(searchParams: { [key: string]: string }) {
-  // const notEmptyQuery = Object.fromEntries(
-  //   Object.entries(searchParams).filter(([_, v]) => v != "")
-  // );
-  const query = new URLSearchParams(searchParams);
-
-  const url = `${process.env.API_ROOT}/api/databases/bunmeibon?${query}`;
-  console.log(url);
-
-  const res = await fetch(url, { cache: "no-store" });
-
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("データが見つかりませんでした。");
-  }
-
-  const response = (await res.json()) as ApiResponse;
-  return response;
-}
 
 const tableHeader = [
   // { label: "ID", field: "bunmei_id", type: "text" },
@@ -52,9 +32,18 @@ function getLoc(id: string, url: string) {
 async function BunmeiResultsPage({
   searchParams,
 }: {
-  searchParams?: { [key: string]: string };
+  searchParams: { [key: string]: string };
 }) {
-  const results = await getData(searchParams!);
+
+
+  const query: BunmeibonFindManyQuery = {
+    entry: searchParams.entry,
+    gokei: searchParams.gokei,
+    shouten: searchParams.shouten,
+    left_kun: searchParams.left_kun,
+    definition: searchParams.definition,
+  };
+  const results = await bunmeibonFindMany(query);
 
   const CellBlock = ({
     label,

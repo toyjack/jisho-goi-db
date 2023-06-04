@@ -1,6 +1,16 @@
 import './globals.css'
 import CommonHeader from '@/components/common/Header';
 import CommonFooter from '@/components/common/Footer';
+
+export const metadata = {
+  manifest: "/images/favicon/site.webmanifest",
+  icons: {
+    icon: "/images/favicon/favicon-32x32.png",
+    apple: "/images/favicon/apple-touch-icon.png",
+  },
+};
+
+
 export default function RootLayout({
   children,
 }: {

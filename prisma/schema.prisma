@@ -1,34 +1,33 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
-
 model User {
-  id           Int       @id @default(autoincrement())
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  email        String    @unique
-  name         String?
-  password     String
-  role         String    @default("user")
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String?
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime? @updatedAt
 }
 
-model News {
-  id       Int       @id @default(autoincrement())
-  pub_date DateTime?
-  title    String?
-  content  String? //@db.VarChar(10000)
-}
+model Hzwm {
+  id         String  @id
+  location   String?
+  type       String?
+  entry      String?
+  definition String?  @db.VarChar(2000)
+  readings   String?
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime? @updatedAt
+}
 
 model Gyokuhentaizen {
   id             Int     @id @default(autoincrement())
@@ -58,11 +57,9 @@ model Jiruisho {
   gokei_display         String?
   gokei_search_original String?
   gokei_search_current  String?
-  defination            String?
   remark                String?
+  definition            String?
 }
-
-
 
 model BunmeiSetsuyoshu {
   id                Int     @id @default(autoincrement())
@@ -126,15 +123,86 @@ model Wakunnosiori_Entry {
   location    String?
   ndl_url     String?
   page        String?
-  definations Wakunnosiori_Def[]
+  definitions Wakunnosiori_Def[]
 }
 
 model Wakunnosiori_Def {
   id         Int                @id @default(autoincrement())
-  defination String?
   index      Int?
   entry_id   Int
+  definition String?
   entry      Wakunnosiori_Entry @relation(fields: [entry_id], references: [id])
 
   @@index([entry_id])
+}
+
+model KrmRecord {
+  id             Int       @id @default(autoincrement())
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @default(now())
+  deletedAt      DateTime?
+  KRID_n         String
+  KRID_sn        String
+  KR2ID          String
+  KRID           String
+  KR_Tenri_p     String?
+  KR_vol_name    String?
+  KR_radical     String?
+  KR_vol_radical String?
+  Entry          String?
+  Entry_original String?
+  Def            String?   @db.VarChar(2000)
+  Remarks        String?   @db.VarChar(2000)
+}
+
+model HiGaiji {
+  id       Int     @id @default(autoincrement())
+  textId   String? @db.VarChar(255)
+  manageId String? @db.VarChar(255)
+  gaiji    String? @db.VarChar(255)
+  char1    String? @db.VarChar(255)
+  unicode  String? @db.VarChar(255)
+  char2    String? @db.VarChar(255)
+  matched  String? @db.VarChar(255)
+  remark   String? @db.VarChar(255)
+  imageUrl String? @db.VarChar(255)
+}
+
+model OudanKanjionItem {
+  id          Int       @id @default(autoincrement())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime?
+  book_id     String
+  book_name   String
+  char_id     Int
+  word_id     Int
+  char        String
+  word        String
+  char_index  Int
+  beat_count  Int?
+  shoten      String?
+  shoten_type String?
+  ruby        String?
+  ruby_all    String?
+  fanqie      String?
+  ruion       String?
+  etc         String?
+  location    String?
+  remarks     String?
+}
+
+model OudankanjionBook {
+  id              Int      @id @default(autoincrement())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime
+  bookId          String   @unique
+  bookInformation String
+  bookName        String
+  inputLegend     String
+  inputer         String
+  jionInformation String
+  possession      String
+  references      String
+  time            String
+  timeDesc        String?
 }

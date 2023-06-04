@@ -1,6 +1,6 @@
 import BunmeibonManaul from "@/markdown/BunmeibonManual.mdx";
 import Shikouban from "@/components/ui/Shikouban";
-function BunmeiPage() {
+async function BunmeiPage() {
   return (
     <div className="px-4 pb-8">
       <Shikouban />

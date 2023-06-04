@@ -1,5 +1,9 @@
 export const databaseList = [
   {
+    title:"本草和名",
+    url:"/hzwm",
+  },
+  {
     title: "色葉字類抄",
     url: "/jiruisho",
   },

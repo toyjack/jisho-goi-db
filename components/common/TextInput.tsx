@@ -1,22 +1,26 @@
 "use client";
 
-function FormTextInput({
+import { UseFormRegister } from "react-hook-form";
+
+interface InputProps {
+  labelLeftUppon: string;
+  labelRightUppon?: string;
+  labelLeftBottom?: string;
+  labelRightBottom?: string;
+  placeholder?: string;
+  name: string;
+  register: UseFormRegister<any>;
+}
+
+function TextInput({
   labelLeftUppon,
   labelRightUppon,
   labelLeftBottom,
   labelRightBottom,
   placeholder,
-  inputValue,
-  getInputValue,
-}: {
-  labelLeftUppon?: string;
-  labelRightUppon?: string;
-  labelLeftBottom?: string;
-  labelRightBottom?: string;
-  placeholder?: string;
-  inputValue?: string;
-  getInputValue: (value: string) => void;
-}) {
+  name,
+  register,
+}: InputProps) {
   return (
     <div className="form-control w-full max-w-xs">
       <label className="label">
@@ -27,8 +31,7 @@ function FormTextInput({
         type="text"
         placeholder={placeholder}
         className="input input-bordered w-full max-w-xs"
-        value={inputValue}
-        onChange={(e) => getInputValue(e.target.value)}
+        {...register(name)}
       />
       <label className="label">
         <span className="label-text-alt">{labelLeftBottom}</span>
@@ -38,4 +41,4 @@ function FormTextInput({
   );
 }
 
-export default FormTextInput;
+export default TextInput;

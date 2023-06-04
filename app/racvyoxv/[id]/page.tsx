@@ -1,18 +1,6 @@
 import IiifViewer from "@/components/iiif/Viewer";
 import BackButton from "@/components/ui/BackButton";
-import Link from "next/link";
-
-async function getData(id: string) {
-  const url = `${process.env.API_ROOT}/api/racvyoxv/${id}`;
-
-  const res = await fetch(url, { cache: "no-store" });
-
-  if (!res.ok) {
-    throw new Error("データが見つかりませんでした。");
-  }
-
-  return res.json();
-}
+import { racvyoxvFindOne } from "@/db/racvyoxv";
 
 const tableHeader = [
   { label: "ID", field: "id" },
@@ -46,12 +34,14 @@ const tableHeader = [
 
 async function RacvyoxvItemPage({ params }: { params: { id: string } }) {
   const { id } = params;
-  const result = await getData(id);
+  const result = await racvyoxvFindOne(id);
+  if (!result) return <div>データが見つかりませんでした。</div>;
+
   // https://gallica.bnf.fr/view3if/ga/ark:/12148/btv1b10508396b/f17
-  const gallicaId = result.gallica.split("/").slice(5, 8).join("/"); //ark:/12148/btv1b10508396b
+  const gallicaId = result.gallica!.split("/").slice(5, 8).join("/"); //ark:/12148/btv1b10508396b
   // https://gallica.bnf.fr/iiif/ark:/12148/btv1b10508396b/manifest.json
   const gallicaManifest = `https://gallica.bnf.fr/iiif/${gallicaId}/manifest.json`;
-  const page = parseInt(result.page)+12;
+  const page = parseInt(result.page!) + 12;
   return (
     <div className="p-4">
       <div className="p-2">
@@ -76,7 +66,12 @@ async function RacvyoxvItemPage({ params }: { params: { id: string } }) {
             {tableHeader.map((header, index) => (
               <tr key={index}>
                 <th>{header.label}</th>
-                <td>{result[header.field]}</td>
+                <td>
+                  {
+                    // @ts-ignore
+                    result[header.field]
+                  }
+                </td>
               </tr>
             ))}
           </tbody>
@@ -86,8 +81,8 @@ async function RacvyoxvItemPage({ params }: { params: { id: string } }) {
       <div className="divider"></div>
       <h2 className="text-xl font-bold py-4">画像</h2>
       <div>
-        <IiifViewer manifestUrl={gallicaManifest} page={page-1} />
-        </div>
+        <IiifViewer manifestUrl={gallicaManifest} page={page - 1} />
+      </div>
     </div>
   );
 }

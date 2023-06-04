@@ -1,6 +1,7 @@
 import Link from "next/link";
 import BackButton from "@/components/ui/BackButton";
 import WakunoshioriImageTabs from "@/app/wakunnoshiori/[id]/ImageTabs";
+import { wakunnoshioriFindOne } from "@/db/wakunnosiori";
 
 interface Defination {
   id: number;
@@ -9,17 +10,6 @@ interface Defination {
   entry_id: number;
 }
 
-async function getData(id: string) {
-  const url = `${process.env.API_ROOT}/api/wakunnoshiori/${id}`;
-
-  const res = await fetch(url, { cache: "no-store" });
-
-  if (!res.ok) {
-    throw new Error("データが見つかりませんでした。");
-  }
-
-  return res.json();
-}
 const tableHeader = [
   { label: "見出し語", field: "entry", type: "text" },
   { label: "語釈", field: "definations", type: "text_array" },
@@ -66,7 +56,8 @@ export default async function WakunnoshioriItemPage({
   params: { id: string };
 }) {
   const { id } = params;
-  const result = await getData(id);
+  const result = await wakunnoshioriFindOne(id);
+  if (!result) return <div>データが見つかりませんでした。</div>;
 
   return (
     <div className="p-4">
@@ -95,7 +86,10 @@ export default async function WakunnoshioriItemPage({
                 <td className="whitespace-normal">
                   <CellBlock
                     label={header.label}
-                    value={result[header.field]}
+                    value={
+                      // @ts-ignore
+                      result[header.field]
+                    }
                     type={header.type}
                   />
                   {/* {handleDefination(result[header.field])} */}
@@ -109,8 +103,11 @@ export default async function WakunnoshioriItemPage({
       <div className="divider py-4"></div>
 
       <h2 className="text-xl font-bold">画像</h2>
-      <WakunoshioriImageTabs location={result.page} ndl_url={result.ndl_url}/>
-     
+      <WakunoshioriImageTabs
+        location={result.page!}
+        ndl_url={result.ndl_url!}
+      />
+
       {/* */}
     </div>
   );

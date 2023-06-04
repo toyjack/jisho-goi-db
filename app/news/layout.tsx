@@ -1,24 +1,12 @@
 import Link from "next/link";
 import NewsListPanel from "./NewsListPanel";
 
-async function getAllNews() {
-  const url = `https://strapi.kojisho.com/api/blogs`;
-
-  const res = await fetch(url, { cache: "no-store" });
-
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("データが見つかりませんでした。");
-  }
-  return res.json();
-}
 
 async function NewsLayout({
   children, 
 }: {
   children: React.ReactNode;
 }) {
-  const news = await getAllNews();
   
   return (
     <div className="container mx-auto">
@@ -26,7 +14,6 @@ async function NewsLayout({
         <h2 className="text-3xl font-bold">
           <Link href="/news">お知らせ</Link>
         </h2>
-        {JSON.stringify(news)}
       </div>
 
       <label
@@ -36,7 +23,7 @@ async function NewsLayout({
         検索パネルを開く
       </label>
 
-      <div className="drawer drawer-mobile h-max">
+      <div className="drawer lg:drawer-open h-max">
         <input id="drawer" type="checkbox" className="drawer-toggle" />
 
         <div className="drawer-content">{children}</div>

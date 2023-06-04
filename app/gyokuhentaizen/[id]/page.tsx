@@ -1,18 +1,7 @@
 
 import BackButton from "@/components/ui/BackButton";
 import GyokuhentaizenImageTabs from "@/app/gyokuhentaizen/[id]/ImageTabs";
-
-async function getData(id: string) {
-  const url = `${process.env.API_ROOT}/api/gyokuhentaizen/${id}`;
-
-  const res = await fetch(url, { cache: "no-store" });
-
-  if (!res.ok) {
-    throw new Error("データが見つかりませんでした。");
-  }
-
-  return res.json();
-}
+import { gyokuhentaizenFindOne } from "@/db/gyokuhentaizen";
 
 function getLocation(ghtz_id: string) {
   const [maki, page, line, num_in_line] = ghtz_id.split("_");
@@ -34,7 +23,9 @@ function getWord(wordStr: string) {
 
 async function GyokuhentaizenItemPage({ params }: { params: { id: string } }) {
   const { id } = params;
-  const result = await getData(id);
+  const result = await gyokuhentaizenFindOne(id);
+
+  if (!result) return <>error</>
 
   return (
     <div className="p-4">

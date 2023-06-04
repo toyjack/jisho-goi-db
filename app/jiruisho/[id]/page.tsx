@@ -1,4 +1,5 @@
 import BackButton from "@/components/ui/BackButton";
+import { jiruishoFindOne } from "@/db/jiruisho";
 import Link from "next/link";
 import JiruishoImageTab from "./ImageTab";
 
@@ -8,22 +9,12 @@ interface ImageData {
   page: number;
 }
 
-async function getData(id: string) {
-  const url = `${process.env.API_ROOT}/api/jiruisho/${id}`;
-
-  const res = await fetch(url, { cache: "no-store" });
-
-  if (!res.ok) {
-    throw new Error("データが見つかりませんでした。");
-  }
-  const result = await res.json();
-  // console.log(result);
-  return result;
-}
-
 async function JiruishoItemPage({ params }: { params: { id: string } }) {
   const { id } = params;
-  const result = await getData(id);
+  const result = await jiruishoFindOne(id);
+  if (!result) {
+    return <div>データが見つかりませんでした。</div>;
+  }
 
   let tabData: ImageData[] = [];
 
@@ -46,8 +37,6 @@ async function JiruishoItemPage({ params }: { params: { id: string } }) {
       page: Number(canvasNum),
     });
   }
-
-  console.log(tabData);
 
   return (
     <div className="p-4">
@@ -138,7 +127,7 @@ async function JiruishoItemPage({ params }: { params: { id: string } }) {
 
             <tr>
               <th>註文</th>
-              <td>{result.defination}</td>
+              <td>{result.definition}</td>
             </tr>
 
             <tr>

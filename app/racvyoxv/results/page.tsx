@@ -1,17 +1,5 @@
+import { racvyoxvFindMany } from "@/db/racvyoxv";
 import Link from "next/link";
-
-async function getData(searchParams: { [key: string]: string }) {
-  const query = new URLSearchParams(searchParams);
-  const url = `${process.env.API_ROOT}/api/racvyoxv/search?${query}`;
-
-  const res = await fetch(url, { cache: "no-store" });
-
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("データが見つかりませんでした。");
-  }
-  return res.json();
-}
 
 const tableHeader = [
   // { label: "ID", field: "id" },
@@ -49,7 +37,10 @@ async function JiruishoResultsPage({
 }: {
   searchParams?: { [key: string]: string };
 }) {
-  const results = await getData(searchParams!);
+  const term = searchParams?.term || "";
+  const kanji_pair_length= searchParams?.kanji_pair_length || "";
+  
+  const {data:results} = await racvyoxvFindMany({ term, kanji_pair_length });
 
   const CellBlock = ({label, value, type }: {label:string, value: string; type: string }) => {
     if (type === "button" && value) {

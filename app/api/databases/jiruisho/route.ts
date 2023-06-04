@@ -1,60 +1,28 @@
-import { prisma } from "@/lib/prisma";
-import { Prisma } from "@prisma/client";
+import { jiruishoFindmany } from "@/db/jiruisho";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
 
-  const where: Prisma.JiruishoWhereInput = {
-    AND: [
-      {
-        entry: {
-          contains: searchParams.get("entry") || undefined,
-        },
-      },
-      {
-        hen: {
-          contains: searchParams.get("hen") || undefined,
-        },
-      },
-      {
-        bu: {
-          contains: searchParams.get("bu") || undefined,
-        },
-      },
-      {
-        onkun: {
-          contains: searchParams.get("onkun") || undefined,
-        },
-      },
-      {
-        char_count: {
-          contains: searchParams.get("char_count") || undefined,
-        },
-      },
-      {
-        gokei_search_original: {
-          contains: searchParams.get("gokei_search_original") || undefined,
-        },
-      },
-      // TODO: fix typo
-      {
-        defination: {
-          contains: searchParams.get("definition") || undefined,
-        },
-      },
-    ],
-  };
-  const resutls = await prisma.$transaction([
-    prisma.jiruisho.count({ where }),
-    prisma.jiruisho.findMany({ where }),
-  ]);
+  const entry = searchParams.get("entry")
+  const gokei_search_original = searchParams.get("gokei_search_original")
+  const gokei_search_current= searchParams.get("gokei_search_current")
+  const definition = searchParams.get("definition")
+  const char_count = searchParams.get("char_count")
+  const hen = searchParams.get("hen")
+  const bu = searchParams.get("bu")
+  const onkun = searchParams.get("onkun")
 
-  const response = {
-    query: searchParams.toString(),
-    count: resutls[0],
-    data: resutls[1],
-  };
+  const results = await jiruishoFindmany({
+    entry,
+    gokei_search_original,
+    gokei_search_current,
+    definition,
+    hen,
+    bu,
+    onkun,
+    char_count,
+  });
 
-  return NextResponse.json(response);
+  return NextResponse.json(results);
 }

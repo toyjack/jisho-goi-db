@@ -22,7 +22,7 @@ function JiruishoLayout({
       検索パネルを開く
     </label>
 
-    <div className="drawer drawer-mobile h-max">
+    <div className="drawer lg:drawer-open">
       <input id="drawer" type="checkbox" className="drawer-toggle" />
 
       <div className="drawer-content">{children}</div>

@@ -1,7 +1,7 @@
 
 function NewsListPanel() {
 
-  return <div>menu</div>;
+  return <div>開発中</div>;
 }
 
 export default NewsListPanel;

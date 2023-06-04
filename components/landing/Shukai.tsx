@@ -23,13 +23,13 @@ function ShukaiSection() {
             開催地: ZOOMによるリモート開催（参加無料） <br />
             お問い合わせ: liuguanwei2013[atmark]gmail.com
           </p>
-          <Link
+          {/* <Link
             href="https://forms.office.com/r/53e51hfaN2"
-            className="btn btn-primary"
+            className="btn btn-primary "
             target={"_blank"}
           >
             参加申し込み
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>

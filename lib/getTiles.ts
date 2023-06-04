@@ -1,4 +1,3 @@
-import fetch from "unfetch";
 import { Manifest } from "@iiif/presentation-2";
 
 export async function getTiles(manifestUrl: string) {
