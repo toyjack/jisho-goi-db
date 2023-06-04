@@ -85,7 +85,8 @@ function CommonFooter() {
                 target="_blank"
                 rel="noreferrer"
               >
-                クリエイティブ・コモンズ 表示-非営利 4.0 (CC BY-NC 4.0) ライセンス
+                クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際 (CC
+                BY-NC-SA 4.0) ライセンス
               </a>
               の下に提供されています。
             </p>

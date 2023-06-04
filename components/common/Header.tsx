@@ -6,7 +6,7 @@ function CommonHeader() {
 
   return (
     <header>
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-base-200">
         <div className="navbar-start">
           <a className="btn btn-ghost normal-case text-xl" href="/">
             <div className="w-16 p-2">
@@ -16,31 +16,26 @@ function CommonHeader() {
           </a>
         </div>
 
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
+        <div className="navbar-center hidden md:flex">
+          <ul className="menu menu-horizontal px-1 bg-base-200">
             <li>
               <Link href="/news">お知らせ</Link>
             </li>
             <li tabIndex={0}>
-              <a className="justify-between">
-                全文データベース
-                <svg
-                  className="fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
-                </svg>
-              </a>
-              <ul className="p-2 bg-base-200 z-10">
-                {databaseList.map((database) => (
-                  <li key={database.title}>
-                    <Link href={database.url}>{database.title}</Link>
-                  </li>
-                ))}
-              </ul>
+              <details>
+                <summary>
+                  全文データベース
+                </summary>
+                <ul className="p-2  text-base z-10">
+                  {databaseList.map((database) => (
+                    <li key={database.title}>
+                      <Link href={database.url}>{database.title}</Link>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+
+              
             </li>
             <li>
               <Link href="/gallery">画像ギャラリー</Link>
@@ -52,9 +47,13 @@ function CommonHeader() {
         </div>
 
         <div className="navbar-end">
-          <div className='px-2 hidden lg:block'>
-            <Link href='/admin' className="btn btn-secondary">管理</Link>
+          <div className="px-2 hidden lg:block">
+            <Link href="/admin" className="btn btn-secondary">
+              管理
+            </Link>
           </div>
+
+          {/* mobile menu */}
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
               <svg
