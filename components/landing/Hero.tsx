@@ -11,10 +11,9 @@ function Hero() {
     >
       <div className="hero-overlay bg-opacity-60"></div>
       <div className="hero-content text-center text-base-100">
-        <div className="max-w-md">
+        <div className="max-w-lg">
           <h1 className="mb-5 text-5xl font-bold">辞書語彙データベース</h1>
           <p className="mb-5">
-            科研費プロジェクト：
             <Link
               className="link link-hover"
               href={"https://kaken.nii.ac.jp/ja/grant/KAKENHI-PROJECT-21H00529"}
