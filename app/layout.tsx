@@ -1,4 +1,6 @@
 import './globals.css'
+import { Analytics } from '@vercel/analytics/react';
+
 import CommonHeader from '@/components/common/Header';
 import CommonFooter from '@/components/common/Footer';
 
@@ -27,6 +29,7 @@ export default function RootLayout({
         <CommonHeader />
         {children}
         <CommonFooter />
+        <Analytics />
       </body>
     </html>
   );
