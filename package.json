@@ -10,7 +10,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@iiif/presentation-3": "*",
     "@next/mdx": "^13.2.1",
+    "@vercel/analytics": "^1.0.1",
     "eslint": "8.33.0",
     "eslint-config-next": "^13.4.3",
     "next": "^13.4.3",

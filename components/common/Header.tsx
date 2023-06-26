@@ -27,7 +27,9 @@ function CommonHeader() {
                 <ul className="p-2  text-base z-10">
                   {databaseList.map((database) => (
                     <li key={database.title}>
-                      <Link href={database.url}>{database.title}</Link>
+                      <Link href={database.url} prefetch={false}>
+                        {database.title}
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -70,13 +72,13 @@ function CommonHeader() {
             <ul className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52">
               {navList.map((item) => (
                 <li key={item.title}>
-                  <Link href={item.url}>{item.title}</Link>
+                  <Link href={item.url} prefetch={false}>
+                    {item.title}
+                  </Link>
                 </li>
               ))}
             </ul>
           </details>
-
-         
         </div>
       </div>
     </header>

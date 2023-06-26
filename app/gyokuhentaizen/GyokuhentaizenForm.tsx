@@ -89,7 +89,7 @@ function GyokuhentaizenForm() {
           <span className="label-text">巻</span>
         </label>
         <select className="select select-bordered" {...register("maki")}>
-          <option disabled selected value="" hidden>
+          <option disabled value="" hidden>
             巻を選択してください
           </option>
           <option value="">（空）</option>
