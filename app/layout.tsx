@@ -4,7 +4,11 @@ import { Analytics } from '@vercel/analytics/react';
 import CommonHeader from '@/components/common/Header';
 import CommonFooter from '@/components/common/Footer';
 
+const title = "辞書語彙データベース"+(process.env.IS_DEV === "true" ? "（検証用）" :"" );
+
 export const metadata = {
+  title,
+  description: "",
   manifest: "/images/favicon/site.webmanifest",
   icons: {
     icon: "/images/favicon/favicon-32x32.png",

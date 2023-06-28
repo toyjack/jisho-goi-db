@@ -12,7 +12,7 @@ function CommonHeader() {
             <div className="w-16 p-2">
               <Image src="/images/logo.png" alt="" width="250" height="160" />
             </div>
-            辞書語彙データベース
+            辞書語彙データベース{process.env.IS_DEV === "true" ? "（検証用）" :"" }
           </a>
         </div>
 
