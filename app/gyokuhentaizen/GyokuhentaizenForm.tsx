@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { radicalList } from "@/utils/radicalList";
 import { useForm } from "react-hook-form";
 import TextInput from "@/components/common/TextInput";
+import { gyokuhentaizenMakiTyo } from "@/constants/gyokuhentaizen_maki_tyo";
 
 interface FormData {
   entry?: string;
@@ -15,12 +16,14 @@ interface FormData {
 }
 
 function GyokuhentaizenForm() {
-  const { register, handleSubmit } = useForm({
+  const { register, watch, handleSubmit } = useForm({
     defaultValues: {
       radical: "",
       maki: "",
+      tyo: "",
     },
   });
+  const watchMaki = watch("maki");
   const router = useRouter();
 
   const onSubmit = (data: FormData) => {
@@ -76,7 +79,7 @@ function GyokuhentaizenForm() {
 
       <TextInput
         labelLeftUppon="残画数"
-        labelRightBottom="アラビア数字"
+        labelRightBottom="半角アラビア数字"
         placeholder="残り画数を入力してください"
         name={"strokes"}
         register={register}
@@ -93,21 +96,32 @@ function GyokuhentaizenForm() {
             巻を選択してください
           </option>
           <option value="">（空）</option>
-          {[1].map((maki) => (
-            <option value={maki} key={maki}>
-              {maki}
+          {gyokuhentaizenMakiTyo.map((item) => (
+            <option value={item.maki} key={item.maki}>
+              {item.maki_kan}
             </option>
           ))}
         </select>
       </div>
 
-      <TextInput
-        labelLeftUppon="丁"
-        labelRightBottom="アラビア数字"
-        placeholder="丁を入力してください"
-        name={"tyo"}
-        register={register}
-      />
+      <div className="form-control w-full max-w-xs">
+        <label className="label">
+          <span className="label-text">丁</span>
+        </label>
+        <select className="select select-bordered" {...register("tyo")}>
+          <option disabled value="" hidden>
+            丁を選択してください
+          </option>
+          <option value="">（空）</option>
+          {gyokuhentaizenMakiTyo
+            .find((item) => item.maki === watchMaki)
+            ?.pages.map((item) => (
+              <option value={item} key={item}>
+                {item.replace("a","表").replace("b","裏")}
+              </option>
+            ))}
+        </select>
+      </div>
 
       <div className="pt-6 form-control w-full max-w-xs flex flex-col items-center justify-center">
         <button className="btn btn-wide btn-primary" type="submit">
