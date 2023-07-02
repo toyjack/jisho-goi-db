@@ -18,6 +18,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'dl.ndl.go.jp',
       },
+      {
+        protocol: 'https',
+        hostname: 'jisho-goi.s3.ap-northeast-1.amazonaws.com',
+      },
     ]
   },
 }

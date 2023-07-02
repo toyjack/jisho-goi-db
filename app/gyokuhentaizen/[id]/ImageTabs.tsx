@@ -28,9 +28,10 @@ function getNdlPageUrl(ghtz_id: string) {
 }
 // http://localhost:3000/images/gyokuhentaizen/vol_2/1_25a.png
 function getFujimotoImageUrl(ghtz_id: string) {
+  const s3BaseUrl = "https://jisho-goi.s3.ap-northeast-1.amazonaws.com";
   const [maki, page, line, num_in_line] = ghtz_id.split("_");
   const fujimotoMaki = String(Number(maki) + 1);
-  return `/images/gyokuhentaizen/vol_${fujimotoMaki}/${maki}_${page}.png`;
+  return `${s3BaseUrl}/gyokuhentaizen/vol_${fujimotoMaki}/${maki}_${page}.png`;
 }
 
 function GyokuhentaizenImageTabs({ ghtz_id }: { ghtz_id: string }) {
@@ -44,6 +45,10 @@ function GyokuhentaizenImageTabs({ ghtz_id }: { ghtz_id: string }) {
 
   const imageWidth = 600;
   const imageHeight = 400;
+
+  const wasedaUrl = getWasedaPageUrl(ghtz_id);
+  const ndlUrl = getNdlImageUrl(ghtz_id);
+  const fujimotoUrl = getFujimotoImageUrl(ghtz_id);
 
   const Tabs = () => {
     return (
@@ -124,8 +129,8 @@ function GyokuhentaizenImageTabs({ ghtz_id }: { ghtz_id: string }) {
     },
     {
       label: "画像ファイル",
-      text: getFujimotoImageUrl(ghtz_id),
-      url: getFujimotoImageUrl(ghtz_id),
+      text: fujimotoUrl,
+      url: fujimotoUrl,
     },
     {
       label: "巻ページ",
@@ -182,12 +187,12 @@ function GyokuhentaizenImageTabs({ ghtz_id }: { ghtz_id: string }) {
         {/* 早稲田本 */}
         <div className={`tab-panel ${activeTab === 0 ? "block" : "hidden"}`}>
           <Link
-            href={getWasedaPageUrl(ghtz_id)}
+            href={wasedaUrl}
             target="_blank"
             className="link"
           >
             <Image
-              src={getWasedaPageUrl(ghtz_id)}
+              src={wasedaUrl}
               alt="waseda"
               placeholder="blur"
               blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
@@ -214,15 +219,13 @@ function GyokuhentaizenImageTabs({ ghtz_id }: { ghtz_id: string }) {
         {/* 藤本 */}
         <div className={`tab-panel ${activeTab === 2 ? "block" : "hidden"}`}>
           <Link
-            href={getFujimotoImageUrl(ghtz_id)}
+            href={fujimotoUrl}
             target="_blank"
             className="link"
           >
             <Image
-              src={getFujimotoImageUrl(ghtz_id)}
+              src={fujimotoUrl}
               alt="fujimoto"
-              placeholder="blur"
-              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
               width={imageWidth}
               height={imageHeight}
             />

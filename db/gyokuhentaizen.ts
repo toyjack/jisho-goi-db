@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { Prisma, Gyokuhentaizen } from "@prisma/client";
 
 export interface GyokuhentaizenFindManyQuery extends Partial<Gyokuhentaizen> {
+  entry?: string | null;
   jion?: string | null;
   maki?: string | null;
   tyo?: string | null;
