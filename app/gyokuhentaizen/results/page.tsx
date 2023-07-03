@@ -25,9 +25,7 @@ async function getData(
     tyo,
   };
 
-  console.log(maki,tyo,query)
   const results = await gyokuhentaizenFindMany(query);
-  console.log(results)
 
   return results;
 }
