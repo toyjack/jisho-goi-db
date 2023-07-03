@@ -12,6 +12,7 @@
   "dependencies": {
     "@iiif/presentation-3": "*",
     "@next/mdx": "^13.4.7",
+    "@upstash/redis": "^1.22.0",
     "@vercel/analytics": "^1.0.1",
     "eslint": "8.33.0",
     "eslint-config-next": "^13.4.7",
