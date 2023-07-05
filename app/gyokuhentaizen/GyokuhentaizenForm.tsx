@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { radicalList } from "@/utils/radicalList";
+import { radicalList } from "@/constants/radicalList";
 import { useForm } from "react-hook-form";
 import TextInput from "@/components/common/TextInput";
 import { gyokuhentaizenMakiTyo } from "@/constants/gyokuhentaizen_maki_tyo";

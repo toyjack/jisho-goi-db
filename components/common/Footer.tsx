@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { databaseList, navList } from "@/utils/navList";
+import { databaseList, navList } from "@/constants/navList";
 function CommonFooter() {
   const links = [
     {

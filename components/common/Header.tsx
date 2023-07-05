@@ -1,8 +1,13 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { databaseList, navList } from '@/utils/navList';
+import { databaseList, navList } from '@/constants/navList';
+import LogoutButton from '../ui/LogoutButton';
+import { getServerSession } from 'next-auth';
+import LoginButton from '../ui/LoginButton';
+import { authOptions } from '@/lib/nextauth-options';
 
-function CommonHeader() {
+async function CommonHeader() {
+  const session = await getServerSession(authOptions);
 
   return (
     <header>
@@ -46,9 +51,13 @@ function CommonHeader() {
 
         <div className="navbar-end">
           <div className="px-2 hidden lg:block">
-            <Link href="/admin" className="btn btn-secondary">
+            {/* <Link href="/admin" className="btn btn-secondary">
               管理
-            </Link>
+            </Link> */}
+            {session ? (<>
+              <Link className="btn btn-secondary" href="/user/profile">プロファイル</Link>
+              <LogoutButton />
+            </>):(<LoginButton />)}
           </div>
 
           {/* mobile menu */}
