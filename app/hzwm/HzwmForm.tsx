@@ -41,13 +41,13 @@ function HzwmForm() {
       />
       <TextInput
         labelLeftUppon="本文"
-        labelRightBottom="漢字／原本の表記"
+        labelRightBottom="漢字"
         placeholder="本文を入力してください"
         name={"definition"}
         register={register}
       />
       <TextInput
-        labelLeftUppon="読み"
+        labelLeftUppon="和名"
         labelRightBottom="ひらがな"
         placeholder="読みを入力してください"
         name={"readings"}

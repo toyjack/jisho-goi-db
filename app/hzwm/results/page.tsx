@@ -22,7 +22,7 @@ async function  HzwmResultsPage({
                 <th></th>
                 <th>所在</th>
                 <th>掲出字</th>
-                <th>読み</th>
+                <th>和名</th>
                 <th>本文</th>
               </tr>
             </thead>

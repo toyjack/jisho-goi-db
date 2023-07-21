@@ -19,7 +19,7 @@ async function HzwmItemPage({params}:{params: {id: string}}) {
               </td>
             </tr>
             <tr>
-              <th>読み</th>
+              <th>和名</th>
               <td>{result?.readings}</td>
             </tr>
             <tr>
