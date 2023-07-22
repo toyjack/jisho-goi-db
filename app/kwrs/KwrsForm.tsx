@@ -106,7 +106,7 @@ export default function KwrsForm() {
         >
           <option value={""}>（選択なし）</option>
           {makiList.map((maki) => {
-            return <option value={maki}>{maki}</option>;
+            return <option value={maki} key={maki}>{maki}</option>;
           })}
         </select>
       </div>
@@ -125,7 +125,7 @@ export default function KwrsForm() {
         >
           <option value={""}>（選択なし）</option>
           {buList.map((item) => {
-            return <option value={item}>{item}</option>;
+            return <option value={item} key={item}>{item}</option>;
           })}
         </select>
       </div>
@@ -144,7 +144,7 @@ export default function KwrsForm() {
         >
           <option value={""}>（選択なし）</option>
           {typeList.map((item) => {
-            return <option value={item}>{item}</option>;
+            return <option value={item} key={item}>{item}</option>;
           })}
         </select>
       </div>
