@@ -10,6 +10,7 @@ interface InputProps {
   placeholder?: string;
   name: string;
   register: UseFormRegister<any>;
+  defaultValue?: string;
 }
 
 function TextInput({
@@ -20,6 +21,7 @@ function TextInput({
   placeholder,
   name,
   register,
+  defaultValue,
 }: InputProps) {
   return (
     <div className="form-control w-full max-w-xs">
@@ -32,6 +34,7 @@ function TextInput({
         placeholder={placeholder}
         className="input input-bordered w-full max-w-xs"
         {...register(name)}
+        defaultValue={defaultValue}
       />
       <label className="label">
         <span className="label-text-alt">{labelLeftBottom}</span>

@@ -1,45 +1,16 @@
+import { databaseList } from "@/constants/navList";
 import Image from "next/image";
 import Link from "next/link";
 
 function DatabasesSection() {
-  const databases = [
-    {
-      title: "色葉字類抄",
-      url: "/jiruisho",
-      description: "姓氏部・名字部",
-      image: "/images/jiruisho_logo.png",
-    },
-    {
-      title: "落葉集",
-      url: "/racvyoxv",
-      description: "本篇",
-      image: "/images/no_image.png",
-    },
-    {
-      title: "和訓栞",
-      url: "/wakunnoshiori",
-      description: "公開予定",
-      image: "/images/wakun_logo.png",
-    },
-    {
-      title: "文明本節用集",
-      url: "/bunmei",
-      description: "イ部",
-      image: "/images/bunmeibon_logo.png",
-    },
-    {
-      title: "増続大広益会玉篇大全",
-      url: "/gyokuhentaizen",
-      description: "巻一",
-      image: "/images/gyokutaizen_logo.png",
-    },
-  ];
+  
 
   return (
     <div
       id="databases"
       className="hero bg-base-100 min-h-screen mx-auto max-w-full"
     >
+      
       <div className="hero-content flex flex-col">
         <div className="flex flex-col px-4 mt-32">
           <div className="p-5 flex flex-col">
@@ -47,11 +18,11 @@ function DatabasesSection() {
             <p className="px-5 text-base">公開テキストデータベース</p>
           </div>
 
-          <div className="flex flex-row gap-3">
-            {databases.map((dataset) => {
+          <div className="flex flex-col md:flex-row md:flex-wrap gap-6 md:m-4 md:p-10">
+            {databaseList.map((dataset) => {
               return (
                 <div
-                  className="card card-compact w-full bg-base-100 shadow-xl"
+                  className="card card-compact min-w-fit bg-base-100 shadow-xl"
                   key={dataset.title}
                 >
                   <figure>
@@ -66,9 +37,9 @@ function DatabasesSection() {
                     <h2 className="card-title">{dataset.title}</h2>
                     <p>{dataset.description}</p>
                     <div className="card-actions justify-end">
-                      <a href={dataset.url} className="btn btn-primary">
+                      <Link href={dataset.url} className="btn btn-primary">
                         詳細
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>

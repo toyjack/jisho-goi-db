@@ -9,31 +9,42 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
   name      String?
   password  String
-  role      Role     @default(USER)
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
-}
-
-enum Role {
-  USER
-  ADVANCED_USER
-  ADMIN
+  role      Role      @default(USER)
 }
 
 model Hzwm {
-  id         String  @id
+  id         String    @id
   location   String?
   type       String?
   entry      String?
-  definition String?  @db.VarChar(2000)
+  definition String?   @db.VarChar(2000)
   readings   String?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime? @updatedAt
+}
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime? @updatedAt
+model Wamyouruijyusho{
+  id        Int  @id @default(autoincrement())
+  // 巻数	
+  maki      String?
+  // 部	
+  bu        String?
+  // 類・具・国郡等	
+  type      String?
+  // 謎	
+  type2    String?
+  // 丁数表裏行数	
+  page      String?
+  // 見出し語	
+  entry     String?
+  // 注文
+  definition String?  @db.VarChar(2000)
 }
 
 model Gyokuhentaizen {
@@ -212,4 +223,35 @@ model OudankanjionBook {
   references      String
   time            String
   timeDesc        String?
+}
+
+model GlyphData {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime?
+  name      String    @unique
+  related   String?
+  data      String?   @db.Text
+}
+
+model hi_gaiji_comfirm_20230707 {
+  textId       String? @db.LongText
+  ctlId        String? @db.VarChar(255)
+  mojikyo      String? @db.VarChar(255)
+  char1        String? @db.VarChar(255)
+  char1Unicode String? @db.VarChar(255)
+  char2        String? @db.VarChar(255)
+  liuComment   String? @db.VarChar(255)
+  remark       String? @db.VarChar(255)
+  loc          String? @db.VarChar(255)
+  url          String? @db.LongText
+  id           Int     @id
+
+  @@map("hi-gaiji-comfirm-20230707")
+}
+
+enum Role {
+  USER
+  ADVANCED_USER
+  ADMIN
 }

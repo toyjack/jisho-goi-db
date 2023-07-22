@@ -5,9 +5,11 @@ import { useEffect } from "react";
 function Osd({
   manifestUrl,
   page = 0,
+  className="w-full h-96",
 }: {
   manifestUrl: string[];
   page?: number;
+  className?: string;
 }) {
   const randomId = Math.random().toString(32).substring(2);
   useEffect(() => {
@@ -32,7 +34,7 @@ function Osd({
   }, [manifestUrl, page, randomId]);
   return (
     <div>
-      <div className="w-full h-96" id={randomId}>
+      <div className={className} id={randomId}>
         Osd
       </div>
     </div>

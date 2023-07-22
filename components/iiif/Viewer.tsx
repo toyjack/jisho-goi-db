@@ -7,9 +7,10 @@ import { getTiles } from "@/lib/getTiles";
 type Props = {
   manifestUrl: string;
   page?: number;
+  className?: string;
 };
 
-export default function IiifViewer({ manifestUrl, page }: Props) {
+export default function IiifViewer({ manifestUrl, page, className }: Props) {
   const [tiles, setTiles] = useState<string[]>([]);
 
   useEffect(() => {
@@ -20,8 +21,8 @@ export default function IiifViewer({ manifestUrl, page }: Props) {
   }, [manifestUrl]);
 
   return (
-    <div className="w-full">
-      <Osd manifestUrl={tiles} page={page} />
+    <div className={`w-full`}>
+      <Osd manifestUrl={tiles} page={page} className={className} />
     </div>
   );
 }
