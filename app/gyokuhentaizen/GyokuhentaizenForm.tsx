@@ -70,7 +70,8 @@ function GyokuhentaizenForm() {
           </option>
           <option value="">（空）</option>
           {radicalList.map((radical) => (
-            <option value={radical.radical} key={radical.radical}>
+            // 3画以上の部首は検索対象外
+            <option value={radical.radical} key={radical.radical} disabled={Number(radical.stroke_count)>2}>
               {radical.label}
             </option>
           ))}
