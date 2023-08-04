@@ -2,13 +2,13 @@ export const databaseList = [
   {
     title:"本草和名",
     url:"/hzwm",
-    description: "",
+    description: "限定公開中",
     image: "/images/hzwm.png",
   },
   {
     title: "古活字版和名類聚抄",
     url: "/kwrs",
-    description: "",
+    description: "全文公開",
     image: "/images/kwrs.png",
   },
   {
