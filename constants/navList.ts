@@ -3,13 +3,13 @@ export const databaseList = [
     title:"本草和名",
     url:"/hzwm",
     description: "",
-    image: "/images/no_image.png",
+    image: "/images/hzwm.png",
   },
   {
     title: "古活字版和名類聚抄",
     url: "/kwrs",
     description: "",
-    image: "/images/no_image.png",
+    image: "/images/kwrs.png",
   },
   {
     title: "色葉字類抄",
@@ -21,7 +21,7 @@ export const databaseList = [
     title: "落葉集",
     url: "/racvyoxv",
     description: "本篇",
-    image: "/images/no_image.png",
+    image: "/images/racvyoxv.png",
   },
   
   {
