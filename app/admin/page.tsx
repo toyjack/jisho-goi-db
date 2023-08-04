@@ -6,10 +6,10 @@ async function page() {
   
   return (
     <div>
-      <h1>Admin Home</h1>
-      <pre>
-        <code>{JSON.stringify(session, null, 2)}</code>
-      </pre>
+      <h1>管理システム</h1>
+      <div>
+
+      </div>
     </div>
   )
 }

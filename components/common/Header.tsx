@@ -1,10 +1,10 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { databaseList, navList } from '@/constants/navList';
-import LogoutButton from '../ui/LogoutButton';
-import { getServerSession } from 'next-auth';
-import LoginButton from '../ui/LoginButton';
-import { authOptions } from '@/lib/nextauth-options';
+import Link from "next/link";
+import Image from "next/image";
+import { databaseList, navList } from "@/constants/navList";
+import LogoutButton from "../ui/LogoutButton";
+import { getServerSession } from "next-auth";
+import LoginButton from "../ui/LoginButton";
+import { authOptions } from "@/lib/nextauth-options";
 
 async function CommonHeader() {
   const session = await getServerSession(authOptions);
@@ -17,7 +17,8 @@ async function CommonHeader() {
             <div className="w-16 p-2">
               <Image src="/images/logo.png" alt="" width="250" height="160" />
             </div>
-            辞書語彙データベース{process.env.IS_DEV === "true" ? "（検証用）" :"" }
+            辞書語彙データベース
+            {process.env.IS_DEV === "true" ? "（検証用）" : ""}
           </a>
         </div>
 
@@ -51,13 +52,21 @@ async function CommonHeader() {
 
         <div className="navbar-end">
           <div className="px-2 hidden lg:block">
-            {/* <Link href="/admin" className="btn btn-secondary">
-              管理
-            </Link> */}
-            {session ? (<>
-              <Link className="btn btn-secondary" href="/user/profile">プロファイル</Link>
-              <LogoutButton />
-            </>):(<LoginButton />)}
+            {session ? (
+              <div className="flex gap-2">
+                <Link className="btn btn-secondary" href="/user/profile">
+                  プロファイル
+                </Link>
+                {session.user.role === "ADMIN" && (
+                  <Link className="btn btn-info" href="/admin">
+                    管理
+                  </Link>
+                )}
+                <LogoutButton />
+              </div>
+            ) : (
+              <LoginButton />
+            )}
           </div>
 
           {/* mobile menu */}
@@ -94,4 +103,4 @@ async function CommonHeader() {
   );
 }
 
-export default CommonHeader
+export default CommonHeader;
