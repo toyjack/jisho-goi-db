@@ -6,16 +6,22 @@ import IiifViewer from "@/components/iiif/Viewer";
 
 function getWasedaPageUrl(ghtz_id: string) {
   const [maki, page, line, num_in_line] = ghtz_id.split("_");
+  // 25a -> 26
+  let wasedaPageNumber = Number(page.slice(0, -1)) + 1;
+  if (page.endsWith("b")) {
+    // 25b -> 27
+    wasedaPageNumber += 1;
+  }
   const wasedaMaki = String(Number(maki)).padStart(4, "0");
-  const wasedaPage = String(Number(page.slice(0, -1)) + 1).padStart(4, "0");
-  // https://archive.wul.waseda.ac.jp/kosho/bunko31/bunko31_e0853/bunko31_e0853_0001/bunko31_e0853_0001_p0026.jpg
-  // https://archive.wul.waseda.ac.jp/kosho/bunko31/bunko31_e0853/bunko31_e0853_0002/bunko31_e0853_0002_p0002.jpg
+  const wasedaPage = String(wasedaPageNumber).padStart(4, "0");
+
   return `https://archive.wul.waseda.ac.jp/kosho/bunko31/bunko31_e0853/bunko31_e0853_${wasedaMaki}/bunko31_e0853_${wasedaMaki}_p${wasedaPage}.jpg`;
 }
 
 function getNdlImageUrl(ghtz_id: string) {
   const [maki, page, line, num_in_line] = ghtz_id.split("_");
   const ndlPage = String(Number(page.slice(0, -1)) - 22).padStart(7, "0");
+  // TODO: other makis
   return `https://dl.ndl.go.jp/api/iiif/3440912/R${ndlPage}/full/full/0/default.jpg`;
 }
 
@@ -186,11 +192,7 @@ function GyokuhentaizenImageTabs({ ghtz_id }: { ghtz_id: string }) {
       <div className="h-full">
         {/* 早稲田本 */}
         <div className={`tab-panel ${activeTab === 0 ? "block" : "hidden"}`}>
-          <Link
-            href={wasedaUrl}
-            target="_blank"
-            className="link"
-          >
+          <Link href={wasedaUrl} target="_blank" className="link">
             <Image
               src={wasedaUrl}
               alt="waseda"
@@ -218,11 +220,7 @@ function GyokuhentaizenImageTabs({ ghtz_id }: { ghtz_id: string }) {
 
         {/* 藤本 */}
         <div className={`tab-panel ${activeTab === 2 ? "block" : "hidden"}`}>
-          <Link
-            href={fujimotoUrl}
-            target="_blank"
-            className="link"
-          >
+          <Link href={fujimotoUrl} target="_blank" className="link">
             <Image
               src={fujimotoUrl}
               alt="fujimoto"
