@@ -9,7 +9,15 @@ async function AdminLayout({ children }: { children: React.ReactNode }) {
   // 管理者認証
   const session = await getServerSession(authOptions);
   if (!session) redirect("/api/auth/signin");
-  if (session.user.role !== "ADMIN") return (<>管理者ではありません。</>);
+
+  if (session.user.role !== "ADMIN")
+    return (
+      <div className="container mx-auto">
+        <div className="flex w-full p-4 m-4">
+          <h1 className="text-3xl font-bold">管理者権限がありません</h1>
+        </div>
+      </div>
+    );
 
   return (
     <div className="container mx-auto">

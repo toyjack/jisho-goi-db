@@ -3,6 +3,7 @@ const nextConfig = {
   experimental: {
     appDir: true,
     mdxRs: true,
+    serverActions: true,
   },
   compiler: {
     styledComponents: true,

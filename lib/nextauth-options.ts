@@ -61,7 +61,7 @@ export const authOptions: NextAuthOptions = {
           },
         });
         // TODO: jump to create user page
-        // if (!userInDb) return false;
+        if (!userInDb) return false;
 
         return true;
       }
