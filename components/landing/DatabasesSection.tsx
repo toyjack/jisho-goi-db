@@ -55,6 +55,10 @@ function DatabasesSection() {
           >
             国立国会図書館デジタルコレクション
           </Link>
+          」、「
+          <Link href="https://gallica.bnf.fr/" target={"_blank"} className="link link-hover">
+            BNF Gallica
+          </Link>
           」から転載したものです。
         </p>
       </div>
