@@ -78,7 +78,7 @@ function CommonFooter() {
               </a>
             </p>
             <p>
-              注があるものを除いて, このサイトの内容物は
+            原則として, このサイトの内容物は
               <a
                 href="https://creativecommons.org/licenses/by-nc/4.0/deed.ja"
                 className="link link-hover"
@@ -90,7 +90,7 @@ function CommonFooter() {
               </a>
               の下に提供されています。
             </p>
-            <p>公開物のライセンスは各自のページにご参照ください。</p>
+            <p>公開物のライセンスは各ページにご参照ください。</p>
           </div>
         </div>
       </div>

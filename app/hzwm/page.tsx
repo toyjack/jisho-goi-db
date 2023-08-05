@@ -4,7 +4,7 @@ import HzwmManual from '@/markdown/HzwmManual.mdx';
 function HzwmPage() {
  return (
    <div className="px-4 pb-8">
-     <Shikouban />
+     {/* <Shikouban /> */}
 
      <article className="max-w-none prose mx-auto p-4">
        <HzwmManual />

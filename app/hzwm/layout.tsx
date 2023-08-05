@@ -13,9 +13,9 @@ function HzwmLayout({
         <h2 className="text-3xl font-bold">
           <Link href="/hzwm">本草和名データベース</Link>
 
-          <span className="badge badge-lg">試行版</span>
+          {/* <span className="badge badge-lg">試行版</span> */}
 
-          <span className="badge badge-lg badge-secondary">v2023-06</span>
+          <span className="badge badge-lg badge-secondary">v2023-08</span>
         </h2>
       </div>
       

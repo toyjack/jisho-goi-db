@@ -36,7 +36,7 @@ async function HzwmItemPage({params}:{params: {id: string}}) {
         <h2>Image View</h2>
         <p>on working</p>
         <IiifViewer
-          manifestUrl={"https://dl.ndl.go.jp/api/iiif/2555536/manifest.json"}
+          manifestUrl={"https://dl.ndl.go.jp/api/iiif/2538099/manifest.json"}
           page={Number(1)}
         />
       </div>

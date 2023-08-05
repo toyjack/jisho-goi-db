@@ -19,6 +19,8 @@ module.exports = {
           accent: "#A69472",
           neutral: "#514859",
           "base-100": "#F2F2EB",
+          // error: "#F25F5C",
+          error:"#f26d6d",
         },
       },
       "dracula",
