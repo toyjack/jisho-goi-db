@@ -40,7 +40,7 @@ function HzwmForm() {
         register={register}
       />
       <TextInput
-        labelLeftUppon="本文"
+        labelLeftUppon="注文"
         labelRightBottom="漢字"
         placeholder="本文を入力してください"
         name={"definition"}
