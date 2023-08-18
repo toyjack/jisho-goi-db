@@ -38,7 +38,7 @@ async function JiruishoResultsPage({
   const { count, data: results } = await jiruishoFindmany(query);
 
   return (
-    <div className="md:p-4">
+    <>
       <div className="divider">
         <h2>検索結果：{count}件</h2>
       </div>
@@ -99,7 +99,7 @@ async function JiruishoResultsPage({
           </tbody>
         </table>
       </div>
-    </div>
+    </>
   );
 }
 

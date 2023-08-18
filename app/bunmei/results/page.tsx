@@ -34,8 +34,6 @@ async function BunmeiResultsPage({
 }: {
   searchParams: { [key: string]: string };
 }) {
-
-
   const query: BunmeibonFindManyQuery = {
     entry: searchParams.entry,
     gokei: searchParams.gokei,
@@ -67,20 +65,21 @@ async function BunmeiResultsPage({
     return <>{value}</>;
   };
 
-
   return (
-    <div className="md:p-4">
+    <>
       <div className="divider">
         <h2>検索結果：{results.count}件</h2>
       </div>
-
+      
       <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>
             <tr>
               <th></th>
               {tableHeader.map((header) => (
-                <th key={header.label} className="w-1">{header.label}</th>
+                <th key={header.label} className="w-1">
+                  {header.label}
+                </th>
               ))}
             </tr>
           </thead>
@@ -93,7 +92,7 @@ async function BunmeiResultsPage({
                   {/* <GetLoc id={result.ghtz_id} url={result.ndl_link} /> */}
                 </th>
                 {tableHeader.map((header) => (
-                  <td key={header.label} >
+                  <td key={header.label}>
                     <CellBlock
                       label={header.label}
                       value={result[header.field]}
@@ -107,7 +106,7 @@ async function BunmeiResultsPage({
           </tbody>
         </table>
       </div>
-    </div>
+    </>
   );
 }
 

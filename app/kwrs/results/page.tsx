@@ -5,7 +5,7 @@ import Link from "next/link";
 async function KwrsResultsPage({ searchParams }: { searchParams: KwrsWhere }) {
   const findManyResult = await kwrsFindmany(searchParams);
   return (
-    <div className="md:p-4 w-full">
+    <>
       <div className="divider">
         <h2>検索結果：{findManyResult.count}件</h2>
       </div>
@@ -45,7 +45,7 @@ async function KwrsResultsPage({ searchParams }: { searchParams: KwrsWhere }) {
           </tbody>
         </table>
       </div>
-    </div>
+    </>
   );
 }
 

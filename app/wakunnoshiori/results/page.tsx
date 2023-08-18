@@ -51,7 +51,7 @@ export default async function WakunnoshioriResultsPage({
   const {data:results} = await wakunnoshioriFindMany(searchParams!);
 
   return (
-    <div className="md:p-4">
+    <>
       <div className="divider">
         <h2>検索結果：{results.length}件</h2>
       </div>
@@ -85,6 +85,6 @@ export default async function WakunnoshioriResultsPage({
           </tbody>
         </table>
       </div>
-    </div>
+    </>
   );
 }

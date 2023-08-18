@@ -52,7 +52,7 @@ async function JiruishoResultsPage({
   };
 
   return (
-    <div className="md:p-4">
+    <>
       <div className="divider">
         <h2>検索結果：{results.length}件</h2>
       </div>
@@ -88,7 +88,7 @@ async function JiruishoResultsPage({
           </tbody>
         </table>
       </div>
-    </div>
+    </>
   );
 }
 
