@@ -1,6 +1,7 @@
 import { hzwmFindMany } from "@/db/hzwm";
 import { Hzwm } from "@prisma/client";
 import Link from "next/link";
+import HzwmManual from '@/markdown/HzwmManual.mdx';
 
 async function  HzwmResultsPage({
   searchParams,
@@ -44,6 +45,13 @@ async function  HzwmResultsPage({
           </table>
         </div>
       </div>
+
+      <div className="divider">
+        <h4>本データベースについて</h4>
+      </div>
+      <article className="max-w-none prose mx-auto p-4">
+       <HzwmManual />
+     </article>
     </div>
   );
 }
