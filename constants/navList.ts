@@ -46,7 +46,7 @@ export const databaseList = [
 
 export const navList = [
   {
-    title: "お知らせ",
+    title: "過去のお知らせ",
     url: "/news",
   },
   ...databaseList,

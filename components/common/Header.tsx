@@ -25,7 +25,7 @@ async function CommonHeader() {
         <div className="navbar-center hidden md:flex">
           <ul className="menu menu-horizontal px-1 bg-base-200">
             <li>
-              <Link href="/news">お知らせ</Link>
+              <Link href="/news">過去のお知らせ</Link>
             </li>
             <li tabIndex={0}>
               <details>
