@@ -1,14 +1,24 @@
+import { nextui } from "@nextui-org/react";
+import next from "next/types";
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx}", // Note the addition of the `app` directory.
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {},
   },
-  plugins: [require("daisyui"), require('@tailwindcss/typography'),],
+  plugins: [
+    require("daisyui"),
+    require('@tailwindcss/typography'),
+    nextui(),
+  ],
+
+  darkMode: "class",
 
   daisyui: {
     themes: [
@@ -20,7 +30,7 @@ module.exports = {
           neutral: "#514859",
           "base-100": "#F2F2EB",
           // error: "#F25F5C",
-          error:"#f26d6d",
+          error: "#f26d6d",
         },
       },
       "dracula",

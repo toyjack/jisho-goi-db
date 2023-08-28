@@ -4,6 +4,7 @@ import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
 import CommonHeader from "@/components/common/Header";
 import CommonFooter from "@/components/common/Footer";
 import GoogleAnalytics from "@/components/common/GoogleAnalytics";
+import { Providers } from "./providers";
 
 const title =
   "辞書語彙データベース" + (process.env.IS_DEV === "true" ? "（検証用）" : "");
@@ -31,7 +32,7 @@ export default function RootLayout({
       </head>
       <body>
         <CommonHeader />
-        {children}
+        <Providers>{children}</Providers>
         <CommonFooter />
         <VercelAnalytics />
         <GoogleAnalytics />
