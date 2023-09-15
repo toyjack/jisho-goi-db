@@ -33,9 +33,9 @@ async function ManualItemPage({ params }: { params: { id: number } }) {
             <input
               name="name"
               type="text"
-              className="input input-bordered bg-base-300 text-base-content w-full max-w-xs"
+              className="input input-bordered bg-base-200 text-base-content w-full max-w-xs"
               defaultValue={manual.name as string}
-              readOnly
+              disabled
             />
           </div>
 
@@ -46,7 +46,7 @@ async function ManualItemPage({ params }: { params: { id: number } }) {
             <input
               name="full_name"
               type="text"
-              className="input input-bordered bg-base-300 text-base-content w-full max-w-xs"
+              className="input input-bordered bg-base-200 text-base-content w-full max-w-xs"
               defaultValue={manual.full_name as string}
             />
           </div>
@@ -54,6 +54,14 @@ async function ManualItemPage({ params }: { params: { id: number } }) {
           <div className="form-control w-full">
             <label className="label">
               <span className="label-text">マニュアル内容</span>
+              <span className="label-text">
+                <div className="form-control">
+                  <label className="label cursor-pointer">
+                    <span className="label-text">プレビュー</span>
+                    <input type="checkbox" className="toggle" disabled />
+                  </label>
+                </div>
+              </span>
             </label>
             <textarea
               className="textarea textarea-bordered resize-y h-96 bg-base-300 text-base-content w-full"
@@ -65,17 +73,17 @@ async function ManualItemPage({ params }: { params: { id: number } }) {
 
           <div className="flex space-x-4">
             <div className="flex-1">
-            <Link href={`/admin/manuals`} className="btn btn-info w-full">
-              戻る
-            </Link>
+              <Link href={`/admin/manuals`} className="btn btn-info w-full">
+                戻る
+              </Link>
             </div>
 
             <div className="flex-1">
-            <input
-              type="submit"
-              value="保存"
-              className="btn btn-primary w-full"
-            />
+              <input
+                type="submit"
+                value="保存"
+                className="btn btn-primary w-full"
+              />
             </div>
           </div>
         </form>

@@ -1,20 +1,7 @@
-import { databaseList } from "@/constants/navList.ts";
-
-export const DbList = () => {
-  const list = databaseList.map((item) => (
-    <li>
-      <a href={item.url}>{item.title}</a>
-    </li>
-  ));
-  return <ul>{list.map((item) => item)}</ul>;
-};
-
 ## 本サイトについて
 
 辞書語彙データベースの収録辞書は、次のとおりです。
 詳細は各データベースのページをご覧ください。
-
-{/* <DbList /> */}
 
 - [『本草和名』](/hzwm)（底本：寛政八年刊記本）
 - [古活字版『和名類聚抄』](/kwrs)

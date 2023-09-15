@@ -1,6 +1,11 @@
-import BunmeibonManaul from "@/markdown/BunmeibonManual.mdx";
+import ManualMarkdown from "@/components/markdown/manual-markdown";
+import { prisma } from "@/lib/prisma";
 
-function BunmeiResultLayout({children}: {children: React.ReactNode}) {
+async function BunmeiResultLayout({children}: {children: React.ReactNode}) {
+  const manual = await prisma.dBManual.findUnique({
+    where: { name: "bunmeibon" },
+  });
+
   return (
     <div className="md:p-4">
       {children}
@@ -9,9 +14,7 @@ function BunmeiResultLayout({children}: {children: React.ReactNode}) {
         <h4>本データベースについて</h4>
       </div>
 
-      <article className="max-w-none prose mx-auto p-4">
-        <BunmeibonManaul />
-      </article>
+      <ManualMarkdown markdownData={manual?.article as string} />
     </div>
   )
 }
