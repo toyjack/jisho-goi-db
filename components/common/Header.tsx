@@ -6,6 +6,7 @@ import { databaseList, navList } from "@/constants/navList";
 import LogoutButton from "../ui/LogoutButton";
 import LoginButton from "../ui/LoginButton";
 import { useSession } from "next-auth/react";
+import RegisterButton from "../ui/RegisterButton";
 
 function CommonHeader() {
   const { data: session, status } = useSession();
@@ -15,7 +16,7 @@ function CommonHeader() {
 
   const closeDbMenu = () => {
     const elem = document.activeElement as HTMLElement;
-    if(elem){
+    if (elem) {
       elem?.blur();
     }
   };
@@ -54,7 +55,8 @@ function CommonHeader() {
           </Link>
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost rounded-btn">
-              全文データベース<ArrowDownIcon />
+              全文データベース
+              <ArrowDownIcon />
             </label>
             <ul
               tabIndex={0}
@@ -93,7 +95,10 @@ function CommonHeader() {
                 <LogoutButton />
               </div>
             ) : (
-              <LoginButton />
+              <div className="flex space-x-4">
+                <LoginButton />
+                <RegisterButton />
+              </div>
             )}
           </div>
 
