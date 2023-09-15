@@ -31,8 +31,10 @@ export default function RootLayout({
         <meta charSet="utf-8" />
       </head>
       <body>
-        <CommonHeader />
-        <Providers>{children}</Providers>
+        <Providers>
+          <CommonHeader />
+          {children}
+        </Providers>
         <CommonFooter />
         <VercelAnalytics />
         <GoogleAnalytics />

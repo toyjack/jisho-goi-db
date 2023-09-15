@@ -1,39 +1,99 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { databaseList, navList } from "@/constants/navList";
 import LogoutButton from "../ui/LogoutButton";
-import { getServerSession } from "next-auth";
 import LoginButton from "../ui/LoginButton";
-import { authOptions } from "@/lib/nextauth-options";
+import { useSession } from "next-auth/react";
+import { useState } from "react";
 
-async function CommonHeader() {
-  const session = await getServerSession(authOptions);
+function CommonHeader() {
+  const { data: session, status } = useSession();
+  const headerTitle =
+    "辞書語彙データベース" +
+    (process.env.IS_DEV === "true" ? "（検証用）" : "");
 
+  const closeDbMenu = () => {
+    const elem = document.activeElement as HTMLElement;
+    if(elem){
+      elem?.blur();
+    }
+  };
+
+  const ArrowDownIcon = () => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="w-4 h-4"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+      />
+    </svg>
+  );
   return (
     <header>
       <div className="navbar bg-base-200">
         <div className="navbar-start">
-          <a className="btn btn-ghost normal-case text-xl" href="/">
+          <a className="flex btn btn-ghost normal-case text-xl" href="/">
             <div className="w-16 p-2">
               <Image src="/images/logo.png" alt="" width="250" height="160" />
             </div>
-            辞書語彙データベース
-            {process.env.IS_DEV === "true" ? "（検証用）" : ""}
+            <div>{headerTitle}</div>
           </a>
         </div>
 
         <div className="navbar-center hidden md:flex">
-          <ul className="menu menu-horizontal px-1 bg-base-200">
+          <Link href="/news" className="btn btn-ghost rounded-btn">
+            過去のお知らせ
+          </Link>
+          <div className="dropdown dropdown-end">
+            <label tabIndex={0} className="btn btn-ghost rounded-btn">
+              全文データベース<ArrowDownIcon />
+            </label>
+            <ul
+              tabIndex={0}
+              className="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52 mt-4"
+            >
+              {databaseList.map((database) => (
+                <li key={database.title}>
+                  <Link
+                    href={database.url}
+                    prefetch={false}
+                    onClick={closeDbMenu}
+                  >
+                    {database.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <Link href="/gallery" className="btn btn-ghost rounded-btn">
+            画像ギャラリー
+          </Link>
+
+          {/* <ul className="menu menu-horizontal px-1 bg-base-200">
             <li>
               <Link href="/news">過去のお知らせ</Link>
             </li>
-            <li tabIndex={0}>
-              <details>
+            <li></li>
+            <li>
+              <details open={isDbMenuOpen}>
                 <summary>全文データベース</summary>
                 <ul className="p-2  text-base z-10">
                   {databaseList.map((database) => (
                     <li key={database.title}>
-                      <Link href={database.url} prefetch={false}>
+                      <Link
+                        href={database.url}
+                        prefetch={false}
+                        onClick={closeDbMenu}
+                      >
                         {database.title}
                       </Link>
                     </li>
@@ -44,10 +104,7 @@ async function CommonHeader() {
             <li>
               <Link href="/gallery">画像ギャラリー</Link>
             </li>
-            {/* <li>
-              <Link href="/about">本サイトについて</Link>
-            </li> */}
-          </ul>
+          </ul> */}
         </div>
 
         <div className="navbar-end">
