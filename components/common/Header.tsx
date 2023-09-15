@@ -6,7 +6,6 @@ import { databaseList, navList } from "@/constants/navList";
 import LogoutButton from "../ui/LogoutButton";
 import LoginButton from "../ui/LoginButton";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
 
 function CommonHeader() {
   const { data: session, status } = useSession();
@@ -77,34 +76,6 @@ function CommonHeader() {
           <Link href="/gallery" className="btn btn-ghost rounded-btn">
             画像ギャラリー
           </Link>
-
-          {/* <ul className="menu menu-horizontal px-1 bg-base-200">
-            <li>
-              <Link href="/news">過去のお知らせ</Link>
-            </li>
-            <li></li>
-            <li>
-              <details open={isDbMenuOpen}>
-                <summary>全文データベース</summary>
-                <ul className="p-2  text-base z-10">
-                  {databaseList.map((database) => (
-                    <li key={database.title}>
-                      <Link
-                        href={database.url}
-                        prefetch={false}
-                        onClick={closeDbMenu}
-                      >
-                        {database.title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </details>
-            </li>
-            <li>
-              <Link href="/gallery">画像ギャラリー</Link>
-            </li>
-          </ul> */}
         </div>
 
         <div className="navbar-end">
