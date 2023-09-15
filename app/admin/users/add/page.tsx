@@ -2,7 +2,6 @@ import { userCreate } from "@/db/users";
 import { Role } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import React from "react";
 
 async function UserAddPage() {
   const roleList = Role;
@@ -12,7 +11,6 @@ async function UserAddPage() {
     const email = data.get("email") as string;
     const password = data.get("password") as string;
     const newUser = await userCreate({ name, email, password });
-    console.log(newUser);
     revalidatePath("/admin/users");
     redirect("/admin/users");
   }

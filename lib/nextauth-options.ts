@@ -32,6 +32,7 @@ export const authOptions: NextAuthOptions = {
           credentials.password,
           user.password
         );
+        console.log(passwordCompare);
         if (!passwordCompare) return null;
 
         return {

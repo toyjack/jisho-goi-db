@@ -39,3 +39,18 @@ export async function userCreate(data: Partial<User>) {
   });
   return result;
 }
+
+export async function userUpdate(userId:string, data: Partial<User>) {
+  const user = await userFindOne(userId);
+  if(!user) throw new Error('User not found');
+  if(data.password) {
+    data.password = await hash(data.password as string, 10);
+  }
+  const updatedUser = await prisma.user.update({
+    where: { id: userId },
+    data: {
+      ...data,
+    },
+  });
+  return updatedUser;
+}
