@@ -9,7 +9,7 @@ datasource db {
 }
 
 model User {
-  id        String       @id @default(cuid())
+  id        String    @id @default(cuid())
   email     String    @unique
   name      String?
   password  String
@@ -21,13 +21,14 @@ model User {
 }
 
 model Account {
-  id String @id @default(cuid())
+  id     String @id @default(cuid())
   userId String
 
-  provider String
+  provider          String
   providerAccountId String
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@unique([provider, providerAccountId])
   @@index([userId])
 }
@@ -43,22 +44,22 @@ model Hzwm {
   updatedAt  DateTime? @updatedAt
 }
 
-model Wamyouruijyusho{
-  id        Int  @id @default(autoincrement())
+model Wamyouruijyusho {
+  id         Int     @id @default(autoincrement())
   // 巻数	
-  maki      String?
+  maki       String?
   // 部	
-  bu        String?
+  bu         String?
   // 類・具・国郡等	
-  type      String?
+  type       String?
   // 謎	
-  type2    String?
+  type2      String?
   // 丁数表裏行数	
-  page      String?
+  page       String?
   // 見出し語	
-  entry     String?
+  entry      String?
   // 注文
-  definition String?  @db.VarChar(2000)
+  definition String? @db.VarChar(2000)
 }
 
 model Gyokuhentaizen {
@@ -268,4 +269,13 @@ enum Role {
   USER
   ADVANCED_USER
   ADMIN
+}
+
+model DBManual {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+  name      String    @unique
+  full_name String?
+  article   String?   @db.LongText
 }
