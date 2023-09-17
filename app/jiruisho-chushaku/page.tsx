@@ -1,8 +1,17 @@
+import { prisma } from '@/lib/prisma'
 import React from 'react'
+import ResultTable from './ResultTable'
 
-function JiruishoChushakuHome() {
+async function JiruishoChushakuHome() {
+  const allData = await prisma.jiruishoChushaku.findMany()
+  console.log(allData)
   return (
-    <div>JiruishoChushakuHome</div>
+    <div>
+      <h2>JiruishoChushakuHome</h2>
+      <div>
+        <ResultTable data={allData} />
+      </div>
+    </div>
   )
 }
 
