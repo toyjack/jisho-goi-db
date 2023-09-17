@@ -3,12 +3,45 @@
 import Link from "next/link";
 import Image from "next/image";
 import { databaseList, navList } from "@/constants/navList";
+import { navMenu } from "@/constants/nav-menu";
 import LogoutButton from "../ui/LogoutButton";
 import LoginButton from "../ui/LoginButton";
 import { useSession } from "next-auth/react";
 import RegisterButton from "../ui/RegisterButton";
 
-function CommonHeader() {
+function NavMenu() {
+  return (
+    <div className="navbar-center hidden md:flex">
+      <ul className="menu menu-horizontal px-1 bg-base-200">
+        <li>
+          <Link href="/news">過去のお知らせ</Link>
+        </li>
+        <li tabIndex={0}>
+          <details>
+            <summary>全文データベース</summary>
+            <ul className="p-2  text-base z-10">
+              {databaseList.map((database) => (
+                <li key={database.title}>
+                  <Link href={database.url} prefetch={false}>
+                    {database.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </details>
+        </li>
+        <li>
+          <Link href="/gallery">画像ギャラリー</Link>
+        </li>
+        {/* <li>
+              <Link href="/about">本サイトについて</Link>
+            </li> */}
+      </ul>
+    </div>
+  );
+}
+
+async function CommonHeader() {
   const { data: session, status } = useSession();
   const headerTitle =
     "辞書語彙データベース" +
@@ -49,36 +82,7 @@ function CommonHeader() {
           </a>
         </div>
 
-        <div className="navbar-center hidden md:flex">
-          <Link href="/news" className="btn btn-ghost rounded-btn">
-            過去のお知らせ
-          </Link>
-          <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost rounded-btn">
-              全文データベース
-              <ArrowDownIcon />
-            </label>
-            <ul
-              tabIndex={0}
-              className="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52 mt-4"
-            >
-              {databaseList.map((database) => (
-                <li key={database.title}>
-                  <Link
-                    href={database.url}
-                    prefetch={false}
-                    onClick={closeDbMenu}
-                  >
-                    {database.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <Link href="/gallery" className="btn btn-ghost rounded-btn">
-            画像ギャラリー
-          </Link>
-        </div>
+        <NavMenu />
 
         <div className="navbar-end">
           <div className="px-2 hidden lg:block">
@@ -101,7 +105,6 @@ function CommonHeader() {
               </div>
             )}
           </div>
-
           {/* mobile menu */}
           <details className="dropdown dropdown-end z-10">
             <summary className="m-1 btn md:hidden">
@@ -130,6 +133,7 @@ function CommonHeader() {
               ))}
             </ul>
           </details>
+          N
         </div>
       </div>
     </header>
