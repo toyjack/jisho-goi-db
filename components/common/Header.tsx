@@ -10,51 +10,44 @@ import { useSession } from "next-auth/react";
 import RegisterButton from "../ui/RegisterButton";
 
 function NavMenu() {
-  return (
-    <div className="navbar-center hidden md:flex">
-      <ul className="menu menu-horizontal px-1 bg-base-200">
-        <li>
-          <Link href="/news">過去のお知らせ</Link>
-        </li>
-        <li tabIndex={0}>
-          <details>
-            <summary>全文データベース</summary>
-            <ul className="p-2  text-base z-10">
-              {databaseList.map((database) => (
-                <li key={database.title}>
-                  <Link href={database.url} prefetch={false}>
-                    {database.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </details>
-        </li>
-        <li>
-          <Link href="/gallery">画像ギャラリー</Link>
-        </li>
-        {/* <li>
-              <Link href="/about">本サイトについて</Link>
-            </li> */}
-      </ul>
-    </div>
-  );
-}
-
-async function CommonHeader() {
-  const { data: session, status } = useSession();
-  const headerTitle =
-    "辞書語彙データベース" +
-    (process.env.IS_DEV === "true" ? "（検証用）" : "");
-
   const closeDbMenu = () => {
     const elem = document.activeElement as HTMLElement;
     if (elem) {
       elem?.blur();
     }
   };
+  return (
+    <>
+      <Link href="/news" className="btn btn-ghost rounded-btn">
+        過去のお知らせ
+      </Link>
+      <div className="dropdown dropdown-end">
+        <label tabIndex={0} className="btn btn-ghost rounded-btn">
+          全文データベース
+          <ArrowDownIcon />
+        </label>
+        <ul
+          tabIndex={0}
+          className="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52 mt-4"
+        >
+          {databaseList.map((database) => (
+            <li key={database.title}>
+              <Link href={database.url} prefetch={false} onClick={closeDbMenu}>
+                {database.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <Link href="/gallery" className="btn btn-ghost rounded-btn">
+        画像ギャラリー
+      </Link>
+    </>
+  );
+}
 
-  const ArrowDownIcon = () => (
+function ArrowDownIcon() {
+  return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
@@ -70,6 +63,14 @@ async function CommonHeader() {
       />
     </svg>
   );
+}
+
+function CommonHeader() {
+  const { data: session, status } = useSession();
+  const headerTitle =
+    "辞書語彙データベース" +
+    (process.env.IS_DEV === "true" ? "（検証用）" : "");
+
   return (
     <header>
       <div className="navbar bg-base-200">
@@ -82,7 +83,9 @@ async function CommonHeader() {
           </a>
         </div>
 
-        <NavMenu />
+        <div className="navbar-center hidden md:flex">
+          <NavMenu />
+        </div>
 
         <div className="navbar-end">
           <div className="px-2 hidden lg:block">
@@ -133,7 +136,6 @@ async function CommonHeader() {
               ))}
             </ul>
           </details>
-          N
         </div>
       </div>
     </header>
