@@ -2,25 +2,23 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { databaseList, navList } from "@/constants/navList";
-import { navMenu } from "@/constants/nav-menu";
+import { NavLink, navMenu } from "@/constants/nav-menu";
+import { Database } from "@/constants/db-menu";
+import RegisterButton from "../ui/RegisterButton";
 import LogoutButton from "../ui/LogoutButton";
 import LoginButton from "../ui/LoginButton";
 import { useSession } from "next-auth/react";
-import RegisterButton from "../ui/RegisterButton";
 
-function NavMenu() {
+function NavMenuItem({ item }: { item: NavLink | Database[] }) {
   const closeDbMenu = () => {
     const elem = document.activeElement as HTMLElement;
     if (elem) {
       elem?.blur();
     }
   };
-  return (
-    <>
-      <Link href="/news" className="btn btn-ghost rounded-btn">
-        過去のお知らせ
-      </Link>
+
+  if (Array.isArray(item)) {
+    return (
       <div className="dropdown dropdown-end">
         <label tabIndex={0} className="btn btn-ghost rounded-btn">
           全文データベース
@@ -30,7 +28,7 @@ function NavMenu() {
           tabIndex={0}
           className="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52 mt-4"
         >
-          {databaseList.map((database) => (
+          {item.map((database) => (
             <li key={database.title}>
               <Link href={database.url} prefetch={false} onClick={closeDbMenu}>
                 {database.title}
@@ -39,10 +37,17 @@ function NavMenu() {
           ))}
         </ul>
       </div>
-      <Link href="/gallery" className="btn btn-ghost rounded-btn">
-        画像ギャラリー
-      </Link>
-    </>
+    );
+  }
+
+  return (
+    <Link
+      href={item.url as string}
+      prefetch={false}
+      className="btn btn-ghost rounded-btn"
+    >
+      {item.title}
+    </Link>
   );
 }
 
@@ -65,6 +70,38 @@ function ArrowDownIcon() {
   );
 }
 
+function MobileMenu() {
+  return (
+    <details className="dropdown dropdown-end z-10">
+      <summary className="m-1 btn md:hidden">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M4 6h16M4 12h8m-8 6h16"
+          ></path>
+        </svg>
+      </summary>
+      <ul className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52">
+        {navMenu.flat().map((item) => (
+          <li key={item.title}>
+            <Link href={item.url} prefetch={false}>
+              {item.title}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </details>
+  );
+}
+
 function CommonHeader() {
   const { data: session, status } = useSession();
   const headerTitle =
@@ -84,7 +121,9 @@ function CommonHeader() {
         </div>
 
         <div className="navbar-center hidden md:flex">
-          <NavMenu />
+          {navMenu.map((item, index) => (
+            <NavMenuItem item={item} key={index} />
+          ))}
         </div>
 
         <div className="navbar-end">
@@ -109,33 +148,7 @@ function CommonHeader() {
             )}
           </div>
           {/* mobile menu */}
-          <details className="dropdown dropdown-end z-10">
-            <summary className="m-1 btn md:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                ></path>
-              </svg>
-            </summary>
-            <ul className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52">
-              {navList.map((item) => (
-                <li key={item.title}>
-                  <Link href={item.url} prefetch={false}>
-                    {item.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </details>
+          <MobileMenu />
         </div>
       </div>
     </header>

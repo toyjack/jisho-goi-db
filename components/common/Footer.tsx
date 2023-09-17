@@ -1,17 +1,10 @@
 import Image from "next/image";
-import { databaseList, navList } from "@/constants/navList";
+import { dbMenu } from "@/constants/db-menu";
 function CommonFooter() {
   const links = [
     {
       title: "テキストデータベース",
-      items: [
-        ...databaseList.map(db=>{
-          return {
-            title: db.title,
-            href: db.url,
-          }
-        })
-      ],
+      items: dbMenu,
     },
     {
       title: "画像ギャラリー",
@@ -22,7 +15,7 @@ function CommonFooter() {
       items:[
         {
           title:"管理システム",
-          href:"/admin"
+          url:"/admin"
         }
       ],
     },
@@ -53,9 +46,9 @@ function CommonFooter() {
               <div className="footer-title mb-2">{title}</div>
               {items && Array.isArray(items) && items.length > 0 && (
                 <ul className="text-sm">
-                  {items.map(({ title, href }) => (
+                  {items.map(({ title, url }) => (
                     <li className="mb-2" key={title}>
-                      <a className="link link-hover" href={href}>
+                      <a className="link link-hover" href={url}>
                         {title}
                       </a>
                     </li>

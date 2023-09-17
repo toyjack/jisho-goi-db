@@ -94,6 +94,16 @@ model Jiruisho {
   definition            String?
 }
 
+model JiruishoChushaku {
+  id Int @id @default(autoincrement())
+  maki String?
+  hen String?
+  bu String?
+  word_in_maeda String
+  word_in_kurokawa String
+  annotation String @db.LongText
+}
+
 model BunmeiSetsuyoshu {
   id                Int     @id @default(autoincrement())
   bunmei_id         String  @unique

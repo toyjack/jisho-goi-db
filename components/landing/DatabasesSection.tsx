@@ -1,4 +1,4 @@
-import { databaseList } from "@/constants/navList";
+import { dbMenu } from "@/constants/db-menu";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -16,7 +16,7 @@ function DatabasesSection() {
           </div>
 
           <div className="flex flex-col md:flex-row md:flex-wrap gap-6 md:m-4 md:p-10">
-            {databaseList.map((dataset) => {
+            {dbMenu.map((dataset) => {
               return (
                 <div
                   className="card card-compact w-64 h-96 bg-base-100 shadow-xl"
