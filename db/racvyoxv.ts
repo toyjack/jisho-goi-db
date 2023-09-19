@@ -3,7 +3,7 @@ import { Prisma } from "@prisma/client";
 
 export interface RacvyoxvFindManyQuery {
   entry?: string | null;
-  kanji_pair_length?: Number;
+  kanji_pair_length?: string;
   bu?: string | null;
   furigana?: string | null;
 }
@@ -23,19 +23,19 @@ export async function racvyoxvFindMany(query: RacvyoxvFindManyQuery){
         OR: [
           {
             kanji_pair: {
-              contains: query.entry,
+              contains: query.entry as string,
             },
           },
           {
             entry: {
-              contains: query.entry,
+              contains: query.entry as string,
             },
           },
           
         ],
       },
       {
-        kanji_pair_length: query.kanji_pair_length,
+        kanji_pair_length: query.kanji_pair_length as string,
       },
       {
         initial_on: query.bu,
@@ -44,22 +44,22 @@ export async function racvyoxvFindMany(query: RacvyoxvFindManyQuery){
         OR:[
           {
             ruby_left_first: {
-              contains: query.furigana,
+              contains: query.furigana as string,
             },
           },
           {
             ruby_left_remains: {
-              contains: query.furigana,
+              contains: query.furigana as string,
             },
           },
           {
             ruby_right_first: {
-              contains: query.furigana,
+              contains: query.furigana as string,
             },
           },
           {
             ruby_right_remains: {
-              contains: query.furigana,
+              contains: query.furigana as string,
             },
           },
         ]

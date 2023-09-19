@@ -35,10 +35,10 @@ async function JiruishoResultsPage({
 }: {
   searchParams?: { [key: string]: string };
 }) {
-  const entry = searchParams?.entry as string;
-  const kanji_pair_length = searchParams?.kanjiPairLength as number;
-  const bu = searchParams?.bu as string;
-  const furigana = searchParams?.furigana as string;
+  const entry = searchParams?.entry;
+  const kanji_pair_length = searchParams?.kanjiPairLength;
+  const bu = searchParams?.bu;
+  const furigana = searchParams?.furigana;
 
   const { data: results } = await racvyoxvFindMany({
     entry,
