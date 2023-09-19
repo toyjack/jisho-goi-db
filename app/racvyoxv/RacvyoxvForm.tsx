@@ -9,7 +9,7 @@ interface FormData {
 }
 
 function RacvyoxvForm() {
-  const {register, handleSubmit} = useForm();
+  const { register, handleSubmit } = useForm();
   const router = useRouter();
 
   const onSubmit = (data: FormData) => {
@@ -18,14 +18,14 @@ function RacvyoxvForm() {
     );
     const query = new URLSearchParams(notEmptyQuery);
     router.push(`/racvyoxv/results?${query}`);
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <TextInput
         labelLeftUppon="見出し語"
         labelRightBottom="ひらがなまたは漢字"
-        name={"term"}
+        name={"entry"}
         register={register}
       />
 
@@ -33,6 +33,20 @@ function RacvyoxvForm() {
         labelLeftUppon="熟語字数"
         labelRightBottom="アラビア数字"
         name={"kanjiPairLength"}
+        register={register}
+      />
+
+      <TextInput
+        labelLeftUppon="部"
+        labelRightBottom="ひらがな"
+        name={"bu"}
+        register={register}
+      />
+
+      <TextInput
+        labelLeftUppon="振り仮名"
+        labelRightBottom="ひらがな"
+        name={"furigana"}
         register={register}
       />
 

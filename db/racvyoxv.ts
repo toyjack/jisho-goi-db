@@ -2,8 +2,10 @@ import { prisma } from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
 
 export interface RacvyoxvFindManyQuery {
-  term?: string | null;
-  kanji_pair_length: string | null;
+  entry?: string | null;
+  kanji_pair_length?: Number;
+  bu?: string | null;
+  furigana?: string | null;
 }
 
 export async function racvyoxvFindOne(id: string) {
@@ -14,45 +16,54 @@ export async function racvyoxvFindOne(id: string) {
 }
 
 export async function racvyoxvFindMany(query: RacvyoxvFindManyQuery){
+  console.log(query);
   const where: Prisma.RacvyoxvWhereInput = {
     AND: [
       {
         OR: [
           {
             kanji_pair: {
-              contains: query.term || undefined,
+              contains: query.entry,
             },
           },
           {
             entry: {
-              contains: query.term || undefined,
+              contains: query.entry,
             },
           },
+          
+        ],
+      },
+      {
+        kanji_pair_length: query.kanji_pair_length,
+      },
+      {
+        initial_on: query.bu,
+      },
+      {
+        OR:[
           {
             ruby_left_first: {
-              contains: query.term || undefined,
+              contains: query.furigana,
             },
           },
           {
             ruby_left_remains: {
-              contains: query.term || undefined,
+              contains: query.furigana,
             },
           },
           {
             ruby_right_first: {
-              contains: query.term || undefined,
+              contains: query.furigana,
             },
           },
           {
             ruby_right_remains: {
-              contains: query.term || undefined,
+              contains: query.furigana,
             },
           },
-        ],
-      },
-      {
-        kanji_pair_length: query.kanji_pair_length || undefined,
-      },
+        ]
+      }
     ],
   };
   const resutls = await prisma.$transaction([
