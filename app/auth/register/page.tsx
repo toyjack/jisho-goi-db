@@ -1,5 +1,4 @@
 import { userCreate } from "@/db/users";
-import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 
 function RegisterPage() {
