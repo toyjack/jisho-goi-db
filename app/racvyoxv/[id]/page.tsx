@@ -1,6 +1,7 @@
 import IiifViewer from "@/components/iiif/Viewer";
 import BackButton from "@/components/ui/BackButton";
 import { racvyoxvFindOne } from "@/db/racvyoxv";
+import Link from "next/link";
 
 const tableHeader = [
   { label: "ID", field: "id" },
@@ -65,17 +66,80 @@ async function RacvyoxvItemPage({ params }: { params: { id: string } }) {
               <th>辞書内ID（仮）</th>
               <td>{result.id}</td>
             </tr>
-            {tableHeader.map((header, index) => (
-              <tr key={index}>
-                <th>{header.label}</th>
-                <td>
-                  {
-                    // @ts-ignore
-                    result[header.field]
-                  }
-                </td>
-              </tr>
-            ))}
+            <tr>
+              <th>代表字頭記号</th>
+              <td>{result.group_entry}</td>
+            </tr>
+            <tr>
+              <th>部</th>
+              <td>{result.initial_on}</td>
+            </tr>
+            <tr>
+              <th>代表字</th>
+              <td>{result.entry}</td>
+            </tr>
+            <tr>
+              <th>熟語</th>
+              <td>{result.kanji_pair}</td>
+            </tr>
+            <tr>
+              <th>訓（左傍）</th>
+              <td>{result.ruby_left_first}</td>
+            </tr>
+            <tr>
+              <th>訓（左傍）</th>
+              <td>{result.ruby_left_remains}</td>
+            </tr>
+            <tr>
+              <th>音（右傍）</th>
+              <td>{result.ruby_right_first}</td>
+            </tr>
+            <tr>
+              <th>音（右傍）</th>
+              <td>{result.ruby_right_remains}</td>
+            </tr>
+            <tr>
+              <th>所在（笠間頁）</th>
+              <td>{result.page}</td>
+            </tr>
+            <tr>
+              <th>頁内行数</th>
+              <td>{result.line}</td>
+            </tr>
+            <tr>
+              <th>Gallica URL</th>
+              <td>
+                <Link
+                  href={result.gallica as string}
+                  target="_blank"
+                  className="link link-hover"
+                >
+                  {result.gallica}
+                </Link>
+              </td>
+            </tr>
+
+            <tr>
+              <th>日国</th>
+              <td>{result.nikkoku1_entry}</td>
+            </tr>
+            <tr>
+              <th>日国URL</th>
+              <td>
+                <Link
+                  href={result.nikkoku1_url as string}
+                  target="_blank"
+                  className="link link-hover"
+                >
+                  {result.nikkoku1_url}
+                </Link>
+              </td>
+            </tr>
+
+            <tr>
+              <th>備考</th>
+              <td>{result.remark}</td>
+            </tr>
           </tbody>
         </table>
       </div>

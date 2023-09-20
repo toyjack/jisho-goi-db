@@ -7,7 +7,7 @@ function BackButton() {
 
   return (
     <button
-      className="btn"
+      className="btn btn-secondary"
       onClick={() => {
         router.back();
       }}
