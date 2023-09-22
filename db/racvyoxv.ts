@@ -1,11 +1,12 @@
 import { prisma } from "@/lib/prisma";
-import { Prisma } from "@prisma/client";
+import { Prisma, Racvyoxv } from "@prisma/client";
 
 export interface RacvyoxvFindManyQuery {
   entry?: string | null;
   kanji_pair_length?: string;
   bu?: string | null;
-  furigana?: string | null;
+  onyomi?: string | null;
+  kunyomi?: string | null;
 }
 
 export async function racvyoxvFindOne(id: string) {
@@ -44,22 +45,26 @@ export async function racvyoxvFindMany(query: RacvyoxvFindManyQuery){
         OR:[
           {
             ruby_left_first: {
-              contains: query.furigana as string,
+              contains: query.kunyomi as string,
             },
           },
           {
             ruby_left_remains: {
-              contains: query.furigana as string,
+              contains: query.kunyomi as string,
             },
           },
+        ]
+      },
+      {
+        OR:[
           {
             ruby_right_first: {
-              contains: query.furigana as string,
+              contains: query.onyomi as string,
             },
           },
           {
             ruby_right_remains: {
-              contains: query.furigana as string,
+              contains: query.onyomi as string,
             },
           },
         ]
@@ -73,8 +78,8 @@ export async function racvyoxvFindMany(query: RacvyoxvFindManyQuery){
 
   const response = {
     query,
-    count: resutls[0],
-    data: resutls[1],
+    count: resutls[0] as number,
+    data: resutls[1] as Racvyoxv[],
   };
 
   return response;

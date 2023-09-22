@@ -24,7 +24,7 @@ function RacvyoxvForm() {
     <form onSubmit={handleSubmit(onSubmit)}>
       <TextInput
         labelLeftUppon="見出し語"
-        labelRightBottom="漢字のみ"
+        labelRightBottom="漢字"
         name={"entry"}
         register={register}
       />
@@ -44,9 +44,16 @@ function RacvyoxvForm() {
       />
 
       <TextInput
-        labelLeftUppon="読み"
+        labelLeftUppon="読み（音読み）"
         labelRightBottom="ひらがな（原本表記）"
-        name={"furigana"}
+        name={"onyomi"}
+        register={register}
+      />
+
+      <TextInput
+        labelLeftUppon="読み（訓読み）"
+        labelRightBottom="ひらがな（原本表記）"
+        name={"kunyomi"}
         register={register}
       />
 

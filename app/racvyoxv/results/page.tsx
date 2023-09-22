@@ -38,13 +38,15 @@ async function JiruishoResultsPage({
   const entry = searchParams?.entry;
   const kanji_pair_length = searchParams?.kanjiPairLength;
   const bu = searchParams?.bu;
-  const furigana = searchParams?.furigana;
+  const onyomi = searchParams?.onyomi;
+  const kunyomi = searchParams?.kunyomi;
 
   const { data: results } = await racvyoxvFindMany({
     entry,
     kanji_pair_length,
     bu,
-    furigana,
+    onyomi,
+    kunyomi
   });
 
   const CellBlock = ({
