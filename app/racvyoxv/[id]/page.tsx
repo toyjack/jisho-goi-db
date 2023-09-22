@@ -83,19 +83,19 @@ async function RacvyoxvItemPage({ params }: { params: { id: string } }) {
               <td>{result.kanji_pair}</td>
             </tr>
             <tr>
-              <th>訓（左傍）</th>
+              <th>左ルビ(1字め)</th>
               <td>{result.ruby_left_first}</td>
             </tr>
             <tr>
-              <th>訓（左傍）</th>
+              <th>左ルビ(2字め/3字め…)</th>
               <td>{result.ruby_left_remains}</td>
             </tr>
             <tr>
-              <th>音（右傍）</th>
+              <th>右ルビ(1字め)</th>
               <td>{result.ruby_right_first}</td>
             </tr>
             <tr>
-              <th>音（右傍）</th>
+              <th>右ルビ(2字め/3字め…)</th>
               <td>{result.ruby_right_remains}</td>
             </tr>
             <tr>
