@@ -11,12 +11,12 @@ function CommonFooter() {
       items: [],
     },
     {
-      title:"管理用",
-      items:[
+      title: "管理用",
+      items: [
         {
-          title:"管理システム",
-          url:"/admin"
-        }
+          title: "管理システム",
+          url: "/admin",
+        },
       ],
     },
   ];
@@ -71,7 +71,7 @@ function CommonFooter() {
               </a>
             </p>
             <p>
-            原則として, このサイトの内容物は
+              原則として, このサイトの内容物は
               <a
                 href="https://creativecommons.org/licenses/by-nc/4.0/deed.ja"
                 className="link link-hover"

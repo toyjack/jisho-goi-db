@@ -1,3 +1,10 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "next/core-web-vitals",
+    "prettier",
+    "plugin:import/recommended"
+  ],
+  "rules": {
+    "no-unused-vars": "warn"
+  }
 }
