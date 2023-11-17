@@ -47,6 +47,7 @@ function BunmeiForm() {
       leftWakun: leftWakun || "",
       shouten: shouten || "",
       definition: def || "",
+      no_kundoku: false,
     },
   });
 
@@ -88,14 +89,21 @@ function BunmeiForm() {
         register={register}
       />
 
-      <div className="divider"></div>
-
       <TextInput
         labelLeftUppon="注文"
         labelRightBottom="カタカナまたは漢字"
         name={"definition"}
         register={register}
       />
+
+      <div className="divider"></div>
+
+      <div className="form-control">
+        <label className="cursor-pointer label">
+          <span className="label-text">検索対象から漢文訓読項目を除外</span>
+          <input type="checkbox" className="toggle toggle-primary" {...register("no_kundoku")} />
+        </label>
+      </div>
 
       <div className="pt-6 form-control w-full max-w-xs flex flex-col items-center justify-center">
         <button type="submit" className="btn btn-wide btn-primary">

@@ -40,6 +40,7 @@ async function BunmeiResultsPage({
     shouten: searchParams.shouten,
     left_kun: searchParams.left_kun,
     definition: searchParams.definition,
+    no_kundoku: searchParams.no_kundoku==="true" ? true : false,
   };
   const results = await bunmeibonFindMany(query);
 
