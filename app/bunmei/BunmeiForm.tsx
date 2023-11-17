@@ -78,7 +78,7 @@ function BunmeiForm() {
       <TextInput
         labelLeftUppon="音訓（左傍）"
         labelRightBottom="カタカナ（原表記）"
-        name="leftWakun"
+        name="left_kun"
         register={register}
       />
 
