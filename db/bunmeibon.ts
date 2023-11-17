@@ -21,21 +21,23 @@ export async function bunmeibonFindUnique(bunmeiId: string) {
 
 export async function bunmeibonFindMany(query: BunmeibonFindManyQuery) {
   const where: Prisma.BunmeiSetsuyoshuWhereInput = {
-    entry: {
-      contains: query.entry || undefined,
-    },
-    gokei: {
-      contains: query.gokei || undefined,
-    },
-    shouten: {
-      contains: query.shouten || undefined,
-    },
-    left_kun: {
-      contains: query.left_kun || undefined,
-    },
-    defination: {
-      contains: query.definition || undefined,
-    },
+    AND:[
+      {entry: {
+        contains: query.entry || undefined,
+      }},
+      {gokei: {
+        contains: query.gokei || undefined,
+      }},
+      {shoten: {
+        contains: query.shouten || undefined,
+      }},
+      {left_kun: {
+        contains: query.left_kun || undefined,
+      }},
+      {definition: {
+        contains: query.definition || undefined,
+      }},
+    ]
   };
 
   const resutls = await prisma.$transaction([

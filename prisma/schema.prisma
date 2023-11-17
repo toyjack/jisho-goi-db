@@ -95,35 +95,60 @@ model Jiruisho {
 }
 
 model JiruishoChushaku {
-  id Int @id @default(autoincrement())
-  maki String?
-  hen String?
-  bu String?
-  word_in_maeda String
+  id               Int     @id @default(autoincrement())
+  maki             String?
+  hen              String?
+  bu               String?
+  word_in_maeda    String
   word_in_kurokawa String
-  annotation String @db.LongText
+  annotation       String  @db.LongText
 }
+
+// model BunmeiSetsuyoshu {
+//   id                Int     @id @default(autoincrement())
+//   bunmei_id         String  @unique
+//   gotou             String?
+//   entry             String?
+//   entry_original    String?
+//   gokei             String?
+//   gokei_original    String?
+//   shouten_original  String?
+//   left_kun_original String?
+//   defination        String?
+//   item_type         String?
+//   bu                String?
+//   mon               String?
+//   page              String?
+//   line              String?
+//   ndl_link          String?
+//   remark            String?
+//   shouten           String?
+//   left_kun          String?
+// }
 
 model BunmeiSetsuyoshu {
   id                Int     @id @default(autoincrement())
   bunmei_id         String  @unique
   gotou             String?
-  entry             String?
-  entry_original    String?
-  gokei             String?
-  gokei_original    String?
-  shouten_original  String?
+  entry             String? @db.VarChar(1000)
+  entry_original    String? @db.VarChar(1000)
+  gokei             String? @db.VarChar(500)
+  gokei_original    String? @db.VarChar(500)
+  shoten            String?
+  shoten_original   String?
+  left_kun          String?
   left_kun_original String?
-  defination        String?
+  definition        String? @db.LongText()
   item_type         String?
   bu                String?
   mon               String?
   page              String?
   line              String?
+  no_inline         String?
+  ndl_comma         String?
   ndl_link          String?
+  revision          String?
   remark            String?
-  shouten           String?
-  left_kun          String?
 }
 
 model Racvyoxv {

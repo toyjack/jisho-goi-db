@@ -8,7 +8,7 @@ interface FormData {
   gokei?: string;
   leftWakun?: string;
   shouten?: string;
-  def?: string;
+  definition?: string;
 }
 
 const mon = [
@@ -36,7 +36,7 @@ function BunmeiForm() {
   const gokei = searchParams.get("gokei");
   const leftWakun = searchParams.get("leftWakun");
   const shouten = searchParams.get("shouten");
-  const def = searchParams.get("def");
+  const def = searchParams.get("definition");
 
   const router = useRouter();
 
@@ -46,7 +46,7 @@ function BunmeiForm() {
       gokei: gokei || "",
       leftWakun: leftWakun || "",
       shouten: shouten || "",
-      def: def || "",
+      definition: def || "",
     },
   });
 
@@ -93,7 +93,7 @@ function BunmeiForm() {
       <TextInput
         labelLeftUppon="注文"
         labelRightBottom="カタカナまたは漢字"
-        name={"def"}
+        name={"definition"}
         register={register}
       />
 
