@@ -3,6 +3,10 @@ import React from 'react'
 function NewsSection() {
   const news = [
     {
+      title:"文明本節用集データベース文明本節用集のロ〜ト部を検索システム上で追加公開しました",
+      date:"2023/11/17"
+    },
+    {
       title: "落葉集本篇を検索システム上で全文公開しました",
       date: "2023/05/18",
     },

@@ -45,7 +45,7 @@ export const dbMenu:Database[] = [
   {
     title: "文明本節用集",
     url: "/bunmei",
-    description: "イ部",
+    description: "イロハニホヘト部",
     image: "/images/bunmeibon_logo.png",
     accessRole: "PUBLIC",
   },
