@@ -1,12 +1,9 @@
-import ManualMarkdown from "@/components/markdown/manual-markdown";
-import { prisma } from "@/lib/prisma";
+import ManualMarkdown from "@/markdown/BunmeibonManual.mdx";
 async function BunmeiPage() {
-  const manual = await prisma.dBManual.findUnique({
-    where: { name: "bunmeibon" },
-  });
+
   return (
-    <div className="px-4 pb-8">
-      <ManualMarkdown markdownData={manual?.article as string} />
+    <div className="prose max-w-none px-4 pb-8">
+      <ManualMarkdown />
     </div>
   );
 }
