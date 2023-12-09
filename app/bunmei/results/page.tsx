@@ -9,9 +9,9 @@ const tableHeader = [
   { label: "見出し語原表記", field: "entry_original", type: "text" },
   // { label: "語形", field: "gokei", type: "text" },
   { label: "語形原表記", field: "gokei_original", type: "text" },
-  { label: "声点", field: "shouten_original", type: "text" },
+  { label: "声点", field: "shoten_original", type: "text" },
   { label: "左傍訓", field: "left_kun_original", type: "text" },
-  { label: "注", field: "defination", type: "text" },
+  { label: "注", field: "definition", type: "text" },
   { label: "項目種別", field: "item_type", type: "text" },
   { label: "部", field: "bu", type: "text" },
   { label: "門", field: "mon", type: "text" },
@@ -43,6 +43,7 @@ async function BunmeiResultsPage({
     no_kundoku: searchParams.no_kundoku==="true" ? true : false,
   };
   const results = await bunmeibonFindMany(query);
+  console.log(results)
 
   const CellBlock = ({
     label,

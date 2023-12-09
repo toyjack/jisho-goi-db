@@ -61,15 +61,13 @@ export async function bunmeibonFindMany(query: BunmeibonFindManyQuery) {
       },
     ],
   };
+  const count =await prisma.bunmeiSetsuyoshu.count({ where })
+  const data= await prisma.bunmeiSetsuyoshu.findMany({ where })
 
-  const resutls = await prisma.$transaction([
-    prisma.bunmeiSetsuyoshu.count({ where }),
-    prisma.bunmeiSetsuyoshu.findMany({ where }),
-  ]);
+
 
   return {
-    query: {},
-    count: resutls[0],
-    data: resutls[1],
+    count,
+    data
   };
 }
