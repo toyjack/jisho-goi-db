@@ -21,9 +21,9 @@ export default function KwrsForm() {
   const [typeList, setTypeList] = useState<string[]>([]);
 
   // TODO: ここで初期値を設定する
-  const [maki, setMaki] = useState(searchParams.get("maki") || "");
-  const [bu, setBu] = useState(searchParams.get("bu") || "");
-  const [type, setType] = useState(searchParams.get("type") || "");
+  const [maki, setMaki] = useState(searchParams?.get("maki") || "");
+  const [bu, setBu] = useState(searchParams?.get("bu") || "");
+  const [type, setType] = useState(searchParams?.get("type") || "");
  
 
   const onSubmit = (data: FormData) => {
@@ -81,7 +81,7 @@ export default function KwrsForm() {
         labelRightBottom="漢字"
         name={"entry"}
         register={register}
-        defaultValue={searchParams.get("entry") || ""}
+        defaultValue={searchParams?.get("entry") || ""}
       />
 
       <TextInput
@@ -89,7 +89,7 @@ export default function KwrsForm() {
         labelRightBottom="漢字"
         name={"definition"}
         register={register}
-        defaultValue={searchParams.get("definition") || ""}
+        defaultValue={searchParams?.get("definition") || ""}
       />
 
       <div className="form-control w-full max-w-xs">

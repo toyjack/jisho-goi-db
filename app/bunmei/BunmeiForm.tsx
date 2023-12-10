@@ -32,22 +32,31 @@ const mon = [
 
 function BunmeiForm() {
   const searchParams = useSearchParams();
-  const entry = searchParams.get("entry");
-  const gokei = searchParams.get("gokei");
-  const leftWakun = searchParams.get("leftWakun");
-  const shouten = searchParams.get("shouten");
-  const def = searchParams.get("definition");
+  const entry = searchParams?.get("entry");
+  const gokei = searchParams?.get("gokei");
+  const leftWakun = searchParams?.get("leftWakun");
+  const shouten = searchParams?.get("shouten");
+  const def = searchParams?.get("definition");
 
   const router = useRouter();
 
-  const { register, handleSubmit } = useForm({
+  type FormData = {
+    entry: string;
+    gokei: string;
+    leftWakun: string;
+    shouten: string;
+    definition: string;
+    no_kundoku: string;
+  };
+
+  const { register, handleSubmit } = useForm<FormData>({
     defaultValues: {
-      entry: entry || "",
+      entry: entry|| "",
       gokei: gokei || "",
       leftWakun: leftWakun || "",
       shouten: shouten || "",
       definition: def || "",
-      no_kundoku: false,
+      no_kundoku: "false",
     },
   });
 
@@ -101,7 +110,11 @@ function BunmeiForm() {
       <div className="form-control">
         <label className="cursor-pointer label">
           <span className="label-text">検索対象から漢文訓読項目を除外</span>
-          <input type="checkbox" className="toggle toggle-primary" {...register("no_kundoku")} />
+          <input
+            type="checkbox"
+            className="toggle toggle-primary"
+            {...register("no_kundoku")}
+          />
         </label>
       </div>
 
