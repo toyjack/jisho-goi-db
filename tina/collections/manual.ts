@@ -1,9 +1,4 @@
-import { manualLicense } from "../../components/tina/license";
-import { manualArticle } from "../../components/tina/article";
-import { manualDivider } from "../../components/tina/divider";
-import { pageTitle } from "../../components/tina/title";
 import type { Collection } from "tinacms";
-import { manualAlert } from "../../components/tina/alert";
 
 const Manual: Collection = {
   label: "データベース説明書ページ",
