@@ -9,7 +9,7 @@ const Manual: Collection = {
   label: "データベース説明書ページ",
   name: "manual",
   path: "contents/",
-  format:"md",
+  format:"mdx",
   ui:{
     router:({document})=>{
       if(document._sys.filename==="hzwm"){
@@ -29,16 +29,54 @@ const Manual: Collection = {
       required: true,
     },
     {
-      type:"object",
-      list:true,
-      name:"blocks",
-      label:"Sections",
+      type:"rich-text",
+      name:"body",
+      label:"Body",
+      isBody:true,
       templates:[
-        pageTitle,
-        manualDivider,
-        manualArticle,
-        manualLicense,
-        manualAlert,
+        {
+          name:"ManualDivider",
+          label:"区切り（水平線）",
+          fields:[
+            {
+              type:"string",
+              name:"dividerText",
+              label:"Divider's Text"
+            }
+          ]
+        },
+        {
+          name:"CcLicense",
+          label:"CCライセンス",
+          fields:[
+            {
+              type:"string",
+              name:"title",
+              label:"license name"
+            }
+          ]
+        },
+        {
+          name: "ManualAlert",
+          label: "警告",
+          fields: [
+            {
+              type: "string",
+              name: "content",
+              label: "内容",
+            },
+          ],
+        },
+        {
+          name: "ManualSiteStory",
+          label: "本サイトについて",
+          fields: [
+            {
+              type: "string",
+              name: "title",
+            },
+          ],
+        },
       ]
     }
   ]
