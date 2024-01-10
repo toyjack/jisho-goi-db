@@ -1,5 +1,5 @@
 ---
-title: 本サイトについて
+title: site story
 ---
 
 ## 本サイトについて
