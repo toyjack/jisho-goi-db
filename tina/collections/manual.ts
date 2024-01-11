@@ -7,11 +7,15 @@ const Manual: Collection = {
   format: "mdx",
   ui: {
     router: ({ document }) => {
-      if (document._sys.filename === "hzwm") {
-        return `/hzwm`
+      switch (document._sys.filename) {
+        case "hzwm":
+          return `/hzwm`
+        case "kwrs":
+          return `/kwrs`
+        default:
+          return undefined;
       }
 
-      return undefined;
     },
     allowedActions: {
       create: true,
@@ -20,11 +24,11 @@ const Manual: Collection = {
   },
   fields: [
     {
-      type:"string",
-      name:"title",
-      label:"タイトル",
-      isTitle:true,
-      required:true,
+      type: "string",
+      name: "title",
+      label: "タイトル",
+      isTitle: true,
+      required: true,
     },
     {
       type: "object",
@@ -33,6 +37,17 @@ const Manual: Collection = {
       list: true,
       templates: [
         {
+          name: "ManualAlert",
+          label: "警告",
+          fields: [
+            {
+              type: "string",
+              name: "content",
+              label: "内容",
+            },
+          ],
+        },
+        {
           name: "SiteDescriptionBlock",
           label: "本サイトについて(「記事」の中の内容によって)",
           fields: [
@@ -40,6 +55,40 @@ const Manual: Collection = {
               type: "string",
               name: "title",
               label: "タイトル",
+            }
+          ]
+        },
+        {
+          name: "Members",
+          label: "メンバー",
+          fields: [
+            {
+              type: "object",
+              name: "members",
+              label: "メンバー",
+              list: true,
+              fields: [
+                {
+                  type: "string",
+                  name: "name",
+                  label: "名前",
+                },
+                {
+                  type: "string",
+                  name: "nameInEnglish",
+                  label: "名前(ローマ字)",
+                },
+                {
+                  type: "string",
+                  name: "imageUrl",
+                  label: "画像URL",
+                },
+                {
+                  type: "string",
+                  name: "linkUrl",
+                  label: "リンクURL",
+                },
+              ]
             }
           ]
         },
@@ -67,7 +116,7 @@ const Manual: Collection = {
             {
               type: "rich-text",
               name: "body",
-              label: "Body",
+              label: "内容",
               templates: [
                 {
                   name: "ManualDivider",
