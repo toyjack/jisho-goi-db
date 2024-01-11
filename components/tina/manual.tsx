@@ -1,15 +1,13 @@
 "use client";
 
-import client from "@/tina/__generated__/client";
 import {
-  ArticleQuery,
   ManualQuery,
   ManualQueryVariables,
 } from "@/tina/__generated__/types";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { tinaField, useTina } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
+import SiteStory from "./site-story";
 
 export default function TinaManualComponent(props: {
   data: ManualQuery;
@@ -19,18 +17,6 @@ export default function TinaManualComponent(props: {
   const { data } = useTina({
     ...props,
   });
-
-  const [siteStory, setSiteStory] = useState<ArticleQuery>();
-
-  useEffect(() => {
-    const fetchContent = async () => {
-      const response = await client.queries.article({
-        relativePath: "site-story.md",
-      });
-      setSiteStory(response.data);
-    };
-    fetchContent();
-  }, []);
 
   return (
     <div>
@@ -73,9 +59,7 @@ export default function TinaManualComponent(props: {
 
           case "ManualBlocksSiteDescriptionBlock":
             return (
-              <div key={index} className="prose max-w-none">
-                <TinaMarkdown content={siteStory?.article.body} />
-              </div>
+              <SiteStory key={index} />
             );
 
           case "ManualBlocksDivider":

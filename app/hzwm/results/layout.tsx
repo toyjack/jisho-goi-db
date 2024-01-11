@@ -5,9 +5,6 @@ async function layout({ children }: { children: React.ReactNode }) {
   let result = await client.queries.manual({
     relativePath: "hzwm.mdx",
   });
-  let siteStory = await client.queries.manual({
-    relativePath: "site-story.mdx",
-  });
 
   if (result.errors) {
     return (
@@ -19,7 +16,7 @@ async function layout({ children }: { children: React.ReactNode }) {
     );
   }
   result = JSON.parse(JSON.stringify(result));
-  siteStory = JSON.parse(JSON.stringify(siteStory));
+
   return (
     <div className="md:p-4">
       {children}
@@ -27,7 +24,7 @@ async function layout({ children }: { children: React.ReactNode }) {
       <div className="divider">
         <h4>本データベースについて</h4>
       </div>
-      <TinaManualComponent {...result} siteStory={{ ...siteStory }} />
+      <TinaManualComponent {...result} />
     </div>
   );
 }

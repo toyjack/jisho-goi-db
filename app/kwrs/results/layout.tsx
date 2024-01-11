@@ -1,6 +1,11 @@
-import KwrsManual from '@/markdown/KwrsManual.mdx'
+import TinaManualComponent from "@/components/tina/manual";
+import client from "@/tina/__generated__/client";
 
-function layout({ children }: { children: React.ReactNode }) {
+async function layout({ children }: { children: React.ReactNode }) {
+  const result = await client.queries.manual({
+    relativePath: "hzwm.mdx",
+  });
+  
   return (
     <div className="md:p-4">
       {children}
@@ -8,9 +13,9 @@ function layout({ children }: { children: React.ReactNode }) {
       <div className="divider">
         <h4>本データベースについて</h4>
       </div>
-      <article className="max-w-none prose mx-auto p-4">
-        <KwrsManual />
-      </article>
+      <div className="px-4 pb-8">
+        <TinaManualComponent {...result} />
+      </div>
     </div>
   );
 }
