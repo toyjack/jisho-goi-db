@@ -51,6 +51,6 @@ module.exports = {
       "dracula",
     ],
     logs: false,
-    darkTheme: "dracula",
+    // darkTheme: "dracula",
   },
 }
