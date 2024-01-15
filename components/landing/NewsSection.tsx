@@ -27,13 +27,13 @@ function NewsSection() {
             <div className="flex-1 w-full flex-col text-left">
               <ul>
                 {news.map((item) => (
-                  <>
-                    <li key={item.title}>
+                  <div key={item.title}>
+                    <li>
                       <h5 className="text-3xl">{item.title}</h5>
                       <h6 className="text-xl">{item.date}</h6>
                     </li>
                     <div className=" divider"></div>
-                  </>
+                  </div>
                 ))}
                 <li>
                   <a href="/news" className="link link-hover">
