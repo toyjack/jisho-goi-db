@@ -1,13 +1,12 @@
-import Shikouban from "@/components/ui/Shikouban";
-import Manual from "@/markdown/WakunnosioriManual.mdx";
-export default function WakunnosioriPage() {
-   return (
-     <div className="px-4 pb-8">
-       <Shikouban />
-
-       <article className="max-w-none prose mx-auto p-4">
-         <Manual />
-       </article>
-     </div>
-   );
+import TinaManualComponent from "@/components/tina/manual";
+import client from "@/tina/__generated__/client";
+export default async function WakunnosioriPage() {
+  const result = await client.queries.manual({
+    relativePath: "wakunnoshiori.mdx",
+  });
+  return (
+    <div className="px-4 pb-8">
+      <TinaManualComponent {...result} />
+    </div>
+  );
 }

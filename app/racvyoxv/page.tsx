@@ -1,13 +1,14 @@
-import Shikouban from "@/components/ui/Shikouban";
-import RacvyoxvManual from "@/markdown/RacvyoxvManual.mdx"
+import TinaManualComponent from "@/components/tina/manual";
+import client from "@/tina/__generated__/client";
 
-function RacvyoxvPage() {
+async function RacvyoxvPage() {
+  const result = await client.queries.manual({
+    relativePath: "racvyoxv.mdx",
+  });
+
   return (
     <div className="px-4 pb-8">
-
-      <article className="max-w-none prose mx-auto p-4">
-        <RacvyoxvManual />
-      </article>
+      <TinaManualComponent {...result} />
     </div>
   );
 }

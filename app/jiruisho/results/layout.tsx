@@ -1,6 +1,11 @@
-import JiruishoManual from "@/markdown/JiruishoManual.mdx";
+import TinaManualComponent from "@/components/tina/manual";
+import client from "@/tina/__generated__/client";
 
-function layout({ children }: { children: React.ReactNode }) {
+async function layout({ children }: { children: React.ReactNode }) {
+  const result = await client.queries.manual({
+    relativePath: "jiruisho.mdx",
+  });
+  
   return (
     <div className="md:p-4">
       {children}
@@ -9,7 +14,7 @@ function layout({ children }: { children: React.ReactNode }) {
         <h4>本データベースについて</h4>
       </div>
       <article className="max-w-none prose mx-auto p-4">
-        <JiruishoManual />
+        <TinaManualComponent {...result} />
       </article>
     </div>
   );

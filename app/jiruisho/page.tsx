@@ -1,14 +1,14 @@
-import Shikouban from "@/components/ui/Shikouban";
-import JiruishoManual from "@/markdown/JiruishoManual.mdx";
+import TinaManualComponent from "@/components/tina/manual";
+import client from "@/tina/__generated__/client";
 
-function JiruishoPage() {
+async function JiruishoPage() {
+  const result = await client.queries.manual({
+    relativePath: "jiruisho.mdx",
+  });
+
   return (
     <div className="px-4 pb-8">
-      <Shikouban />
-
-      <article className="max-w-none prose mx-auto p-4">
-        <JiruishoManual />
-      </article>
+      <TinaManualComponent {...result} />
     </div>
   );
 }

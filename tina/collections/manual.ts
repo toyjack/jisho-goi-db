@@ -7,15 +7,20 @@ const Manual: Collection = {
   format: "mdx",
   ui: {
     router: ({ document }) => {
-      switch (document._sys.filename) {
-        case "hzwm":
-          return `/hzwm`
-        case "kwrs":
-          return `/kwrs`
-        default:
-          return undefined;
+      const list = [
+        'hzwm',
+        'kwrs',
+        'jiruisho',
+        'racvyoxv',
+        'bunmei',
+        'gyokuhentaizen',
+        'wakunnoshiori',
+      ]
+      if (list.includes(document._sys.filename)) {
+        return `/${document._sys.filename}`
+      } else {
+        return undefined;
       }
-
     },
     allowedActions: {
       create: true,

@@ -1,14 +1,13 @@
-import GyokuhentaizenManual from "@/markdown/GyokuhentaizenManual.mdx";
-import Shikouban from "@/components/ui/Shikouban";
+import client from "@/tina/__generated__/client";
+import TinaManualComponent from "@/components/tina/manual";
 
-function GyokuhentaizenPage() {
+async function GyokuhentaizenPage() {
+  const result = await client.queries.manual({
+    relativePath: "gyokuhentaizen.mdx",
+  });
   return (
     <div className="px-4 pb-8">
-      <Shikouban />
-
-      <article className="max-w-none prose mx-auto p-4">
-        <GyokuhentaizenManual />
-      </article>
+      <TinaManualComponent {...result} />
     </div>
   );
 }

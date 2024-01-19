@@ -1,10 +1,16 @@
-import GyokuhentaizenManual from "@/markdown/GyokuhentaizenManual.mdx";
+import TinaManualComponent from "@/components/tina/manual";
+import client from "@/tina/__generated__/client";
 
-function GyokuhentaizenResultLayout({
+async function GyokuhentaizenResultLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+
+  const result = await client.queries.manual({
+    relativePath: "gyokuhentaizen.mdx",
+  });
+
   return (
     <div className="md:p-4">
       {children}
@@ -13,9 +19,7 @@ function GyokuhentaizenResultLayout({
         <h4>本データベースについて</h4>
       </div>
 
-      <article className="max-w-none prose mx-auto p-4">
-        <GyokuhentaizenManual />
-      </article>
+      <TinaManualComponent {...result} />
     </div>
   );
 }
