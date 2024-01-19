@@ -1,9 +1,9 @@
-import ManualMarkdown from "@/components/markdown/manual-markdown";
-import { prisma } from "@/lib/prisma";
+import TinaManualComponent from "@/components/tina/manual";
+import client from "@/tina/__generated__/client";
 
-async function BunmeiResultLayout({children}: {children: React.ReactNode}) {
-  const manual = await prisma.dBManual.findUnique({
-    where: { name: "bunmeibon" },
+async function BunmeiResultLayout({ children }: { children: React.ReactNode }) {
+  const result = await client.queries.manual({
+    relativePath: "bunmei.mdx",
   });
 
   return (
@@ -14,9 +14,9 @@ async function BunmeiResultLayout({children}: {children: React.ReactNode}) {
         <h4>本データベースについて</h4>
       </div>
 
-      <ManualMarkdown markdownData={manual?.article as string} />
+      <TinaManualComponent {...result} />
     </div>
-  )
+  );
 }
 
-export default BunmeiResultLayout
+export default BunmeiResultLayout;

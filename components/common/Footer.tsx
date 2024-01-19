@@ -17,6 +17,10 @@ function CommonFooter() {
           title: "管理システム",
           url: "/admin",
         },
+        {
+          title: "ページ内容編集",
+          url: "/tina-admin/index.html",
+        },
       ],
     },
   ];
