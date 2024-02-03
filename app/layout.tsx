@@ -1,9 +1,9 @@
 import "./globals.css";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 import CommonHeader from "@/components/common/Header";
 import CommonFooter from "@/components/common/Footer";
-import GoogleAnalytics from "@/components/common/GoogleAnalytics";
 import { Providers } from "./providers";
 
 const title =
@@ -27,9 +27,9 @@ export default function RootLayout({
   return (
     <html lang="ja" data-theme="myTheme">
       <head>
+        <GoogleAnalytics gaId="G-43JXZ3BZT8" />
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta charSet="utf-8" />
-        <GoogleAnalytics />
       </head>
       <body>
         <Providers>
