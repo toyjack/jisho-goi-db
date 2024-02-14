@@ -2,18 +2,20 @@ import Link from "next/link";
 import NewsListPanel from "./NewsListPanel";
 import { client } from "@/tina/__generated__/client";
 
-
 async function NewsLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const newsResponse = await client.queries.newsConnection()
-  console.log(newsResponse.data.newsConnection)
+  // BUG 数指定しないとデータ取得できない
+  const newsResponse = await client.queries.newsConnection({
+    first:999
+  })
   const allNews = newsResponse.data.newsConnection.edges?.map(news => {
     return {
       title: news?.node?.title,
       date: news?.node?.date,
+      url: news?.node?._sys.filename,
     }
   })
 
@@ -39,9 +41,9 @@ async function NewsLayout({
 
         <div className="drawer-side min-h-screen">
           <label htmlFor="drawer" className="drawer-overlay"></label>
-          <div className="menu p-4 w-80 bg-base-200 text-base-content z-10">
+          <ul className="menu p-4 bg-base-200 text-base-content z-10">
             <NewsListPanel allNews={allNews} />
-          </div>
+          </ul>
         </div>
       </div>
     </div>
