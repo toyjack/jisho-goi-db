@@ -103,10 +103,8 @@ function MobileMenu() {
 }
 
 function CommonHeader() {
-  const { data: session, status } = useSession();
-  const headerTitle =
-    "辞書語彙データベース" +
-    (process.env.IS_DEV === "true" ? "（検証用）" : "");
+  const { data: session } = useSession();
+  const headerTitle = "辞書語彙データベース"
 
   return (
     <header>

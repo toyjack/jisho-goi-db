@@ -1,6 +1,7 @@
 import { defineConfig } from "tinacms";
 import Manual from "./collections/manual";
 import ArticleCollection from "./collections/article";
+import NewsCollection from "./collections/news";
 
 // Your hosting provider likely exposes this as an environment variable
 const branch =
@@ -32,6 +33,7 @@ export default defineConfig({
     collections: [
       Manual,
       ArticleCollection,
+      NewsCollection,
     ],
   },
 });

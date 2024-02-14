@@ -1,7 +1,11 @@
 
-function NewsListPanel() {
+function NewsListPanel({allNews}:{allNews?:any[]}) {
 
-  return <div>開発中</div>;
+  return <div>
+    <pre>
+      {JSON.stringify(allNews, null, 2)}
+    </pre>
+  </div>;
 }
 
 export default NewsListPanel;

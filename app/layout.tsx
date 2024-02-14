@@ -6,8 +6,7 @@ import CommonHeader from "@/components/common/Header";
 import CommonFooter from "@/components/common/Footer";
 import { Providers } from "./providers";
 
-const title =
-  "辞書語彙データベース" + (process.env.IS_DEV === "true" ? "（検証用）" : "");
+const title = "辞書語彙データベース";
 
 export const metadata = {
   title,
@@ -19,12 +18,12 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return (
+    return (
     <html lang="ja" data-theme="myTheme">
       <head>
         <GoogleAnalytics gaId="G-43JXZ3BZT8" />
