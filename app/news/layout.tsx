@@ -31,7 +31,7 @@ async function NewsLayout({
         htmlFor="drawer"
         className="px-2 h-auto w-full btn btn-primary drawer-button lg:hidden"
       >
-        検索パネルを開く
+        お知らせリストを開く
       </label>
 
       <div className="drawer lg:drawer-open h-max">

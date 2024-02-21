@@ -1,4 +1,5 @@
 import ShukaiSection from "@/components/landing/Shukai";
+import Shukai2024Section from "@/components/landing/Shukai-2024";
 import client from "@/tina/__generated__/client";
 
 async function NewsPage() {
@@ -23,6 +24,8 @@ async function NewsPage() {
       {/* <pre>
         {JSON.stringify(lastNews, null, 2)}
       </pre> */}
+      <Shukai2024Section />
+      <div className="divider"></div>
       <ShukaiSection />
     </>
   );
