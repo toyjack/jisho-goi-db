@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import shukaiPoster from "/public/images/forum2024-1.png";
+import shukaiPoster from "/public/images/forum2024-1.jpg";
 
 function Shukai2024Section() {
   return (
