@@ -20,7 +20,7 @@ function Shukai2024Section() {
           </h1>
           <p className="py-6">
             開催日: <span className="text-red-600 font-bold">2024年3月10日（日）13:00～16:30 （北京時間CST）</span> <br />
-            開催地: 【オンライン】Zoom　【現地】清華大学文南楼116　（参加無料）） <br />
+            開催地: 【オンライン】Zoom　【現地】清華大学文南楼116　（参加無料） <br />
             お問い合わせ: liuguanwei2013[atmark]gmail.com
           </p>
           <Link
