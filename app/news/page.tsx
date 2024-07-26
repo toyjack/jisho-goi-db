@@ -1,5 +1,6 @@
 import ShukaiSection from "@/components/landing/Shukai";
 import Shukai2024Section from "@/components/landing/Shukai-2024";
+import Shukai202409 from "@/components/landing/Shukai-202409";
 // import client from "@/tina/__generated__/client";
 
 async function NewsPage() {
@@ -21,6 +22,8 @@ async function NewsPage() {
   // TODO on working
   return (
     <>
+      <Shukai202409 />
+      <div className="divider"></div>
       <Shukai2024Section />
       <div className="divider"></div>
       <ShukaiSection />
