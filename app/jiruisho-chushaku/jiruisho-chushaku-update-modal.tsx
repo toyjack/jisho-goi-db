@@ -3,6 +3,7 @@
 import TextInput from "@/components/common/TextInput";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { createItem } from "./actions";
 
 type Props = {
   maki?: string;
@@ -19,8 +20,9 @@ function JiruishoChushakuUpdateItemModal({
   annotation,
 }: Props) {
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data:any) => {
+  const onSubmit = async (data:any) => {
     console.log(data);
+    await createItem(data);
   };
   return (
     <div className="modal-box">
@@ -33,6 +35,19 @@ function JiruishoChushakuUpdateItemModal({
             name="word_in_maeda"
             register={register}
           />
+          <TextInput
+            labelLeftUppon="見出し語（黒川）"
+            defaultValue={word_in_kurokawa as string}
+            name="word_in_kurokawa"
+            register={register}
+          />
+          <TextInput
+            labelLeftUppon="注釈"
+            defaultValue={annotation as string}
+            name="annotation"
+            register={register}
+          />
+          <input type="submit" value="新規作成" className="btn btn-primary" />
         </form>
       </p>
       <div className="modal-action">
