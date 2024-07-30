@@ -17,3 +17,18 @@ export async function updateItem(id:number, data:Partial<JiruishoChushaku>){
   });
   return item;
 }
+
+export async function deleteItem(id:number){
+  const item = await prisma.jiruishoChushaku.delete({
+    where: { id }
+  });
+  return item;
+}
+
+export async function getItem(id: number){
+  const item = await prisma.jiruishoChushaku.findUnique({
+    where: { id }
+  });
+  return item;
+}
+

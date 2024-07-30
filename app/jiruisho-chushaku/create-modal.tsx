@@ -14,7 +14,7 @@ type Props = {
   annotation?: string;
 };
 
-function JiruishoChushakuUpdateItemModal({
+function CreateItemModal({
   word_in_maeda,
   word_in_kurokawa,
   annotation,
@@ -60,4 +60,4 @@ function JiruishoChushakuUpdateItemModal({
   );
 }
 
-export default JiruishoChushakuUpdateItemModal;
+export default CreateItemModal;
