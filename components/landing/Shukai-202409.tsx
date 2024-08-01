@@ -24,7 +24,7 @@ export default function Shukai202409() {
         <Link href={image.src} target="_blank">
           <Image
             src={image}
-            className="max-w-sm rounded-lg shadow-2xl"
+            className="max-w-xs rounded-lg shadow-2xl"
             alt="poster"
           />
         </Link>
