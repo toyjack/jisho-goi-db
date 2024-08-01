@@ -4,31 +4,37 @@ import React from "react";
 
 import shukaiPoster from "/public/images/202409a.jpg";
 import shukaiPoster2 from "/public/images/202409b.jpg";
-import posterJp01 from "/public/images/202409-jp01.jpg"
-import posterJp02 from "/public/images/202409-jp02.jpg"
-import posterJp03 from "/public/images/202409-jp03.jpg"
-import posterEnd from "/public/images/202409-end.jpg"
+import posterJp01 from "/public/images/202409-jp01.jpg";
+import posterJp02 from "/public/images/202409-jp02.jpg";
+import posterJp03 from "/public/images/202409-jp03.jpg";
+import posterEnd from "/public/images/202409-end.jpg";
 
 export default function Shukai202409() {
-  const posters = [shukaiPoster, shukaiPoster2
-    , posterJp01, posterJp02, posterJp03, posterEnd
-  ]
-  const posterItem= (image:StaticImageData) => {
+  const posters = [
+    shukaiPoster,
+    shukaiPoster2,
+    posterJp01,
+    posterJp02,
+    posterJp03,
+    posterEnd,
+  ];
+  const posterItem = (image: StaticImageData) => {
     return (
-      <div className="carousel-item">
-            <Link href={image.src} target="_blank">
-              <Image
-                src={image}
-                className="max-w-sm rounded-lg shadow-2xl"
-                alt="poster"
-              />
-            </Link>
-          </div>)
-  }
+      <div className="carousel-item" key={image.src}>
+        <Link href={image.src} target="_blank">
+          <Image
+            src={image}
+            className="max-w-sm rounded-lg shadow-2xl"
+            alt="poster"
+          />
+        </Link>
+      </div>
+    );
+  };
   return (
     <div className="hero min-h-screen bg-base-100">
       <div className="hero-content flex-col lg:flex-row-reverse">
-        <div className="carousel carousel-center bg-neutral rounded-box max-w-md space-x-4 p-4">
+        <div className="carousel carousel-center bg-neutral rounded-box max-w-sm space-x-4 p-4">
           {posters.map(posterItem)}
         </div>
         <div>
@@ -38,7 +44,7 @@ export default function Shukai202409() {
           </h1>
           <p className="py-6">
             開催日:{" "}
-            <span className="text-red-600 font-bold">
+            <span className="text-error font-bold">
               2024年9月19日（木）10:00～18:25
               ／9月20日（金）10:00～18:15（いずれも日本時間）
             </span>
@@ -65,8 +71,20 @@ export default function Shukai202409() {
             </Link>
           </div>
           <div className="pt-4 grid grid-cols-2 gap-4">
-            <a href={"/pdf/202409-poster-jp.pdf"} download className="btn btn-outline btn-error">チラシをダウンロード</a>
-            <a href={"/pdf/202409-poster-cn.pdf"} download className="btn btn-outline btn-info">中文版海报下载</a>
+            <a
+              href={"/pdf/202409-poster-jp.pdf"}
+              download
+              className="btn btn-outline btn-error"
+            >
+              チラシをダウンロード
+            </a>
+            <a
+              href={"/pdf/202409-poster-cn.pdf"}
+              download
+              className="btn btn-outline btn-info"
+            >
+              中文版海报下载
+            </a>
           </div>
         </div>
       </div>
