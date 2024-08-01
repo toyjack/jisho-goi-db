@@ -66,7 +66,7 @@ function CommonFooter() {
         <div className="md:flex md:items-center md:justify-between py-6 md:py-8">
           <div className="text-sm text-gray-700 mr-4 dark:text-slate-400 text-center md:text-left">
             <p>
-              © 2022-2023{" "}
+              © 2022-2024{" "}
               <a
                 href="https://jisho-goi.kojisho.com/gyokuhentaizen"
                 className="link link-hover"
