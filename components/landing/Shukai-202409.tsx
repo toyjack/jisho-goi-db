@@ -48,24 +48,25 @@ export default function Shukai202409() {
             お問い合わせ: a4.ohshima[atmark]gmail.com
           </p>
 
-          <div className="flex flex-row flex-wrap gap-4">
+          <div className="grid grid-cols-2 gap-4">
             <Link
               href="https://forms.office.com/r/Qp5q3Q8M7a"
-              className="btn btn-primary basis-1/3"
+              className="btn btn-error"
               target={"_blank"}
             >
               参加申し込み（日本語）
             </Link>
             <Link
               href="https://forms.office.com/r/siM8qYmfAt"
-              className="btn btn-info basis-1/3"
+              className="btn btn-info"
               target={"_blank"}
             >
               申请参会（中文）
             </Link>
           </div>
-          <div className="p-4">
-            <a href={"/pdf/202409-poster-cn.pdf"} download className="btn btn-outline btn-error">中文版海报下载</a>
+          <div className="pt-4 grid grid-cols-2 gap-4">
+            <a href={"/pdf/202409-poster-jp.pdf"} download className="btn btn-outline btn-error">チラシをダウンロード</a>
+            <a href={"/pdf/202409-poster-cn.pdf"} download className="btn btn-outline btn-info">中文版海报下载</a>
           </div>
         </div>
       </div>
