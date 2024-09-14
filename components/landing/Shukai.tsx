@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import shukaiPoster from "/public/images/2022kenkyukai.png";
 
-function ShukaiSection() {
+function Shukai2023() {
   return (
     <div className="hero min-h-screen bg-base-100">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -36,4 +36,4 @@ function ShukaiSection() {
   );
 }
 
-export default ShukaiSection
+export default Shukai2023
