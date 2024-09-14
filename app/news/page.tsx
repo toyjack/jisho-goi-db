@@ -27,8 +27,6 @@ async function NewsPage() {
       <Shukai2024Section />
       <div className="divider"></div>
       <Shukai2023 />
-      <div className="divider"></div>
-      <Shukai2023 />
     </>
   );
 }
