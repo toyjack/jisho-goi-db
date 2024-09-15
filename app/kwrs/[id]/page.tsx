@@ -93,14 +93,13 @@ export default async function KwrsItemPage({
       <div className="divider"></div>
       <h2 className="text-xl font-bold py-4">画像</h2>
       <div className="flex flex-col">
-        <pre>
-          {vol} {cho} {side}
-          <p>
-            <a href={manifestUrl}>manifest</a>
-            <a href={ndl_page}>ndl_page</a>
-          </p>
-        </pre>
         <IiifViewer manifestUrl={manifestUrl as string} page={koma-1} />
+        <p>
+          画像は国立国会図書館のデジタルコレクションから提供されています。{" "}
+        </p>
+        <p>
+          リンク：<Link href={ndl_page as string} target="_blank" className="link link-hover">{ndl_page}</Link>
+        </p>
       </div>
     </div>
   );
