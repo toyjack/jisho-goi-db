@@ -89,7 +89,7 @@ export default async function KwrsItemPage({
       <div className="divider"></div>
       <h2 className="text-xl font-bold py-4">画像</h2>
       <div className="">
-        <IiifViewer manifestUrl={manifestUrl} page={page} className="h-screen w-full " />
+        <IiifViewer manifestUrl={manifestUrl} page={page} />
       </div>
     </div>
   );

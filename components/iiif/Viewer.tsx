@@ -21,7 +21,7 @@ export default function IiifViewer({ manifestUrl, page, className }: Props) {
   }, [manifestUrl]);
 
   return (
-    <div className={`w-full min-h-screen`}>
+    <div className={``}>
       <Osd manifestUrl={tiles} page={page} className={className} />
     </div>
   );
