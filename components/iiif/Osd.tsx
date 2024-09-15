@@ -5,7 +5,7 @@ import { useEffect } from "react";
 function Osd({
   manifestUrl,
   page = 0,
-  className="w-full h-96",
+  className="w-full h-[100vh]",
 }: {
   manifestUrl: string[];
   page?: number;
