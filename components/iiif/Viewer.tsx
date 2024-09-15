@@ -21,8 +21,8 @@ export default function IiifViewer({ manifestUrl, page, className }: Props) {
   }, [manifestUrl]);
 
   return (
-    <div className={``}>
-      <Osd manifestUrl={tiles} page={page} className={className} />
+    <div className={className}>
+      <Osd manifestUrl={tiles} page={page}/>
     </div>
   );
 }
