@@ -9,23 +9,16 @@ export const metadata: Metadata = {
     "クリエイティブ・コモンズ・ライセンスの表示 - 非営利 - 継承 4.0 国際（CC BY-NC-SA 4.0）相当の条件で提供しています。",
 };
 
-function HzwmLayout({
-  children, // will be a page or nested layout
-}: {
-  children: React.ReactNode;
-}) {
+function HzwmLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="container mx-auto h-full">
       <div className="p-10">
         <h2 className="text-3xl font-bold">
           <Link href="/hzwm">本草和名データベース</Link>
-
-          {/* <span className="badge badge-lg">試行版</span> */}
-
           <span className="badge badge-lg badge-secondary">v2023-08</span>
         </h2>
       </div>
-      
+
       <label
         htmlFor="drawer"
         className="h-auto w-full btn btn-primary drawer-button lg:hidden"
@@ -46,7 +39,6 @@ function HzwmLayout({
             </Suspense>
           </div>
         </div>
-
       </div>
     </div>
   );
