@@ -1,6 +1,13 @@
 import Link from "next/link";
 import { Suspense } from "react";
 import HzwmForm from "./HzwmForm";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "本草和名データベース - [辞書語彙データベース]",
+  description:
+    "クリエイティブ・コモンズ・ライセンスの表示 - 非営利 - 継承 4.0 国際（CC BY-NC-SA 4.0）相当の条件で提供しています。",
+};
 
 function HzwmLayout({
   children, // will be a page or nested layout
