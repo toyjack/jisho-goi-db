@@ -1,8 +1,17 @@
 import IiifViewer from "@/components/iiif/Viewer";
-import { hzwmFindOneById } from "@/db/hzwm"
+import { hzwmFindOneById } from "@/db/hzwm";
+import Link from "next/link";
 
-async function HzwmItemPage({params}:{params: {id: string}}) {
-  const result = await hzwmFindOneById(params.id)
+async function HzwmItemPage({ params }: { params: { id: string } }) {
+  const result = await hzwmFindOneById(params.id);
+  // HW_A_15a_7_1 -> 15a
+  const choAndSide = params.id.split("_")[2];
+  const cho = Number(choAndSide.slice(0, -1));
+  const side = choAndSide.slice(-1) === "a" ? 0 : 1;
+  // for ndl: https://dl.ndl.go.jp/pid/2538099
+  const koma = Number(cho) + Number(side) + 11;
+  const ndl_web = `https://dl.ndl.go.jp/pid/2538099/1/${String(koma)}`;
+  const ndl_manifest = `https://dl.ndl.go.jp/api/iiif/2538099/manifest.json`;
   return (
     <div>
       <div className="max-w-lg">
@@ -29,19 +38,33 @@ async function HzwmItemPage({params}:{params: {id: string}}) {
           </tbody>
         </table>
       </div>
-      
+
       <div className="divider">画像</div>
 
-      <div>
-        <h2>Image View</h2>
-        <p>on working</p>
-        <IiifViewer
-          manifestUrl={"https://dl.ndl.go.jp/api/iiif/2538099/manifest.json"}
-          page={Number(1)}
-        />
+      <div className="flex flex-col gap-4">
+        <IiifViewer manifestUrl={ndl_manifest} page={koma - 1} />
+
+        <div className="flex flex-col gap-2">
+          <div>
+            NDL Web Page:
+            <Link href={ndl_web} target="_blank" className="link link-hover">
+              {ndl_web}
+            </Link>
+          </div>
+          <div>
+            NDL Manifest:
+            <Link
+              href={ndl_manifest}
+              target="_blank"
+              className="link link-hover"
+            >
+              {ndl_manifest}
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );
 }
 
-export default HzwmItemPage
+export default HzwmItemPage;
