@@ -34,9 +34,7 @@ export async function gyokuhentaizenFindMany(
   const where: Prisma.GyokuhentaizenWhereInput = {
     AND: [
       {
-        entry: {
-          contains: query.entry || undefined,
-        },
+        entry: query.entry,
       },
       {
         OR: [
@@ -53,15 +51,19 @@ export async function gyokuhentaizenFindMany(
         ],
       },
       {
-        wakun: {
-          contains: query.wakun || undefined,
-        },
+        OR:[
+          {
+            wakun: {
+              contains: query.wakun || undefined,
+            },
+          }
+        ]
       },
-      { radical: query.radical || undefined },
-      { remain_strokes: query.remain_strokes || undefined },
+      { radical: query.radical },
+      { remain_strokes: query.remain_strokes },
       {
         ghtz_id: {
-          startsWith: ghtz_id || undefined,
+          startsWith: ghtz_id,
         },
       },
     ],
@@ -73,15 +75,15 @@ export async function gyokuhentaizenFindMany(
   let results: [number, Gyokuhentaizen[]];
 
   // if (cached) {
-    // results = cached as [number, Gyokuhentaizen[]];
-    // console.log("used cache:", key);
+  // results = cached as [number, Gyokuhentaizen[]];
+  // console.log("used cache:", key);
   // } else {
-    results = await prisma.$transaction([
-      prisma.gyokuhentaizen.count({ where }),
-      prisma.gyokuhentaizen.findMany({ where }),
-    ]);
+  results = await prisma.$transaction([
+    prisma.gyokuhentaizen.count({ where }),
+    prisma.gyokuhentaizen.findMany({ where }),
+  ]);
 
-    // const cacheValue = JSON.stringify(results);
+  // const cacheValue = JSON.stringify(results);
   //   await redis.set(key, cacheValue);
   //   // console.log("cached:", key);
   // }

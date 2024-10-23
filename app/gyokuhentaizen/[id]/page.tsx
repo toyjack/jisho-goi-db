@@ -1,4 +1,3 @@
-
 import BackButton from "@/components/ui/BackButton";
 import GyokuhentaizenImageTabs from "@/app/gyokuhentaizen/[id]/ImageTabs";
 import { gyokuhentaizenFindOne } from "@/db/gyokuhentaizen";
@@ -25,16 +24,14 @@ async function GyokuhentaizenItemPage({ params }: { params: { id: string } }) {
   const { id } = params;
   const result = await gyokuhentaizenFindOne(id);
 
-  if (!result) return <>error</>
+  if (!result) return <>error</>;
 
   return (
     <div className="p-4">
       <div className="p-2">
         <BackButton />
       </div>
-
       <h2 className="text-xl font-bold">テキストデータ</h2>
-
       <div className="overflow-x-auto">
         <table className="table table-zebra w-full">
           <thead>
@@ -50,10 +47,14 @@ async function GyokuhentaizenItemPage({ params }: { params: { id: string } }) {
             </tr>
             <tr>
               <th>掲出字</th>
-              <td>
-               {result.entry}
-              </td>
+              <td>{result.entry}</td>
             </tr>
+            {result.ids && (
+              <tr>
+                <th>掲出字IDS</th>
+                <td>{result.ids}</td>
+              </tr>
+            )}
             <tr>
               <th>部首</th>
               <td>{result.radical}</td>
@@ -81,11 +82,8 @@ async function GyokuhentaizenItemPage({ params }: { params: { id: string } }) {
           </tbody>
         </table>
       </div>
-
       <div className="divider py-4"></div>
-
       <h2 className="text-xl font-bold py-4">画像</h2>
-
       表示がバグっているので修正が必要
       {/* <GyokuhentaizenImageTabs ghtz_id={result.ghtz_id} /> */}
     </div>
