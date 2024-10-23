@@ -5,7 +5,7 @@ import { useEffect } from "react";
 function Osd({
   manifestUrl,
   page = 0,
-  className = "w-full h-[100vh]",
+  className = "w-full h-[90vh]",
 }: {
   manifestUrl: string[];
   page?: number;
@@ -22,8 +22,8 @@ function Osd({
         initialPage: page,
         showReferenceStrip: true,
         showNavigator: true,
-        showRotationControl: true,
-        showHomeControl: true,
+        // showRotationControl: true,
+        // showHomeControl: true,
         showFullPageControl: true,
         showSequenceControl: true,
         showZoomControl: true,
@@ -34,13 +34,7 @@ function Osd({
       };
     }
   }, [manifestUrl, page, randomId]);
-  return (
-    <div>
-      <div className={className} id={randomId}>
-        Osd
-      </div>
-    </div>
-  );
+  return <div className={className} id={randomId} />;
 }
 
 export default Osd;

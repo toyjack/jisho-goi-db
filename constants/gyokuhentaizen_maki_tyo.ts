@@ -2,6 +2,7 @@ export const gyokuhentaizenMakiTyo = [
   {
     maki: "1",
     maki_kan: "一",
+    manifest:"https://dl.ndl.go.jp/api/iiif/3440912/manifest.json",
     pages: [
       "25a",
       "25b",
@@ -135,6 +136,7 @@ export const gyokuhentaizenMakiTyo = [
   {
     maki: "2",
     maki_kan: "二",
+    manifest:"https://dl.ndl.go.jp/api/iiif/3440914/manifest.json",
     pages: [
       "2a",
       "2b",
@@ -234,6 +236,7 @@ export const gyokuhentaizenMakiTyo = [
   {
     maki: "3",
     maki_kan: "三",
+    manifest:"https://dl.ndl.go.jp/api/iiif/3440916/manifest.json",
     pages: [
       "1a",
       "1b",
@@ -331,6 +334,7 @@ export const gyokuhentaizenMakiTyo = [
   {
     maki: "4",
     maki_kan: "四",
+    manifest:"https://dl.ndl.go.jp/api/iiif/3440918/manifest.json",
     pages: [
       "1a",
       "1b",
@@ -448,6 +452,7 @@ export const gyokuhentaizenMakiTyo = [
   {
     maki: "5",
     maki_kan: "五",
+    manifest:"https://dl.ndl.go.jp/api/iiif/3440920/manifest.json",
     pages: [
       "1a",
       "1b",

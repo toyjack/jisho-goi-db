@@ -3,13 +3,21 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import IiifViewer from "@/components/iiif/Viewer";
+import { gyokuhentaizenMakiTyo } from "@/constants/gyokuhentaizen_maki_tyo";
+
+function getWasedaMakiUrl(ghtz_id: string) {
+  const [maki] = ghtz_id.split("_");
+  const wasedaMaki = String(Number(maki)).padStart(4, "0");
+  return `https://archive.wul.waseda.ac.jp/kosho/bunko31/bunko31_e0853/bunko31_e0853_${wasedaMaki}/bunko31_e0853_${wasedaMaki}.html`;
+}
 
 function getWasedaPageUrl(ghtz_id: string) {
-  const [maki, page, line, num_in_line] = ghtz_id.split("_");
-  // 25a -> 26
-  let wasedaPageNumber = Number(page.slice(0, -1)) + 1;
+  const [maki, page] = ghtz_id.split("_");
+  let wasedaPageNumber = Number(page.slice(0, -1));
+  if (maki !== "2") {
+    wasedaPageNumber += 1;
+  }
   if (page.endsWith("b")) {
-    // 25b -> 27
     wasedaPageNumber += 1;
   }
   const wasedaMaki = String(Number(maki)).padStart(4, "0");
@@ -19,25 +27,28 @@ function getWasedaPageUrl(ghtz_id: string) {
 }
 
 function getNdlImageUrl(ghtz_id: string) {
-  const [maki, page, line, num_in_line] = ghtz_id.split("_");
+  const [maki, page] = ghtz_id.split("_");
   // only works for vol 1
-  const ndlPage = String(Number(page.slice(0, -1)) - 22).padStart(7, "0");
-  
+  // const ndlPage = String(Number(page.slice(0, -1)) - 22).padStart(7, "0");
+  const choIndex = gyokuhentaizenMakiTyo
+    .find((m) => m.maki === maki)
+    ?.pages.indexOf(page);
+  if (choIndex === undefined) {
+    return "";
+  }
+  let ndlPage = "";
+  if (maki === "1") {
+    ndlPage = String(choIndex + 3).padStart(7, "0");
+  }
+  console.log({ page, ndlPage, choIndex });
   // TODO: other makis
   return `https://dl.ndl.go.jp/api/iiif/3440912/R${ndlPage}/full/full/0/default.jpg`;
 }
 
-function getNdlPageUrl(ghtz_id: string) {
-  const [maki, page, line, num_in_line] = ghtz_id.split("_");
-  // https://dl.ndl.go.jp/pid/3440912/1/3
-  const ndlPage = String(Number(page.slice(0, -1)) - 22).padStart(7, "0");
-
-  return `https://dl.ndl.go.jp/pid/3440912/1/${ndlPage}`;
-}
 // http://localhost:3000/images/gyokuhentaizen/vol_2/1_25a.png
 function getFujimotoImageUrl(ghtz_id: string) {
   const s3BaseUrl = "https://jisho-goi.s3.ap-northeast-1.amazonaws.com";
-  const [maki, page, line, num_in_line] = ghtz_id.split("_");
+  const [maki, page] = ghtz_id.split("_");
   const fujimotoMaki = String(Number(maki) + 1);
   return `${s3BaseUrl}/gyokuhentaizen/vol_${fujimotoMaki}/${maki}_${page}.png`;
 }
@@ -45,7 +56,7 @@ function getFujimotoImageUrl(ghtz_id: string) {
 function GyokuhentaizenImageTabs({ ghtz_id }: { ghtz_id: string }) {
   const [activeTab, setActiveTab] = useState(0);
 
-  const [maki, page, line, num_in_line] = ghtz_id.split("_");
+  const [maki, page] = ghtz_id.split("_");
   // https://dl.ndl.go.jp/pid/3440912/1/3
   const ndlPage = String(Number(page.slice(0, -1)) - 23).padStart(7, "0");
 
@@ -55,8 +66,10 @@ function GyokuhentaizenImageTabs({ ghtz_id }: { ghtz_id: string }) {
   const imageHeight = 400;
 
   const wasedaUrl = getWasedaPageUrl(ghtz_id);
-  const ndlUrl = getNdlImageUrl(ghtz_id);
   const fujimotoUrl = getFujimotoImageUrl(ghtz_id);
+
+  const manifest =
+    gyokuhentaizenMakiTyo.find((m) => m.maki === maki)?.manifest || "";
 
   const Tabs = () => {
     return (
@@ -91,8 +104,8 @@ function GyokuhentaizenImageTabs({ ghtz_id }: { ghtz_id: string }) {
     },
     {
       label: "巻ページ",
-      text: "https://archive.wul.waseda.ac.jp/kosho/bunko31/bunko31_e0853/bunko31_e0853_0001/bunko31_e0853_0001.html",
-      url: "https://archive.wul.waseda.ac.jp/kosho/bunko31/bunko31_e0853/bunko31_e0853_0001/bunko31_e0853_0001.html",
+      text: getWasedaMakiUrl(ghtz_id),
+      url: getWasedaMakiUrl(ghtz_id),
     },
     {
       label: "底本",
@@ -213,14 +226,11 @@ function GyokuhentaizenImageTabs({ ghtz_id }: { ghtz_id: string }) {
           className={`tab-panel h-full ${activeTab === 1 ? "block" : "hidden"}`}
         >
           {/* <IiifViewer
-            manifestUrl={"https://dl.ndl.go.jp/api/iiif/3440912/manifest.json"}
+            manifestUrl={manifest}
             page={Number(ndlPage)}
           /> */}
-          page:{page}
-        
-        ndlpage:{ndlPage}
-
-          <ImageMetaTable metas={ndlMetas} />
+          {/* <ImageMetaTable metas={ndlMetas} /> */}
+          表示がバグっているので修正が必要
         </div>
 
         {/* 藤本 */}
