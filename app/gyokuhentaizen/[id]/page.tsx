@@ -86,7 +86,8 @@ async function GyokuhentaizenItemPage({ params }: { params: { id: string } }) {
 
       <h2 className="text-xl font-bold py-4">画像</h2>
 
-      <GyokuhentaizenImageTabs ghtz_id={result.ghtz_id} />
+      表示がバグっているので修正が必要
+      {/* <GyokuhentaizenImageTabs ghtz_id={result.ghtz_id} /> */}
     </div>
   );
 }

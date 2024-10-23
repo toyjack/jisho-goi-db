@@ -20,7 +20,9 @@ function getWasedaPageUrl(ghtz_id: string) {
 
 function getNdlImageUrl(ghtz_id: string) {
   const [maki, page, line, num_in_line] = ghtz_id.split("_");
+  // only works for vol 1
   const ndlPage = String(Number(page.slice(0, -1)) - 22).padStart(7, "0");
+  
   // TODO: other makis
   return `https://dl.ndl.go.jp/api/iiif/3440912/R${ndlPage}/full/full/0/default.jpg`;
 }
@@ -210,10 +212,13 @@ function GyokuhentaizenImageTabs({ ghtz_id }: { ghtz_id: string }) {
         <div
           className={`tab-panel h-full ${activeTab === 1 ? "block" : "hidden"}`}
         >
-          <IiifViewer
+          {/* <IiifViewer
             manifestUrl={"https://dl.ndl.go.jp/api/iiif/3440912/manifest.json"}
             page={Number(ndlPage)}
-          />
+          /> */}
+          page:{page}
+        
+        ndlpage:{ndlPage}
 
           <ImageMetaTable metas={ndlMetas} />
         </div>
