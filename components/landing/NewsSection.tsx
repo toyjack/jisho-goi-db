@@ -3,6 +3,10 @@ import React from 'react'
 function NewsSection() {
   const news = [
     {
+      title: "増続大広益会玉篇大全の巻二〜巻五を検索システム上で追加公開しました",
+      date: "2024/10/13",
+    },
+    {
       title:"文明本節用集のロ〜ト部を検索システム上で追加公開しました",
       date:"2023/11/17"
     },
