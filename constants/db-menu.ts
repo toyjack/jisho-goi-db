@@ -52,7 +52,7 @@ export const dbMenu:Database[] = [
   {
     title: "増続大広益会玉篇大全",
     url: "/gyokuhentaizen",
-    description: "巻一〜巻五",
+    description: "巻一〜巻五、巻八、巻九",
     image: "/images/gyokutaizen_logo.png",
     accessRole: "PUBLIC",
   },
