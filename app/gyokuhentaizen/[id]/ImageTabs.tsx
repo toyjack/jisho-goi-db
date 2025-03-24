@@ -113,7 +113,7 @@ function GyokuhentaizenImageTabs({ ghtz_id }: { ghtz_id: string }) {
       url: "https://www.wul.waseda.ac.jp/kotenseki/html/bunko31/bunko31_e0853/index.html",
     },
     {
-      label: "利用事項",
+      label: "画像の利用",
       text: "https://www.waseda.jp/library/user/using-images/",
       url: "https://www.waseda.jp/library/user/using-images/",
     },
@@ -136,7 +136,7 @@ function GyokuhentaizenImageTabs({ ghtz_id }: { ghtz_id: string }) {
       url: "https://dl.ndl.go.jp/pid/3440912/1/3",
     },
     {
-      label: "利用事項",
+      label: "画像の利用",
       text: "https://www.ndl.go.jp/jp/use/",
       url: "https://www.ndl.go.jp/jp/use/",
     },
@@ -159,7 +159,7 @@ function GyokuhentaizenImageTabs({ ghtz_id }: { ghtz_id: string }) {
       url: "#",
     },
     {
-      label: "利用事項",
+      label: "画像の利用",
       text: "",
       url: "#",
     },
