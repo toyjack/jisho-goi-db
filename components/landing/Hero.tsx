@@ -37,8 +37,9 @@ function Hero() {
             >
               日本初の国語辞書『色葉字類抄』に採録された漢籍出典語彙の院政期における使用状況（2021年度稲盛研究助成）
             </Link>
-            <Link className="link link-hover" href={"#"} target="_blank">
-              「清华大学大学自主科研计画文科專项经费·基研究專项(W01)《色叶字类抄》为中心的日本古辞书研究与数据库建设」(2023THZWJC31·藤本灯)
+            、
+            <Link className="link link-hover" href={"#"}>
+              「清华大学大学自主科研计画文科專项经费·基研究專项(W01)《色叶字类抄》为中心的日本古辞书研究与数据库建设」（2023THZWJC31·藤本灯）
             </Link>
           </p>
           <a className="btn btn-primary" href="#databases">
