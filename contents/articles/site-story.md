@@ -17,6 +17,6 @@ title: site story
 
 辞書語彙データベースの構築と公開は、下記の助成を受けて行っています。
 
-* [『色葉字類抄』の語彙研究および総合データベースの構築（21H00529）](https://kaken.nii.ac.jp/ja/grant/KAKENHI-PROJECT-21H00529/)
+* [『色葉字類抄』の語彙研究および総合データベースの構築（21H00529）](https://kaken.nii.ac.jp/ja/grant/KAKENHI-PROJECT-23K20465/)
 * [異種古辞書間におけるデータ連携モデルの構築（21K18364）](https://kaken.nii.ac.jp/ja/grant/KAKENHI-PROJECT-21K18364/)
 * [日本初の国語辞書『色葉字類抄』に採録された漢籍出典語彙の院政期における使用状況（2021 年度稲盛研究助成）](https://www.inamori-f.or.jp/recipient/fujimoto-akari/)
