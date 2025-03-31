@@ -45,14 +45,14 @@ export const dbMenu:Database[] = [
   {
     title: "文明本節用集",
     url: "/bunmei",
-    description: "イロハニホヘト部、チリヌルヲ部",
+    description: "イロハニホヘトチリヌルヲ部",
     image: "/images/bunmeibon_logo.png",
     accessRole: "PUBLIC",
   },
   {
     title: "増続大広益会玉篇大全",
     url: "/gyokuhentaizen",
-    description: "巻一〜巻五、巻八、巻九",
+    description: "全文公開",
     image: "/images/gyokutaizen_logo.png",
     accessRole: "PUBLIC",
   },
