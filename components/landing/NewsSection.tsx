@@ -3,19 +3,43 @@ import React from 'react'
 function NewsSection() {
   const news = [
     {
+      title:"文明本節用集のチリヌルヲ部を検索システム上で追加公開しました",
+      date:"2025/3/31"
+    },
+    {
+      title: "増続大広益会玉篇大全の巻六〜巻十一を検索システム上で追加、全文公開しました",
+      date: "2025/3/31",
+    },
+    {
+      title: "本草和名と古活字版和名類聚抄の全文テキストデータ （附：和名索引）データセットを公開しました（https://dataset.kojisho.com/hzwm-kwrs-wamyo-dataset）",
+      date: "2025/2/28",
+    },
+    {
       title: "増続大広益会玉篇大全の巻二〜巻五を検索システム上で追加公開しました",
       date: "2024/10/13",
     },
     {
-      title:"文明本節用集のロ〜ト部を検索システム上で追加公開しました",
-      date:"2023/11/17"
+      title:"文明本節用集のロハニホヘト部を検索システム上で追加公開しました",
+      date:"2023/11/18"
+    },
+    {
+      title:"本草和名を検索システム上で全文公開しました",
+      date:"2023/6/4"
+    },
+    {
+      title:"色葉字類抄注釈データベースを検索システム上で限定公開しました",
+      date:"2023/9/23"
+    },
+    {
+      title:"古活字版和名類聚抄を検索システム上で全文公開しました",
+      date:"2023/7/23"
     },
     {
       title: "落葉集本篇を検索システム上で全文公開しました",
       date: "2023/05/18",
     },
     {
-      title: "プロトタイプ版の公開開始",
+      title: "本データベース検索システム・プロトタイプ版の公開開始（色葉字類抄／姓氏部・名字部、落葉集／イ部・ロ部、文明本節用集／イ部、増続大広益会玉篇大全／巻一）",
       date: "2023/03/03",
     },
   ];
@@ -33,8 +57,8 @@ function NewsSection() {
                 {news.map((item) => (
                   <div key={item.title}>
                     <li>
-                      <h5 className="text-3xl">{item.title}</h5>
-                      <h6 className="text-xl">{item.date}</h6>
+                      <h5 className="text-xl">{item.title}</h5>
+                      <h6 className="text-md">{item.date}</h6>
                     </li>
                     <div className=" divider"></div>
                   </div>
