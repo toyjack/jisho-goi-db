@@ -14,9 +14,9 @@ function Hero() {
         <div className="max-w-lg">
           <h1 className="mb-5 text-5xl font-bold">辞書語彙データベース</h1>
           <p className="mb-5">
-            <Link className="link link-hover" href={"#"}>
+            <span className="text">
               「清华大学大学自主科研计画文科專项经费·基研究專项(W01)《色叶字类抄》为中心的日本古辞书研究与数据库建设」（2023THZWJC31·藤本灯）
-            </Link>
+            </span>
             、
             <Link
               className="link link-hover"
