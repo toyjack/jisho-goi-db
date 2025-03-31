@@ -19,6 +19,6 @@ title: site story
 
 * 「清华大学大学自主科研计画文科專项经费·基研究專项(W01)《色叶字类抄》为中心的日本古辞书研究与数据库建设」（2023THZWJC31·藤本灯）
 * [日本古辞書ポータルサイトの開発による公開研究資源の高度利用（24K16080）](https://kaken.nii.ac.jp/ja/grant/KAKENHI-PROJECT-24K16080/)
-* [『色葉字類抄』の語彙研究および総合データベースの構築（21H00529）](https://kaken.nii.ac.jp/ja/grant/KAKENHI-PROJECT-23K20465/)
+* [『色葉字類抄』の語彙研究および総合データベースの構築（23K20465、21H00529）](https://kaken.nii.ac.jp/ja/grant/KAKENHI-PROJECT-23K20465/)
 * [異種古辞書間におけるデータ連携モデルの構築（21K18364）](https://kaken.nii.ac.jp/ja/grant/KAKENHI-PROJECT-21K18364/)
 * [日本初の国語辞書『色葉字類抄』に採録された漢籍出典語彙の院政期における使用状況（2021 年度稲盛研究助成）](https://www.inamori-f.or.jp/recipient/fujimoto-akari/)
