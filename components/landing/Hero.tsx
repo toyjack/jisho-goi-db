@@ -20,10 +20,10 @@ function Hero() {
             、
             <Link
               className="link link-hover"
-              href={"https://kaken.nii.ac.jp/ja/grant/KAKENHI-PROJECT-21H00529"}
+              href={"https://kaken.nii.ac.jp/ja/grant/KAKENHI-PROJECT-23K20465"}
               target="_blank"
             >
-              『色葉字類抄』の語彙研究および総合データベースの構築（科研費21H00529）
+              『色葉字類抄』の語彙研究および総合データベースの構築（科研費23K20465、21H00529）
             </Link>
             、
             <Link
