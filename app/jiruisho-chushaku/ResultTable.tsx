@@ -83,6 +83,9 @@ function ResultTable({ data }: { data: JiruishoChushaku[] }) {
       <table className="table w-full">
         <thead>
           <tr>
+          {session && session.user.role === "ADMIN" && (
+            <th>操作</th>
+          )}
             <th>見出し語（前田）</th>
             <th>見出し語（黒川）</th>
             <th>注釈</th>

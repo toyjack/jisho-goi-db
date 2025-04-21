@@ -1,6 +1,6 @@
 import React from 'react'
 
-function JiruishoChushakuResultsPage({
+async function JiruishoChushakuResultsPage({
   searchParams,
 }: {
   searchParams?: { [key: string]: string };
