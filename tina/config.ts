@@ -1,7 +1,7 @@
 import { defineConfig } from "tinacms";
-import Manual from "./collections/manual";
-import ArticleCollection from "./collections/article";
-import NewsCollection from "./collections/news";
+import Manual from "../tina/collections/manual";
+import ArticleCollection from "../tina/collections/article";
+import NewsCollection from "../tina/collections/news";
 
 // Your hosting provider likely exposes this as an environment variable
 const branch =

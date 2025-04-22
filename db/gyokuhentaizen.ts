@@ -1,5 +1,4 @@
 import { prisma } from "@/lib/prisma";
-// import { redis } from "@/lib/redis";
 import { Prisma, Gyokuhentaizen } from "@prisma/client";
 
 export interface GyokuhentaizenFindManyQuery extends Partial<Gyokuhentaizen> {
@@ -69,24 +68,15 @@ export async function gyokuhentaizenFindMany(
     ],
   };
 
-  // const key = JSON.stringify(`gyokuhentaizenFindMany:${JSON.stringify(where)}`);
-  // const cached = await redis.get(key);
-
   let results: [number, Gyokuhentaizen[]];
 
-  // if (cached) {
-  // results = cached as [number, Gyokuhentaizen[]];
-  // console.log("used cache:", key);
-  // } else {
+
   results = await prisma.$transaction([
     prisma.gyokuhentaizen.count({ where }),
     prisma.gyokuhentaizen.findMany({ where }),
   ]);
 
-  // const cacheValue = JSON.stringify(results);
-  //   await redis.set(key, cacheValue);
-  //   // console.log("cached:", key);
-  // }
+
 
   const response = {
     query,
