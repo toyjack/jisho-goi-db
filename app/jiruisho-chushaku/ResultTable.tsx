@@ -38,7 +38,7 @@ function ResultTable({ data }: { data: JiruishoChushaku[] }) {
   };
 
   return (
-    <div className="">
+    <div className="overflow-x-auto">
       {session && session.user.role === "ADMIN" && (
         <>
           <div className="flex justify-end">

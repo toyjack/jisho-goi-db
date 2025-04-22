@@ -1,22 +1,23 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import TextInput from "../../components/common/TextInput";
 
 interface FormData {
-  entry?: string;
-  gokei_search_current?: string;
-  gokei_search_original?: string;
-  definition?: string;
-  shouten?: string;
-  hen?: string;
-  bu?: string;
-  onkun?: string;
-  char_count?: string;
+  word_in_maeda?: string;
+  word_in_kurokawa?: string;
+  annotation?: string;
 }
 
 function JiruishoChushakuForm() {
+  const searchParams = useSearchParams()
+  const initialValues = {
+    word_in_maeda: searchParams.get("word_in_maeda") || "",
+    word_in_kurokawa: searchParams.get("word_in_kurokawa") || "",
+    annotation: searchParams.get("annotation") || "",
+  };
+  const { word_in_maeda, word_in_kurokawa, annotation } = initialValues;
   const router = useRouter();
   const { register, handleSubmit } = useForm();
 
@@ -34,18 +35,21 @@ function JiruishoChushakuForm() {
         labelLeftUppon="見出し語（前田）"
         labelRightBottom=""
         name={"word_in_maeda"}
+        defaultValue={word_in_maeda}
         register={register}
       />
       <TextInput
         labelLeftUppon="見出し語（黒川）"
         labelRightBottom=""
         name={"word_in_kurokawa"}
+        defaultValue={word_in_kurokawa}
         register={register}
       />
       <TextInput
         labelLeftUppon="注釈"
         labelRightBottom=""
         name={"annotation"}
+        defaultValue={annotation}
         register={register}
       />
 

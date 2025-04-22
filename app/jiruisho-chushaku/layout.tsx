@@ -7,7 +7,7 @@ function JiruishoChushakuLayout({ children }: { children: React.ReactNode }) {
     <div className="container mx-auto">
       <div className="p-10">
         <h2 className="text-3xl font-bold">
-          <Link href="/jiruisho">色葉字類抄注釈データベース</Link>
+          <Link href="/jiruisho-chushaku">色葉字類抄注釈データベース</Link>
           <span className="badge badge-lg badge-secondary">v2023-09</span>
         </h2>
       </div>
