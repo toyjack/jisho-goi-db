@@ -1,5 +1,6 @@
 import Link from "next/link";
 import KwrsForm from "./KwrsForm";
+import { Suspense } from "react";
 
 export default function WamyoshoLayout({
   children, // will be a page or nested layout
@@ -38,7 +39,9 @@ export default function WamyoshoLayout({
         <div className="drawer-side min-h-screen">
           <label htmlFor="drawer" className="drawer-overlay"></label>
           <div className="menu p-4 w-80 bg-base-200 text-base-content z-10">
-            <KwrsForm />
+            <Suspense fallback={<div>Loading...</div>}>
+              <KwrsForm />
+            </Suspense>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React from "react";
+import React, { Suspense } from "react";
 import JiruishoChushakuForm from "./JiruishoChushakuForm";
 
 function JiruishoChushakuLayout({ children }: { children: React.ReactNode }) {
@@ -22,15 +22,15 @@ function JiruishoChushakuLayout({ children }: { children: React.ReactNode }) {
         <input id="drawer" type="checkbox" className="drawer-toggle" />
 
         <div className="drawer-content">
-          <div className="sm:p-4 sm:m-2">
-          {children}
-          </div>
+          <div className="sm:p-4 sm:m-2">{children}</div>
         </div>
 
         <div className="drawer-side min-h-screen">
           <label htmlFor="drawer" className="drawer-overlay"></label>
           <div className="menu p-4 w-80 bg-base-200 text-base-content z-10 sm:rounded-md">
-            <JiruishoChushakuForm />
+            <Suspense fallback={<div>Loading...</div>}>
+              <JiruishoChushakuForm />
+            </Suspense>
           </div>
         </div>
       </div>
