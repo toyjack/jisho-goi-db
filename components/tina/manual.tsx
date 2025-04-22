@@ -1,9 +1,6 @@
 "use client";
 
-import {
-  ManualQuery,
-  ManualQueryVariables,
-} from "@/tina/__generated__/types";
+import { ManualQuery, ManualQueryVariables } from "@/tina/__generated__/types";
 import Link from "next/link";
 import { tinaField, useTina } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
@@ -37,7 +34,7 @@ export default function TinaManualComponent(props: {
 
           case "ManualBlocksManualAlert":
             return (
-              <div className="alert alert-warning shadow-lg">
+              <div key={index} className="alert alert-warning shadow-lg">
                 <div className="flex">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -52,18 +49,18 @@ export default function TinaManualComponent(props: {
                       d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
                     />
                   </svg>
-                  <span data-tina-field={tinaField(block,"content")}>{block.content}</span>
+                  <span data-tina-field={tinaField(block, "content")}>
+                    {block.content}
+                  </span>
                 </div>
               </div>
             );
 
           case "ManualBlocksSiteDescriptionBlock":
-            return (
-              <SiteStory key={index} />
-            );
+            return <SiteStory key={index} />;
 
           case "ManualBlocksDivider":
-            return <div className="divider"></div>;
+            return <div key={index} className="divider"></div>;
 
           case "ManualBlocksMembers":
             return (

@@ -1,6 +1,6 @@
 "use client";
 
-import client from "@/tina/__generated__/client";
+import { client } from "@/tina/__generated__/client";
 import { ArticleQuery } from "@/tina/__generated__/types";
 import { useEffect, useState } from "react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
