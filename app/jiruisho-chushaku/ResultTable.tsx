@@ -1,14 +1,17 @@
 "use client";
 import { JiruishoChushaku } from "@prisma/client";
 import { useSession } from "next-auth/react";
-import CreateItemModal from "./create-modal";
-import { useState } from "react";
+import { CreateItemModal } from "./create-modal";
+import { useRef, useState } from "react";
 import { deleteItem } from "./actions";
 import EditModal from "./edit-modal";
 
 function ResultTable({ data }: { data: JiruishoChushaku[] }) {
-  const { data: session, } = useSession();
+  const { data: session } = useSession();
   const [current, setCurrent] = useState(0);
+  const createItemModalRef = useRef<HTMLDialogElement>(null);
+  const editItemModalRef = useRef<HTMLDialogElement>(null);
+  const deleteItemModalRef = useRef<HTMLDialogElement>(null);
 
   const CloseModalBtn = ({ label = "閉じる" }: { label?: string }) => (
     <form method="dialog">
@@ -17,19 +20,16 @@ function ResultTable({ data }: { data: JiruishoChushaku[] }) {
   );
 
   const handleCreate = () => {
-    // @ts-ignore
-    document.getElementById("create_item_modal")?.showModal();
+    createItemModalRef.current?.showModal();
   };
   const handleEdit = (id: number) => {
     setCurrent(id);
-    // @ts-ignore
-    document.getElementById("edit_item_modal")?.showModal();
+    editItemModalRef.current?.showModal();
   };
 
   const handleDelete = (id: number) => {
     setCurrent(id);
-    // @ts-ignore
-    document.getElementById("delete_item_modal")?.showModal();
+    deleteItemModalRef.current?.showModal();
   };
 
   const handleConfirmDelete = async () => {
@@ -48,29 +48,27 @@ function ResultTable({ data }: { data: JiruishoChushaku[] }) {
             </button>
           </div>
 
-          <dialog id="create_item_modal" className="modal">
-            <CreateItemModal />
-          </dialog>
+          <CreateItemModal ref={createItemModalRef} />
 
-          <dialog id="edit_item_modal" className="modal">
+          <dialog ref={editItemModalRef} className="modal">
             <EditModal id={current} />
             <form method="dialog" className="modal-backdrop">
               <button>close</button>
             </form>
           </dialog>
 
-          <dialog id="delete_item_modal" className="modal">
+          <dialog ref={deleteItemModalRef} className="modal">
             <div className="modal-box">
               <h3 className="font-bold text-lg">注釈削除</h3>
               <p className="py-4">注釈ID：{current}</p>
-              <div>
+              <div className="flex justify-end gap-2">
                 <CloseModalBtn label="取り消し" />{" "}
                 <form onSubmit={handleConfirmDelete}>
                   <input
                     type="submit"
                     className="btn btn-error"
                     value={"削除"}
-                  ></input>
+                  />
                 </form>
               </div>
             </div>
@@ -80,12 +78,11 @@ function ResultTable({ data }: { data: JiruishoChushaku[] }) {
           </dialog>
         </>
       )}
+
       <table className="table w-full">
         <thead>
           <tr>
-          {session && session.user.role === "ADMIN" && (
-            <th>操作</th>
-          )}
+            {session && session.user.role === "ADMIN" && <th>操作</th>}
             <th>見出し語（前田）</th>
             <th>見出し語（黒川）</th>
             <th>注釈</th>

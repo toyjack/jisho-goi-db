@@ -1,16 +1,14 @@
-import { prisma } from '@/lib/prisma'
-import React from 'react'
-import ResultTable from './ResultTable'
+import React from "react";
+import ResultTable from "./ResultTable";
+import { getAllItems } from "./actions";
 
 async function JiruishoChushakuHome() {
-  const allData = await prisma.jiruishoChushaku.findMany()
+  const allData = await getAllItems();
   return (
     <div>
-      <div>
-        <ResultTable data={allData} />
-      </div>
+      <ResultTable data={allData} />
     </div>
-  )
+  );
 }
 
-export default JiruishoChushakuHome
+export default JiruishoChushakuHome;
