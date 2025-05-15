@@ -50,6 +50,7 @@
       "@prisma/engines",
       "bcrypt",
       "better-sqlite3",
+      "esbuild",
       "prisma",
       "yarn"
     ]
