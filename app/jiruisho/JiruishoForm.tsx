@@ -21,7 +21,7 @@ function JiruishoForm() {
 
   const onSubmit = (data:FormData) => {
     const notEmptyQuery = Object.fromEntries(
-      Object.entries(data).filter(([_, v]) => v != "")
+      Object.entries(data).filter(([, v]) => v != "")
     );
     const query = new URLSearchParams(notEmptyQuery);
     router.push(`/jiruisho/results?${query}`);

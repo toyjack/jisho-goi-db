@@ -1,14 +1,22 @@
 "use client";
-import { JiruishoChushaku } from "@prisma/client";
+import { JiruishoChushaku, Prisma } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { useRef, useState } from "react";
 import { deleteItem } from "./actions";
 import EditModal from "./edit-modal";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-function ResultTable({ data }: { data: JiruishoChushaku[] }) {
+type JiruishoChushakuWithJiruisho = Prisma.JiruishoChushakuGetPayload<{
+  include:{
+    jiruisho: true
+  }
+}>
+
+function ResultTable({ data }: { data: JiruishoChushakuWithJiruisho[] }) {
   const { data: session } = useSession();
   const [current, setCurrent] = useState(0);
+  const router= useRouter();
   const createItemModalRef = useRef<HTMLDialogElement>(null);
   const editItemModalRef = useRef<HTMLDialogElement>(null);
   const deleteItemModalRef = useRef<HTMLDialogElement>(null);
@@ -23,13 +31,15 @@ function ResultTable({ data }: { data: JiruishoChushaku[] }) {
     createItemModalRef.current?.showModal();
   };
   const handleEdit = (id: number) => {
-    setCurrent(id);
-    editItemModalRef.current?.showModal();
+    // setCurrent(id);
+    // editItemModalRef.current?.showModal();
+    router.push(`/jiruisho-chushaku/create?id=${id}`);
   };
 
   const handleDelete = (id: number) => {
     setCurrent(id);
     deleteItemModalRef.current?.showModal();
+
   };
 
   const handleConfirmDelete = async () => {
@@ -44,9 +54,12 @@ function ResultTable({ data }: { data: JiruishoChushaku[] }) {
           <div className="flex justify-end">
             {/* @ts-ignore */}
             {/* <button className="btn btn-primary" onClick={() => handleCreate()}> */}
-            <Link href={"/jiruisho-chushaku/create"} className="btn btn-primary">
+            <Link
+              href={"/jiruisho-chushaku/create"}
+              className="btn btn-primary"
+            >
               新規作成
-              </Link>
+            </Link>
             {/* </button> */}
           </div>
 
@@ -83,8 +96,8 @@ function ResultTable({ data }: { data: JiruishoChushaku[] }) {
         <thead>
           <tr>
             {session && session.user.role === "ADMIN" && <th>操作</th>}
-            <th>見出し語（前田）</th>
-            <th>見出し語（黒川）</th>
+            <th>注釈ID</th>
+            <th>見出し語ID・見出し語</th>
             <th>注釈</th>
           </tr>
         </thead>
@@ -95,7 +108,7 @@ function ResultTable({ data }: { data: JiruishoChushaku[] }) {
                 <td className="flex gap-2 items-center justify-center text-center">
                   <button
                     className="btn btn-primary"
-                    onClick={() => handleEdit(row.id)}
+                    onClick={() => handleEdit(row.jiruisho.id)}
                   >
                     修正
                   </button>
@@ -107,8 +120,12 @@ function ResultTable({ data }: { data: JiruishoChushaku[] }) {
                   </button>
                 </td>
               )}
-              <td>{row.word_in_maeda}</td>
-              <td>{row.word_in_kurokawa}</td>
+              <td>{row.id}</td>
+              <td>
+                <Link href={`/jiruisho/${row.jiruisho.id}`} className="link link-hover">
+                  {row.jiruisho.id}・{row.jiruisho.entry}
+                </Link>
+              </td>
               <td className="">{row.annotation}</td>
             </tr>
           ))}

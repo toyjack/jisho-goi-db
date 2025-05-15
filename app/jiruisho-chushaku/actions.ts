@@ -5,7 +5,11 @@ import { JiruishoChushaku } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
 export async function getAllItems() {
-  const items = await prisma.jiruishoChushaku.findMany();
+  const items = await prisma.jiruishoChushaku.findMany({
+    include: {
+      jiruisho: true
+    },
+  });
   return items;
 }
 
@@ -55,3 +59,4 @@ export async function getItem(id: number) {
   });
   return item;
 }
+
