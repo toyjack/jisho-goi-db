@@ -87,6 +87,7 @@ model Jiruisho {
 
 model JiruishoChushaku {
   id               Int      @id @default(autoincrement())
+  // TODO: remove maki, hen, bu,word_in_kurokawa, word_in_maeda
   maki             String?
   hen              String?
   bu               String?

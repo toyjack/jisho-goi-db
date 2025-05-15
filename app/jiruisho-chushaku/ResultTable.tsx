@@ -1,10 +1,10 @@
 "use client";
 import { JiruishoChushaku } from "@prisma/client";
 import { useSession } from "next-auth/react";
-import { CreateItemModal } from "./create-modal";
 import { useRef, useState } from "react";
 import { deleteItem } from "./actions";
 import EditModal from "./edit-modal";
+import Link from "next/link";
 
 function ResultTable({ data }: { data: JiruishoChushaku[] }) {
   const { data: session } = useSession();
@@ -43,12 +43,12 @@ function ResultTable({ data }: { data: JiruishoChushaku[] }) {
         <>
           <div className="flex justify-end">
             {/* @ts-ignore */}
-            <button className="btn btn-primary" onClick={() => handleCreate()}>
+            {/* <button className="btn btn-primary" onClick={() => handleCreate()}> */}
+            <Link href={"/jiruisho-chushaku/create"} className="btn btn-primary">
               新規作成
-            </button>
+              </Link>
+            {/* </button> */}
           </div>
-
-          <CreateItemModal ref={createItemModalRef} />
 
           <dialog ref={editItemModalRef} className="modal">
             <EditModal id={current} />
