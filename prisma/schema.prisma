@@ -65,7 +65,7 @@ model Gyokuhentaizen {
 }
 
 model Jiruisho {
-  id                    Int     @id @default(autoincrement())
+  id                    Int               @id @default(autoincrement())
   entry                 String?
   entry_expression      String?
   shouten               String?
@@ -82,16 +82,19 @@ model Jiruisho {
   gokei_search_current  String?
   remark                String?
   definition            String?
+  chushaku              JiruishoChushaku?
 }
 
 model JiruishoChushaku {
-  id               Int     @id @default(autoincrement())
+  id               Int      @id @default(autoincrement())
   maki             String?
   hen              String?
   bu               String?
-  annotation       String  @db.LongText
+  annotation       String   @db.LongText
   word_in_kurokawa String
   word_in_maeda    String
+  jiruisho_id      Int      @unique
+  jiruisho         Jiruisho @relation(fields: [jiruisho_id], references: [id])
 }
 
 model BunmeiSetsuyoshu {
