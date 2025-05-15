@@ -5,19 +5,16 @@ import { useForm } from "react-hook-form";
 import TextInput from "../../components/common/TextInput";
 
 interface FormData {
-  word_in_maeda?: string;
-  word_in_kurokawa?: string;
+  entry?: string;
   annotation?: string;
 }
 
 function JiruishoChushakuForm() {
   const searchParams = useSearchParams()
   const initialValues = {
-    word_in_maeda: searchParams.get("word_in_maeda") || "",
-    word_in_kurokawa: searchParams.get("word_in_kurokawa") || "",
+    entry: searchParams.get("entry") || "",
     annotation: searchParams.get("annotation") || "",
   };
-  const { word_in_maeda, word_in_kurokawa, annotation } = initialValues;
   const router = useRouter();
   const { register, handleSubmit } = useForm();
 
@@ -32,24 +29,17 @@ function JiruishoChushakuForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <TextInput
-        labelLeftUppon="見出し語（前田）"
+        labelLeftUppon="見出し語"
         labelRightBottom=""
-        name={"word_in_maeda"}
-        defaultValue={word_in_maeda}
-        register={register}
-      />
-      <TextInput
-        labelLeftUppon="見出し語（黒川）"
-        labelRightBottom=""
-        name={"word_in_kurokawa"}
-        defaultValue={word_in_kurokawa}
+        name={"entry"}
+        defaultValue={initialValues.entry}
         register={register}
       />
       <TextInput
         labelLeftUppon="注釈"
         labelRightBottom=""
         name={"annotation"}
-        defaultValue={annotation}
+        defaultValue={initialValues.annotation}
         register={register}
       />
 

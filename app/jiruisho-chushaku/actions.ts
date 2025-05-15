@@ -7,7 +7,7 @@ import { revalidatePath } from "next/cache";
 export async function getAllItems() {
   const items = await prisma.jiruishoChushaku.findMany({
     include: {
-      jiruisho: true
+      jiruisho: true,
     },
   });
   return items;

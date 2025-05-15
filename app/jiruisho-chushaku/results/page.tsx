@@ -9,17 +9,17 @@ async function JiruishoChushakuResultsPage({
 }) {
   const results = await prisma.jiruishoChushaku.findMany({
     where: {
-      word_in_kurokawa: {
-        contains: searchParams?.word_in_kurokawa || undefined,
+      jiruisho:{
+        entry:{
+          contains: searchParams?.entry,
+        }
       },
-
-      word_in_maeda: {
-        contains: searchParams?.word_in_maeda || undefined,
-      },
-
       annotation: {
-        contains: searchParams?.annotation || undefined,
+        contains: searchParams?.annotation,
       },
+    },
+    include: {
+      jiruisho: true,
     },
   });
 
