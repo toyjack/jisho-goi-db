@@ -16,18 +16,15 @@ model User {
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
   role      Role      @default(USER)
-
-  accounts Account[]
+  accounts  Account[]
 }
 
 model Account {
-  id     String @id @default(cuid())
-  userId String
-
+  id                String @id @default(cuid())
+  userId            String
   provider          String
   providerAccountId String
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
   @@index([userId])
@@ -46,19 +43,12 @@ model Hzwm {
 
 model Wamyouruijyusho {
   id         Int     @id @default(autoincrement())
-  // 巻数	
   maki       String?
-  // 部	
   bu         String?
-  // 類・具・国郡等	
   type       String?
-  // 謎	
   type2      String?
-  // 丁数表裏行数	
   page       String?
-  // 見出し語	
   entry      String?
-  // 注文
   definition String? @db.VarChar(2000)
 }
 
@@ -99,32 +89,10 @@ model JiruishoChushaku {
   maki             String?
   hen              String?
   bu               String?
-  word_in_maeda    String
-  word_in_kurokawa String
   annotation       String  @db.LongText
+  word_in_kurokawa String
+  word_in_maeda    String
 }
-
-// model BunmeiSetsuyoshu {
-//   id                Int     @id @default(autoincrement())
-//   bunmei_id         String  @unique
-//   gotou             String?
-//   entry             String?
-//   entry_original    String?
-//   gokei             String?
-//   gokei_original    String?
-//   shouten_original  String?
-//   left_kun_original String?
-//   defination        String?
-//   item_type         String?
-//   bu                String?
-//   mon               String?
-//   page              String?
-//   line              String?
-//   ndl_link          String?
-//   remark            String?
-//   shouten           String?
-//   left_kun          String?
-// }
 
 model BunmeiSetsuyoshu {
   id                Int     @id @default(autoincrement())
@@ -134,21 +102,21 @@ model BunmeiSetsuyoshu {
   entry_original    String? @db.VarChar(1000)
   gokei             String? @db.VarChar(500)
   gokei_original    String? @db.VarChar(500)
-  shoten            String?
-  shoten_original   String?
   left_kun          String?
   left_kun_original String?
-  definition        String? @db.LongText()
+  definition        String? @db.LongText
   item_type         String?
   bu                String?
   mon               String?
   page              String?
   line              String?
-  no_inline         String?
-  ndl_comma         String?
   ndl_link          String?
-  revision          String?
   remark            String?
+  ndl_comma         String?
+  no_inline         String?
+  revision          String?
+  shoten            String?
+  shoten_original   String?
 }
 
 model Racvyoxv {
@@ -284,28 +252,6 @@ model GlyphData {
   data      String?   @db.Text
 }
 
-model hi_gaiji_comfirm_20230707 {
-  textId       String? @db.LongText
-  ctlId        String? @db.VarChar(255)
-  mojikyo      String? @db.VarChar(255)
-  char1        String? @db.VarChar(255)
-  char1Unicode String? @db.VarChar(255)
-  char2        String? @db.VarChar(255)
-  liuComment   String? @db.VarChar(255)
-  remark       String? @db.VarChar(255)
-  loc          String? @db.VarChar(255)
-  url          String? @db.LongText
-  id           Int     @id
-
-  @@map("hi-gaiji-comfirm-20230707")
-}
-
-enum Role {
-  USER
-  ADVANCED_USER
-  ADMIN
-}
-
 model DBManual {
   id        Int       @id @default(autoincrement())
   createdAt DateTime  @default(now())
@@ -313,4 +259,10 @@ model DBManual {
   name      String    @unique
   full_name String?
   article   String?   @db.LongText
+}
+
+enum Role {
+  USER
+  ADVANCED_USER
+  ADMIN
 }

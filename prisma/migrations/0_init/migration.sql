@@ -97,9 +97,9 @@ CREATE TABLE `JiruishoChushaku` (
     `maki` VARCHAR(191) NULL,
     `hen` VARCHAR(191) NULL,
     `bu` VARCHAR(191) NULL,
-    `word_in_maeda` VARCHAR(191) NOT NULL,
-    `word_in_kurokawa` VARCHAR(191) NOT NULL,
     `annotation` LONGTEXT NOT NULL,
+    `word_in_kurokawa` VARCHAR(191) NOT NULL,
+    `word_in_maeda` VARCHAR(191) NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -113,8 +113,6 @@ CREATE TABLE `BunmeiSetsuyoshu` (
     `entry_original` VARCHAR(1000) NULL,
     `gokei` VARCHAR(500) NULL,
     `gokei_original` VARCHAR(500) NULL,
-    `shoten` VARCHAR(191) NULL,
-    `shoten_original` VARCHAR(191) NULL,
     `left_kun` VARCHAR(191) NULL,
     `left_kun_original` VARCHAR(191) NULL,
     `definition` LONGTEXT NULL,
@@ -123,11 +121,13 @@ CREATE TABLE `BunmeiSetsuyoshu` (
     `mon` VARCHAR(191) NULL,
     `page` VARCHAR(191) NULL,
     `line` VARCHAR(191) NULL,
-    `no_inline` VARCHAR(191) NULL,
-    `ndl_comma` VARCHAR(191) NULL,
     `ndl_link` VARCHAR(191) NULL,
-    `revision` VARCHAR(191) NULL,
     `remark` VARCHAR(191) NULL,
+    `ndl_comma` VARCHAR(191) NULL,
+    `no_inline` VARCHAR(191) NULL,
+    `revision` VARCHAR(191) NULL,
+    `shoten` VARCHAR(191) NULL,
+    `shoten_original` VARCHAR(191) NULL,
 
     UNIQUE INDEX `BunmeiSetsuyoshu_bunmei_id_key`(`bunmei_id`),
     PRIMARY KEY (`id`)
@@ -286,23 +286,6 @@ CREATE TABLE `GlyphData` (
     `data` TEXT NULL,
 
     UNIQUE INDEX `GlyphData_name_key`(`name`),
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `hi-gaiji-comfirm-20230707` (
-    `textId` LONGTEXT NULL,
-    `ctlId` VARCHAR(255) NULL,
-    `mojikyo` VARCHAR(255) NULL,
-    `char1` VARCHAR(255) NULL,
-    `char1Unicode` VARCHAR(255) NULL,
-    `char2` VARCHAR(255) NULL,
-    `liuComment` VARCHAR(255) NULL,
-    `remark` VARCHAR(255) NULL,
-    `loc` VARCHAR(255) NULL,
-    `url` LONGTEXT NULL,
-    `id` INTEGER NOT NULL,
-
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
