@@ -98,6 +98,8 @@ function ResultTable({ data }: { data: JiruishoChushakuWithJiruisho[] }) {
             {session && session.user.role === "ADMIN" && <th>操作</th>}
             <th>注釈ID</th>
             <th>見出し語ID・見出し語</th>
+            <th>音訓</th>
+            <th>注文</th>
             <th>注釈</th>
           </tr>
         </thead>
@@ -126,6 +128,8 @@ function ResultTable({ data }: { data: JiruishoChushakuWithJiruisho[] }) {
                   {row.jiruisho.id}・{row.jiruisho.entry}
                 </Link>
               </td>
+              <td>{row.jiruisho.gokei_display}</td>
+              <td>{row.jiruisho.definition}</td>
               <td className="">{row.annotation}</td>
             </tr>
           ))}
