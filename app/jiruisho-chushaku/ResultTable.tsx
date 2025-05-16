@@ -8,15 +8,15 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 type JiruishoChushakuWithJiruisho = Prisma.JiruishoChushakuGetPayload<{
-  include:{
-    jiruisho: true
-  }
-}>
+  include: {
+    jiruisho: true;
+  };
+}>;
 
 function ResultTable({ data }: { data: JiruishoChushakuWithJiruisho[] }) {
   const { data: session } = useSession();
   const [current, setCurrent] = useState(0);
-  const router= useRouter();
+  const router = useRouter();
   const createItemModalRef = useRef<HTMLDialogElement>(null);
   const editItemModalRef = useRef<HTMLDialogElement>(null);
   const deleteItemModalRef = useRef<HTMLDialogElement>(null);
@@ -39,7 +39,6 @@ function ResultTable({ data }: { data: JiruishoChushakuWithJiruisho[] }) {
   const handleDelete = (id: number) => {
     setCurrent(id);
     deleteItemModalRef.current?.showModal();
-
   };
 
   const handleConfirmDelete = async () => {
@@ -107,7 +106,8 @@ function ResultTable({ data }: { data: JiruishoChushakuWithJiruisho[] }) {
           {data.map((row, i) => (
             <tr key={i}>
               {session && session.user.role === "ADMIN" && (
-                <td className="flex gap-2 items-center justify-center text-center">
+                <td >
+                  <div className="flex flex-col gap-2">
                   <button
                     className="btn btn-primary"
                     onClick={() => handleEdit(row.jiruisho.id)}
@@ -120,11 +120,15 @@ function ResultTable({ data }: { data: JiruishoChushakuWithJiruisho[] }) {
                   >
                     削除
                   </button>
+                  </div>
                 </td>
               )}
               <td>{row.id}</td>
               <td>
-                <Link href={`/jiruisho/${row.jiruisho.id}`} className="link link-hover">
+                <Link
+                  href={`/jiruisho/${row.jiruisho.id}`}
+                  className="link link-hover"
+                >
                   {row.jiruisho.id}・{row.jiruisho.entry}
                 </Link>
               </td>
