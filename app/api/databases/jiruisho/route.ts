@@ -15,8 +15,6 @@ export async function GET(request: Request) {
 
   const results = await jiruishoFindmany({
     entry,
-    gokei_search_original,
-    gokei_search_current,
     definition,
     hen,
     bu,
