@@ -1,5 +1,5 @@
 "use client";
-import { JiruishoChushaku, Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { useRef, useState } from "react";
 import { deleteItem } from "./actions";
@@ -17,7 +17,6 @@ function ResultTable({ data }: { data: JiruishoChushakuWithJiruisho[] }) {
   const { data: session } = useSession();
   const [current, setCurrent] = useState(0);
   const router = useRouter();
-  const createItemModalRef = useRef<HTMLDialogElement>(null);
   const editItemModalRef = useRef<HTMLDialogElement>(null);
   const deleteItemModalRef = useRef<HTMLDialogElement>(null);
 
@@ -27,12 +26,7 @@ function ResultTable({ data }: { data: JiruishoChushakuWithJiruisho[] }) {
     </form>
   );
 
-  const handleCreate = () => {
-    createItemModalRef.current?.showModal();
-  };
   const handleEdit = (id: number) => {
-    // setCurrent(id);
-    // editItemModalRef.current?.showModal();
     router.push(`/jiruisho-chushaku/create?id=${id}`);
   };
 
@@ -51,15 +45,12 @@ function ResultTable({ data }: { data: JiruishoChushakuWithJiruisho[] }) {
       {session && session.user.role === "ADMIN" && (
         <>
           <div className="flex justify-end">
-            {/* @ts-ignore */}
-            {/* <button className="btn btn-primary" onClick={() => handleCreate()}> */}
             <Link
               href={"/jiruisho-chushaku/create"}
               className="btn btn-primary"
             >
               新規作成
             </Link>
-            {/* </button> */}
           </div>
 
           <dialog ref={editItemModalRef} className="modal">
@@ -106,20 +97,20 @@ function ResultTable({ data }: { data: JiruishoChushakuWithJiruisho[] }) {
           {data.map((row, i) => (
             <tr key={i}>
               {session && session.user.role === "ADMIN" && (
-                <td >
+                <td>
                   <div className="flex flex-col gap-2">
-                  <button
-                    className="btn btn-primary"
-                    onClick={() => handleEdit(row.jiruisho.id)}
-                  >
-                    修正
-                  </button>
-                  <button
-                    className="btn btn-error"
-                    onClick={() => handleDelete(row.id)}
-                  >
-                    削除
-                  </button>
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => handleEdit(row.jiruisho.id)}
+                    >
+                      修正
+                    </button>
+                    <button
+                      className="btn btn-error"
+                      onClick={() => handleDelete(row.id)}
+                    >
+                      削除
+                    </button>
                   </div>
                 </td>
               )}
