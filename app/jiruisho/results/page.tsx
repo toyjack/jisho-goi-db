@@ -23,17 +23,19 @@ async function JiruishoResultsPage({
   searchParams?: { [key: string]: string };
 }) {
   if (!searchParams) return <div>検索結果がありません</div>;
-  // entry=&gokei_search_current=ア&=&defination=&shouten=&hen=&bu=&onkun=&char_count=
+
+  const ndl_url = (searchParams.ndl_maki || "")+( searchParams.ndl_page || "");
+
   const query: JiruishoFindManyQuery = {
     entry: searchParams.entry,
-    gokei_search_current: searchParams.gokei_search_current,
-    gokei_search_original: searchParams.gokei_search_original,
+    gokei_search: searchParams.gokei_search,
     definition: searchParams.definition,
     shouten: searchParams.shouten,
     bu: searchParams.bu,
     hen: searchParams.hen,
     onkun: searchParams.onkun,
     char_count: searchParams.char_count,
+    ndl_url: ndl_url,
   };
   const { count, data: results } = await jiruishoFindmany(query);
 
@@ -60,7 +62,7 @@ async function JiruishoResultsPage({
                 <td>
                   <Link
                     href={`/jiruisho/${result.id}`}
-                    className="link link-hover"
+                    className="link link-hover kbd"
                   >
                     {result.entry}
                   </Link>
@@ -89,7 +91,6 @@ async function JiruishoResultsPage({
                   </Link>
                 </td>
                 <td>{result.onkun}</td>
-                <td>{result.char_count}</td>
                 <td>{result.gokei_display}</td>
                 <td>{result.defination}</td>
 

@@ -1,26 +1,29 @@
 import { prisma } from "@/lib/prisma";
-import { Jiruisho, Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 
 export interface JiruishoFindManyQuery {
   entry?: string | null;
-  gokei_search_current?: string | null;
-  gokei_search_original?: string | null;
+  gokei_search?: string | null;
   definition?: string | null;
   shouten?: string | null;
   hen?: string | null;
   bu?: string | null;
   onkun?: string | null;
   char_count?: string | null;
+  ndl_url?: string | null;
 }
 
 export async function jiruishoFindOne(id: string) {
   const result = await prisma.jiruisho.findUnique({
     where: { id: Number(id) },
+    include:{
+      chushaku: true
+    }
   });
   return result;
 }
 
-export async function jiruishoFindmany(query: Partial<Jiruisho>) {
+export async function jiruishoFindmany(query: JiruishoFindManyQuery) {
   const where: Prisma.JiruishoWhereInput = {
     AND: [
       {
@@ -29,14 +32,32 @@ export async function jiruishoFindmany(query: Partial<Jiruisho>) {
         },
       },
       {
-        gokei_search_current: {
-          contains: query.gokei_search_current || undefined,
-        },
+        OR: [
+          {
+            gokei_search_current: {
+              contains: query.gokei_search || undefined,
+            },
+          },
+          {
+            gokei_search_original: {
+              contains: query.gokei_search || undefined,
+            },
+          },
+        ],
       },
       {
-        gokei_search_original: {
-          contains: query.gokei_search_original || undefined,
-        },
+        OR: [
+          {
+            maeda_ndl_url: {
+              contains: query.ndl_url || undefined,
+            },
+          },
+          {
+            kurokawa_ndl_url: {
+              contains: query.ndl_url || undefined,
+            },
+          },
+        ],
       },
       {
         definition: {
@@ -83,4 +104,19 @@ export async function jiruishoFindmany(query: Partial<Jiruisho>) {
   };
 
   return response;
+}
+
+
+export async function countItemsByField(
+  field: keyof JiruishoFindManyQuery,
+  value: string
+) {
+  const where: Prisma.JiruishoWhereInput = {
+    [field]: {
+      contains: value,
+    },
+  };
+
+  const count = await prisma.jiruisho.count({ where });
+  return count;
 }

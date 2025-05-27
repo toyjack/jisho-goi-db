@@ -1,5 +1,5 @@
 import BackButton from "@/components/ui/BackButton";
-import { jiruishoFindOne } from "@/db/jiruisho";
+import { countItemsByField, jiruishoFindOne } from "@/db/jiruisho";
 import Link from "next/link";
 import JiruishoImageTab from "./ImageTab";
 
@@ -15,6 +15,16 @@ async function JiruishoItemPage({ params }: { params: { id: string } }) {
   if (!result) {
     return <div>データが見つかりませんでした。</div>;
   }
+
+  const countItemInBu = await countItemsByField(
+    "bu",
+    result.bu || ""
+  );
+  
+  const countItemInHen = await countItemsByField(
+    "hen",
+    result.hen || ""
+  );
 
   let tabData: ImageData[] = [];
 
@@ -64,6 +74,15 @@ async function JiruishoItemPage({ params }: { params: { id: string } }) {
               <td>{result.entry}</td>
             </tr>
             <tr>
+              <th>語形原表記</th>
+              <td>{result.gokei_display}</td>
+            </tr>
+            <tr>
+              <th>注文</th>
+              <td>{result.definition}</td>
+            </tr>
+
+            <tr>
               <th>声点</th>
               <td>{result.shouten}</td>
             </tr>
@@ -75,6 +94,17 @@ async function JiruishoItemPage({ params }: { params: { id: string } }) {
               <th>所在部</th>
               <td>{result.bu}</td>
             </tr>
+
+            <tr>
+              <th>所在篇の項目数</th>
+              <td>{countItemInHen}</td>
+            </tr>
+
+            <tr>
+              <th>所在部の項目数</th>
+              <td>{countItemInBu}</td>
+            </tr>
+
             <tr>
               <th>前田本所在</th>
               <td>{result.maeda_loc}</td>
@@ -121,19 +151,16 @@ async function JiruishoItemPage({ params }: { params: { id: string } }) {
             </tr>
 
             <tr>
-              <th>語形原表記</th>
-              <td>{result.gokei_display}</td>
-            </tr>
-
-            <tr>
-              <th>註文</th>
-              <td>{result.definition}</td>
-            </tr>
-
-            <tr>
               <th>備考</th>
               <td>{result.remark}</td>
             </tr>
+
+            {result.chushaku && (
+              <tr>
+                <th>注釈</th>
+                <td>{result.chushaku.annotation}</td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

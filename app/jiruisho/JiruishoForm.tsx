@@ -2,6 +2,8 @@
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import TextInput from "../../components/common/TextInput";
+import Select from "@/components/common/Select";
+import { buOptions, henOptions, makiOptions, onkunOptions } from "./results/constants";
 
 interface FormData {
   entry?: string;
@@ -13,16 +15,27 @@ interface FormData {
   bu?: string;
   onkun?: string;
   char_count?: string;
+  ndl_maki?: string;
+  ndl_page?: string;
 }
 
 function JiruishoForm() {
   const router = useRouter();
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = (data:FormData) => {
+  const onSubmit = (data: FormData) => {
+    const arr = ["onkun", "bu", "hen"] as Partial<keyof FormData>[];
+
+    for (const key of arr) {
+      if (data[key] === "不明") {
+        data[key] = "";
+      }
+    }
+
     const notEmptyQuery = Object.fromEntries(
       Object.entries(data).filter(([, v]) => v != "")
     );
+
     const query = new URLSearchParams(notEmptyQuery);
     router.push(`/jiruisho/results?${query}`);
   };
@@ -36,20 +49,14 @@ function JiruishoForm() {
         register={register}
       />
       <TextInput
-        labelLeftUppon="語形（現代仮名遣い）"
-        labelRightBottom="カタカナ"
-        name={"gokei_search_current"}
-        register={register}
-      />
-      <TextInput
-        labelLeftUppon="語形（原表記）"
-        labelRightBottom="カタカナ"
-        name={"gokei_search_original"}
+        labelLeftUppon="語形"
+        labelRightBottom="カタカナ（清濁不問・現代仮名遣い可）"
+        name={"gokei_search"}
         register={register}
       />
 
       <TextInput
-        labelLeftUppon="註文"
+        labelLeftUppon="注文"
         labelRightBottom="カタカナまたは漢字"
         name={"definition"}
         register={register}
@@ -64,31 +71,47 @@ function JiruishoForm() {
         register={register}
       />
 
-      <TextInput
+      <Select
         labelLeftUppon="篇"
-        labelRightBottom="カタカナ"
         name={"hen"}
         register={register}
+        options={henOptions}
       />
 
-      <TextInput
+      <Select
         labelLeftUppon="部"
-        labelRightBottom="漢字"
         name={"bu"}
         register={register}
+        options={buOptions}
       />
 
-      <TextInput
-        labelLeftUppon="音訓"
-        labelRightBottom="「音」または「訓」"
+      <Select
+        labelLeftUppon="語種"
         name={"onkun"}
         register={register}
+        options={onkunOptions}
       />
 
       <TextInput
         labelLeftUppon="字数"
         labelRightBottom="アラビア数字"
         name={"char_count"}
+        register={register}
+      />
+
+      <div className="divider"></div>
+
+      <Select
+        labelLeftUppon="所在巻"
+        labelRightBottom="所在検索：以下のコマ数の部分に半角数字で入力するとそのページの全語が検索されるようにしたい。"
+        name={"ndl_maki"}
+        register={register}
+        options={makiOptions}
+      />
+      <TextInput
+        labelLeftUppon="所在ページ"
+        labelRightBottom="アラビア半角数字"
+        name={"ndl_page"}
         register={register}
       />
 
