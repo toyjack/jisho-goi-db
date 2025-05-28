@@ -24,10 +24,10 @@ function JiruishoForm() {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data: FormData) => {
-    const arr = ["onkun", "bu", "hen"] as Partial<keyof FormData>[];
+    const arr = ["onkun", "bu", "hen","ndl_maki"] as Partial<keyof FormData>[];
 
     for (const key of arr) {
-      if (data[key] === "不明") {
+      if (data[key] === "すべて") {
         data[key] = "";
       }
     }
@@ -50,7 +50,7 @@ function JiruishoForm() {
       />
       <TextInput
         labelLeftUppon="語形"
-        labelRightBottom="カタカナ（清濁不問・現代仮名遣い可）"
+        labelRightBottom="カナ（清濁不問・現代仮名遣い可）"
         name={"gokei_search"}
         register={register}
       />
@@ -66,7 +66,6 @@ function JiruishoForm() {
 
       <TextInput
         labelLeftUppon="声点"
-        labelRightBottom="..."
         name={"shouten"}
         register={register}
       />
@@ -103,7 +102,6 @@ function JiruishoForm() {
 
       <Select
         labelLeftUppon="所在巻"
-        labelRightBottom="所在検索：以下のコマ数の部分に半角数字で入力するとそのページの全語が検索されるようにしたい。"
         name={"ndl_maki"}
         register={register}
         options={makiOptions}

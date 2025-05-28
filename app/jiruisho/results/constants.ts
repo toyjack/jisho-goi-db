@@ -1,11 +1,12 @@
 export const onkunOptions = [
-  { value: "不明", label: "不明" },
+  { value: "すべて", label: "すべて" },
   { value: "音", label: "音" },
   { value: "訓", label: "訓" },
+  { value: "不明", label: "不明" },
 ];
 
 export const henOptions = [
-  { value: "不明", label: "不明" },
+  { value: "すべて", label: "すべて" },
   { value: "イ", label: "イ" },
   { value: "ロ", label: "ロ" },
   { value: "ハ", label: "ハ" },
@@ -56,7 +57,7 @@ export const henOptions = [
 ];
 
 export const buOptions = [
-  { value: "不明", label: "不明" },
+  { value: "すべて", label: "すべて" },
   { value: "天象", label: "天象" },
   { value: "地儀", label: "地儀" },
   { value: "植物", label: "植物" },
@@ -81,7 +82,7 @@ export const buOptions = [
 ];
 
 export const makiOptions = [
-  { value: "不明", label: "不明" },
+  { value: "すべて", label: "すべて" },
   { value: "https://dl.ndl.go.jp/pid/1182105/1/", label: "前田本上巻" },
   { value: "https://dl.ndl.go.jp/pid/1182119/1/", label: "前田本下巻" },
   { value: "https://dl.ndl.go.jp/pid/3438233/1/", label: "黒川本上巻" },
