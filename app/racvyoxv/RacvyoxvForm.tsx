@@ -30,7 +30,7 @@ function RacvyoxvForm() {
       />
 
       <TextInput
-        labelLeftUppon="熟語字数"
+        labelLeftUppon="単語構成字数"
         labelRightBottom="半角アラビア数字"
         name={"kanjiPairLength"}
         register={register}
