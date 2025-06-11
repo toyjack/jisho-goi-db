@@ -3,14 +3,12 @@ import Link from "next/link";
 
 const tableHeader = [
   // { label: "ID", field: "id" },
-  { label: "部", field: "initial_on", type: "text" },
-  { label: "代表字", field: "entry", type: "text" },
-  { label: "熟語", field: "kanji_pair", type: "text" },
-  { label: "左ルビ(1字め)", field: "ruby_left_first", type: "text" },
-  { label: "左ルビ(2字め/3字め…)", field: "ruby_left_remains", type: "text" },
-  { label: "右ルビ(1字め)", field: "ruby_right_first", type: "text" },
-  { label: "右ルビ(2字め/3字め…)", field: "ruby_right_remains", type: "text" },
+  { label: "部", field: "bu", type: "text" },
+  { label: "見出し語", field: "entry", type: "text" },
+  { label: "訓読み", field: "kun", type: "block" },
+  { label: "音読み", field: "on", type: "block" },
   { label: "備考", field: "remark", type: "text" },
+  { label: "Gallica画像", field: "gallica", type: "button" },
   // { label: "所在（笠間頁）", field: "page", type: "text" },
   // { label: "頁内行数", field: "line", type: "text" },
   // { label: "Gallica URL", field: "gallica", type: "button" },
@@ -64,6 +62,16 @@ async function JiruishoResultsPage({
           {label}
         </Link>
       );
+    }
+
+    if (type === "block") {
+      return (
+        <div className="flex gap-1">
+          {value ? value.split(";").map((line, index) => (
+            <span key={index} className="kbd">{line}</span>
+          )) : "なし"}
+        </div>
+      );      
     }
     return <>{value}</>;
   };

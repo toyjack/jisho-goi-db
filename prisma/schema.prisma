@@ -124,37 +124,33 @@ model BunmeiSetsuyoshu {
 }
 
 model Racvyoxv {
-  id                 Int     @id @default(autoincrement())
-  record_creator     String?
-  check_kubo         String?
-  check_fujimoto     String?
-  page               String?
-  line               String?
-  gallica            String?
-  initial_on         String?
-  entry              String?
-  kanji_pair         String?
-  ruby_left_first    String?
-  ruby_left_remains  String?
-  ruby_right_first   String?
-  ruby_right_remains String?
-  remark             String?
-  nikkoku1_entry     String?
-  kanji_pair_length  String?
-  nikkoku1_url       String?
-  nikkoku2_entry     String?
-  nikkoku2_url       String?
-  nikkoku3_entry     String?
-  nikkoku3_url       String?
-  nikkoku4_entry     String?
-  nikkoku4_url       String?
-  nikkoku5_entry     String?
-  nikkoku5_url       String?
-  nikkoku6_entry     String?
-  nikkoku6_url       String?
-  nikkoku7_entry     String?
-  nikkoku7_url       String?
-  group_entry        String?
+  id             String  @id
+  page           String?
+  line           String?
+  gallica        String?
+  bu             String?
+  entry          String?
+  entry_length   Int?
+  gokei          String?
+  kun            String?
+  on             String?
+  remark         String?
+  nikkoku1_entry String?
+  nikkoku1_url   String?
+  nikkoku2_entry String?
+  nikkoku2_url   String?
+  nikkoku3_entry String?
+  nikkoku3_url   String?
+  nikkoku4_entry String?
+  nikkoku4_url   String?
+  nikkoku5_entry String?
+  nikkoku5_url   String?
+  nikkoku6_entry String?
+  nikkoku6_url   String?
+  nikkoku7_entry String?
+  nikkoku7_url   String?
+  nikkoku8_entry String?
+  nikkoku8_url   String?
 }
 
 model Wakunnosiori_Entry {
@@ -174,95 +170,6 @@ model Wakunnosiori_Def {
   entry      Wakunnosiori_Entry @relation(fields: [entry_id], references: [id])
 
   @@index([entry_id])
-}
-
-model KrmRecord {
-  id             Int       @id @default(autoincrement())
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @default(now())
-  deletedAt      DateTime?
-  KRID_n         String
-  KRID_sn        String
-  KR2ID          String
-  KRID           String
-  KR_Tenri_p     String?
-  KR_vol_name    String?
-  KR_radical     String?
-  KR_vol_radical String?
-  Entry          String?
-  Entry_original String?
-  Def            String?   @db.VarChar(2000)
-  Remarks        String?   @db.VarChar(2000)
-}
-
-model HiGaiji {
-  id       Int     @id @default(autoincrement())
-  textId   String? @db.VarChar(255)
-  manageId String? @db.VarChar(255)
-  gaiji    String? @db.VarChar(255)
-  char1    String? @db.VarChar(255)
-  unicode  String? @db.VarChar(255)
-  char2    String? @db.VarChar(255)
-  matched  String? @db.VarChar(255)
-  remark   String? @db.VarChar(255)
-  imageUrl String? @db.VarChar(255)
-}
-
-model OudanKanjionItem {
-  id          Int       @id @default(autoincrement())
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime?
-  book_id     String
-  book_name   String
-  char_id     Int
-  word_id     Int
-  char        String
-  word        String
-  char_index  Int
-  beat_count  Int?
-  shoten      String?
-  shoten_type String?
-  ruby        String?
-  ruby_all    String?
-  fanqie      String?
-  ruion       String?
-  etc         String?
-  location    String?
-  remarks     String?
-}
-
-model OudankanjionBook {
-  id              Int      @id @default(autoincrement())
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime
-  bookId          String   @unique
-  bookInformation String
-  bookName        String
-  inputLegend     String
-  inputer         String
-  jionInformation String
-  possession      String
-  references      String
-  time            String
-  timeDesc        String?
-}
-
-model GlyphData {
-  id        Int       @id @default(autoincrement())
-  createdAt DateTime  @default(now())
-  updatedAt DateTime?
-  name      String    @unique
-  related   String?
-  data      String?   @db.Text
-}
-
-model DBManual {
-  id        Int       @id @default(autoincrement())
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt
-  name      String    @unique
-  full_name String?
-  article   String?   @db.LongText
 }
 
 enum Role {

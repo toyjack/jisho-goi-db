@@ -11,64 +11,36 @@ export interface RacvyoxvFindManyQuery {
 
 export async function racvyoxvFindOne(id: string) {
   const result = await prisma.racvyoxv.findUnique({
-    where: { id: Number(id) },
+    where: { id },
   });
   return result;
 }
 
-export async function racvyoxvFindMany(query: RacvyoxvFindManyQuery){
+export async function racvyoxvFindMany(query: RacvyoxvFindManyQuery) {
   console.log(query);
   const where: Prisma.RacvyoxvWhereInput = {
     AND: [
       {
-        OR: [
-          {
-            kanji_pair: {
-              contains: query.entry as string,
-            },
-          },
-          {
-            entry: {
-              contains: query.entry as string,
-            },
-          },
-          
-        ],
+        entry: {
+          contains: query.entry as string,
+        },
       },
       {
-        kanji_pair_length: query.kanji_pair_length as string,
+        entry_length: Number(query.kanji_pair_length) || undefined,
       },
       {
-        initial_on: query.bu,
+        bu: query.bu,
       },
       {
-        OR:[
-          {
-            ruby_left_first: {
-              contains: query.kunyomi as string,
-            },
-          },
-          {
-            ruby_left_remains: {
-              contains: query.kunyomi as string,
-            },
-          },
-        ]
+        kun: {
+          contains: query.kunyomi as string,
+        },
       },
       {
-        OR:[
-          {
-            ruby_right_first: {
-              contains: query.onyomi as string,
-            },
-          },
-          {
-            ruby_right_remains: {
-              contains: query.onyomi as string,
-            },
-          },
-        ]
-      }
+        on: {
+          contains: query.onyomi as string,
+        },
+      },
     ],
   };
   const resutls = await prisma.$transaction([

@@ -3,38 +3,6 @@ import BackButton from "@/components/ui/BackButton";
 import { racvyoxvFindOne } from "@/db/racvyoxv";
 import Link from "next/link";
 
-const tableHeader = [
-  { label: "ID", field: "id" },
-  { label: "代表字頭記号", field: "group_entry" },
-  { label: "所在（笠間頁）", field: "page" },
-  { label: "頁内行数", field: "line" },
-  { label: "Gallica URL", field: "gallica" },
-  { label: "頭音", field: "initial_on" },
-  { label: "代表字", field: "entry" },
-  { label: "熟語", field: "kanji_pair" },
-  { label: "訓（左傍）", field: "ruby_left_first" },
-  { label: "訓（左傍）", field: "ruby_left_remains" },
-  { label: "音（右傍）", field: "ruby_right_first" },
-  { label: "音（右傍）", field: "ruby_right_remains" },
-  { label: "備考", field: "remark" },
-  { label: "日国", field: "nikkoku1_entry" },
-  { label: "日国URL", field: "nikkoku1_url" },
-  // { label: "日国1", field: "nikkoku1_entry" },
-  // { label: "日国1 URL", field: "nikkoku1_url" },
-  // { label: "日国2", field: "nikkoku2_entry" },
-  // { label: "日国2 URL", field: "nikkoku2_url" },
-  // { label: "日国3", field: "nikkoku3_entry" },
-  // { label: "日国3 URL", field: "nikkoku3_url" },
-  // { label: "日国4", field: "nikkoku4_entry" },
-  // { label: "日国4 URL", field: "nikkoku4_url" },
-  // { label: "日国5", field: "nikkoku5_entry" },
-  // { label: "日国5 URL", field: "nikkoku5_url" },
-  // { label: "日国6", field: "nikkoku6_entry" },
-  // { label: "日国6 URL", field: "nikkoku6_url" },
-  // { label: "日国7", field: "nikkoku7_entry" },
-  // { label: "日国7 URL", field: "nikkoku7_url" },
-];
-
 async function RacvyoxvItemPage({ params }: { params: { id: string } }) {
   const { id } = params;
   const result = await racvyoxvFindOne(id);
@@ -63,40 +31,28 @@ async function RacvyoxvItemPage({ params }: { params: { id: string } }) {
           </thead>
           <tbody>
             <tr>
-              <th>辞書内ID（仮）</th>
+              <th>辞書内ID</th>
               <td>{result.id}</td>
             </tr>
-            <tr>
+            {/* <tr>
               <th>代表字頭記号</th>
               <td>{result.group_entry}</td>
-            </tr>
+            </tr> */}
             <tr>
               <th>部</th>
-              <td>{result.initial_on}</td>
+              <td>{result.bu}</td>
             </tr>
             <tr>
-              <th>代表字</th>
+              <th>見出し語</th>
               <td>{result.entry}</td>
             </tr>
             <tr>
-              <th>熟語</th>
-              <td>{result.kanji_pair}</td>
+              <th>訓読み</th>
+              <td>{result.kun}</td>
             </tr>
             <tr>
-              <th>左ルビ(1字め)</th>
-              <td>{result.ruby_left_first}</td>
-            </tr>
-            <tr>
-              <th>左ルビ(2字め/3字め…)</th>
-              <td>{result.ruby_left_remains}</td>
-            </tr>
-            <tr>
-              <th>右ルビ(1字め)</th>
-              <td>{result.ruby_right_first}</td>
-            </tr>
-            <tr>
-              <th>右ルビ(2字め/3字め…)</th>
-              <td>{result.ruby_right_remains}</td>
+              <th>音読み</th>
+              <td>{result.on}</td>
             </tr>
             <tr>
               <th>所在（笠間頁）</th>
@@ -135,6 +91,148 @@ async function RacvyoxvItemPage({ params }: { params: { id: string } }) {
                 </Link>
               </td>
             </tr>
+
+            {result.nikkoku2_entry && result.nikkoku2_url && (
+              <>
+                <tr>
+                  <th>日国2</th>
+                  <td>{result.nikkoku2_entry}</td>
+                </tr>
+                <tr>
+                  <th>日国2 URL</th>
+                  <td>
+                    <Link
+                      href={result.nikkoku2_url as string}
+                      target="_blank"
+                      className="link link-hover"
+                    >
+                      {result.nikkoku2_url}
+                    </Link>
+                  </td>
+                </tr>
+              </>
+            )}
+            {result.nikkoku3_entry && result.nikkoku3_url && (
+              <>
+                <tr>
+                  <th>日国3</th>
+                  <td>{result.nikkoku3_entry}</td>
+                </tr>
+                <tr>
+                  <th>日国3 URL</th>
+                  <td>
+                    <Link
+                      href={result.nikkoku3_url as string}
+                      target="_blank"
+                      className="link link-hover"
+                    >
+                      {result.nikkoku3_url}
+                    </Link>
+                  </td>
+                </tr>
+              </>
+            )}
+            {result.nikkoku4_entry && result.nikkoku4_url && (
+              <>
+                <tr>
+                  <th>日国4</th>
+                  <td>{result.nikkoku4_entry}</td>
+                </tr>
+                <tr>
+                  <th>日国4 URL</th>
+                  <td>
+                    <Link
+                      href={result.nikkoku4_url as string}
+                      target="_blank"
+                      className="link link-hover"
+                    >
+                      {result.nikkoku4_url}
+                    </Link>
+                  </td>
+                </tr>
+              </>
+            )}
+            {result.nikkoku5_entry && result.nikkoku5_url && (
+              <>
+                <tr>
+                  <th>日国5</th>
+                  <td>{result.nikkoku5_entry}</td>
+                </tr>
+                <tr>
+                  <th>日国5 URL</th>
+                  <td>
+                    <Link
+                      href={result.nikkoku5_url as string}
+                      target="_blank"
+                      className="link link-hover"
+                    >
+                      {result.nikkoku5_url}
+                    </Link>
+                  </td>
+                </tr>
+              </>
+            )}
+            {result.nikkoku6_entry && result.nikkoku6_url && (
+              <>
+                <tr>
+                  <th>日国6</th>
+                  <td>{result.nikkoku6_entry}</td>
+                </tr>
+                <tr>
+                  <th>日国6 URL</th>
+                  <td>
+                    <Link
+                      href={result.nikkoku6_url as string}
+                      target="_blank"
+                      className="link link-hover"
+                    >
+                      {result.nikkoku6_url}
+                    </Link>
+                  </td>
+                </tr>
+              </>
+            )}
+            {result.nikkoku7_entry && result.nikkoku7_url && (
+              <>
+                <tr>
+                  <th>日国7</th>
+                  <td>{result.nikkoku7_entry}</td>
+                </tr>
+                <tr>
+                  <th>日国7 URL</th>
+                  <td>
+                    <Link
+                      href={result.nikkoku7_url as string}
+                      target="_blank"
+                      className="link link-hover"
+                    >
+                      {result.nikkoku7_url}
+                    </Link>
+                  </td>
+                </tr>
+              </>
+            )}
+            {result.nikkoku8_entry && result.nikkoku8_url && (
+              <>
+                <tr>
+                  <th>日国8</th>
+                  <td>{result.nikkoku8_entry}</td>
+                </tr>
+                <tr>
+                  <th>日国8 URL</th>
+                  <td>
+                    <Link
+                      href={result.nikkoku8_url as string}
+                      target="_blank"
+                      className="link link-hover"
+                    >
+                      {result.nikkoku8_url}
+                    </Link>
+                  </td>
+                </tr>
+              </>
+            )}
+        
 
             <tr>
               <th>備考</th>
