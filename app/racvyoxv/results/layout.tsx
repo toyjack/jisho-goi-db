@@ -1,7 +1,7 @@
 import TinaManualComponent from "@/components/tina/manual";
 import client from "@/tina/__generated__/client";
 
-async function layout({ children }: { children: React.ReactNode }) {
+async function RacvyoxvResultLayout({ children }: { children: React.ReactNode }) {
   const result = await client.queries.manual({
     relativePath: "racvyoxv.mdx",
   });
@@ -22,4 +22,4 @@ async function layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default layout;
+export default RacvyoxvResultLayout;
