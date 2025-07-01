@@ -23,13 +23,6 @@ function Shukai2024Section() {
             開催地: 【オンライン】Zoom　【現地】清華大学文南楼116　（参加無料） <br />
             お問い合わせ: liuguanwei2013[atmark]gmail.com
           </p>
-          <Link
-            href="https://forms.office.com/r/KESQnWXqW8"
-            className="btn btn-primary "
-            target={"_blank"}
-          >
-            参加申し込み
-          </Link>
         </div>
       </div>
     </div>
