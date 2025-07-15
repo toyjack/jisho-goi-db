@@ -12,8 +12,8 @@ function GyokuhentaizenLayout({
       <div className="p-10">
         <h2 className="text-3xl font-bold">
           <Link href="/gyokuhentaizen">増続大広益会玉篇大全データベース</Link>
-          <span className="badge badge-lg">試行版vol.1 ~ vol.5</span>
-          <span className="badge badge-lg badge-secondary">v2024-10</span>
+          <span className="badge badge-lg">全文公開試行版</span>
+          <span className="badge badge-lg badge-secondary">v2025-03</span>
         </h2>
       </div>
       <label
