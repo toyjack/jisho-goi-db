@@ -1,14 +1,9 @@
-import TinaManualComponent from "@/components/tina/manual";
-import client from "@/tina/__generated__/client";
 
 async function RacvyoxvPage() {
-  const result = await client.queries.manual({
-    relativePath: "racvyoxv.mdx",
-  });
 
   return (
     <div className="px-4 pb-8">
-      <TinaManualComponent {...result} />
+      
     </div>
   );
 }

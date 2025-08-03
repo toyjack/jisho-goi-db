@@ -1,14 +1,16 @@
-import TinaManualComponent from "@/components/tina/manual";
-import client from "@/tina/__generated__/client";
+import JiruishoManual from "@/content/manuals/jiruisho.mdx";
 
-async function JiruishoPage() {
-  const result = await client.queries.manual({
-    relativePath: "jiruisho.mdx",
-  });
+export function generateMetadata() {
+  return {
+    title: '三巻本色葉字類抄',
+    description: '三巻本色葉字類抄データベースの使用説明書',
+  };
+}
 
+function JiruishoPage() {
   return (
     <div className="px-4 pb-8">
-      <TinaManualComponent {...result} />
+      <JiruishoManual />
     </div>
   );
 }

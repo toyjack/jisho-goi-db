@@ -4,8 +4,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Development Commands
 
-- **Development server**: `pnpm dev` - Runs TinaCMS development server with Prisma generation and Next.js dev server
-- **Build**: `pnpm build` - Builds TinaCMS, generates Prisma client, and builds Next.js app for production
+- **Development server**: `pnpm dev` - Runs Prisma generation and Next.js dev server
+- **Build**: `pnpm build` - Generates Prisma client and builds Next.js app for production
 - **Lint**: `pnpm lint` - Runs Next.js ESLint configuration
 - **Start production**: `pnpm start` - Starts production server
 
@@ -23,7 +23,7 @@ This is a **Japanese dictionary and text corpus database application** built wit
 - **Styling**: TailwindCSS with DaisyUI components
 - **Database**: MySQL with Prisma ORM
 - **Authentication**: NextAuth.js with credentials and OAuth providers
-- **CMS**: TinaCMS for content management
+- **Content Management**: MDX files with custom components
 - **Image Viewing**: OpenSeadragon for IIIF manifests
 - **Caching**: Upstash Redis
 
@@ -68,18 +68,19 @@ RESTful API routes under `/api/databases/[database]/`:
 - Redis caching for performance optimization
 
 ### Content Management
-- **TinaCMS**: Manages static content (manuals, news, articles)
-- **Content files**: Stored in `/contents/` as MDX and Markdown
-- **Generated files**: TinaCMS generates client and schema files in `/tina/__generated__/`
+- **MDX Files**: Manages static content (manuals, news, articles)
+- **Content files**: Stored in `/content/` as MDX files
+- **Components**: Custom MDX components in `/components/mdx/` for rich content
 
 ### Important Configuration Files
 - **Database**: `prisma/schema.prisma` (MySQL with Prisma relation mode)
 - **Auth**: `lib/nextauth-options.ts` (NextAuth configuration with role extensions)
-- **Images**: `next.config.js` (IIIF domain allowlist for remote images)
+- **Images**: `next.config.js` (IIIF domain allowlist for remote images, MDX configuration)
 - **Styling**: `tailwind.config.js` (DaisyUI theme configuration)
+- **MDX Components**: `mdx-components.tsx` (Global MDX component configuration)
 
 ### Development Notes
 - Uses pnpm for package management with specific built dependencies configuration
-- Requires environment variables for database, authentication providers, and TinaCMS
+- Requires environment variables for database and authentication providers
 - Admin functionality requires `ADMIN` role in user database record
 - Image viewing requires proper IIIF manifest URLs and tile generation
