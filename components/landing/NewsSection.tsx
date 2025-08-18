@@ -3,6 +3,10 @@ import React from 'react'
 function NewsSection() {
   const news = [
     {
+      title:"落葉集データセットを公開しました（https://doi.org/10.5281/zenodo.16892693）",
+      date:"2025/08/18"
+    },
+    {
       title:"文明本節用集のチリヌルヲ部を検索システム上で追加公開しました",
       date:"2025/3/31"
     },
