@@ -28,6 +28,10 @@ const tableHeader = [
   // { label: "日国7 URL", field: "nikkoku7_url", type: "button" },
 ];
 
+function uniq(array: string[]) {
+  return Array.from(new Set(array));
+}
+
 async function JiruishoResultsPage({
   searchParams,
 }: {
@@ -65,6 +69,7 @@ async function JiruishoResultsPage({
     }
 
     if (type === "block") {
+      value = uniq(value.split(";")).join("; ");
       return (
         <div className="flex gap-1">
           {value ? value.split(";").map((line, index) => (

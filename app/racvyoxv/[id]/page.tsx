@@ -46,14 +46,25 @@ async function RacvyoxvItemPage({ params }: { params: { id: string } }) {
               <th>見出し語</th>
               <td>{result.entry}</td>
             </tr>
+            
             <tr>
-              <th>訓読み</th>
-              <td>{result.kun}</td>
+              <th>代表字の訓読み</th>
+              <td>
+                {result.kun?.split(";")[0]}
+              </td>
             </tr>
             <tr>
-              <th>音読み</th>
-              <td>{result.on}</td>
+              <th>2字目以降の訓読み</th>
+              <td>{result.kun?.split(";").slice(1).join("、")}</td>
             </tr>
+            <tr>
+              <th>代表字の音読み</th>
+              <td>{result.on?.split(";")[0]}</td>
+            </tr>
+            <tr>
+              <th>2字目以降の音読み</th>
+              <td>{result.on?.split(";").slice(1).join("、")}</td>
+              </tr>
             <tr>
               <th>所在（笠間頁）</th>
               <td>{result.page}</td>
@@ -83,7 +94,7 @@ async function RacvyoxvItemPage({ params }: { params: { id: string } }) {
               <th>日国URL</th>
               <td>
                 <Link
-                  href={result.nikkoku1_url as string}
+                  href={result.nikkoku1_url || ""}
                   target="_blank"
                   className="link link-hover"
                 >
