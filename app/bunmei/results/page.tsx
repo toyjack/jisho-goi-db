@@ -1,4 +1,5 @@
 import { bunmeibonFindMany, BunmeibonFindManyQuery } from "@/db/bunmeibon";
+import { BunmeiSetsuyoshu } from "@prisma/client";
 import Link from "next/link";
 
 const tableHeader = [
@@ -18,7 +19,7 @@ const tableHeader = [
   // { label: "影印本番号", field: "page", type: "text" },
   // { label: "行数", field: "line", type: "text" },
   // { label: "備考", field: "remark", type: "text" },
-];
+] as const;
 
 function getLoc(id: string, url: string) {
   const [page, line, col] = id.split("_");
@@ -40,7 +41,7 @@ async function BunmeiResultsPage({
     shouten: searchParams.shouten,
     left_kun: searchParams.left_kun,
     definition: searchParams.definition,
-    no_kundoku: searchParams.no_kundoku==="true" ? true : false,
+    no_kundoku: searchParams.no_kundoku === "true" ? true : false,
   };
   const results = await bunmeibonFindMany(query);
   console.log(results)
@@ -72,7 +73,7 @@ async function BunmeiResultsPage({
       <div className="divider">
         <h2>検索結果：{results.count}件</h2>
       </div>
-      
+
       <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>
@@ -86,18 +87,18 @@ async function BunmeiResultsPage({
             </tr>
           </thead>
           <tbody>
-            {results.data.map((result: any, index: number) => (
+            {results.data.map((result, index) => (
               <tr key={result.bunmei_id}>
                 {/* <th>{index + 1}</th> */}
                 <th>
-                  {getLoc(result.bunmei_id, result.ndl_link)}
+                  {result.ndl_link ? getLoc(result.bunmei_id, result.ndl_link) : "-"}
                   {/* <GetLoc id={result.ghtz_id} url={result.ndl_link} /> */}
                 </th>
                 {tableHeader.map((header) => (
                   <td key={header.label}>
                     <CellBlock
                       label={header.label}
-                      value={result[header.field]}
+                      value={result[header.field] ?? ""}
                       type={header.type}
                       url={`/bunmei/${result.bunmei_id}`}
                     />
