@@ -4,11 +4,12 @@ import { useForm } from "react-hook-form";
 import TextInput from "@/components/common/TextInput";
 
 interface FormData {
-  entry?: string;
-  gokei?: string;
-  leftWakun?: string;
-  shouten?: string;
-  definition?: string;
+  entry: string;
+  gokei: string;
+  leftWakun: string;
+  shouten: string;
+  definition: string;
+  no_kundoku: string;
 }
 
 const mon = [
@@ -40,18 +41,9 @@ function BunmeiForm() {
 
   const router = useRouter();
 
-  type FormData = {
-    entry: string;
-    gokei: string;
-    leftWakun: string;
-    shouten: string;
-    definition: string;
-    no_kundoku: string;
-  };
-
   const { register, handleSubmit } = useForm<FormData>({
     defaultValues: {
-      entry: entry|| "",
+      entry: entry || "",
       gokei: gokei || "",
       leftWakun: leftWakun || "",
       shouten: shouten || "",

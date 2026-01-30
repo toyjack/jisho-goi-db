@@ -1,14 +1,16 @@
-import TinaManualComponent from "@/components/tina/manual";
-import { client } from "@/tina/__generated__/client";
+import HzwmManual from "@/content/manuals/hzwm.mdx";
 
-export default async function HzwmPage() {
-  const result = await client.queries.manual({
-    relativePath: "hzwm.mdx",
-  });
+export function generateMetadata() {
+  return {
+    title: '本草和名データベース',
+    description: '本草和名データベースの使用説明書',
+  };
+}
 
+export default function HzwmPage() {
   return (
     <div className="px-4 pb-8">
-      <TinaManualComponent {...result} />
+      <HzwmManual />
     </div>
   );
 }

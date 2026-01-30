@@ -1,14 +1,16 @@
-import TinaManualComponent from "@/components/tina/manual";
-import client from "@/tina/__generated__/client";
+import KwrsManual from "@/content/manuals/kwrs.mdx";
 
-async function WamyoshoHome() {
-  let result = await client.queries.manual({
-    relativePath: "kwrs.mdx",
-  });
+export function generateMetadata() {
+  return {
+    title: '古活字版和名類聚抄',
+    description: '古活字版和名類聚抄データベースの使用説明書',
+  };
+}
 
+function WamyoshoHome() {
   return (
     <div className="px-4 pb-8">
-      <TinaManualComponent {...result} />
+      <KwrsManual />
     </div>
   );
 }
