@@ -21,6 +21,7 @@ function Shukai2025Section() {
           <p className="py-6">
             開催日: <span className="text-red-600 font-bold">2026年3月1日（日）13:00～16:30 </span> <br />
             開催地: 【オンライン】Zoom　 <br />
+            参加申込： <Link href={"https://forms.microsoft.com/r/BmUpxquwwp"} className="link link-info link-hover">https://forms.microsoft.com/r/BmUpxquwwp</Link> <br />
             お問い合わせ: akari[atmark]tsinghua.edu.cn
           </p>
         </div>
