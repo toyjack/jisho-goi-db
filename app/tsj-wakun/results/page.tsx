@@ -1,5 +1,5 @@
 import { searchTsjWakun } from "@/db/tsj_wakun";
-import { Database } from "@/lib/supabase/type";
+import { Database } from "@/lib/supabase/types";
 import Link from "next/link";
 
 type TsjWakunRow = Database["public"]["Tables"]["tsj_wakun"]["Row"];
