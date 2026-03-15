@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server"
-import { Database } from "@/lib/supabase/type"
+import { Database } from "@/lib/supabase/types"
 
 export async function getTsjWakun(tsjWakunId: string) {
   const supabase = await createClient()
