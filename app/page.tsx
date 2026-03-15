@@ -8,7 +8,6 @@ export default function Home() {
   return (
     <main>
       <Hero />
-      <Shukai2025Section />
       <NewsSection />
       <DatabasesSection />
       <MembersSection />
