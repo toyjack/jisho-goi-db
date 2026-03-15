@@ -287,6 +287,12 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_racvyoxv_distinct_bu: {
+        Args: never
+        Returns: {
+          部: string
+        }[]
+      }
       search_kanseki_records: {
         Args: {
           p_creator?: string
