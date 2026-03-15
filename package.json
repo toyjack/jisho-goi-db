@@ -10,7 +10,7 @@
     "test": "vitest",
     "test:run": "vitest run",
     "supabase": "supabase",
-    "supabase:gen": "source .env && supabase gen types typescript --db-url ${SUPABASE_DB_URL} --schema public > types/supabase.d.ts"
+    "supabase:gen": "source .env && supabase gen types typescript --db-url ${SUPABASE_DB_URL} --schema public > lib/supabase/types.ts"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",
