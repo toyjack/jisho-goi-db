@@ -9,7 +9,8 @@
     "start": "next start",
     "test": "vitest",
     "test:run": "vitest run",
-    "supabase": "supabase"
+    "supabase": "supabase",
+    "supabase:gen": "source .env && supabase gen types typescript --db-url ${SUPABASE_DB_URL} --schema public > types/supabase.d.ts"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",
@@ -55,7 +56,7 @@
     "jsdom": "^27.4.0",
     "postcss": "^8.4.33",
     "prettier": "^3.2.2",
-    "supabase": "^2.76.8",
+    "supabase": "^2.78.1",
     "tailwindcss": "^3.4.1",
     "vitest": "^4.0.18"
   },
