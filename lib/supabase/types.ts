@@ -9,6 +9,84 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      dhsjr: {
+        Row: {
+          ID: string
+          その他: string | null
+          仮名型: string | null
+          仮名注: string | null
+          備考: string | null
+          出現位置: string | null
+          単字_出現形: string | null
+          単字_見出し: string | null
+          単字長: string | null
+          反切: string | null
+          声点: string | null
+          声点型: string | null
+          漢語_alphabet: string | null
+          漢語_出現形: string | null
+          漢語_見出し: string | null
+          漢語内位置: string | null
+          節博士: string | null
+          語種: string | null
+          資料内漢字番号: number
+          資料内漢語番号: string | null
+          資料名: string | null
+          資料番号: string | null
+          類音: string | null
+        }
+        Insert: {
+          ID: string
+          その他?: string | null
+          仮名型?: string | null
+          仮名注?: string | null
+          備考?: string | null
+          出現位置?: string | null
+          単字_出現形?: string | null
+          単字_見出し?: string | null
+          単字長?: string | null
+          反切?: string | null
+          声点?: string | null
+          声点型?: string | null
+          漢語_alphabet?: string | null
+          漢語_出現形?: string | null
+          漢語_見出し?: string | null
+          漢語内位置?: string | null
+          節博士?: string | null
+          語種?: string | null
+          資料内漢字番号: number
+          資料内漢語番号?: string | null
+          資料名?: string | null
+          資料番号?: string | null
+          類音?: string | null
+        }
+        Update: {
+          ID?: string
+          その他?: string | null
+          仮名型?: string | null
+          仮名注?: string | null
+          備考?: string | null
+          出現位置?: string | null
+          単字_出現形?: string | null
+          単字_見出し?: string | null
+          単字長?: string | null
+          反切?: string | null
+          声点?: string | null
+          声点型?: string | null
+          漢語_alphabet?: string | null
+          漢語_出現形?: string | null
+          漢語_見出し?: string | null
+          漢語内位置?: string | null
+          節博士?: string | null
+          語種?: string | null
+          資料内漢字番号?: number
+          資料内漢語番号?: string | null
+          資料名?: string | null
+          資料番号?: string | null
+          類音?: string | null
+        }
+        Relationships: []
+      }
       jyobatsu_records: {
         Row: {
           ID: string
@@ -138,6 +216,21 @@ export type Database = {
         }
         Relationships: []
       }
+      normalizations: {
+        Row: {
+          normalized: string | null
+          target: string | null
+        }
+        Insert: {
+          normalized?: string | null
+          target?: string | null
+        }
+        Update: {
+          normalized?: string | null
+          target?: string | null
+        }
+        Relationships: []
+      }
       racvyoxv_shogyokuhen: {
         Row: {
           "２字目": string | null
@@ -228,6 +321,99 @@ export type Database = {
         }
         Relationships: []
       }
+      "racvyoxv-dev": {
+        Row: {
+          "２字目": string | null
+          "3字目": string | null
+          "4字目": string | null
+          "5字目": string | null
+          GallicaURL: string | null
+          ID: string | null
+          "ページ数（笠間書院総索引／天理図書館善本叢": number | null
+          代表字: string | null
+          代表字頭記号: string | null
+          備考: string | null
+          文字数: number | null
+          篇名: string | null
+          行数: string | null
+          見出し語: string | null
+          "訓読み(左傍1字目)": string | null
+          "訓読み(左傍1字目補完)": string | null
+          "訓読み(左傍2字目)": string | null
+          "訓読み(左傍3字目)": string | null
+          "訓読み(左傍4字目)": string | null
+          "訓読み(左傍5字目)": string | null
+          "語形（音読み）": string | null
+          部: string | null
+          "音読み(右傍1字目)": string | null
+          "音読み(右傍1字目補完)": string | null
+          "音読み(右傍2字目)": string | null
+          "音読み(右傍3字目)": string | null
+          "音読み(右傍4字目)": string | null
+          "音読み(右傍5字目)": string | null
+        }
+        Insert: {
+          "２字目"?: string | null
+          "3字目"?: string | null
+          "4字目"?: string | null
+          "5字目"?: string | null
+          GallicaURL?: string | null
+          ID?: string | null
+          "ページ数（笠間書院総索引／天理図書館善本叢"?: number | null
+          代表字?: string | null
+          代表字頭記号?: string | null
+          備考?: string | null
+          文字数?: number | null
+          篇名?: string | null
+          行数?: string | null
+          見出し語?: string | null
+          "訓読み(左傍1字目)"?: string | null
+          "訓読み(左傍1字目補完)"?: string | null
+          "訓読み(左傍2字目)"?: string | null
+          "訓読み(左傍3字目)"?: string | null
+          "訓読み(左傍4字目)"?: string | null
+          "訓読み(左傍5字目)"?: string | null
+          "語形（音読み）"?: string | null
+          部?: string | null
+          "音読み(右傍1字目)"?: string | null
+          "音読み(右傍1字目補完)"?: string | null
+          "音読み(右傍2字目)"?: string | null
+          "音読み(右傍3字目)"?: string | null
+          "音読み(右傍4字目)"?: string | null
+          "音読み(右傍5字目)"?: string | null
+        }
+        Update: {
+          "２字目"?: string | null
+          "3字目"?: string | null
+          "4字目"?: string | null
+          "5字目"?: string | null
+          GallicaURL?: string | null
+          ID?: string | null
+          "ページ数（笠間書院総索引／天理図書館善本叢"?: number | null
+          代表字?: string | null
+          代表字頭記号?: string | null
+          備考?: string | null
+          文字数?: number | null
+          篇名?: string | null
+          行数?: string | null
+          見出し語?: string | null
+          "訓読み(左傍1字目)"?: string | null
+          "訓読み(左傍1字目補完)"?: string | null
+          "訓読み(左傍2字目)"?: string | null
+          "訓読み(左傍3字目)"?: string | null
+          "訓読み(左傍4字目)"?: string | null
+          "訓読み(左傍5字目)"?: string | null
+          "語形（音読み）"?: string | null
+          部?: string | null
+          "音読み(右傍1字目)"?: string | null
+          "音読み(右傍1字目補完)"?: string | null
+          "音読み(右傍2字目)"?: string | null
+          "音読み(右傍3字目)"?: string | null
+          "音読み(右傍4字目)"?: string | null
+          "音読み(右傍5字目)"?: string | null
+        }
+        Relationships: []
+      }
       tsj_wakun: {
         Row: {
           def_manyogana: string | null
@@ -287,10 +473,50 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      count_dhsjr_all_fields_by_word: {
+        Args: { search_query: string }
+        Returns: number
+      }
+      get_dhsjr_books: {
+        Args: never
+        Returns: {
+          資料名: string
+          資料番号: string
+        }[]
+      }
       get_racvyoxv_distinct_bu: {
         Args: never
         Returns: {
           部: string
+        }[]
+      }
+      search_dhsjr_all_fields_by_word: {
+        Args: { page_number?: number; page_size?: number; search_query: string }
+        Returns: {
+          ID: string
+          score: number
+          その他: string
+          仮名型: string
+          仮名注: string
+          備考: string
+          出現位置: string
+          単字_出現形: string
+          単字_見出し: string
+          単字長: string
+          反切: string
+          声点: string
+          声点型: string
+          漢語_alphabet: string
+          漢語_出現形: string
+          漢語_見出し: string
+          漢語内位置: string
+          節博士: string
+          語種: string
+          資料内漢字番号: number
+          資料内漢語番号: string
+          資料名: string
+          資料番号: string
+          類音: string
         }[]
       }
       search_kanseki_records: {

@@ -1,15 +1,15 @@
-import { racvyoxvFindMany } from "@/db/racvyoxv";
 import { createClient } from "@/lib/supabase/server";
 import Link from "next/link";
 
 const tableHeader = [
   // { label: "ID", field: "id" },
+  { label: "篇名", field: "篇名", type: "text" },
   { label: "部", field: "部", type: "text" },
-  { label: "代表字", field: "代表字", type: "text" },
+  { label: "見出し語", field: "見出し語", type: "text" },
   { label: "訓読み", field: "訓読み(左傍1字目)", type: "block" },
   { label: "音読み", field: "音読み(右傍1字目)", type: "block" },
   { label: "備考", field: "備考", type: "text" },
-  { label: "国書DB", field: "国書DB所在", type: "button" },
+  { label: "画像URL", field: "GallicaURL", type: "button" },
   // { label: "所在（笠間頁）", field: "page", type: "text" },
   // { label: "頁内行数", field: "line", type: "text" },
   // { label: "Gallica URL", field: "gallica", type: "button" },
@@ -38,21 +38,15 @@ async function RacvyoxvDevResultPage({
   const bu = searchParams?.bu;
   const onyomi = searchParams?.onyomi;
   const kunyomi = searchParams?.kunyomi;
+  const henmei = searchParams?.henmei;
 
   const supabase = await createClient();
 
-  // const { data: results } = await racvyoxvFindMany({
-  //   entry,
-  //   kanji_pair_length,
-  //   bu,
-  //   onyomi,
-  //   kunyomi
-  // });
-
   const { data: results, error } = await supabase
-    .from("racvyoxv_shogyokuhen")
+    .from("racvyoxv-dev")
     .select("*")
-    .like("代表字", `%${entry || ""}%`)
+    .like("見出し語", `%${entry || ""}%`)
+    .like("篇名", `%${henmei || ""}%`)
     .like("部", `%${bu || ""}%`)
     .like(`"音読み(右傍1字目)"`, `%${onyomi || ""}%`)
     .like(`"訓読み(左傍1字目)"`, `%${kunyomi || ""}%`);
@@ -84,7 +78,12 @@ async function RacvyoxvDevResultPage({
       return (
         <div className="flex gap-1">
           {value
-            }
+            ?.split(";")
+            .map((v: string, i: number) => (
+              <span key={i} className="badge badge-primary">
+                {v.trim()}
+              </span>
+            ))}
         </div>
       );
     }

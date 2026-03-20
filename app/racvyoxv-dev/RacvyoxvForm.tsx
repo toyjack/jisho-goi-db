@@ -1,6 +1,7 @@
 "use client";
+import Select from "@/components/common/Select";
 import TextInput from "@/components/common/TextInput";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 interface FormData {
@@ -9,9 +10,16 @@ interface FormData {
 }
 
 function RacvyoxvForm() {
+  const searchParams = useSearchParams()
+ 
+  const entry = searchParams.get('entry') || "";
+  const bu = searchParams.get('bu') || "";
+  const onyomi = searchParams.get('onyomi') || "";
+  const kunyomi = searchParams.get('kunyomi') || "";
+  const henmei = searchParams.get('henmei') || "";
+
   const { register, handleSubmit } = useForm();
   const router = useRouter();
-
 
   const onSubmit = (data: FormData) => {
     const notEmptyQuery = Object.fromEntries(
@@ -24,10 +32,24 @@ function RacvyoxvForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <TextInput
-        labelLeftUppon="代表字"
+        labelLeftUppon="見出し語"
         labelRightBottom="漢字"
         name={"entry"}
+        defaultValue={entry}
         register={register}
+      />
+
+      <Select
+        labelLeftUppon="篇名"
+        name={"henmei"}
+        register={register}
+        defaultValue={henmei}
+        options={[
+          { value: "", label: "全て" },
+          { value: "本篇", label: "本篇" },
+          { value: "小玉篇", label: "小玉篇" },
+          { value: "色葉字集", label: "色葉字集" },
+        ]}
       />
 
       <TextInput
@@ -35,6 +57,7 @@ function RacvyoxvForm() {
         labelRightBottom="ひらがな"
         name={"bu"}
         register={register}
+        defaultValue={bu}
       />
 
       <TextInput
@@ -42,6 +65,7 @@ function RacvyoxvForm() {
         labelRightBottom="ひらがな（原本表記）"
         name={"onyomi"}
         register={register}
+        defaultValue={onyomi}
       />
 
       <TextInput
@@ -49,6 +73,8 @@ function RacvyoxvForm() {
         labelRightBottom="ひらがな（原本表記）"
         name={"kunyomi"}
         register={register}
+        defaultValue={kunyomi}
+
       />
 
       <div className="pt-6 form-control w-full max-w-xs flex flex-col items-center justify-center">

@@ -10,8 +10,8 @@ function JiruishoLayout({
     <div className="container mx-auto">
       <div className="p-10">
         <h2 className="text-3xl font-bold">
-          <Link href="/racvyoxv-dev">落葉集（小玉篇）データベース</Link>
-          <span className="badge badge-lg">試行版</span>
+          <Link href="/racvyoxv-dev">落葉集データベース</Link>
+          <span className="badge badge-lg">プロトタイプ試行版</span>
           <span className="badge badge-lg badge-secondary">v2026-03</span>
         </h2>
       </div>
