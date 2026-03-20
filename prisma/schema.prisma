@@ -3,58 +3,60 @@ generator client {
 }
 
 datasource db {
-  provider     = "mysql"
+  provider     = "postgresql"
   url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
-model User {
-  id        String    @id @default(cuid())
-  email     String    @unique
-  name      String?
-  password  String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt
-  role      Role      @default(USER)
-  accounts  Account[]
-}
-
-model Account {
-  id                String @id @default(cuid())
-  userId            String
-  provider          String
-  providerAccountId String
-  user              User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
-  @@index([userId])
-}
-
 model Hzwm {
-  id         String    @id
+  id         String  @id
   location   String?
   type       String?
   entry      String?
-  definition String?   @db.VarChar(2000)
+  definition String?
   readings   String?
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime? @updatedAt
+  createdAt  String?
+  updatedAt  String?
 }
 
-model Wamyouruijyusho {
-  id         Int     @id @default(autoincrement())
-  maki       String?
-  bu         String?
-  type       String?
-  type2      String?
-  page       String?
-  entry      String?
-  definition String? @db.VarChar(2000)
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Account {
+  id                String  @id
+  userId            String?
+  provider          String?
+  providerAccountId String?
 }
 
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model BunmeiSetsuyoshu {
+  id                BigInt  @id
+  bunmei_id         String?
+  gotou             String?
+  entry             String?
+  entry_original    String?
+  gokei             String?
+  gokei_original    String?
+  left_kun          String?
+  left_kun_original String?
+  definition        String?
+  item_type         String?
+  bu                String?
+  mon               String?
+  page              BigInt?
+  line              BigInt?
+  ndl_link          String?
+  remark            String?
+  ndl_comma         String?
+  no_inline         BigInt?
+  revision          String?
+  shoten            String?
+  shoten_original   String?
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model Gyokuhentaizen {
-  id             Int     @id @default(autoincrement())
-  ghtz_id        String  @unique
+  id             BigInt  @id
+  ghtz_id        String?
   entry          String?
   jion_r         String?
   jion_l         String?
@@ -64,8 +66,9 @@ model Gyokuhentaizen {
   remain_strokes String?
 }
 
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model Jiruisho {
-  id                    Int               @id @default(autoincrement())
+  id                    BigInt  @id
   entry                 String?
   entry_expression      String?
   shouten               String?
@@ -76,64 +79,33 @@ model Jiruisho {
   kurokawa_loc          String?
   kurokawa_ndl_url      String?
   onkun                 String?
-  char_count            String?
+  char_count            BigInt?
   gokei_display         String?
   gokei_search_original String?
   gokei_search_current  String?
   remark                String?
   definition            String?
-  chushaku              JiruishoChushaku?
 }
 
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model JiruishoChushaku {
-  id               Int      @id @default(autoincrement())
-  // TODO: remove maki, hen, bu,word_in_kurokawa, word_in_maeda
+  id               BigInt  @id
   maki             String?
   hen              String?
   bu               String?
-  annotation       String   @db.LongText
-  word_in_kurokawa String
-  word_in_maeda    String
-  jiruisho_id      Int      @unique
-  jiruisho         Jiruisho @relation(fields: [jiruisho_id], references: [id])
+  annotation       String?
+  word_in_kurokawa String?
+  word_in_maeda    String?
+  jiruisho_id      BigInt?
 }
 
-model BunmeiSetsuyoshu {
-  id                Int     @id @default(autoincrement())
-  bunmei_id         String  @unique
-  gotou             String?
-  entry             String? @db.VarChar(1000)
-  entry_original    String? @db.VarChar(1000)
-  gokei             String? @db.VarChar(500)
-  gokei_original    String? @db.VarChar(500)
-  left_kun          String?
-  left_kun_original String?
-  definition        String? @db.LongText
-  item_type         String?
-  bu                String?
-  mon               String?
-  page              String?
-  line              String?
-  ndl_link          String?
-  remark            String?
-  ndl_comma         String?
-  no_inline         String?
-  revision          String?
-  shoten            String?
-  shoten_original   String?
-}
-
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model Racvyoxv {
   id             String  @id
-  page           String?
-  line           String?
+  page           BigInt?
+  line           BigInt?
   gallica        String?
-  bu             String?
   entry          String?
-  entry_length   Int?
-  gokei          String?
-  kun            String?
-  on             String?
   remark         String?
   nikkoku1_entry String?
   nikkoku1_url   String?
@@ -149,31 +121,51 @@ model Racvyoxv {
   nikkoku6_url   String?
   nikkoku7_entry String?
   nikkoku7_url   String?
+  bu             String?
+  entry_length   BigInt?
+  kun            String?
   nikkoku8_entry String?
   nikkoku8_url   String?
+  on             String?
+  gokei          String?
 }
 
-model Wakunnosiori_Entry {
-  id          Int                @id @default(autoincrement())
-  entry       String?
-  location    String?
-  ndl_url     String?
-  page        String?
-  definitions Wakunnosiori_Def[]
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model User {
+  id        String  @id
+  email     String?
+  name      String?
+  password  String?
+  createdAt String?
+  updatedAt String?
+  role      String?
 }
 
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model Wakunnosiori_Def {
-  id         Int                @id @default(autoincrement())
-  index      Int?
-  entry_id   Int
+  id         BigInt  @id
+  index      BigInt?
+  entry_id   BigInt?
   definition String?
-  entry      Wakunnosiori_Entry @relation(fields: [entry_id], references: [id])
-
-  @@index([entry_id])
 }
 
-enum Role {
-  USER
-  ADVANCED_USER
-  ADMIN
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Wakunnosiori_Entry {
+  id       BigInt  @id
+  entry    String?
+  location String?
+  ndl_url  String?
+  page     String?
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Wamyouruijyusho {
+  id         BigInt  @id
+  maki       String?
+  bu         String?
+  type       String?
+  type2      String?
+  page       String?
+  entry      String?
+  definition String?
 }
