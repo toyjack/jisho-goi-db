@@ -30,7 +30,7 @@ model Account {
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model BunmeiSetsuyoshu {
   id                BigInt  @id
-  bunmei_id         String?
+  bunmei_id         String @unique
   gotou             String?
   entry             String?
   entry_original    String?
@@ -56,7 +56,7 @@ model BunmeiSetsuyoshu {
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model Gyokuhentaizen {
   id             BigInt  @id
-  ghtz_id        String?
+  ghtz_id        String @unique
   entry          String?
   jion_r         String?
   jion_l         String?
@@ -85,6 +85,7 @@ model Jiruisho {
   gokei_search_current  String?
   remark                String?
   definition            String?
+  chushaku             JiruishoChushaku?
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
@@ -96,7 +97,8 @@ model JiruishoChushaku {
   annotation       String?
   word_in_kurokawa String?
   word_in_maeda    String?
-  jiruisho_id      BigInt?
+  jiruisho_id      BigInt @unique
+  jiruisho         Jiruisho @relation(fields: [jiruisho_id], references: [id])
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
@@ -143,19 +145,23 @@ model User {
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model Wakunnosiori_Def {
-  id         BigInt  @id
+  id         BigInt              @id
   index      BigInt?
   entry_id   BigInt?
   definition String?
+  entry      Wakunnosiori_Entry? @relation(fields: [entry_id], references: [id])
+
+  @@index([entry_id])
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model Wakunnosiori_Entry {
-  id       BigInt  @id
-  entry    String?
-  location String?
-  ndl_url  String?
-  page     String?
+  id          BigInt             @id
+  entry       String?
+  location    String?
+  ndl_url     String?
+  page        String?
+  definitions Wakunnosiori_Def[]
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.

@@ -5,7 +5,7 @@ import TextInput from "@/components/common/TextInput";
 import { useForm } from "react-hook-form";
 import { getItem, updateItem } from "./actions";
 
-function EditModal({ id }: { id: number }) {
+function EditModal({ id }: { id: bigint | number }) {
   const { register, handleSubmit } = useForm();
   const [wordInMaeda, setWordInMaeda] = useState("");
   const [wordInKurokawa, setWordInKurokawa] = useState("");
@@ -21,9 +21,9 @@ function EditModal({ id }: { id: number }) {
 
       const item = await getItem(id);
       if (!item) return null;
-      setWordInMaeda(item.word_in_maeda);
-      setWordInKurokawa(item.word_in_kurokawa);
-      setAnnotation(item.annotation);
+      setWordInMaeda(item.word_in_maeda ?? "");
+      setWordInKurokawa(item.word_in_kurokawa ?? "");
+      setAnnotation(item.annotation ?? "");
     })();
   }, [id]);
 

@@ -49,7 +49,7 @@ export default async function CreateChushakuPage({
             <TargePanel result={results} />
           </div>
           <div>
-            <EditPanel targetId={results.id} chushaku={results.chushaku?.annotation} />
+            <EditPanel targetId={results.id} chushaku={results.chushaku?.annotation ?? undefined} />
           </div>
         </div>
       )}

@@ -12,7 +12,7 @@ async function RacvyoxvItemPage({ params }: { params: { id: string } }) {
   const gallicaId = result.gallica!.split("/").slice(5, 8).join("/"); //ark:/12148/btv1b10508396b
   // https://gallica.bnf.fr/iiif/ark:/12148/btv1b10508396b/manifest.json
   const gallicaManifest = `https://gallica.bnf.fr/iiif/${gallicaId}/manifest.json`;
-  const page = parseInt(result.page!) + 12;
+  const page = Number(result.page!) + 12;
   return (
     <div className="p-4">
       <div className="p-2">
@@ -67,11 +67,11 @@ async function RacvyoxvItemPage({ params }: { params: { id: string } }) {
               </tr>
             <tr>
               <th>所在（笠間頁）</th>
-              <td>{result.page}</td>
+              <td>{result.page !== null ? String(result.page) : null}</td>
             </tr>
             <tr>
               <th>頁内行数</th>
-              <td>{result.line}</td>
+              <td>{result.line !== null ? String(result.line) : null}</td>
             </tr>
             <tr>
               <th>Gallica URL</th>

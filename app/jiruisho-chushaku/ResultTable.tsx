@@ -15,7 +15,7 @@ type JiruishoChushakuWithJiruisho = Prisma.JiruishoChushakuGetPayload<{
 
 function ResultTable({ data }: { data: JiruishoChushakuWithJiruisho[] }) {
   const { data: session } = useSession();
-  const [current, setCurrent] = useState(0);
+  const [current, setCurrent] = useState<bigint | number>(0);
   const router = useRouter();
   const editItemModalRef = useRef<HTMLDialogElement>(null);
   const deleteItemModalRef = useRef<HTMLDialogElement>(null);
@@ -26,11 +26,11 @@ function ResultTable({ data }: { data: JiruishoChushakuWithJiruisho[] }) {
     </form>
   );
 
-  const handleEdit = (id: number) => {
+  const handleEdit = (id: bigint | number) => {
     router.push(`/jiruisho-chushaku/create?id=${id}`);
   };
 
-  const handleDelete = (id: number) => {
+  const handleDelete = (id: bigint | number) => {
     setCurrent(id);
     deleteItemModalRef.current?.showModal();
   };
@@ -63,7 +63,7 @@ function ResultTable({ data }: { data: JiruishoChushakuWithJiruisho[] }) {
           <dialog ref={deleteItemModalRef} className="modal">
             <div className="modal-box">
               <h3 className="font-bold text-lg">注釈削除</h3>
-              <p className="py-4">注釈ID：{current}</p>
+              <p className="py-4">注釈ID：{String(current)}</p>
               <div className="flex justify-end gap-2">
                 <CloseModalBtn label="取り消し" />{" "}
                 <form onSubmit={handleConfirmDelete}>
@@ -114,13 +114,13 @@ function ResultTable({ data }: { data: JiruishoChushakuWithJiruisho[] }) {
                   </div>
                 </td>
               )}
-              <td>{row.id}</td>
+              <td>{String(row.id)}</td>
               <td>
                 <Link
                   href={`/jiruisho/${row.jiruisho.id}`}
                   className="link link-hover"
                 >
-                  {row.jiruisho.id}・{row.jiruisho.entry}
+                  {String(row.jiruisho.id)}・{row.jiruisho.entry}
                 </Link>
               </td>
               <td>{row.jiruisho.gokei_display}</td>

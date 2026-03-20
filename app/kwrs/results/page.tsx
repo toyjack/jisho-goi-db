@@ -26,7 +26,7 @@ async function KwrsResultsPage({ searchParams }: { searchParams: KwrsWhere }) {
           </thead>
           <tbody>
             {findManyResult.data.map((item: Wamyouruijyusho, index: number) => (
-              <tr key={item.id}>
+              <tr key={String(item.id)}>
                 <th>{index + 1}</th>
                 <td>{item.maki}</td>
                 <td>{item.bu}</td>

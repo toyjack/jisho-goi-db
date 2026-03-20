@@ -1,10 +1,11 @@
 import { userCreate } from "@/db/users";
-import { Role } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 async function UserAddPage() {
-  const roleList = Role;
+  const roleList = ["USER",
+  "ADVANCED_USER",
+  "ADMIN"];
   async function handleSubmit(data: FormData) {
     "use server";
     const name = data.get("name") as string;

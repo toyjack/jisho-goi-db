@@ -68,7 +68,7 @@ export default async function WakunnoshioriResultsPage({
           </thead>
           <tbody>
             {results.map((result: any, index: number) => (
-              <tr key={result.id}>
+              <tr key={String(result.id)}>
                 <th>{index + 1}</th>
                 {tableHeader.map((header) => (
                   <td key={header.label} className="whitespace-normal">

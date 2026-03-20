@@ -30,11 +30,12 @@ export async function userCreate(data: Partial<User>) {
 
   const result = await prisma.user.create({
     data: {
+      id: crypto.randomUUID(),
       name,
       email,
       password: hashedPwd,
       role,
-      createdAt,
+      createdAt: createdAt.toISOString(),
     },
   });
   return result;

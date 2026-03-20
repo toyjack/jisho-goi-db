@@ -21,7 +21,8 @@ const tableHeader = [
   // { label: "備考", field: "remark", type: "text" },
 ] as const;
 
-function getLoc(id: string, url: string) {
+function getLoc(id: string, url: string | null) {
+  if (!url) return "-";
   const [page, line, col] = id.split("_");
   // https://dl.ndl.go.jp/pid/1286982/1/3
   const [_, __, ___, ____, _____, ______, koma] = url.split("/");
@@ -91,7 +92,7 @@ async function BunmeiResultsPage({
               <tr key={result.bunmei_id}>
                 {/* <th>{index + 1}</th> */}
                 <th>
-                  {result.ndl_link ? getLoc(result.bunmei_id, result.ndl_link) : "-"}
+                  {getLoc(result.bunmei_id!, result.ndl_link)}
                   {/* <GetLoc id={result.ghtz_id} url={result.ndl_link} /> */}
                 </th>
                 {tableHeader.map((header) => (

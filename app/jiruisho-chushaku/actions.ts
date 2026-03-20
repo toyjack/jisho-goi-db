@@ -26,7 +26,7 @@ export async function createItem(data: JiruishoChushaku) {
   revalidatePath("/jiruisho-chushaku");
 }
 
-export async function updateItem(id: number, data: Partial<JiruishoChushaku>) {
+export async function updateItem(id: bigint | number, data: Partial<JiruishoChushaku>) {
   try {
     await prisma.jiruishoChushaku.update({
       where: { id },
@@ -40,7 +40,7 @@ export async function updateItem(id: number, data: Partial<JiruishoChushaku>) {
   revalidatePath("/jiruisho-chushaku");
 }
 
-export async function deleteItem(id: number) {
+export async function deleteItem(id: bigint | number) {
   try {
     await prisma.jiruishoChushaku.delete({
       where: { id },
@@ -53,7 +53,7 @@ export async function deleteItem(id: number) {
   revalidatePath("/jiruisho-chushaku");
 }
 
-export async function getItem(id: number) {
+export async function getItem(id: bigint | number) {
   const item = await prisma.jiruishoChushaku.findUnique({
     where: { id },
   });

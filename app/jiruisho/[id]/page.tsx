@@ -67,7 +67,7 @@ async function JiruishoItemPage({ params }: { params: { id: string } }) {
           <tbody>
             <tr>
               <th>辞書内ID（仮）</th>
-              <td>{result.id}</td>
+              <td>{String(result.id)}</td>
             </tr>
             <tr>
               <th>見出し語</th>
@@ -147,7 +147,7 @@ async function JiruishoItemPage({ params }: { params: { id: string } }) {
             </tr>
             <tr>
               <th>文字数</th>
-              <td>{result.char_count}</td>
+              <td>{result.char_count !== null ? String(result.char_count) : null}</td>
             </tr>
 
             <tr>

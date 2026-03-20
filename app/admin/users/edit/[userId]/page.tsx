@@ -1,13 +1,11 @@
 import { userFindOne, userUpdate } from '@/db/users'
-import { Role } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import React from 'react'
 
 async function UserItemPage({params}:{params: {userId: string}}) {
   const userId = params.userId
-  const roleList = Role;
-  const user = await userFindOne(userId)
+const roleList = ["USER", "ADVANCED_USER", "ADMIN"];  const user = await userFindOne(userId)
   if(!user) return <div>ユーザーが見つかりません</div>
   
   async function handleSubmit(data: FormData) {

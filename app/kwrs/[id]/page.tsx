@@ -44,7 +44,7 @@ export default async function KwrsItemPage({
           <tbody>
             <tr>
               <th>辞書内ID（仮）</th>
-              <td>{result.id}</td>
+              <td>{String(result.id)}</td>
             </tr>
             <tr>
               <th>見出し語</th>

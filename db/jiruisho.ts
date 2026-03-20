@@ -86,9 +86,9 @@ export async function jiruishoFindmany(query: JiruishoFindManyQuery) {
         },
       },
       {
-        char_count: {
-          contains: query.char_count || undefined,
-        },
+        char_count: query.char_count
+          ? { equals: BigInt(query.char_count) }
+          : undefined,
       },
     ],
   };

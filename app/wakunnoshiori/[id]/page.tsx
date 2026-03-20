@@ -78,7 +78,7 @@ export default async function WakunnoshioriItemPage({
           <tbody>
             <tr>
               <th>辞書内ID（仮）</th>
-              <td>{result.id}</td>
+              <td>{String(result.id)}</td>
             </tr>
             {tableHeader.map((header, index) => (
               <tr key={index}>

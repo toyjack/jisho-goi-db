@@ -20,13 +20,14 @@ export async function searchJiruisho(formData: FormData) {
 export async function getJiruishoById(id: number) {
   const result = await prisma.jiruisho.findUnique({
     where: {
-      id: id,
-    },
-    include: {
-      chushaku: true,
+      id: BigInt(id),
     },
   });
-  return result;
+  if (!result) return null;
+  const chushaku = await prisma.jiruishoChushaku.findUnique({
+    where: { id: BigInt(id) },
+  });
+  return { ...result, chushaku };
 }
 
 export async function createJiruishoChushaku(formData: FormData) {
@@ -35,23 +36,20 @@ export async function createJiruishoChushaku(formData: FormData) {
 
   // use upsert to create or update the chushaku
   await prisma.jiruishoChushaku.upsert({
-    where:{
-      jiruisho_id: Number(jiurishoId)
+    where: {
+      id: BigInt(jiurishoId || 0),
     },
     update: {
       annotation: note,
     },
     create: {
+      id: BigInt(jiurishoId || 0),
       annotation: note || "",
       // TODO: add word_in_kurokawa and word_in_maeda
       word_in_kurokawa: "",
       word_in_maeda: "",
-      jiruisho: {
-        connect: {
-          id: Number(jiurishoId),
-        },
-      },
-    }
+      jiruisho_id: BigInt(jiurishoId || 0),
+    },
   });
   
 
