@@ -2,6 +2,7 @@ import Shukai2023 from "@/components/landing/Shukai";
 import Shukai202201Section from "@/components/landing/Shukai-2022";
 import Shukai2024Section from "@/components/landing/Shukai-2024";
 import Shukai202409 from "@/components/landing/Shukai-202409";
+import Shukai2025Section from "@/components/landing/Shukai-2025";
 
 export function generateMetadata() {
   return {
@@ -13,6 +14,8 @@ export function generateMetadata() {
 function NewsPage() {
   return (
     <>
+      <Shukai2025Section />
+      <div className="divider"></div>
       <Shukai202409 />
       <div className="divider"></div>
       <Shukai2024Section />
