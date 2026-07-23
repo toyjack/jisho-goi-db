@@ -9,21 +9,21 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Development Commands
 
-- **Development server**: `pnpm dev` - Runs Prisma generation and Next.js dev server
-- **Build**: `pnpm build` - Generates Prisma client and builds Next.js app for production
-- **Lint**: `pnpm lint` - Runs Next.js ESLint configuration
-- **Start production**: `pnpm start` - Starts production server
-- **Test**: `pnpm test` - Runs Vitest in watch mode
-- **Test (run once)**: `pnpm test:run` - Runs Vitest once and exits
+- **Development server**: `bun dev` - Runs Prisma generation and Next.js dev server
+- **Build**: `bun run build` - Generates Prisma client and builds Next.js app for production
+- **Lint**: `bun run lint` - Runs Next.js ESLint configuration
+- **Start production**: `bun run start` - Starts production server
+- **Test**: `bun test` - Runs Vitest in watch mode
+- **Test (run once)**: `bun run test:run` - Runs Vitest once and exits
 
 ### Database Commands
-- **Generate Prisma client**: `prisma generate` - Required after schema changes
-- **Database migrations**: `prisma migrate dev` - Apply database schema changes
-- **View database**: `prisma studio` - Opens Prisma Studio for database inspection
+- **Generate Prisma client**: `bunx prisma generate` - Required after schema changes
+- **Database migrations**: `bunx prisma migrate dev` - Apply database schema changes
+- **View database**: `bunx prisma studio` - Opens Prisma Studio for database inspection
 
 ### Supabase Commands
-- **Supabase CLI**: `pnpm supabase` - Access Supabase CLI commands
-- **Generate Supabase types**: `pnpm supabase:gen` - Generates TypeScript types from Supabase schema to `lib/supabase/types.ts`
+- **Supabase CLI**: `bun run supabase` - Access Supabase CLI commands
+- **Generate Supabase types**: `bun run supabase:gen` - Generates TypeScript types from Supabase schema to `lib/supabase/types.ts`
 
 ## Architecture Overview
 
@@ -105,12 +105,12 @@ RESTful API routes under `/api/databases/[database]/`:
 - **Testing**: Component tests using Vitest and React Testing Library (e.g., `components/common/TextInput.test.tsx`)
 
 ### Development Notes
-- Uses pnpm for package management with specific built dependencies configuration
+- Uses bun for package management; trusted postinstall scripts are declared via `trustedDependencies` in `package.json` (bun's equivalent of pnpm's `onlyBuiltDependencies`)
 - **Environment variables required**:
   - Prisma/MySQL: `DATABASE_URL`
   - Supabase: `SUPABASE_DB_URL`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`
   - NextAuth and OAuth providers configuration
 - Admin functionality requires `ADMIN` role in user database record
 - Image viewing requires proper IIIF manifest URLs and tile generation
-- Supabase types must be regenerated after schema changes using `pnpm supabase:gen`
-- Run tests before committing changes using `pnpm test:run`
+- Supabase types must be regenerated after schema changes using `bun run supabase:gen`
+- Run tests before committing changes using `bun run test:run`
