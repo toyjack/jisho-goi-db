@@ -13,15 +13,17 @@
 
 ## P1：构建与工程基础设施
 
-- [ ] **补齐 CI 流水线**：新增 `.github/workflows/ci.yml`，在每次 PR 上至少跑 `pnpm lint`、`tsc --noEmit`、`pnpm test:run`、`pnpm build`。当前唯一的质量门禁是 Vercel 构建本身，最近一次提交（`57584dd`）就是事后修复 Vercel 构建失败，说明确有必要前置检查。
+- [x] **包管理器从 pnpm 切换到 bun**：删除 `.npmrc`/`pnpm-lock.yaml`，新增 `bun.lock`，`package.json` 的 `pnpm.onlyBuiltDependencies` 改为 bun 的 `trustedDependencies`，`CLAUDE.md` 命令说明同步更新。完成于 2026-07-23（`2cb047d`）。
+- [ ] **补齐 CI 流水线**：新增 `.github/workflows/ci.yml`，在每次 PR 上至少跑 `bun run lint`、`tsc --noEmit`、`bun run test:run`、`bun run build`。当前唯一的质量门禁是 Vercel 构建本身，最近一次提交（`57584dd`）就是事后修复 Vercel 构建失败，说明确有必要前置检查。
 - [ ] **引入 pre-commit 钩子**：使用 husky + lint-staged，在提交前自动跑 lint 与格式化，降低把明显问题带入仓库的概率。
-- [ ] **版本化部署配置**：目前没有根目录 `vercel.json`，部署配置完全依赖 Vercel 控制台手动设置。建议将关键构建/环境配置显式写入 `vercel.json` 并纳入版本控制，便于排查与迁移。
+- [ ] **版本化部署配置**：目前没有根目录 `vercel.json`，部署配置完全依赖 Vercel 控制台手动设置。建议将关键构建/环境配置显式写入 `vercel.json` 并纳入版本控制，便于排查与迁移。确认 Vercel 已正确识别 `bun.lock` 并使用 bun 完成安装/构建。
 - [ ] **补充 `.env.example`**：仓库中只有真实的 `.env`，没有安全的模板文件。参照 CLAUDE.md 中列出的环境变量清单，创建 `.env.example`（含变量名、简要说明，不含真实值），方便新协作者搭建本地环境。
 - [ ] **升级过时的 `tsconfig.json` target**：`target: "es5"` 是 create-next-app 早期模板遗留配置，与 Next 14 App Router 面向现代浏览器的定位不符，建议升级到 `es2017` 或更高。
 
 ## P2：历史遗留清理（技术债）
 
 - [ ] **处理 `Racvyoxv` / `Racvyoxv-dev` 重复目录**：两者结构、组件几乎完全重复（`RacvyoxvForm.tsx` 同名，`[id]/page.tsx` 105 行 vs 265 行）。需要确认 `-dev` 版本是否为未完成的实验分支，评估后要么合并有价值的改动到正式版本并删除 `-dev` 目录，要么明确其定位并重命名。
+  - 进展（2026-07-23，`03f914f`）：已修复 `-dev` 版本 `layout.tsx` 中 `RacvyoxvForm` 缺少 `Suspense` 边界导致的构建报错（该表单比正式版多了从 URL 参数回填默认值的逻辑，用到了 `useSearchParams()`）。这只是让 build 能通过的临时修复，两个目录是否合并/删除的根本问题仍未处理。
 - [ ] **清理 `prisma/dev.db`**：仓库中残留的 SQLite 文件，与当前 Postgres/Supabase 架构无关，属于清理遗漏，确认无用后删除并加入 `.gitignore`。
 - [ ] **合并 `content/` 与 `contents/` 两个内容目录**：职责重叠（`content/{articles,manuals,news}` vs `contents/pages`）容易让贡献者困惑，建议统一到一个目录并更新所有引用路径。
 - [ ] **重建 Prisma 迁移历史**：`prisma/migrations/0_init/migration.sql` 是原始 MySQL 语法（反引号表名、`ENUM`、`utf8mb4` 字符集），但 `schema.prisma` 当前声明 `provider = "postgresql"`，初始迁移在新 Postgres 环境下大概率无法直接重放。建议基于当前线上 Postgres/Supabase 的真实 schema 重新生成一份干净的初始迁移（`prisma migrate diff` / `db pull` 后 baseline），并在文档中记录这次迁移历史的来龙去脉。
@@ -57,7 +59,7 @@
 
 | 优先级 | 说明 | 建议时间窗口 |
 |--------|------|--------------|
-| P0 | 安全漏洞、可能导致构建失败或数据错误的问题 | 尽快，1 周内 |
+| P0（已全部完成，2026-07-23） | 安全漏洞、可能导致构建失败或数据错误的问题 | 尽快，1 周内 |
 | P1 | 工程基础设施缺失，影响长期开发效率与质量把关 | 2-4 周内 |
 | P2 | 历史遗留的重复/过时代码与配置 | 视排期，1-2 个月内 |
 | P3 | 代码质量与架构层面的改善，非紧急但影响可维护性 | 持续迭代 |
