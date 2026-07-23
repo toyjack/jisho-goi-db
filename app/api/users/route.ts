@@ -10,7 +10,11 @@ export async function GET(request: NextRequest) {
 
   if (!token) return NextResponse.json({
     error: "You must be sign in to view the protected content on this page.",
-  });
+  }, { status: 401 });
+
+  if (token.role !== "ADMIN") return NextResponse.json({
+    error: "You must be an admin to view this content.",
+  }, { status: 403 });
 
   const allUsersData = await prisma.user.findMany();
   const allUsers = allUsersData.map((user) => {

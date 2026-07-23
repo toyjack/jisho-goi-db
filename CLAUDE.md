@@ -2,6 +2,11 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Language Preference
+
+- **Conversation**: Always respond to the user in Chinese (中文).
+- **Code & comments**: Prefer Japanese (日本語) for code comments and identifiers where natural, given this is a Japanese dictionary/text corpus project.
+
 ## Development Commands
 
 - **Development server**: `pnpm dev` - Runs Prisma generation and Next.js dev server
