@@ -38,10 +38,11 @@
 
 ### 阶段一：搭建基础设施
 
-- [ ] **安装并初始化 Playwright**：`bun add -D @playwright/test && bunx playwright install`，生成 `playwright.config.ts`。配置 `webServer` 选项自动拉起 `bun run dev`（或针对生产构建用 `bun run build && bun run start`），避免每次手动启服务。
-- [ ] **确定测试专用环境与数据**：E2E 测试会真实命中数据库（Prisma/Postgres、Supabase），需要决定测试对接的是独立的测试库、Supabase 的预览分支，还是只读的生产库快照。**不建议直接对生产库跑写入类测试**（如注册、`jiruisho-chushaku` 的创建/编辑）。建议至少为写入类场景准备一个可重置的测试数据库，并通过独立的 `.env.test` 管理连接串。
+- [x] **安装并初始化 Playwright**：`bun add -D @playwright/test`、`bunx playwright install chromium`，`playwright.config.ts` 已生成，`webServer` 配置自动拉起 `bun run dev`。完成于 2026-07-23。
+- [ ] **确定测试专用环境与数据**：E2E 测试会真实命中数据库（Prisma/Postgres、Supabase），需要决定测试对接的是独立的测试库、Supabase 的预览分支，还是只读的生产库快照。**不建议直接对生产库跑写入类测试**（如注册、`jiruisho-chushaku` 的创建/编辑）。建议至少为写入类场景准备一个可重置的测试数据库，并通过独立的 `.env.test` 管理连接串。目前 `bun run dev` 直接读取项目现有 `.env`，尚未与生产数据库隔离，写入类/契约类用例暂缓，仅先跑通不触碰数据库的冒烟测试。
 - [ ] **补充测试专用账号**：需要至少一个 `USER`、一个 `ADMIN` 角色的测试账号（seed 脚本或 Prisma seed），用于覆盖权限相关场景（如已修复的 `/api/users` 权限校验、`/admin` 路由保护）。
-- [ ] **将 `test:e2e` 脚本加入 `package.json`**：如 `"test:e2e": "playwright test"`，并在 `.gitignore` 中排除 Playwright 的 `test-results/`、`playwright-report/` 产物目录。
+- [x] **将 `test:e2e` 脚本加入 `package.json`**：`"test:e2e": "playwright test"` 已加入，`.gitignore` 已排除 Playwright 的 `test-results/`、`playwright-report/`、`blob-report/` 产物目录。完成于 2026-07-23。
+- [x] **最小冒烟测试跑通**：`tests/e2e/smoke.spec.ts` 验证首页可加载、未登录访问 `/admin` 被正确拦截，2 个测试均通过。完成于 2026-07-23。
 
 ### 数据库模块契约测试模板
 
