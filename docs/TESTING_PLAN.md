@@ -39,8 +39,8 @@
 ### 阶段一：搭建基础设施
 
 - [x] **安装并初始化 Playwright**：`bun add -D @playwright/test`、`bunx playwright install chromium`，`playwright.config.ts` 已生成，`webServer` 配置自动拉起 `bun run dev`。完成于 2026-07-23。
-- [ ] **确定测试专用环境与数据**：E2E 测试会真实命中数据库（Prisma/Postgres、Supabase），需要决定测试对接的是独立的测试库、Supabase 的预览分支，还是只读的生产库快照。**不建议直接对生产库跑写入类测试**（如注册、`jiruisho-chushaku` 的创建/编辑）。建议至少为写入类场景准备一个可重置的测试数据库，并通过独立的 `.env.test` 管理连接串。目前 `bun run dev` 直接读取项目现有 `.env`，尚未与生产数据库隔离，写入类/契约类用例暂缓，仅先跑通不触碰数据库的冒烟测试。
-- [ ] **补充测试专用账号**：需要至少一个 `USER`、一个 `ADMIN` 角色的测试账号（seed 脚本或 Prisma seed），用于覆盖权限相关场景（如已修复的 `/api/users` 权限校验、`/admin` 路由保护）。
+- [x] **确定测试专用环境与数据（阶段性决策）**：当前 `.env` 的 `DATABASE_URL` 就是生产数据库（`POSTGRES_*` 系列变量名显示是 Vercel Postgres 集成，非独立开发库），没有可重置的测试库。决策（2026-07-23）：**暂不新建独立测试数据库**，先只做只读契约测试——挑选真实存在、稳定不太会被删改的词条作为 `knownQuery` 断言基准，只验证 GET 类的搜索/详情流程；**注册、`jiruisho-chushaku` 创建/编辑等写入类场景的 E2E 暂缓**，等到确实需要覆盖这些路径（比如即将重构相关代码）时再搭建独立测试库（候选：Supabase 免费实例或本地 Postgres + seed 脚本），到时更新本条为方案 A。
+- [ ] **补充测试专用账号**：需要至少一个 `USER`、一个 `ADMIN` 角色的测试账号（seed 脚本或 Prisma seed），用于覆盖权限相关场景（如已修复的 `/api/users` 权限校验、`/admin` 路由保护）。**同样受上面的决策影响而暂缓**——`/admin` 中间件拦截这个层面的契约（未登录 → 重定向）已经在 `smoke.spec.ts` 里覆盖，不需要真实测试账号；但"USER 角色被拒绝 / ADMIN 角色能访问"这类需要真实登录状态的用例，要等测试账号或独立测试库就绪后再补。
 - [x] **将 `test:e2e` 脚本加入 `package.json`**：`"test:e2e": "playwright test"` 已加入，`.gitignore` 已排除 Playwright 的 `test-results/`、`playwright-report/`、`blob-report/` 产物目录。完成于 2026-07-23。
 - [x] **最小冒烟测试跑通**：`tests/e2e/smoke.spec.ts` 验证首页可加载、未登录访问 `/admin` 被正确拦截，2 个测试均通过。完成于 2026-07-23。
 
@@ -124,9 +124,9 @@ for (const contract of moduleContracts) {
 
 ### 阶段二：核心场景覆盖（按风险排序）
 
-- [ ] **认证流程**：注册（`app/auth/register`）→ 登录（`/api/auth/signin`）→ 登出的完整闭环；覆盖密码不一致、邮箱已注册等失败路径。这是唯一涉及真实写入且历史上有死代码/重复入口问题的区域，值得作为第一批用例。
-- [ ] **权限边界**：未登录访问 `/admin` 应被中间件拦截跳转；`USER` 角色访问 `/admin` 或调用 `/api/users` 应被拒绝；`ADMIN` 角色能正常访问。直接验证权限逻辑长期不被回归破坏。
-- [ ] **搜索与结果流程（用上面的契约测试模板）**：先给 `Jiruisho`（结构典型）、`Racvyoxv`（存在 `-dev` 分叉，最需要回归保护）、`Tsj-Wakun`（唯一 Supabase 直连模块，技术栈不同）三个模块补上契约表条目跑通，再逐步把剩余模块加入表中，不必一次性覆盖全部 9 个。
+- [ ] **认证流程**：注册（`app/auth/register`）→ 登录（`/api/auth/signin`）→ 登出的完整闭环；覆盖密码不一致、邮箱已注册等失败路径。这是唯一涉及真实写入且历史上有死代码/重复入口问题的区域，值得作为第一批用例。**暂缓**——受"确定测试专用环境与数据"决策影响，写入类场景要等独立测试库就绪后再补。
+- [x] **权限边界（部分完成）**：未登录访问 `/admin` 被中间件拦截跳转已在 `tests/e2e/smoke.spec.ts` 验证通过。`USER`/`ADMIN` 角色的差异化访问需要真实登录状态，同样受测试账号缺失影响暂缓。
+- [x] **搜索与结果流程（`Jiruisho`、`Racvyoxv` 已完成，2026-07-23）**：`tests/e2e/database-modules.contract.ts` + `database-modules.spec.ts` 落地了参数化契约测试，用空字符串 `contains` 匹配保证"至少命中一条结果"且不依赖具体业务数据，覆盖了搜索命中→详情页字段展示→无结果不崩溃三个断言点，对当前生产数据库直接可跑（只读，不涉及写入）。`Tsj-Wakun`（唯一 Supabase 直连模块）尚未加入契约表，其余模块也待逐步补充。
 - [ ] **`Jiruisho-Chushaku` 的创建/编辑流程**：这是全项目唯一的写入型 Server Action（`app/jiruisho-chushaku/create/actions.ts`），单元测试清单中已标记为风险最高项，E2E 层面应补充"创建一条注释 → 编辑 → 保存后内容正确回显"的完整用户旅程。
 - [ ] **IIIF 图像查看器基本可用性**：`Gyokuhentaizen`、`KWRS` 等依赖 OpenSeadragon 的模块，至少验证图像查看器容器能正常挂载、不抛控制台错误（不需要断言具体像素渲染，OpenSeadragon 的 canvas 渲染细节不适合做精确断言）。
 
