@@ -40,13 +40,7 @@
 
 ## P4：测试覆盖建设
 
-当前仓库仅有 1 个测试文件（`components/common/TextInput.test.tsx`），测试基础设施（Vitest + Testing Library + jsdom）已就绪但几乎未使用。按风险收益比排序，建议依次补充：
-
-- [ ] **`lib/nextauth-options.ts`**：认证核心逻辑，目前完全没有测试保护。
-- [ ] **`app/api/users/route.ts`**：配合 P0 的权限修复，补充鉴权相关的测试用例（未登录/普通用户/管理员三种角色的行为）。
-- [ ] **`app/jiruisho-chushaku/create/actions.ts`**：全项目唯一的写入型 Server Action，目前无任何测试保护，风险最高。
-- [ ] **`db/*.ts` 查询函数层**：逐步为核心数据库模块的查询函数补充单元测试，尤其是模糊搜索、分页等公共逻辑。
-- [ ] **`app/api/**/route.ts`**：14 个 API 路由目前无一有测试，建议按模块优先级逐步补齐基础的请求/响应测试。
+单元测试补充计划与 Playwright 端到端测试引入计划已拆分至独立文档：[TESTING_PLAN.md](./TESTING_PLAN.md)。
 
 ## 长期方向（不属于本轮排期，但值得关注）
 

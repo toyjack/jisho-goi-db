@@ -114,3 +114,12 @@ RESTful API routes under `/api/databases/[database]/`:
 - Image viewing requires proper IIIF manifest URLs and tile generation
 - Supabase types must be regenerated after schema changes using `bun run supabase:gen`
 - Run tests before committing changes using `bun run test:run`
+
+## Testing Policy for AI-Assisted Changes
+
+This project is developed largely via vibe coding (natural-language-driven, AI-generated changes with light line-by-line review). Tests here exist to guard **behavior contracts**, not implementation details — see `docs/TESTING_PLAN.md` for the full test strategy and contract-test template.
+
+- **Don't require tests before writing code.** Blocking on "write the test first" fights the vibe-coding workflow. Instead, after making a change, always be able to produce a **runnable verification**: an E2E/unit test run (existing or newly added) whose output demonstrates the change works. A described intention is not verification — an executed command with output is.
+- **High-risk code requires a hard test gate, not just a self-check.** Changes touching auth (`lib/nextauth-options.ts`, `middleware.ts`), authorization checks (any `role === "ADMIN"` gate, `/api/**/route.ts` permission checks), or the one write-path Server Action (`app/jiruisho-chushaku/create/actions.ts`) must have a passing test (existing or newly written) before considering the change done. These are the areas where silent breakage is costly (data leaks, data corruption) and where AI-driven edits are most likely to accidentally weaken a check.
+- **Prefer E2E over unit tests for "does it still work" questions.** The 9 database modules share the same search → results → detail page pattern; the biggest real risk is a refactor (e.g., extracting a shared search/results component) silently breaking one module's search while leaving the others fine. A quick Playwright run across the contract-test template (see `docs/TESTING_PLAN.md`) catches this far more reliably than reading a diff. Reach for this especially after any change to shared components used by multiple database modules.
+- **Don't over-invest in low-risk areas.** Exact result ordering, cosmetic rendering details, and other low-consequence behavior don't need tight test coverage — spending effort there takes away from the auth/authorization/write-path gate above.
