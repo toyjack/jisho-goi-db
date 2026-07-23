@@ -14,6 +14,7 @@
 ## 新发现的高优先级 bug（测试驱动发现）
 
 - [ ] **`Bunmei`（BunmeiSetsuyoshu）模块搜索功能已损坏**：`prisma/schema.prisma` 中 `bunmei_id` 字段声明为非空 `String @unique`，但生产数据库中至少存在一条 `bunmei_id` 为 `null` 的记录。只要一次 `bunmeibonFindMany` 查询命中这条记录，Prisma 就会抛 `PrismaClientKnownRequestError`（`Error converting field "bunmei_id" of expected non-nullable type "String", found incompatible value of "null"`），导致 `/bunmei/results` 页面 500，实质上让整个模块的搜索功能不可用。由 2026-07-23 新增的 E2E 契约测试（`tests/e2e/database-modules.spec.ts` 中 `Bunmei` 用例）发现并保持为预期失败状态，作为回归提醒。修复需要先确认这条脏数据的来源（是否可以直接补一个值，或该记录本身就该删除），再决定是清数据还是把 schema 字段改为可空。
+- [x] **本地 `.env` 缺少 Supabase 公开环境变量，`Tsj-Wakun` 模块在本地开发环境完全不可用**：`lib/supabase/server.ts` 依赖 `NEXT_PUBLIC_SUPABASE_URL`、`NEXT_PUBLIC_SUPABASE_ANON_KEY`，本地 `.env` 中两者曾均未配置，导致 `bun run dev` 下访问 `/tsj-wakun/results` 或任意详情页都会抛 `Your project's URL and Key are required to create a Supabase client!` 的运行时异常。由 2026-07-23 扩展契约测试到 `TsjWakun` 模块时发现（`tests/e2e/database-modules.spec.ts`），已由用户补充 `.env` 后解决，`TsjWakun` 契约测试验证通过。
 
 ## P1：构建与工程基础设施
 

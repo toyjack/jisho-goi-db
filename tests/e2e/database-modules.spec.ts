@@ -21,7 +21,7 @@ for (const contract of moduleContracts) {
       page,
     }) => {
       const query = new URLSearchParams({
-        entry: "存在しないはずの見出し語__e2e__",
+        [contract.noResultQueryField]: "存在しないはずの見出し語__e2e__",
       }).toString();
       await page.goto(`${contract.resultsPath}?${query}`);
 
