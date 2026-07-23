@@ -11,6 +11,10 @@
 
 ---
 
+## 新发现的高优先级 bug（测试驱动发现）
+
+- [ ] **`Bunmei`（BunmeiSetsuyoshu）模块搜索功能已损坏**：`prisma/schema.prisma` 中 `bunmei_id` 字段声明为非空 `String @unique`，但生产数据库中至少存在一条 `bunmei_id` 为 `null` 的记录。只要一次 `bunmeibonFindMany` 查询命中这条记录，Prisma 就会抛 `PrismaClientKnownRequestError`（`Error converting field "bunmei_id" of expected non-nullable type "String", found incompatible value of "null"`），导致 `/bunmei/results` 页面 500，实质上让整个模块的搜索功能不可用。由 2026-07-23 新增的 E2E 契约测试（`tests/e2e/database-modules.spec.ts` 中 `Bunmei` 用例）发现并保持为预期失败状态，作为回归提醒。修复需要先确认这条脏数据的来源（是否可以直接补一个值，或该记录本身就该删除），再决定是清数据还是把 schema 字段改为可空。
+
 ## P1：构建与工程基础设施
 
 - [x] **包管理器从 pnpm 切换到 bun**：删除 `.npmrc`/`pnpm-lock.yaml`，新增 `bun.lock`，`package.json` 的 `pnpm.onlyBuiltDependencies` 改为 bun 的 `trustedDependencies`，`CLAUDE.md` 命令说明同步更新。完成于 2026-07-23（`2cb047d`）。

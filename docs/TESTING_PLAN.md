@@ -126,7 +126,11 @@ for (const contract of moduleContracts) {
 
 - [ ] **认证流程**：注册（`app/auth/register`）→ 登录（`/api/auth/signin`）→ 登出的完整闭环；覆盖密码不一致、邮箱已注册等失败路径。这是唯一涉及真实写入且历史上有死代码/重复入口问题的区域，值得作为第一批用例。**暂缓**——受"确定测试专用环境与数据"决策影响，写入类场景要等独立测试库就绪后再补。
 - [x] **权限边界（部分完成）**：未登录访问 `/admin` 被中间件拦截跳转已在 `tests/e2e/smoke.spec.ts` 验证通过。`USER`/`ADMIN` 角色的差异化访问需要真实登录状态，同样受测试账号缺失影响暂缓。
-- [x] **搜索与结果流程（`Jiruisho`、`Racvyoxv` 已完成，2026-07-23）**：`tests/e2e/database-modules.contract.ts` + `database-modules.spec.ts` 落地了参数化契约测试，用空字符串 `contains` 匹配保证"至少命中一条结果"且不依赖具体业务数据，覆盖了搜索命中→详情页字段展示→无结果不崩溃三个断言点，对当前生产数据库直接可跑（只读，不涉及写入）。`Tsj-Wakun`（唯一 Supabase 直连模块）尚未加入契约表，其余模块也待逐步补充。
+- [x] **搜索与结果流程（7/9 模块已完成，2026-07-23）**：`tests/e2e/database-modules.contract.ts` + `database-modules.spec.ts` 落地了参数化契约测试，覆盖 `Jiruisho`、`Racvyoxv`、`Bunmei`、`Gyokuhentaizen`、`Hzwm`、`Kwrs`、`Wakunnoshiori` 共 7 个模块。断言点：搜索命中→详情页字段展示→无结果不崩溃，对当前生产数据库直接可跑（只读，不涉及写入）。
+  - 查询策略需按模块区分：多数模块的 `entry` 是 `contains` 模糊匹配，空字符串等于全匹配，可安全作为"至少命中一条结果"的通用查询；但 `Gyokuhentaizen` 的 `entry` 是**精确匹配**（`db/gyokuhentaizen.ts:36`），传空字符串会变成 `entry: ""` 的精确查询而非"不过滤"，因此该模块的 `knownQuery` 必须是空对象（不传参数，让 Prisma 忽略该条件），而不是 `{ entry: "" }`——契约表中已注明。
+  - **`Bunmei` 用例目前保持失败状态，这是预期的**：测试发现了一个真实的生产数据 bug（`bunmei_id` 存在 null 值但 schema 声明非空），详见 IMPROVEMENT_PLAN.md「新发现的高优先级 bug」。在该 bug 修复前不要为了让测试变绿而弱化断言或跳过这个用例。
+  - `Tsj-Wakun`（唯一 Supabase 直连模块）与写入型的 `Jiruisho-Chushaku` 尚未加入契约表。
+  - `playwright.config.ts` 的默认测试超时已从 30 秒延长到 60 秒：`next dev` 对每个路由是首次访问时现场编译，跑到后面新模块容易撞上默认超时，这是环境问题不是业务 bug，串行/加长超时后即可稳定复现结果。
 - [ ] **`Jiruisho-Chushaku` 的创建/编辑流程**：这是全项目唯一的写入型 Server Action（`app/jiruisho-chushaku/create/actions.ts`），单元测试清单中已标记为风险最高项，E2E 层面应补充"创建一条注释 → 编辑 → 保存后内容正确回显"的完整用户旅程。
 - [ ] **IIIF 图像查看器基本可用性**：`Gyokuhentaizen`、`KWRS` 等依赖 OpenSeadragon 的模块，至少验证图像查看器容器能正常挂载、不抛控制台错误（不需要断言具体像素渲染，OpenSeadragon 的 canvas 渲染细节不适合做精确断言）。
 

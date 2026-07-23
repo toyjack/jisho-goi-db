@@ -2,6 +2,10 @@ import { defineConfig, devices } from "@playwright/test";
 
 export default defineConfig({
   testDir: "./tests/e2e",
+  // next dev はルートごとに初回アクセス時にオンデマンドコンパイルするため、
+  // デフォルトの30秒では特に重いページ（IIIF Viewer を含む詳細ページ等）で
+  // タイムアウトしやすい。余裕を持って60秒に設定。
+  timeout: 60_000,
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
