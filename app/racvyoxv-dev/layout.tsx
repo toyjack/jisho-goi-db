@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import RacvyoxvForm from "@/app/racvyoxv-dev/RacvyoxvForm";
 
 function JiruishoLayout({
@@ -30,7 +31,9 @@ function JiruishoLayout({
         <div className="drawer-side min-h-screen">
           <label htmlFor="drawer" className="drawer-overlay"></label>
           <div className="menu p-4 w-80 bg-base-200 text-base-content z-10">
-            <RacvyoxvForm />
+            <Suspense>
+              <RacvyoxvForm />
+            </Suspense>
           </div>
         </div>
       </div>
