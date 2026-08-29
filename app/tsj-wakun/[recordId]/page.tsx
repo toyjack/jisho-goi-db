@@ -2,8 +2,8 @@ import { getTsjWakun, TsjWakunPart } from "@/db/tsj_wakun";
 import BackButton from "@/components/ui/BackButton";
 
 const HDIC_VIEWER_BASE_URL = "https://viewer.hdic.jp/tsj2";
-const NIKKOKU_PERSONAL_BASE_URL = "https://japanknowledge.com/psnl";
-const NIKKOKU_LIBRARY_BASE_URL = "https://japanknowledge.com/library";
+const NIKKOKU_PERSONAL_BASE_URL = "https://japanknowledge.com/psnl/display/?lid=";
+const NIKKOKU_LIBRARY_BASE_URL = "https://japanknowledge.com/library/display/?lid=";
 
 // wakunParts の表示順・ラベルは 2026-05-22 打合せ記録の指示どおり
 // （倭訓栞ID は非表示、臨川本所在は享和本所在の直上）。
@@ -60,7 +60,7 @@ async function TsjWakunItemPage({ params }: { params: { recordId: string } }) {
           href={hdicViewerUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="link link-primary"
+          className="link link-hover"
         >
           HDICビューアで見る
         </a>
@@ -111,18 +111,18 @@ async function TsjWakunItemPage({ params }: { params: { recordId: string } }) {
                       <div className="flex gap-4">
                         <span>{part.nikkokuId}</span>
                         <a
-                          href={`${NIKKOKU_PERSONAL_BASE_URL}/${part.nikkokuId}`}
+                          href={`${NIKKOKU_PERSONAL_BASE_URL}${part.nikkokuId}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="link link-primary"
+                          className="link link-hover"
                         >
                           個人版
                         </a>
                         <a
-                          href={`${NIKKOKU_LIBRARY_BASE_URL}/${part.nikkokuId}`}
+                          href={`${NIKKOKU_LIBRARY_BASE_URL}${part.nikkokuId}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="link link-primary"
+                          className="link link-hover"
                         >
                           図書館版
                         </a>
@@ -149,7 +149,7 @@ async function TsjWakunItemPage({ params }: { params: { recordId: string } }) {
                   href={resource.ndlUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="link link-primary mr-4"
+                  className="link link-hover mr-4"
                 >
                   NDL
                 </a>
@@ -157,7 +157,7 @@ async function TsjWakunItemPage({ params }: { params: { recordId: string } }) {
                   href={resource.nijlUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="link link-primary"
+                  className="link link-hover"
                 >
                   NIJL
                 </a>
