@@ -29,8 +29,8 @@
 
 - [ ] **处理 `Racvyoxv` / `Racvyoxv-dev` 重复目录**：两者结构、组件几乎完全重复（`RacvyoxvForm.tsx` 同名，`[id]/page.tsx` 105 行 vs 265 行）。需要确认 `-dev` 版本是否为未完成的实验分支，评估后要么合并有价值的改动到正式版本并删除 `-dev` 目录，要么明确其定位并重命名。
   - 进展（2026-07-23，`03f914f`）：已修复 `-dev` 版本 `layout.tsx` 中 `RacvyoxvForm` 缺少 `Suspense` 边界导致的构建报错（该表单比正式版多了从 URL 参数回填默认值的逻辑，用到了 `useSearchParams()`）。这只是让 build 能通过的临时修复，两个目录是否合并/删除的根本问题仍未处理。
-- [ ] **清理 `prisma/dev.db`**：仓库中残留的 SQLite 文件，与当前 Postgres/Supabase 架构无关，属于清理遗漏，确认无用后删除并加入 `.gitignore`。
-- [ ] **合并 `content/` 与 `contents/` 两个内容目录**：职责重叠（`content/{articles,manuals,news}` vs `contents/pages`）容易让贡献者困惑，建议统一到一个目录并更新所有引用路径。
+- [x] **清理 `prisma/dev.db`**：核查（2026-08-28）发现该文件从未被 git 追踪（`.gitignore` 中已列出），本地也已不存在，无需额外清理。
+- [x] **合并 `content/` 与 `contents/` 两个内容目录**：核查（2026-08-28）发现 `contents/` 目录已不存在，代码中也没有任何路径引用它，已自然收敛到 `content/` 单一目录。
 - [ ] **重建 Prisma 迁移历史**：`prisma/migrations/0_init/migration.sql` 是原始 MySQL 语法（反引号表名、`ENUM`、`utf8mb4` 字符集），但 `schema.prisma` 当前声明 `provider = "postgresql"`，初始迁移在新 Postgres 环境下大概率无法直接重放。建议基于当前线上 Postgres/Supabase 的真实 schema 重新生成一份干净的初始迁移（`prisma migrate diff` / `db pull` 后 baseline），并在文档中记录这次迁移历史的来龙去脉。
 - [ ] **评估 `relationMode = "prisma"` 是否还需要保留**：该设置最初是为了兼容 MySQL/PlanetScale 时代，模拟外键约束而非使用数据库原生约束。现在主库已是 Postgres/Supabase，原生外键约束在一致性和性能上通常更优，建议评估切换回 `foreignKeys` 模式的可行性。
 - [ ] **统一 `KWRS` 模块命名**：路由与组件中大量使用 `Kwrs*` 命名，但对应的 Prisma 模型实际是 `Wamyouruijyusho`（和名類聚抄），命名不一致会显著增加新人理解成本。建议要么统一改为模型的真实名称，要么在模块内添加清晰的命名映射说明。
@@ -49,8 +49,8 @@
 
 ## 长期方向（不属于本轮排期，但值得关注）
 
-- **Next.js / React 大版本升级评估**：Next 14 已有明确的升级路径（15/16），React 18→19 也已发生在实际安装的依赖中；建议做一次专项评估，明确升级窗口与需要配合改动的范围（ESLint 9 flat config、Server Actions 行为变化等）。
-- **技术栈统一评估**：`Tsj-Wakun` 模块完全脱离 Prisma、直接使用 Supabase client，与其余 8 个模块的技术栈不一致。长期看是否要将更多模块迁移到 Supabase，或者反过来统一收敛到一套数据访问层，需要一次架构层面的决策。
+- **Next.js / React 大版本升级评估**：Next 14 已有明确的升级路径（15/16）；当前 `react`/`react-dom` 仍锁定在 18.2.0（核查于 2026-08-28），尚未升级到 19。建议做一次专项评估，明确升级窗口与需要配合改动的范围（ESLint 9 flat config、Server Actions 行为变化等）。
+- **技术栈统一评估**：`Tsj-Wakun` 模块完全脱离 Prisma、直接使用 Supabase client，与其余 8 个模块的技术栈不一致。~~长期看是否要将更多模块迁移到 Supabase，或者反过来统一收敛到一套数据访问层，需要一次架构层面的决策。~~ 已有明确方向（2026-08-28）：`Tsj-Wakun` 计划改为通过 API 调用 `toyjack/hdicviewer-rebuild`（详见 [TSJ_WAKUN_DEV_PLAN.md](./TSJ_WAKUN_DEV_PLAN.md) 中"架构变更"一节），而不是收敛到 Supabase；该迁移被上游数据集尚未就绪阻塞，jisho-goi-db 这边目前只做数据访问层的准备工作。
 
 ---
 

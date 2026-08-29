@@ -83,14 +83,13 @@ export const moduleContracts: ModuleContract[] = [
   {
     name: "TsjWakun",
     resultsPath: "/tsj-wakun/results",
-    // 唯一 Prisma を経由せず Supabase client を直接使うモジュール（db/tsj_wakun.ts）。
-    // 空文字列は searchTsjWakun 内で「値なし」として無視されるため、
-    // 他の contains 系モジュールと同様に空文字列で全件ヒットになる。
-    // 検索対象フィールドは entry ではなく entry_text。
-    knownQuery: { entry_text: "" },
-    // searchTsjWakun は Supabase の .ilike(key, ...) を使うため、
-    // 存在しない列名を渡すとエラーになる。他モジュールと違い entry ではなく
-    // 実在する列名 entry_text を使う必要がある。
+    // 唯一 Prisma を経由せず外部 API（hdicviewer-rebuild の /api/v1、db/tsj_wakun.ts）を
+    // 使うモジュール。2026-08-28 にデータソースを Supabase からこの API に切り替えた際、
+    // 検索エンドポイントが q（クエリ文字列）必須になり、他モジュールのような「空文字列で
+    // 全件ヒット」というトリックが使えなくなった。そのため実データに存在するとわかっている
+    // 広めの見出し語（"一"を含む headword）を明示的に使う。実データの変更で壊れる可能性は
+    // 他モジュールより高いが、API の制約上この形が現実的な落とし所。
+    knownQuery: { entry_text: "一" },
     noResultQueryField: "entry_text",
     resultRowLinkSelector: "table tbody tr a[href^='/tsj-wakun/']",
     detailLabelText: "見出し語",

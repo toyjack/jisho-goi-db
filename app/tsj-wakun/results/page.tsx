@@ -1,8 +1,5 @@
-import { searchTsjWakun } from "@/db/tsj_wakun";
-import { Database } from "@/lib/supabase/types";
+import { NO_QUERY_MESSAGE, searchTsjWakun, TsjWakunResultRow, TsjWakunSearchParams } from "@/db/tsj_wakun";
 import Link from "next/link";
-
-type TsjWakunRow = Database["public"]["Tables"]["tsj_wakun"]["Row"];
 
 async function TsjWakunResultsPage({
   searchParams,
@@ -10,8 +7,18 @@ async function TsjWakunResultsPage({
   searchParams?: { [key: string]: string | undefined };
 }) {
   const { data, error } = await searchTsjWakun(
-    searchParams as unknown as Partial<TsjWakunRow>
+    (searchParams ?? {}) as TsjWakunSearchParams
   );
+
+  if (error && error.message === NO_QUERY_MESSAGE) {
+    return (
+      <div className="p-4">
+        <div className="alert alert-info">
+          <span>{NO_QUERY_MESSAGE}</span>
+        </div>
+      </div>
+    );
+  }
 
   if (error) {
     return (
@@ -37,27 +44,27 @@ async function TsjWakunResultsPage({
             <tr>
               <th></th>
               <th>ID</th>
-              <th>見出し語</th>
-              <th>読み</th>
-              <th>万葉仮名</th>
-              <th>享和本見出し</th>
-              <th>所在</th>
+              <th>見出し語（天治本）</th>
+              <th>和訓（天治本）</th>
+              <th>和訓（天治本万葉仮名）</th>
+              <th>見出し語（享和本）</th>
+              <th>新撰字鏡校注所在</th>
             </tr>
           </thead>
           <tbody>
-            {results.map((item: TsjWakunRow, index: number) => (
-              <tr key={item.sj_w_id}>
+            {results.map((item: TsjWakunResultRow, index: number) => (
+              <tr key={item.wakunId}>
                 <th>{index + 1}</th>
-                <td>{item.sj_w_id}</td>
+                <td>{item.wakunId}</td>
                 <td>
-                  <Link href={"/tsj-wakun/" + item.sj_w_id} className="kbd">
-                    {item.entry_text}
+                  <Link href={"/tsj-wakun/" + item.recordId} className="kbd">
+                    {item.entryText}
                   </Link>
                 </td>
-                <td>{item.reading_kana_kanji}</td>
-                <td>{item.def_manyogana}</td>
-                <td>{item.kyowa_entry_text}</td>
-                <td>{item.kyowa_loc}</td>
+                <td>{item.readingKanaKanji}</td>
+                <td>{item.definitionManyogana}</td>
+                <td>{item.kyowaEntryText}</td>
+                <td>{item.rinsenLocation}</td>
               </tr>
             ))}
           </tbody>
