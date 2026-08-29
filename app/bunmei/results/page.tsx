@@ -65,7 +65,7 @@ async function BunmeiResultsPage({
         </Link>
       );
     }
-    if (url) return <Link href={url}>{value}</Link>;
+    if (url && value) return <Link href={url} className="link link-hover kbd">{value}</Link>;
     return <>{value}</>;
   };
 
@@ -101,7 +101,11 @@ async function BunmeiResultsPage({
                       label={header.label}
                       value={result[header.field] ?? ""}
                       type={header.type}
-                      url={`/bunmei/${result.bunmei_id}`}
+                      url={
+                        header.field === "entry_original"
+                          ? `/bunmei/${result.bunmei_id}`
+                          : undefined
+                      }
                     />
                   </td>
                 ))}
