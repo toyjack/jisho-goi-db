@@ -61,7 +61,13 @@ async function TsjWakunResultsPage({
                     {item.entryText}
                   </Link>
                 </td>
-                <td>{item.readingKanaKanji}</td>
+                <td>
+                  {item.hasNoWakun ? (
+                    <span className="italic opacity-60">和訓なし</span>
+                  ) : (
+                    item.readingKanaKanji
+                  )}
+                </td>
                 <td>{item.definitionManyogana}</td>
                 <td>{item.kyowaEntryText}</td>
                 <td>{item.rinsenLocation}</td>

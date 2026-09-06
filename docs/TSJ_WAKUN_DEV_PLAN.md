@@ -109,9 +109,13 @@
   - `TsjWakunForm.tsx`、`results/page.tsx`、`[recordId]/page.tsx` 已按会议记录改名，「倭訓栞ID」已删除展示，「臨川本所在」已移到「享和本所在」正上方（详情页用显式 `wakunPartFieldOrder` 数组渲染，不再用 `Object.entries`）
   - D0 已落地：路由从 `[wakunId]` 重命名为 `[recordId]`（`git mv`），按 `recordId` 拉取条目详情后渲染其 `wakunParts[]`（一条条目下有多条和訓时全部列出）
 
-- [x] **品词/种别/字数下拉框（2026-08-28 完成，含真实数据验证）**
-  - `TsjWakunForm.tsx` 新增「種別」「品詞」两个下拉框（复用 `components/common/Select.tsx`）+「漢字数」「和訓仮名字数」两个文本输入（未做成下拉框——真实数据里这两个字段是任意整数，没有先验的有限选项集，做成下拉框需要先枚举数据里实际出现的字数分布，目前用数字输入更贴近实际情况，见 `TsjWakunForm.tsx` 里的说明）
-  - `posCategory` 的中日文映射是 best-effort（`TsjWakunForm.tsx` 里有代码注释说明），已用本地 API 实测 `entry_type=variant`、`pos_category=noun` 两个筛选参数确实生效（分别把"一"的 headword 命中从5条筛到3条、把"あ"的 reading 命中筛出23条），但"連語"细分（名詞句/動詞句/定義文）和"なし"具体对应 `not-applicable` 还是 `unassigned` 未做进一步验证
+- [x] **品词/种别/字数下拉框（2026-08-28 完成，含真实数据验证；2026-09-06 补做「漢字数/和訓仮名字数」下拉框化 + 品詞细分选项）**
+  - `TsjWakunForm.tsx` 新增「種別」「品詞」两个下拉框（复用 `components/common/Select.tsx`）
+  - `posCategory` 的中日文映射是 best-effort（`TsjWakunForm.tsx` 里有代码注释说明），已用本地 API 实测 `entry_type=variant`、`pos_category=noun` 两个筛选参数确实生效（分别把"一"的 headword 命中从5条筛到3条、把"あ"的 reading 命中筛出23条），"なし"对应 `not-applicable`
+  - **2026-09-06 更新**：拉了 ~1300 条真实 wakunParts 样本核对 `partOfSpeechRaw`/`charCount`/`kanaCharCount` 的实际取值分布，据此完成以下三项：
+    1. 「漢字数」「和訓仮名字数」从文本输入改成下拉框（`charCountOptions`/`kanaCountOptions`）。实测 `charCount` 集中在 1〜5、`kanaCharCount` 在 1〜19（多数 2〜6），下拉框末尾各留一个开区间「6以上」「11以上」兜底未见过的更大值；开区间选项不传给 API（`charCount`/`kanaCount` 只支持精确匹配），改为 `db/tsj_wakun.ts` 里 `parseCountParam()` 做客户端下限过滤。
+    2. 品詞下拉框补上「名詞（名詞句）」「連語（名詞句）」「連語（定義文）」「連語（動詞句）」四个细分选项。实测证实 `partOfSpeechRaw` 是自由文本而非枯定枚举（如"連語（動詞句・視線動作）"这种带額外描述的变体也存在），无法整串精确匹配，改用 `"<posCategory>:<sub>"` 复合值——API 端仍传基础 `posCategory`（noun/phrase），细分部分用 `partOfSpeechRaw.includes()` 部分匹配在 `db/tsj_wakun.ts` 里做客户端二次过滤（`POS_SUB_RAW_INCLUDES`）。已用真实记录 `s0106a503b`（"曉"，两条 wakunPart 分别是"連語（動詞句）"/"名詞"）实测验证：`phrase:verb-phrase` 正确只留下动词句那条，`phrase:noun-phrase` 正确返回 0 条。
+    3. 顺带发现服务端 `posCategory` 参数对 headword 类查询似乎不会把 `matchedPartIds` 收窄到只含该词性的行（同一 record 下不同词性的 wakunPart 仍会一起出现）——不影响上面细分筛选的正确性（细分筛选本来就是客户端二次过滤），但意味着基础 `noun`/`phrase` 这类粗筛也可能需要类似的客户端兜底，未来如果发现粗筛未生效可以参考这次的排查方式。
 
 - [x] **日国 ID → lib / personal 版 URL 化（2026-08-28 完成，含真实数据验证）**
   - 位置：`app/tsj-wakun/[recordId]/page.tsx`
@@ -126,6 +130,19 @@
 
 - [ ] **读み检索：忽略浊音有无（暂缓，待确认现状）**
   - 建议先用本地 API 实测几个浊音对照词确认 `/search` 服务端是否已经做了正规化，再决定要不要作为需求提给上游，不要照抄 Supabase 时代"建生成列"的方案
+
+- [x] **和訓（天治本）检索：ひらがな输入不命中的 bug 修复（2026-09-06 完成）**
+  - 现象（用户反馈）：搜索窗标签是"平仮名"，但实际用平假名输入却 0 命中
+  - 根因有两层：① 结果展示用的 `readingKanaKanji` 列是片假名+汉字（如"アケヌ（曉）"），实测 `/search` 的 `field=reading` 只认与 `readingHistoricalKana` 一致的平假名写法——片假名原样传给 API 的 `q` 会在服务端就 0 命中；② 即便 API 命中，`db/tsj_wakun.ts` 里客户端二次做字面量核对时，是拿 `readingKanaKanji`（片假名）跟平假名查询词直接 `.includes()`，命中会被这一步误杀
+  - 修复：新增 `katakanaToHiragana()`（把 Unicode 片假名区 U+30A1-U+30F6 整体 -0x60 移到平假名区，汉字/符号不受影响），在①传给 API 的 `q` 和②客户端二次核对两处，都统一把"和訓（天治本）"这个检索字段的值转成平假名再比较。已用真实数据 `s0106a503b`/`sj_w00014`（"アケヌ（曉）"）验证：输入"あけぬ"或"アケヌ"都能正确命中 1 条，结果表格本身仍然按原样显示片假名，不受影响；搜索窗标签"平仮名"因此不需要改成"カタカナ"
+
+- [x] **和訓が無い見出し語（例："先"）も検索結果に出す（2026-09-06 完成）**
+  - 用户提问：之前已经跟池田老师提过希望在原始数据里把"没有和訓"的项目也标出来，想知道进展如何
+  - **实测现状（当前生产环境 API，`datasetVersions.tsj = 89245c87-...`）**：以"先"为例（`recordId: s1202b601`），`GET /datasets/tsj/records/s1202b601` 返回的 `content.wakunParts` 仍是空数组 `[]`——也就是说**池田老师那边还没有在 `TSJ_wakun.tsv` 里补上"和訓なし"的行**，上游数据目前的表现是"这个字压根没有和訓行"，而不是"有一行、值是空/なし"。这个信息可以直接回复给池田老师核实是否已经在处理中
+  - **jisho-goi-db 侧的应对**：不等上游数据变化，直接在应用层把这类记录也纳入搜索结果。原因：`db/tsj_wakun.ts` 原来的结果拼装逻辑是遍历 `record.content.wakunParts[]` 生成行，`wakunParts` 为空数组时一行都不会生成，即使 `/search` 的 `field=headword` 明明已经命中了这条记录（`matchedPartIds` 里放的是 `recordId` 本身，不是 `sj_w*` 和訓 ID），用户搜"先"会得到 0 件、看起来像是查无此字
+  - 实现：新增 `buildNoWakunRow()`，当命中记录的 `wakunParts.length === 0` 时，只要是**見出し語（`entry_text`）欄**命中（和訓・万葉仮名・享和本見出し这几个欄本来就是 wakunPart 级别的数据，无和訓记录不可能从这几欄命中），且没有同时指定「種別/品詞/漢字数/和訓仮名字数」这类 wakunPart 专属筛选（语义上不适用于没有和訓行的记录），就合成一行 `hasNoWakun: true` 的结果，见出し语用 `record.normalized.headword`、所在用 `content.positions[0].rinsenLocation`（`TsjRecordContent` 补充了 `positions` 字段的类型）
+  - UI：`results/page.tsx` 的"和訓（天治本）"列在 `hasNoWakun` 时显示斜体灰字「和訓なし」；`[recordId]/page.tsx` 详情页在 `wakunParts` 为空时加一条提示"この記録には和訓データが登録されていません（元の新撰字鏡データに和訓が無い項目です）"，避免用户点进去看到一片空白摸不着头脑
+  - 已用真实数据验证：`entry_text=先` 现在返回 1 件、显示"和訓なし"；附加 `pos_category=noun` 等 wakunPart 专属筛选后合成行正确消失（0 件）；`entry_text=一`（契约测试用的已知查询词）混合返回了普通和訓行与若干"和訓なし"的生僻字合成行（这些字的见出し语本身是包含"一"部件的 IDS 组合字），行为符合预期，未破坏既有契约测试
 
 ## P1 — 阻塞点已缩小，待样本数据确认
 

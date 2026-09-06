@@ -76,6 +76,14 @@ async function TsjWakunItemPage({ params }: { params: { recordId: string } }) {
         </>
       )}
 
+      {data.content.wakunParts.length === 0 && (
+        <div className="alert alert-info mb-4">
+          <span>
+            この記録には和訓データが登録されていません（元の新撰字鏡データに和訓が無い項目です）。
+          </span>
+        </div>
+      )}
+
       {data.content.wakunParts.map((part) => (
         <div key={part.partId} className="mb-8">
           <h2 className="text-xl font-bold mb-4">和訓データ</h2>
