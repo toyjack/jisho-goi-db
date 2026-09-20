@@ -25,7 +25,7 @@ function Shukai2026Section() {
             共催：清華大学外文系、公益財団法人古代学協会、名古屋大学人文学研究科、名古屋大学高等研究院、Tokai Pathways to Global Excellence（T-GEx）
           </p>
           <p className="py-3">
-            発表レポート：<Link href="/pdf/20260911学会レポート.pdf" className="link link-info link-hover">ダウンロード</Link>
+            {/* 発表レポート：<Link href="/pdf/20260911学会レポート.pdf" className="link link-info link-hover">ダウンロード</Link> */}
           </p>
         </div>
       </div>
